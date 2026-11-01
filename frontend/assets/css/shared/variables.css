@@ -1,0 +1,61 @@
+
+/* ===================================
+   ARTHA - DESIGN VARIABLES
+   Font: Poppins
+   Shared: Admin, Pemilik, Kasir
+=================================== */
+
+:root {
+
+  /* FONT */
+  --font-primary: "Poppins", sans-serif;
+
+  /* WARNA DASAR */
+  --color-sidebar: #001840;
+  --color-primary: #102A71;
+  --color-accent: #F5C400;
+  --color-background: #FFFDF0;
+  --color-white: #FFFFFF;
+
+  /* SIDEBAR DAN NAVIGASI */
+  --sidebar-bg: #001840;
+  --sidebar-text: #FFFFFF;
+  --sidebar-active-icon: #F5C400;
+  --sidebar-active-bg: rgba(245, 196, 0, 0.15);
+  --sidebar-hover-bg: rgba(245, 196, 0, 0.10);
+
+  /* ROLE PEMILIK */
+  --owner-text: #102A71;
+  --owner-table-header: #848FA7;
+  --owner-role-badge: rgba(244, 196, 48, 0.20);
+
+  /* ROLE ADMIN */
+  --admin-table-header: #091B3A;
+  --admin-button: #081B3A;
+  --admin-add-icon: #334155;
+
+  /* ROLE KASIR */
+  --cashier-table-header: #E2E8F0;
+  --cashier-button: #102A71;
+  --cashier-role-badge: rgba(9, 27, 58, 0.10);
+  --cashier-history-text: #0A192F;
+  --cashier-search-placeholder: #94A3B8;
+
+  /* STATUS */
+  --color-success: #0D824D;
+  --color-warning: #92400E;
+  --color-danger: #DC2626;
+
+  /* GRAFIK */
+  --chart-yellow: linear-gradient(
+    180deg, #F3C200, #DCAD00
+  );
+
+  --chart-blue: linear-gradient(
+    180deg, #22489A, #132F78
+  );
+
+  /* KOMPONEN UMUM */
+  --color-border: #E2E8F0;
+  --color-icon: #334155;
+}
