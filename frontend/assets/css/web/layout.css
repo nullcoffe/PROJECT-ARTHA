@@ -1,0 +1,83 @@
+/* =========================================================
+   ARTHA | SHARED WEB LAYOUT
+   Sidebar mengambil bagian kiri; main mengisi sisa lebar.
+========================================================= */
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--color-background);
+}
+
+.dashboard-layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.main-content {
+  width: calc(100% - var(--sidebar-width));
+  min-width: 0;
+  min-height: 100vh;
+  margin-left: var(--sidebar-width);
+  padding: var(--content-padding-y) var(--content-padding-x);
+  background: var(--color-background);
+}
+
+.page-container {
+  width: 100%;
+  max-width: var(--content-max-width);
+  min-width: 0;
+  margin-inline: auto;
+}
+
+.page-title {
+  margin-bottom: var(--content-section-gap);
+  color: var(--color-primary);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-semibold);
+  line-height: 1.35;
+}
+
+.content-section {
+  width: 100%;
+  min-width: 0;
+  margin-bottom: var(--content-section-gap);
+}
+
+.card {
+  width: 100%;
+  min-width: 0;
+  padding: clamp(14px, 2%, 24px);
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(10px, 1.5%, 20px);
+}
+
+.content-flex {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.5%, 20px);
+}
+
+.table-container {
+  width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+@media (min-width: 701px) and (max-width: 1024px) {
+  .main-content {
+    padding-inline: clamp(16px, 3%, 28px);
+  }
+}

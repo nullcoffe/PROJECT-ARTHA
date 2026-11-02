@@ -1,89 +1,148 @@
 /* =========================================================
-   ARTHA | DESIGN TOKENS & TYPOGRAPHY
-   Dipakai bersama oleh halaman Admin, Pemilik, dan Kasir.
+   ARTHA | DESIGN TOKENS & RESPONSIVE SCALE
+   Dipakai bersama oleh Admin, Pemilik, dan Kasir.
+   Lebar layout memakai persentase viewport + batas minimum/maksimum.
 ========================================================= */
 
 @font-face {
   font-family: "Poppins";
   src: url("../../fonts/poppins-latin-400-normal.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
+  font-style: normal; font-weight: 400; font-display: swap;
 }
-
 @font-face {
   font-family: "Poppins";
   src: url("../../fonts/poppins-latin-500-normal.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
+  font-style: normal; font-weight: 500; font-display: swap;
 }
-
 @font-face {
   font-family: "Poppins";
   src: url("../../fonts/poppins-latin-600-normal.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
+  font-style: normal; font-weight: 600; font-display: swap;
 }
-
 @font-face {
   font-family: "Poppins";
   src: url("../../fonts/poppins-latin-700-normal.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
+  font-style: normal; font-weight: 700; font-display: swap;
 }
 
 :root {
   /* Typography */
   --font-primary: "Poppins", sans-serif;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-size-xs: 0.625rem;
+  --font-size-sm: 0.75rem;
+  --font-size-base: 0.875rem;
+  --font-size-lg: 1rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
 
-  /* Brand */
+  /* Brand colors — dipertahankan dari Figma */
   --color-sidebar: #001840;
   --color-primary: #102A71;
   --color-accent: #F5C400;
   --color-background: #FFFDF0;
   --color-white: #FFFFFF;
+  --color-text: #102A71;
+  --color-text-secondary: #7180A5;
+  --color-border: #E2E8F0;
+  --color-icon: #334155;
 
-  /* Sidebar */
+  /* Sidebar colors */
   --sidebar-bg: #001840;
   --sidebar-text: #FFFFFF;
+  --sidebar-active-text: #F5C400;
   --sidebar-active-icon: #F5C400;
   --sidebar-active-bg: rgba(245, 196, 0, 0.15);
   --sidebar-hover-bg: rgba(245, 196, 0, 0.10);
 
-  /* Owner */
+  /* DESKTOP SCALE
+     Pada frame Figma 919px: 21.9vw ≈ 201px.
+     Batas 180–240px menjaga sidebar tidak terlalu kecil/besar. */
+  --sidebar-width: clamp(180px, 21.9vw, 240px);
+  --sidebar-padding-x: 7%;
+  --sidebar-padding-y: clamp(18px, 4vh, 30px);
+  --sidebar-logo-size: clamp(38px, 4.8vw, 48px);
+  --sidebar-menu-gap: clamp(6px, 1.1vh, 10px);
+  --sidebar-item-height: clamp(34px, 5.5vh, 44px);
+  --sidebar-item-padding-x: 7%;
+  --sidebar-icon-size: clamp(16px, 1.6vw, 20px);
+
+  /* MOBILE DRAWER SCALE */
+  --sidebar-mobile-width: min(78vw, 300px);
+  --sidebar-mobile-padding-x: 5.5%;
+  --sidebar-mobile-padding-y: clamp(18px, 3vh, 24px);
+  --sidebar-mobile-item-height: clamp(42px, 6vh, 48px);
+
+  /* Header */
+  --header-bg: #FFFDF0;
+  --header-text: #102A71;
+  --header-border: #EEEAE1;
+  --header-height: clamp(64px, 10vh, 84px);
+  --header-mobile-height: clamp(54px, 8vh, 62px);
+  --profile-size: clamp(36px, 4.5vw, 42px);
+  --profile-size-mobile: 28px;
+
+  /* Main content — horizontal padding scales with content width */
+  --content-padding-x: clamp(18px, 4%, 48px);
+  --content-padding-y: clamp(18px, 4vh, 34px);
+  --content-mobile-padding-x: 4%;
+  --content-mobile-padding-y: 0px;
+  --content-max-width: 100%;
+  --content-section-gap: clamp(14px, 2.2vh, 24px);
+
+  /* Spacing scale */
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-7: 1.75rem;
+  --spacing-8: 2rem;
+
+  /* Role-specific colors */
   --owner-text: #102A71;
   --owner-table-header: #848FA7;
   --owner-role-badge: rgba(244, 196, 48, 0.20);
-
-  /* Admin */
   --admin-table-header: #091B3A;
   --admin-button: #081B3A;
   --admin-add-icon: #334155;
-
-  /* Cashier */
   --cashier-table-header: #E2E8F0;
   --cashier-button: #102A71;
   --cashier-role-badge: rgba(9, 27, 58, 0.10);
   --cashier-history-text: #0A192F;
   --cashier-search-placeholder: #94A3B8;
 
-  /* Status */
+  /* Status and charts */
   --color-success: #0D824D;
   --color-warning: #92400E;
   --color-danger: #DC2626;
-
-  /* Charts */
   --chart-yellow: linear-gradient(180deg, #F3C200, #DCAD00);
   --chart-blue: linear-gradient(180deg, #22489A, #132F78);
 
-  /* General components */
-  --color-border: #E2E8F0;
-  --color-icon: #334155;
+  /* Components */
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 12px;
+  --radius-full: 9999px;
   --shadow-soft: 0 4px 18px rgba(16, 42, 113, 0.06);
+
+  /* Layer and motion */
+  --z-sidebar: 1000;
+  --z-overlay: 900;
+  --z-mobile-control: 1100;
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --color-overlay: rgba(0, 0, 0, 0.40);
+}
+
+/* Mobile token overrides */
+@media (max-width: 700px) {
+  :root {
+    --content-section-gap: 1rem;
+  }
 }

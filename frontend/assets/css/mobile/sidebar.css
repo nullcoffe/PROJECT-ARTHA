@@ -1,0 +1,333 @@
+
+/* =========================================================
+   ARTHA | SHARED MOBILE SIDEBAR
+   Digunakan oleh Admin, Pemilik, dan Kasir
+========================================================= */
+
+
+/* =========================================================
+   1. MOBILE SIDEBAR CONTAINER
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        z-index: var(--z-sidebar, 1000);
+
+        display: flex;
+        flex-direction: column;
+
+        width: var(--sidebar-mobile-width, 241px);
+        height: 100vh;
+        height: 100dvh;
+
+        padding:
+            var(--sidebar-mobile-padding-y, 22px)
+            var(--sidebar-mobile-padding-x, 13px);
+
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        background-color: var(--sidebar-bg);
+
+        transform: translateX(-100%);
+        visibility: hidden;
+
+        transition:
+            transform var(--transition-normal, 0.3s ease),
+            visibility var(--transition-normal, 0.3s ease);
+    }
+
+
+    /* =====================================================
+       2. SIDEBAR OPEN
+    ===================================================== */
+
+    .sidebar-checkbox:checked ~ .dashboard-layout .sidebar {
+        transform: translateX(0);
+        visibility: visible;
+    }
+
+
+    /* =====================================================
+       3. SIDEBAR BRAND
+    ===================================================== */
+
+    .sidebar-brand {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        width: 100%;
+        min-height: 35px;
+
+        margin-bottom: 22px;
+    }
+
+    .brand-left {
+        display: flex;
+        align-items: center;
+
+        gap: 12px;
+        min-width: 0;
+    }
+
+    .brand-logo {
+        width: 28px;
+        height: 28px;
+
+        flex-shrink: 0;
+        object-fit: contain;
+    }
+
+    .brand-title {
+        color: var(--sidebar-text);
+
+        font-size: 19px;
+        font-weight: var(--font-bold, 700);
+
+        white-space: nowrap;
+    }
+
+
+    /* =====================================================
+       4. CLOSE BUTTON (X)
+       Sejajar dengan tulisan ARTHA
+    ===================================================== */
+
+    .close-sidebar-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 30px;
+        height: 30px;
+
+        flex-shrink: 0;
+
+        color: var(--sidebar-text);
+        background: transparent;
+
+        border-radius: var(--radius-sm, 6px);
+
+        cursor: pointer;
+
+        transition: background var(--transition-fast, 0.2s ease);
+    }
+
+    .close-sidebar-btn:hover {
+        background-color: var(--sidebar-hover-bg);
+    }
+
+    .close-sidebar-btn svg {
+        width: 21px;
+        height: 21px;
+
+        fill: none;
+        stroke: currentColor;
+
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+
+    /* =====================================================
+       5. SIDEBAR NAVIGATION
+    ===================================================== */
+
+    .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+
+        width: 100%;
+        gap: 7px;
+    }
+
+    .nav-item {
+        display: flex;
+        align-items: center;
+
+        width: 100%;
+        min-height: 43px;
+
+        gap: 14px;
+        padding: 10px 14px;
+
+        color: var(--sidebar-text);
+
+        font-size: var(--font-size-base, 14px);
+        font-weight: var(--font-medium, 500);
+
+        border: 1px solid transparent;
+        border-radius: var(--radius-lg, 12px);
+    }
+
+    .nav-icon {
+        display: block;
+
+        width: 19px;
+        height: 19px;
+
+        flex: 0 0 19px;
+        object-fit: contain;
+    }
+
+
+    /* =====================================================
+       6. ACTIVE MENU
+    ===================================================== */
+
+    .nav-item.active {
+        color: var(--sidebar-active-text);
+
+        background-color: var(--sidebar-active-bg);
+        border-color: var(--color-accent);
+    }
+
+
+    /* =====================================================
+       7. HOVER MENU
+    ===================================================== */
+
+    .nav-item:hover {
+        background-color: var(--sidebar-hover-bg);
+    }
+
+    .nav-item.active:hover {
+        background-color: var(--sidebar-active-bg);
+    }
+
+
+    /* =====================================================
+       8. LOGOUT
+    ===================================================== */
+
+    .nav-item.logout {
+        min-height: 55px;
+
+        margin-top: 12px;
+        padding-top: 16px;
+
+        color: var(--color-danger);
+
+        border-top: 1px solid rgba(255,255,255,0.15);
+        border-radius: 0;
+    }
+
+
+    /* =====================================================
+       9. HAMBURGER BUTTON
+    ===================================================== */
+
+    .hamburger-btn {
+        position: fixed;
+        top: 13px;
+        left: 14px;
+
+        z-index: var(--z-mobile-control, 1100);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 30px;
+        height: 30px;
+
+        color: var(--color-primary);
+        background: transparent;
+
+        cursor: pointer;
+    }
+
+    .hamburger-btn svg {
+        width: 23px;
+        height: 23px;
+
+        fill: none;
+        stroke: currentColor;
+
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+
+    /* HAMBURGER HILANG SAAT SIDEBAR TERBUKA */
+
+    .sidebar-checkbox:checked ~ .hamburger-btn {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+
+    /* =====================================================
+       10. OVERLAY
+    ===================================================== */
+
+    .sidebar-overlay {
+        position: fixed;
+        inset: 0;
+
+        z-index: var(--z-overlay, 900);
+
+        display: block;
+
+        background-color: var(--color-overlay, rgba(0,0,0,0.4));
+
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+
+        transition:
+            opacity var(--transition-normal, 0.3s ease),
+            visibility var(--transition-normal, 0.3s ease);
+    }
+
+
+    /* OVERLAY AKTIF */
+
+    .sidebar-checkbox:checked ~ .sidebar-overlay {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        cursor: pointer;
+    }
+
+
+    /* =====================================================
+       11. SCROLLBAR
+    ===================================================== */
+
+    .sidebar::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+        background-color: rgba(255,255,255,0.2);
+        border-radius: var(--radius-full, 9999px);
+    }
+
+    .sidebar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+}
+
+
+/* =========================================================
+   12. SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .sidebar {
+        width: min(241px, 82vw);
+    }
+
+}

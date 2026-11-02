@@ -1,0 +1,119 @@
+/* =========================================================
+   ARTHA | SHARED WEB SIDEBAR
+========================================================= */
+
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: var(--z-sidebar);
+  display: flex;
+  flex-direction: column;
+  width: var(--sidebar-width);
+  height: 100vh;
+  height: 100dvh;
+  padding: var(--sidebar-padding-y) var(--sidebar-padding-x);
+  overflow-x: hidden;
+  overflow-y: auto;
+  color: var(--sidebar-text);
+  background: var(--sidebar-bg);
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: var(--sidebar-logo-size);
+  margin-bottom: clamp(14px, 2.5vh, 24px);
+}
+
+.brand-left {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1.2vw, 12px);
+  min-width: 0;
+}
+
+.brand-logo {
+  display: block;
+  width: var(--sidebar-logo-size);
+  height: var(--sidebar-logo-size);
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+.brand-title {
+  color: var(--sidebar-text);
+  font-family: var(--font-primary);
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  font-weight: var(--font-bold);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--sidebar-menu-gap);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: var(--sidebar-item-height);
+  gap: clamp(8px, 1.2vw, 14px);
+  padding: 0 var(--sidebar-item-padding-x);
+  color: var(--sidebar-text);
+  font-family: var(--font-primary);
+  font-size: clamp(0.68rem, 0.9vw, 0.875rem);
+  font-weight: var(--font-medium);
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.nav-item span {
+  min-width: 0;
+  line-height: 1.35;
+}
+
+.nav-icon {
+  display: block;
+  width: var(--sidebar-icon-size);
+  height: var(--sidebar-icon-size);
+  flex: 0 0 var(--sidebar-icon-size);
+  object-fit: contain;
+}
+
+.nav-item.active {
+  color: var(--sidebar-active-text);
+  background: var(--sidebar-active-bg);
+  border-color: var(--color-accent);
+}
+
+.nav-item:hover { background: var(--sidebar-hover-bg); }
+.nav-item.active:hover { background: var(--sidebar-active-bg); }
+
+.nav-item.logout {
+  margin-top: clamp(8px, 1.5vh, 14px);
+  padding-top: 10px;
+  color: var(--color-danger);
+  font-weight: var(--font-semibold);
+  border-top: 1px solid rgba(255,255,255,.15);
+  border-radius: 0;
+}
+
+.nav-item.logout:hover { background: rgba(220,38,38,.10); }
+
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.2); border-radius: 999px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+
+/* Drawer controls hanya aktif pada mobile */
+.hamburger-btn,
+.close-sidebar-btn,
+.sidebar-overlay { display: none; }
