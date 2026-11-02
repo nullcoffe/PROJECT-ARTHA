@@ -1,61 +1,89 @@
+/* =========================================================
+   ARTHA | DESIGN TOKENS & TYPOGRAPHY
+   Dipakai bersama oleh halaman Admin, Pemilik, dan Kasir.
+========================================================= */
 
-/* ===================================
-   ARTHA - DESIGN VARIABLES
-   Font: Poppins
-   Shared: Admin, Pemilik, Kasir
-=================================== */
+@font-face {
+  font-family: "Poppins";
+  src: url("../../fonts/poppins-latin-400-normal.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../../fonts/poppins-latin-500-normal.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../../fonts/poppins-latin-600-normal.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../../fonts/poppins-latin-700-normal.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
 
 :root {
-
-  /* FONT */
+  /* Typography */
   --font-primary: "Poppins", sans-serif;
 
-  /* WARNA DASAR */
+  /* Brand */
   --color-sidebar: #001840;
   --color-primary: #102A71;
   --color-accent: #F5C400;
   --color-background: #FFFDF0;
   --color-white: #FFFFFF;
 
-  /* SIDEBAR DAN NAVIGASI */
+  /* Sidebar */
   --sidebar-bg: #001840;
   --sidebar-text: #FFFFFF;
   --sidebar-active-icon: #F5C400;
   --sidebar-active-bg: rgba(245, 196, 0, 0.15);
   --sidebar-hover-bg: rgba(245, 196, 0, 0.10);
 
-  /* ROLE PEMILIK */
+  /* Owner */
   --owner-text: #102A71;
   --owner-table-header: #848FA7;
   --owner-role-badge: rgba(244, 196, 48, 0.20);
 
-  /* ROLE ADMIN */
+  /* Admin */
   --admin-table-header: #091B3A;
   --admin-button: #081B3A;
   --admin-add-icon: #334155;
 
-  /* ROLE KASIR */
+  /* Cashier */
   --cashier-table-header: #E2E8F0;
   --cashier-button: #102A71;
   --cashier-role-badge: rgba(9, 27, 58, 0.10);
   --cashier-history-text: #0A192F;
   --cashier-search-placeholder: #94A3B8;
 
-  /* STATUS */
+  /* Status */
   --color-success: #0D824D;
   --color-warning: #92400E;
   --color-danger: #DC2626;
 
-  /* GRAFIK */
-  --chart-yellow: linear-gradient(
-    180deg, #F3C200, #DCAD00
-  );
+  /* Charts */
+  --chart-yellow: linear-gradient(180deg, #F3C200, #DCAD00);
+  --chart-blue: linear-gradient(180deg, #22489A, #132F78);
 
-  --chart-blue: linear-gradient(
-    180deg, #22489A, #132F78
-  );
-
-  /* KOMPONEN UMUM */
+  /* General components */
   --color-border: #E2E8F0;
   --color-icon: #334155;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --shadow-soft: 0 4px 18px rgba(16, 42, 113, 0.06);
 }
