@@ -1,0 +1,461 @@
+/* =====================================================
+   ARTHA | ADMIN - PRODUK & STOK
+   Konten halaman saja. Layout/sidebar/header shared.
+===================================================== */
+
+.desktop-page-title { display: block; }
+.mobile-page-title { display: none; }
+.product-page-content { width: 100%; min-width: 0; }
+
+.product-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0 0 10px;
+}
+
+.product-search {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    width: min(48%, 260px);
+    height: 26px;
+    padding: 0 8px;
+    background: var(--color-white);
+    border: 1px solid #657391;
+    border-radius: 7px;
+}
+.product-search img { width: 12px; height: 12px; object-fit: contain; }
+.product-search input {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    color: var(--color-primary);
+    background: transparent;
+    font-family: var(--font-primary);
+    font-size: .55rem;
+}
+.product-search input::placeholder { color: #91A0B8; }
+
+.product-toolbar-actions { display: flex; align-items: center; gap: 8px; }
+.stock-adjust-trigger,
+.add-product-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 26px;
+    padding: 0 10px;
+    border-radius: 7px;
+    font-family: var(--font-primary);
+    font-size: .56rem;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease;
+}
+.stock-adjust-trigger {
+    color: var(--admin-button);
+    background: var(--color-white);
+    border: 1px solid var(--admin-button);
+}
+.add-product-trigger {
+    color: var(--color-white);
+    background: var(--admin-button);
+    border: 1px solid var(--admin-button);
+}
+.stock-adjust-trigger img,
+.add-product-trigger img {
+    width: 12px;
+    height: 12px;
+    object-fit: contain;
+}
+.stock-adjust-trigger img {
+    filter: brightness(0) saturate(100%) invert(8%) sepia(27%) saturate(2020%) hue-rotate(183deg) brightness(92%);
+}
+.add-product-trigger img { filter: brightness(0) invert(1); }
+.stock-adjust-trigger:hover { background: var(--color-background); }
+.add-product-trigger:hover { background: var(--color-primary); }
+
+.product-table-card {
+    width: 100%;
+    overflow: hidden;
+    background: var(--color-white);
+    border: 1px solid var(--admin-table-header);
+    border-radius: 9px 9px 0 0;
+}
+.product-table-wrapper { width: 100%; overflow-x: auto; }
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-primary);
+    font-size: .55rem;
+}
+.product-table thead { color: var(--color-white); background: var(--admin-table-header); }
+.product-table th {
+    height: 28px;
+    padding: 0 18px;
+    text-align: left;
+    font-size: .53rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.product-table td {
+    height: 34px;
+    padding: 0 18px;
+    color: #0A192F;
+    border-bottom: 1px solid #E8ECF2;
+    white-space: nowrap;
+}
+.product-table tbody tr:last-child td { border-bottom: 0; }
+.stock-safe { color: #0D824D !important; font-weight: 600; }
+.stock-low { color: #92400E !important; font-weight: 600; }
+.stock-status { font-weight: 600; }
+.stock-status.safe { color: #0D824D; }
+.stock-status.low { color: #92400E; }
+.product-empty-state {
+    padding: 15px;
+    color: #7180A5;
+    font-size: .7rem;
+    text-align: center;
+}
+
+.product-forms-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(220px, 1fr);
+    align-items: start;
+    gap: 14px;
+    margin: 22px 10px 0;
+}
+
+.product-form-panel,
+.stock-form-panel {
+    min-width: 0;
+    padding: 13px 13px 12px;
+    background: var(--color-white);
+    border: 1px solid #657391;
+    border-radius: 11px;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+.product-form-panel.form-panel-active,
+.stock-form-panel.form-panel-active {
+    border-color: var(--admin-button);
+    box-shadow: 0 0 0 2px rgba(8,27,58,.10);
+}
+.product-panel-heading {
+    margin-bottom: 11px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #EFF1F5;
+}
+.product-panel-heading h2 {
+    color: var(--color-primary);
+    font-size: .75rem;
+    font-weight: 700;
+}
+
+.product-fields-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px 10px;
+}
+
+.product-field {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 4px;
+}
+.product-field label {
+    color: var(--color-primary);
+    font-size: .48rem;
+    font-weight: 600;
+}
+.product-field input,
+.product-field select {
+    width: 100%;
+    min-width: 0;
+    height: 25px;
+    padding: 0 7px;
+    color: var(--color-primary);
+    background: var(--color-white);
+    border: 1px solid #AAB4C5;
+    border-radius: 2px;
+    font-family: var(--font-primary);
+    font-size: .5rem;
+}
+.product-field input::placeholder { color: #91A0B8; }
+.product-field input:focus,
+.product-field select:focus {
+    border-color: var(--admin-button);
+    outline: 1px solid rgba(8,27,58,.12);
+}
+
+.product-form-actions,
+.stock-form-actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid #EFF1F5;
+}
+.stock-form-actions { border-top: 0; padding-top: 0; margin-top: 12px; }
+
+.admin-primary-button,
+.admin-outline-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    min-height: 25px;
+    padding: 0 10px;
+    border-radius: 7px;
+    font-family: var(--font-primary);
+    font-size: .48rem;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.admin-primary-button {
+    color: var(--color-white);
+    background: var(--admin-button);
+    border: 1px solid var(--admin-button);
+}
+.admin-outline-button {
+    color: var(--admin-button);
+    background: var(--color-white);
+    border: 1px solid #657391;
+}
+.admin-primary-button:hover { background: var(--color-primary); }
+.admin-outline-button:hover { background: var(--color-background); }
+.button-symbol { font-size: .7rem; line-height: 1; }
+
+.stock-product-field { margin-bottom: 10px; }
+.stock-number-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 9px;
+}
+.stock-number-grid input,
+.total-stock-field input { background: #F8F9FB; }
+.total-stock-field { margin-top: 9px; }
+.form-feedback {
+    min-height: 12px;
+    margin-top: 5px;
+    color: #0D824D;
+    font-size: .48rem;
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .product-forms-grid { margin-inline: 0; grid-template-columns: 1.2fr 1fr; }
+    .product-table th,.product-table td { padding-inline: 12px; }
+}
+
+
+/* =====================================================
+   FIX FINAL | ADMIN PRODUK & STOK - WEB
+===================================================== */
+
+@media (min-width: 769px) {
+
+    /* Pastikan elemen khusus mobile tidak muncul */
+    .mobile-brand,
+    .mobile-page-title {
+        display: none !important;
+    }
+
+    .product-page-content {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* TOOLBAR */
+
+    .product-toolbar {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin: 0 0 10px;
+        gap: 12px;
+    }
+
+    .product-search {
+        display: flex !important;
+        align-items: center;
+        width: 260px;
+        height: 26px;
+        flex: 0 1 260px;
+        padding: 0 9px;
+        gap: 7px;
+        overflow: hidden;
+    }
+
+    .product-search img {
+        display: block !important;
+        width: 12px !important;
+        height: 12px !important;
+        min-width: 12px;
+        max-width: 12px;
+        object-fit: contain;
+        flex: 0 0 12px;
+    }
+
+    .product-search input {
+        display: block;
+        width: 100%;
+        height: 100%;
+        min-width: 0;
+        font-size: 10px;
+    }
+
+    /* TOMBOL TOOLBAR */
+
+    .product-toolbar-actions {
+        display: flex !important;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .product-toolbar-actions button {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+
+        height: 26px;
+        min-width: 0;
+        padding: 0 10px;
+
+        font-family: var(--font-primary);
+        font-size: 9px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .product-toolbar-actions button img {
+        display: block !important;
+        width: 12px !important;
+        height: 12px !important;
+        min-width: 12px;
+        max-width: 12px;
+        object-fit: contain;
+        flex: 0 0 12px;
+    }
+
+    /* TABEL PRODUK */
+
+    .product-table-card {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .product-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .product-table {
+        width: 100%;
+        table-layout: auto;
+        border-collapse: collapse;
+    }
+
+    .product-table th {
+        background: var(--admin-table-header);
+        color: #FFFFFF;
+        height: 28px;
+    }
+
+    .product-table td {
+        height: 34px;
+        background: #FFFFFF;
+    }
+
+    /* FORM */
+
+    .product-forms-grid {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1.35fr) minmax(220px, 1fr);
+        width: calc(100% - 20px);
+        margin: 22px auto 0;
+        gap: 14px;
+    }
+
+    .product-form-panel,
+    .stock-form-panel {
+        display: block;
+        min-width: 0;
+    }
+
+    .product-form-panel img,
+    .stock-form-panel img {
+        max-width: 100%;
+    }
+
+}
+
+/* =====================================================
+   ACTIVE PANEL - PRODUK & STOK
+===================================================== */
+
+.product-form-panel,
+.stock-form-panel {
+    border: 1px solid #657391;
+    transition: border-color 0.2s ease;
+}
+
+/* PANEL YANG SEDANG AKTIF */
+
+.product-form-panel.form-panel-active,
+.stock-form-panel.form-panel-active {
+    border: 2px solid var(--admin-button);
+    box-shadow: none;
+}
+/* HIGHLIGHT PANEL FORM */
+
+.form-mode-radio {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Default: Data Produk aktif */
+#mode-product:checked ~ .product-forms-grid #productFormPanel {
+    border: 2px solid var(--admin-button);
+    box-shadow: none;
+}
+
+/* Penyesuaian Stok aktif */
+#mode-stock:checked ~ .product-forms-grid #stockFormPanel {
+    border: 2px solid var(--admin-button);
+    box-shadow: none;
+}
+
+/* Highlight tombol terpilih */
+#mode-product:checked ~ .product-toolbar .add-product-trigger,
+#mode-stock:checked ~ .product-toolbar .stock-adjust-trigger {
+    outline: 2px solid rgba(8, 27, 58, 0.15);
+}
+
+.product-toolbar-actions label {
+    cursor: pointer;
+    user-select: none;
+}
+.product-toolbar-actions img {
+    width: 12px;
+    height: 12px;
+    max-width: 12px;
+    max-height: 12px;
+    object-fit: contain;
+}

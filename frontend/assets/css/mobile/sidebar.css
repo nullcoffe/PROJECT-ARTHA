@@ -1,61 +1,69 @@
 
 /* =========================================================
    ARTHA | SHARED MOBILE SIDEBAR
-   Digunakan oleh Admin, Pemilik, dan Kasir
+   Digunakan bersama Admin, Pemilik, dan Kasir.
+   Khusus Smartphone.
 ========================================================= */
 
+@media (max-width: 768px) {
 
-/* =========================================================
-   1. MOBILE SIDEBAR CONTAINER
-========================================================= */
+    /* 1. SIDEBAR TOGGLE */
 
-@media (max-width: 700px) {
+    .sidebar-checkbox {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+
+    /* 2. SIDEBAR CONTAINER */
 
     .sidebar {
         position: fixed;
         top: 0;
         left: 0;
 
-        z-index: var(--z-sidebar, 1000);
+        z-index: var(--z-sidebar);
 
         display: flex;
         flex-direction: column;
 
-        width: var(--sidebar-mobile-width, 241px);
+        width: min(78vw, 280px);
+        max-width: 88vw;
+
         height: 100vh;
         height: 100dvh;
 
-        padding:
-            var(--sidebar-mobile-padding-y, 22px)
-            var(--sidebar-mobile-padding-x, 13px);
+        padding: 20px 18px;
 
-        overflow-y: auto;
         overflow-x: hidden;
+        overflow-y: auto;
 
         background-color: var(--sidebar-bg);
+        color: var(--sidebar-text);
 
-        transform: translateX(-100%);
+        transform: translateX(-101%);
         visibility: hidden;
 
         transition:
-            transform var(--transition-normal, 0.3s ease),
-            visibility var(--transition-normal, 0.3s ease);
+            transform var(--transition-normal),
+            visibility var(--transition-normal);
     }
 
 
-    /* =====================================================
-       2. SIDEBAR OPEN
-    ===================================================== */
+    /* SIDEBAR TERBUKA */
 
-    .sidebar-checkbox:checked ~ .dashboard-layout .sidebar {
+    .sidebar-checkbox:checked
+    ~ .dashboard-layout
+    .sidebar {
         transform: translateX(0);
         visibility: visible;
     }
 
 
-    /* =====================================================
-       3. SIDEBAR BRAND
-    ===================================================== */
+    /* 3. BRAND / LOGO */
 
     .sidebar-brand {
         display: flex;
@@ -63,41 +71,61 @@
         justify-content: space-between;
 
         width: 100%;
-        min-height: 35px;
+        min-height: 36px;
 
-        margin-bottom: 22px;
+        margin-bottom: 24px;
     }
 
     .brand-left {
         display: flex;
         align-items: center;
 
-        gap: 12px;
+        width: 100%;
         min-width: 0;
+
+        gap: 10px;
     }
+
+
+    /* LOGO SVG — WARNA ASLI */
 
     .brand-logo {
-        width: 28px;
-        height: 28px;
+        display: block;
 
-        flex-shrink: 0;
+        width: 38px;
+        height: 38px;
+
+        flex: 0 0 38px;
+
+        padding: 2px;
+
         object-fit: contain;
+
+        background-color: #FFFFFF;
+        border-radius: 9px;
+
+        filter: none !important;
+        opacity: 1;
+        mix-blend-mode: normal;
     }
 
-    .brand-title {
-        color: var(--sidebar-text);
 
-        font-size: 19px;
-        font-weight: var(--font-bold, 700);
+    /* BRAND TITLE */
+
+    .brand-title {
+        overflow: hidden;
+
+        color: var(--color-white);
+
+        font-family: var(--font-primary);
+        font-size: 16px;
+        font-weight: 700;
 
         white-space: nowrap;
     }
 
 
-    /* =====================================================
-       4. CLOSE BUTTON (X)
-       Sejajar dengan tulisan ARTHA
-    ===================================================== */
+    /* 4. CLOSE BUTTON */
 
     .close-sidebar-btn {
         display: flex;
@@ -107,130 +135,150 @@
         width: 30px;
         height: 30px;
 
-        flex-shrink: 0;
+        flex: 0 0 30px;
 
-        color: var(--sidebar-text);
+        margin-left: 8px;
+
+        color: #FFFFFF;
         background: transparent;
 
-        border-radius: var(--radius-sm, 6px);
+        border-radius: var(--radius-sm);
 
         cursor: pointer;
-
-        transition: background var(--transition-fast, 0.2s ease);
     }
 
-    .close-sidebar-btn:hover {
-        background-color: var(--sidebar-hover-bg);
-    }
-
+    .close-sidebar-btn img,
     .close-sidebar-btn svg {
-        width: 21px;
-        height: 21px;
+        width: 19px;
+        height: 19px;
 
-        fill: none;
-        stroke: currentColor;
+        object-fit: contain;
 
-        stroke-width: 2;
-        stroke-linecap: round;
-        stroke-linejoin: round;
+        filter: brightness(0) invert(1);
     }
 
 
-    /* =====================================================
-       5. SIDEBAR NAVIGATION
-    ===================================================== */
+    /* 5. NAVIGATION */
 
     .sidebar-nav {
         display: flex;
         flex-direction: column;
 
+        align-items: stretch;
+
         width: 100%;
-        gap: 7px;
+        gap: 9px;
     }
 
-    .nav-item {
+    .sidebar-nav .nav-item {
         display: flex;
         align-items: center;
 
         width: 100%;
-        min-height: 43px;
+        min-width: 0;
+        min-height: 40px;
 
-        gap: 14px;
-        padding: 10px 14px;
+        gap: 12px;
+        padding: 0 12px;
 
         color: var(--sidebar-text);
 
-        font-size: var(--font-size-base, 14px);
-        font-weight: var(--font-medium, 500);
+        font-family: var(--font-primary);
+        font-size: var(--text-sm);
+        font-weight: 500;
+
+        text-decoration: none;
+
+        background: transparent;
 
         border: 1px solid transparent;
-        border-radius: var(--radius-lg, 12px);
+        border-radius: var(--radius-md);
+
+        transition:
+            background-color var(--transition-fast),
+            color var(--transition-fast);
     }
 
-    .nav-icon {
+    .sidebar-nav .nav-item span {
+        flex: 1;
+        min-width: 0;
+
+        white-space: nowrap;
+        line-height: 1.4;
+    }
+
+
+    /* 6. NAVIGATION ICON */
+
+    .sidebar-nav .nav-icon {
         display: block;
 
-        width: 19px;
-        height: 19px;
+        width: 18px;
+        height: 18px;
 
-        flex: 0 0 19px;
+        flex: 0 0 18px;
+
         object-fit: contain;
+
+        filter: brightness(0) invert(1);
     }
 
 
-    /* =====================================================
-       6. ACTIVE MENU
-    ===================================================== */
+    /* 7. ACTIVE MENU */
 
-    .nav-item.active {
-        color: var(--sidebar-active-text);
+    .sidebar-nav .nav-item.active {
+        color: var(--color-accent);
 
         background-color: var(--sidebar-active-bg);
-        border-color: var(--color-accent);
+
+        border: 1px solid var(--color-accent);
+    }
+
+    .sidebar-nav .nav-item.active .nav-icon {
+        filter:
+            brightness(0)
+            saturate(100%)
+            invert(77%)
+            sepia(95%)
+            saturate(1000%)
+            hue-rotate(2deg)
+            brightness(105%);
     }
 
 
-    /* =====================================================
-       7. HOVER MENU
-    ===================================================== */
+    /* 8. HOVER MENU */
 
-    .nav-item:hover {
+    .sidebar-nav .nav-item:hover {
         background-color: var(--sidebar-hover-bg);
     }
 
-    .nav-item.active:hover {
+    .sidebar-nav .nav-item.active:hover {
         background-color: var(--sidebar-active-bg);
     }
 
 
-    /* =====================================================
-       8. LOGOUT
-    ===================================================== */
+    /* 9. LOGOUT */
 
-    .nav-item.logout {
-        min-height: 55px;
+    .sidebar-nav .nav-item.logout {
+        width: 100%;
+        min-height: 40px;
 
-        margin-top: 12px;
-        padding-top: 16px;
+        margin-top: 8px;
 
-        color: var(--color-danger);
+        color: var(--sidebar-text);
 
-        border-top: 1px solid rgba(255,255,255,0.15);
-        border-radius: 0;
+        border: 1px solid transparent;
+        border-radius: var(--radius-md);
+    }
+
+    .sidebar-nav .nav-item.logout:hover {
+        background-color: var(--sidebar-hover-bg);
     }
 
 
-    /* =====================================================
-       9. HAMBURGER BUTTON
-    ===================================================== */
+    /* 10. HAMBURGER */
 
     .hamburger-btn {
-        position: fixed;
-        top: 13px;
-        left: 14px;
-
-        z-index: var(--z-mobile-control, 1100);
-
         display: flex;
         align-items: center;
         justify-content: center;
@@ -238,79 +286,79 @@
         width: 30px;
         height: 30px;
 
+        flex: 0 0 30px;
+
+        padding: 0;
+
         color: var(--color-primary);
         background: transparent;
 
         cursor: pointer;
     }
 
+    .hamburger-btn img,
     .hamburger-btn svg {
-        width: 23px;
-        height: 23px;
+        display: block;
 
-        fill: none;
-        stroke: currentColor;
+        width: 20px;
+        height: 20px;
 
-        stroke-width: 2;
-        stroke-linecap: round;
-        stroke-linejoin: round;
+        object-fit: contain;
     }
 
 
     /* HAMBURGER HILANG SAAT SIDEBAR TERBUKA */
 
-    .sidebar-checkbox:checked ~ .hamburger-btn {
+    .sidebar-checkbox:checked
+    ~ .dashboard-layout
+    .hamburger-btn {
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
     }
 
 
-    /* =====================================================
-       10. OVERLAY
-    ===================================================== */
+    /* 11. OVERLAY */
 
     .sidebar-overlay {
         position: fixed;
         inset: 0;
 
-        z-index: var(--z-overlay, 900);
+        z-index: var(--z-overlay);
 
         display: block;
 
-        background-color: var(--color-overlay, rgba(0,0,0,0.4));
+        background-color: var(--color-overlay);
 
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
 
         transition:
-            opacity var(--transition-normal, 0.3s ease),
-            visibility var(--transition-normal, 0.3s ease);
+            opacity var(--transition-normal),
+            visibility var(--transition-normal);
     }
 
-
-    /* OVERLAY AKTIF */
-
-    .sidebar-checkbox:checked ~ .sidebar-overlay {
+    .sidebar-checkbox:checked
+    ~ .dashboard-layout
+    .sidebar-overlay {
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
+
         cursor: pointer;
     }
 
 
-    /* =====================================================
-       11. SCROLLBAR
-    ===================================================== */
+    /* 12. SCROLLBAR */
 
     .sidebar::-webkit-scrollbar {
         width: 4px;
     }
 
     .sidebar::-webkit-scrollbar-thumb {
-        background-color: rgba(255,255,255,0.2);
-        border-radius: var(--radius-full, 9999px);
+        background-color: rgba(255, 255, 255, 0.22);
+        border-radius: 999px;
     }
 
     .sidebar::-webkit-scrollbar-track {
@@ -321,13 +369,13 @@
 
 
 /* =========================================================
-   12. SMALL MOBILE
+   SMALL MOBILE
 ========================================================= */
 
-@media (max-width: 400px) {
+@media (max-width: 380px) {
 
     .sidebar {
-        width: min(241px, 82vw);
+        width: min(78vw, 280px);
     }
 
 }

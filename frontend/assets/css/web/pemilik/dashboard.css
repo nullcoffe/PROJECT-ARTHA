@@ -1,0 +1,140 @@
+/* ARTHA | PEMILIK DASHBOARD — WEB
+   Hanya komponen yang unik di halaman Dashboard Pemilik:
+   kartu ringkasan dan grafik penjualan. Layout global di shared CSS.
+*/
+.owner-statistics {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(12px,1.5vw,18px);
+  width:100%;
+  margin-bottom:18px;
+}
+.owner-stat-card {
+  display:flex;
+  align-items:center;
+  min-width:0;
+  min-height:clamp(92px,15vh,112px);
+  gap:12px;
+  padding:clamp(13px,1.5vw,20px);
+  background:var(--color-white);
+  border:1px solid var(--color-border);
+  border-radius:var(--radius-md);
+  box-shadow:var(--shadow-soft);
+}
+.owner-stat-icon {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:clamp(30px,3.2vw,40px);
+  height:clamp(32px,3.5vw,42px);
+  flex:0 0 clamp(30px,3.2vw,40px);
+}
+.owner-stat-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+    filter:
+        brightness(0)
+        saturate(100%)
+        invert(77%)
+        sepia(95%)
+        saturate(1000%)
+        hue-rotate(2deg)
+        brightness(105%);
+}
+.owner-stat-info { min-width:0; }
+/* LABEL KARTU */
+.owner-stat-info p {
+  margin: 0 0 3px;
+  color: #657391;
+  font-size: clamp(.68rem, .82vw, .78rem);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* ANGKA STATISTIK */
+.owner-stat-info h2 {
+  color: var(--color-primary);
+  font-family: var(--font-primary);
+  font-size: clamp(1.25rem, 1.8vw, 1.65rem);
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.owner-chart-card {
+  width:100%;
+  min-width:0;
+  min-height:clamp(300px,46vh,350px);
+  padding:clamp(16px,1.8vw,22px);
+  background:var(--color-white);
+  border:1px solid var(--color-border);
+  border-radius:var(--radius-md);
+  box-shadow:var(--shadow-soft);
+}
+.owner-chart-header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:clamp(18px,2.7vh,26px);
+}
+.owner-chart-header h2 {
+  color:var(--color-primary);
+  font-size:.95rem;
+  font-weight:var(--font-semibold);
+}
+.owner-year-select {
+  min-width: 80px;
+  width: 80px;
+  height: 36px;
+  padding: 0 10px;
+
+  color: var(--color-primary);
+  background-color: var(--color-white);
+
+  border: 1px solid var(--color-primary);
+  border-radius: 7px;
+
+  font-family: var(--font-primary);
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.owner-year-select:hover,
+.owner-year-select:focus {
+  background-color: var(--color-background);
+}
+.owner-chart-content {
+  display:grid;
+  grid-template-columns:38px minmax(0,1fr);
+  gap:8px;
+  height:clamp(190px,30vh,230px);
+}
+.owner-chart-y-axis {
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  justify-content:space-between;
+  padding-bottom:19px;
+}
+.owner-chart-y-axis span { color:#8290AA; font-size:.58rem; line-height:1; }
+.owner-chart-bars {
+  display:grid;
+  grid-template-columns:repeat(12,minmax(0,1fr));
+  min-width:0;
+  height:100%;
+  column-gap:clamp(5px,1vw,13px);
+  border-bottom:1px solid #E5EAF1;
+}
+.owner-bar-group { display:flex; flex-direction:column; align-items:center; min-width:0; }
+.owner-bar-area { display:flex; align-items:flex-end; justify-content:center; width:100%; flex:1; min-height:0; }
+.owner-bar { width:clamp(9px,1.4vw,17px); height:var(--bar-height); min-height:3px; border-radius:3px 3px 0 0; }
+.owner-bar.blue { background:var(--chart-blue); }
+.owner-bar.yellow { background:var(--chart-yellow); }
+.owner-bar-group>span { height:18px; padding-top:5px; color:#64748B; font-size:.56rem; white-space:nowrap; }
+

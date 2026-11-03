@@ -1,71 +1,207 @@
+
 /* =========================================================
    ARTHA | GLOBAL RESET
-   Reset elemen dasar; tidak mengatur layout role.
+   Digunakan bersama oleh Admin, Pemilik, dan Kasir.
+   Berlaku untuk Desktop, Tablet, dan Mobile.
+========================================================= */
+
+
+/* =========================================================
+   1. BOX SIZING
+   Memastikan perhitungan ukuran elemen konsisten.
 ========================================================= */
 
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
+
+/* =========================================================
+   2. HTML & BODY
+========================================================= */
+
 html {
-  width: 100%;
-  min-height: 100%;
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
+    width: 100%;
+    min-height: 100%;
+    font-size: 100%;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
-  width: 100%;
-  min-width: 320px;
-  min-height: 100vh;
-  font-family: var(--font-primary, "Poppins", sans-serif);
-  font-size: var(--font-size-base, 14px);
-  font-weight: var(--font-regular, 400);
-  line-height: 1.5;
-  color: var(--color-text, #102A71);
-  background: var(--color-background, #FFFDF0);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+    min-width: 320px;
+    min-height: 100vh;
+
+    font-family: var(--font-primary);
+    font-size: var(--text-base);
+    font-weight: 400;
+    line-height: 1.5;
+
+    color: var(--color-primary);
+    background-color: var(--color-background);
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
+
+
+/* =========================================================
+   3. HEADING & PARAGRAPH
+========================================================= */
 
 h1, h2, h3, h4, h5, h6 {
-  font: inherit;
-  line-height: 1.35;
+    font-family: inherit;
+    font-weight: inherit;
+    line-height: 1.35;
 }
 
-p { line-height: 1.55; }
-a { color: inherit; text-decoration: none; }
-ul, ol { list-style: none; }
-img, svg { display: block; max-width: 100%; }
-img { height: auto; }
-button, input, select, textarea { font: inherit; }
-button { border: 0; cursor: pointer; }
-input, select, textarea { color: inherit; }
-input::placeholder, textarea::placeholder {
-  color: var(--color-text-secondary, #7180A5);
-  opacity: 1;
-}
-table { width: 100%; border-collapse: collapse; border-spacing: 0; }
-
-:focus-visible {
-  outline: 2px solid var(--color-primary, #102A71);
-  outline-offset: 2px;
+p {
+    line-height: 1.5;
 }
 
-* { scrollbar-width: thin; scrollbar-color: #AAB4C8 transparent; }
-*::-webkit-scrollbar { width: 6px; height: 6px; }
-*::-webkit-scrollbar-thumb { background: #AAB4C8; border-radius: 999px; }
-*::-webkit-scrollbar-track { background: transparent; }
+
+/* =========================================================
+   4. LINK & LIST
+========================================================= */
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+
+/* =========================================================
+   5. IMAGE & SVG
+========================================================= */
+
+img,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+img {
+    height: auto;
+}
+
+
+/* =========================================================
+   6. BUTTON
+========================================================= */
+
+button {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    cursor: pointer;
+    border: none;
+}
+
+
+/* =========================================================
+   7. FORM ELEMENT
+========================================================= */
+
+input,
+select,
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+}
+
+input,
+select,
+textarea {
+    outline: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--cashier-search-placeholder);
+    opacity: 1;
+}
+
+
+/* =========================================================
+   8. TABLE
+========================================================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+th,
+td {
+    text-align: left;
+}
+
+
+/* =========================================================
+   9. FOCUS ACCESSIBILITY
+========================================================= */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   10. SCROLLBAR
+========================================================= */
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #AAB4C8 transparent;
+}
+
+*::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #AAB4C8;
+    border-radius: 999px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+/* =========================================================
+   11. REDUCED MOTION
+   Mengurangi animasi bagi pengguna yang memilih
+   pengurangan gerakan pada perangkatnya.
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
 }

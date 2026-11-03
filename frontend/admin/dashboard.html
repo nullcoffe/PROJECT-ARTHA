@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FFFDF0">
+    <title>Dashboard Admin | ARTHA</title>
+    <!-- SHARED: warna, reset, layout, sidebar, header -->
+    <link rel="stylesheet" href="../assets/css/shared/variables.css">
+    <link rel="stylesheet" href="../assets/css/shared/reset.css">
+    <link rel="stylesheet" href="../assets/css/web/layout.css">
+    <link rel="stylesheet" href="../assets/css/web/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/web/header.css">
+    <link rel="stylesheet" href="../assets/css/mobile/layout.css">
+    <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/mobile/header.css">
+
+    <link rel="stylesheet" href="../assets/css/web/admin/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/mobile/admin/dashboard.css">
+</head>
+<body>
+    <input type="checkbox" id="sidebar-toggle" class="sidebar-checkbox"
+           aria-label="Buka atau tutup navigasi">
+
+    <div class="dashboard-layout">
+        <aside class="sidebar" aria-label="Navigasi Admin">
+            <div class="sidebar-brand">
+                <div class="brand-left">
+                    <img src="../assets/images/Logo.svg" alt="Logo ARTHA" class="brand-logo">
+                    <span class="brand-title">ARTHA</span>
+                </div>
+                <label for="sidebar-toggle" class="close-sidebar-btn" aria-label="Tutup sidebar">
+                    <img src="../assets/icons/actions/cancel.svg" alt="">
+                </label>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active" aria-current="page">
+                    <img src="../assets/icons/sidebar/dashboard.svg" class="nav-icon" alt="">
+                    <span>Dashboard</span>
+                </a>
+                <a href="pengguna.html" class="nav-item">
+                    <img src="../assets/icons/sidebar/pengguna.svg" class="nav-icon" alt="">
+                    <span>Pengguna</span>
+                </a>
+                <a href="produk&stok.html" class="nav-item">
+                    <img src="../assets/icons/sidebar/produk&amp;stok.svg" class="nav-icon" alt="">
+                    <span>Produk &amp; Stok</span>
+                </a>
+                <a href="transaksi.html" class="nav-item">
+                    <img src="../assets/icons/sidebar/transaksi.svg" class="nav-icon" alt="">
+                    <span>Transaksi</span>
+                </a>
+                <a href="../index.html" class="nav-item logout">
+                    <img src="../assets/icons/actions/logout.svg" class="nav-icon" alt="">
+                    <span>Keluar</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <label for="sidebar-toggle" class="hamburger-btn" aria-label="Buka sidebar">
+                        <img src="../assets/icons/actions/hamburger.svg" alt="">
+                    </label>
+                    <a href="dashboard.html" class="mobile-brand" aria-label="ARTHA">
+                        <img src="../assets/images/Logo.svg" alt="">
+                        <span>ARTHA</span>
+                    </a>
+                    <h1 class="desktop-page-title">Dashboard Admin</h1>
+                </div>
+                <div class="header-right">
+                    <div class="admin-profile">
+                        <div class="profile-circle">
+                            <img src="../assets/icons/header/profile.svg" alt="">
+                        </div>
+                        <span>Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <h1 class="mobile-page-title">Dashboard Admin</h1>
+
+            <div class="page-container admin-dashboard-content">
+                <section class="admin-statistics" aria-label="Ringkasan dashboard">
+                    <article class="admin-stat-card">
+                        <div class="admin-stat-icon">
+                            <img src="../assets/icons/cards/jumlahproduk.svg" alt="">
+                        </div>
+                        <div class="admin-stat-info">
+                            <p>Total Jumlah Produk</p>
+                            <h2>60</h2>
+                        </div>
+                    </article>
+
+                    <article class="admin-stat-card">
+                        <div class="admin-stat-icon admin-users-icon">
+                            <img src="../assets/icons/cards/multiuser.svg" alt="">
+                        </div>
+                        <div class="admin-stat-info">
+                            <p>Total Jumlah<br>Pengguna</p>
+                            <h2>8</h2>
+                        </div>
+                    </article>
+
+                    <article class="admin-stat-card">
+                        <div class="admin-stat-icon">
+                            <img src="../assets/icons/cards/stoktipis.svg" alt="">
+                        </div>
+                        <div class="admin-stat-info">
+                            <p>Total Stok Menipis</p>
+                            <h2>6</h2>
+                        </div>
+                    </article>
+                </section>
+
+                <section class="admin-chart-card" aria-labelledby="admin-chart-title">
+                    <div class="admin-chart-header">
+                        <h2 id="admin-chart-title">Tren Penjualan Bulanan</h2>
+                        <select class="admin-year-select" aria-label="Pilih tahun">
+                            <option value="2024">2024</option>
+                            <option value="2025" selected>2025</option>
+                            <option value="2026">2026</option>
+                        </select>
+                    </div>
+
+                    <div class="admin-chart-content" role="img"
+                         aria-label="Grafik contoh penjualan bulanan Januari sampai Desember">
+                        <div class="admin-chart-y-axis" aria-hidden="true">
+                            <span>Rp12 jt</span><span>Rp9 jt</span><span>Rp6 jt</span>
+                            <span>Rp3 jt</span><span>0</span>
+                        </div>
+                        <div class="admin-chart-bars" aria-hidden="true">
+                            <div class="admin-bar-group"><div class="admin-bar-area"><div class="admin-bar blue" style="--bar-height:28.33%"></div></div><span>Jan</span></div>
+                            <div class="admin-bar-group"><div class="admin-bar-area"><div class="admin-bar blue" style="--bar-height:45.83%"></div></div><span>Feb</span></div>
+                            <div class="admin-bar-group"><div class="admin-bar-area"><div class="admin-bar yellow" style="--bar-height:33.33%"></div></div><span>Mar</span></div>
+                            <div class="admin-bar-group"><div class="admin-bar-area"><div class="admin-bar blue" style="--bar-height:53.33%"></div></div><span>Apr</span></div>
+                            <div class="admin-bar-group"><div class="admin-bar-area"><div class="admin-bar blue" style="--bar-height:47.5%"></div></div><span>Mei</span></div>
+                            <div class="admin-bar-group"><div class="admin-bar-area"><div class="admin-bar yellow" style="--bar-height:66.67%"></div></div><span>Jun</span></div>
+                            <div class="admin-bar-group"><div class="admin-bar-area"><div class="admin-bar blue" style="--bar-height:45%"></div></div><span>Jul</span></div>
+                            <div class="admin-bar-group"><div class="admin-bar-area"><div class="admin-bar blue" style="--bar-height:64.17%"></div></div><span>Agu</span></div>
+                            <div class="admin-bar-group"><div class="admin-bar-area"><div class="admin-bar yellow" style="--bar-height:52.5%"></div></div><span>Sep</span></div>
+                            <div class="admin-bar-group"><div class="admin-bar-area"><div class="admin-bar blue" style="--bar-height:78.33%"></div></div><span>Okt</span></div>
+                            <div class="admin-bar-group"><div class="admin-bar-area"><div class="admin-bar blue" style="--bar-height:68.33%"></div></div><span>Nov</span></div>
+                            <div class="admin-bar-group"><div class="admin-bar-area"><div class="admin-bar yellow" style="--bar-height:81.67%"></div></div><span>Des</span></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+        <label for="sidebar-toggle" class="sidebar-overlay" aria-label="Tutup sidebar"></label>
+    </div>
+</body>
+</html>

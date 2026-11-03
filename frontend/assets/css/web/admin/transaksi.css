@@ -1,0 +1,173 @@
+/* =====================================================
+   ARTHA | ADMIN - TRANSAKSI
+   WEB CONTENT ONLY. Komponen Admin menggunakan token Admin.
+===================================================== */
+
+.desktop-page-title { display: block; }
+.mobile-page-title { display: none; }
+.transaction-content { width: 100%; min-width: 0; }
+
+.transaction-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: clamp(12px, 1.5vw, 18px);
+    margin: 0 0 18px;
+}
+
+.transaction-summary-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    min-height: 88px;
+    padding: 12px;
+    background: var(--color-white);
+    border: 1px solid var(--color-primary);
+    border-radius: 7px;
+}
+
+.transaction-summary-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+}
+.transaction-summary-icon img { width: 100%; height: 100%; object-fit: contain; }
+
+.transaction-summary-card p {
+    margin: 0;
+    color: var(--color-primary);
+    font-size: clamp(.62rem, .8vw, .75rem);
+    font-weight: 600;
+    line-height: 1.25;
+}
+.transaction-summary-card h2 {
+    margin: 0;
+    color: var(--color-primary);
+    font-size: clamp(1.7rem, 2.7vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.05;
+}
+
+.transaction-filters {
+    display: grid;
+    grid-template-columns: minmax(130px, 1fr) minmax(130px, 1fr) minmax(150px, .95fr);
+    align-items: end;
+    gap: 14px;
+    margin-bottom: 11px;
+}
+
+.transaction-filter-field { display: flex; flex-direction: column; gap: 4px; }
+.transaction-filter-field label {
+    color: var(--color-primary);
+    font-size: .57rem;
+    font-weight: 600;
+}
+.transaction-filter-field select {
+    width: 100%;
+    height: 25px;
+    padding: 0 8px;
+    color: #657391;
+    background: var(--color-white);
+    border: 1px solid var(--color-primary);
+    border-radius: 6px;
+    font-family: var(--font-primary);
+    font-size: .58rem;
+}
+
+.all-period-card {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-height: 55px;
+    padding: 7px 11px;
+    background: var(--color-white);
+    border: 1px solid var(--color-primary);
+    border-radius: 7px;
+}
+.all-period-icon { width: 28px; height: 32px; flex: 0 0 28px; }
+.all-period-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(0) saturate(100%) invert(12%) sepia(27%) saturate(2400%) hue-rotate(190deg) brightness(85%);
+}
+.all-period-card strong {
+    display: block;
+    color: var(--color-primary);
+    font-size: .68rem;
+    font-weight: 700;
+}
+.all-period-card span {
+    display: block;
+    color: #657391;
+    font-size: .53rem;
+    line-height: 1.35;
+}
+
+.transaction-list-section { width: 100%; }
+.transaction-list-heading {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    margin: 0 0 7px;
+    padding: 0 12px;
+    color: var(--admin-button);
+    background: var(--color-white);
+    border: 1px solid #E5EAF1;
+    border-radius: 6px;
+    font-size: .58rem;
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.transaction-table-card {
+    width: 100%;
+    overflow: hidden;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.transaction-table-wrapper { width: 100%; overflow-x: auto; }
+.transaction-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-primary);
+    font-size: .62rem;
+}
+.transaction-table thead { color: var(--color-white); background: var(--admin-table-header); }
+.transaction-table th {
+    height: 31px;
+    padding: 0 18px;
+    text-align: left;
+    font-size: .55rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.transaction-table td {
+    height: 40px;
+    padding: 0 18px;
+    color: #0A192F;
+    border-bottom: 1px solid #EDF0F4;
+    white-space: nowrap;
+}
+.transaction-table tbody tr:last-child td { border-bottom: 0; }
+.transaction-table td:first-child,.transaction-table td:last-child { font-weight: 600; }
+.transaction-empty-state { padding: 18px; color: #7180A5; font-size: .7rem; text-align: center; }
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .transaction-summary-card { gap: 7px; padding: 9px; }
+    .transaction-summary-icon { width: 32px; height: 32px; flex-basis: 32px; }
+    .transaction-filters { gap: 9px; }
+    .transaction-table th,.transaction-table td { padding-inline: 12px; }
+}
+
+
+.transaction-filter-field select:disabled {
+    opacity: 1;
+    cursor: not-allowed;
+    background-color: #FFFFFF;
+    color: #657391;
+}

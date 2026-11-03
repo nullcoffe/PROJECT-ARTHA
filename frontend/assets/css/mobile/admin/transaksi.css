@@ -1,0 +1,69 @@
+/* ARTHA | ADMIN - TRANSAKSI MOBILE */
+@media (max-width: 768px) {
+    .desktop-page-title { display: none; }
+    .mobile-page-title {
+        display: block;
+        margin: 0 0 14px;
+        color: var(--color-primary);
+        font-size: clamp(1.05rem, 4.5vw, 1.25rem);
+        font-weight: 700;
+    }
+    .transaction-content { width: 100%; min-width: 0; }
+
+    .transaction-summary {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+    .transaction-summary-card {
+        min-height: 70px;
+        gap: 12px;
+        padding: 10px 14px;
+        border-radius: 10px;
+    }
+    .transaction-summary-icon { width: 34px; height: 34px; flex-basis: 34px; }
+    .transaction-summary-card p { font-size: .68rem; }
+    .transaction-summary-card h2 { font-size: 1.6rem; }
+
+    .transaction-filters {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 13px;
+    }
+    .transaction-filter-field label { font-size: .65rem; }
+    .transaction-filter-field select { height: 36px; padding-inline: 8px; font-size: .66rem; }
+    .all-period-card {
+        grid-column: 1 / -1;
+        min-height: 58px;
+        padding: 8px 12px;
+    }
+    .all-period-icon { width: 30px; height: 34px; flex-basis: 30px; }
+    .all-period-card strong { font-size: .72rem; }
+    .all-period-card span { font-size: .6rem; }
+
+    .transaction-list-heading { min-height: 31px; font-size: .65rem; }
+    .transaction-table-card { border-radius: 8px; }
+    .transaction-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .transaction-table { min-width: 550px; font-size: .68rem; }
+    .transaction-table th { height: 38px; padding-inline: 12px; font-size: .62rem; }
+    .transaction-table td { height: 43px; padding-inline: 12px; }
+}
+
+@media (max-width: 380px) {
+    .transaction-summary-card { padding-inline: 11px; }
+    .transaction-filters { gap: 8px; }
+    .transaction-table { min-width: 520px; }
+}
+@media (max-width: 768px) {
+    
+    }
+
+
+@media (max-width: 768px) {
+    .transaction-filter-field select:disabled {
+        opacity: 1;
+        cursor: not-allowed;
+        background-color: #FFFFFF;
+        color: #657391;
+    }
+}

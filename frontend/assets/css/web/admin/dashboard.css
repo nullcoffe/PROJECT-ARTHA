@@ -1,0 +1,166 @@
+/* =====================================================
+   ARTHA | ADMIN DASHBOARD - WEB CONTENT ONLY
+   Layout/sidebar/header memakai shared CSS.
+===================================================== */
+
+.desktop-page-title { display: block; }
+.mobile-page-title { display: none; }
+.admin-dashboard-content { width: 100%; min-width: 0; }
+
+.admin-statistics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 13px;
+    width: 100%;
+    margin: 0 0 20px;
+}
+
+.admin-stat-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    min-width: 0;
+    min-height: 122px;
+    padding: 22px 16px 14px;
+    background: var(--color-white);
+    border: 1.5px solid var(--color-primary);
+    border-radius: 7px;
+}
+
+.admin-stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+}
+
+.admin-stat-icon img {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+}
+
+.admin-users-icon { flex-basis: 44px; width: 44px; }
+.admin-users-icon img { width: 44px; height: 40px; }
+
+.admin-stat-info { min-width: 0; padding-top: 2px; }
+.admin-stat-info p {
+    margin: 3px 0 5px;
+    color: var(--color-primary);
+    font-size: clamp(.68rem, .82vw, .76rem);
+    font-weight: 600;
+    line-height: 1.45;
+}
+.admin-stat-info h2 {
+    margin: 0;
+    color: var(--color-primary);
+    font-family: var(--font-primary);
+    font-size: clamp(2rem, 3.2vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.08;
+}
+
+.admin-chart-card {
+    width: 100%;
+    min-width: 0;
+    min-height: 342px;
+    padding: 20px 22px 22px;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 9px;
+    box-shadow: 0 2px 3px rgba(0,0,0,.18);
+}
+.admin-chart-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+.admin-chart-header h2 {
+    color: var(--color-primary);
+    font-size: .88rem;
+    font-weight: 600;
+}
+.admin-year-select {
+    width: 78px;
+    height: 34px;
+    padding: 0 8px;
+    color: var(--color-primary);
+    background: var(--color-white);
+    border: 1px solid var(--color-primary);
+    border-radius: 6px;
+    font-family: var(--font-primary);
+    font-size: .78rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.admin-year-select:hover,
+.admin-year-select:focus { background: var(--color-background); }
+
+.admin-chart-content {
+    display: grid;
+    grid-template-columns: 38px minmax(0,1fr);
+    gap: 8px;
+    height: 250px;
+    margin-top: 25px;
+}
+.admin-chart-y-axis {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+.admin-chart-y-axis span {
+    color: #7180A5;
+    font-size: .56rem;
+    line-height: 1;
+}
+.admin-chart-bars {
+    display: grid;
+    grid-template-columns: repeat(12,minmax(0,1fr));
+    min-width: 0;
+    height: 100%;
+    column-gap: clamp(5px, 1.2vw, 15px);
+    border-bottom: 1px solid var(--color-border);
+}
+.admin-bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+}
+.admin-bar-area {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+}
+.admin-bar {
+    width: min(100%, 18px);
+    height: var(--bar-height);
+    min-height: 3px;
+    border-radius: 4px 4px 0 0;
+}
+.admin-bar.blue { background: var(--chart-blue); }
+.admin-bar.yellow { background: var(--chart-yellow); }
+.admin-bar-group > span {
+    height: 19px;
+    padding-top: 6px;
+    color: #7180A5;
+    font-size: .56rem;
+    white-space: nowrap;
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .admin-stat-card { min-height: 112px; padding: 18px 10px; gap: 8px; }
+    .admin-stat-icon { flex-basis: 32px; width: 32px; }
+    .admin-stat-icon img { width: 32px; height: 32px; }
+    .admin-stat-info p { font-size: .62rem; }
+    .admin-stat-info h2 { font-size: 2rem; }
+    .admin-chart-content { height: 220px; }
+}

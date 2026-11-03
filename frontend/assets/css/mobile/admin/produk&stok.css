@@ -1,0 +1,187 @@
+/* ARTHA | ADMIN - PRODUK & STOK
+   Konten mobile; sidebar/header memakai shared CSS. */
+
+@media (max-width: 768px) {
+    .desktop-page-title { display: none; }
+    .mobile-page-title {
+        display: block;
+        margin: 0 0 14px;
+        color: var(--color-primary);
+        font-size: clamp(1.05rem, 4.5vw, 1.25rem);
+        font-weight: 700;
+    }
+    .product-page-content { width: 100%; min-width: 0; }
+
+    .product-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        margin-bottom: 12px;
+    }
+    .product-search { width: 100%; height: 36px; padding-inline: 10px; }
+    .product-search img { width: 15px; height: 15px; }
+    .product-search input { font-size: .7rem; }
+
+    .product-toolbar-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .stock-adjust-trigger,.add-product-trigger {
+        height: 36px;
+        padding-inline: 7px;
+        font-size: .62rem;
+    }
+    .stock-adjust-trigger img,.add-product-trigger img { width: 14px; height: 14px; }
+
+    .product-table-card { border-radius: 8px; }
+    .product-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .product-table { min-width: 620px; font-size: .68rem; }
+    .product-table th { height: 38px; padding-inline: 12px; font-size: .65rem; }
+    .product-table td { height: 42px; padding-inline: 12px; }
+
+    .product-forms-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin: 14px 0 0;
+    }
+    .product-form-panel,.stock-form-panel {
+        padding: 14px 12px;
+        border-radius: 10px;
+    }
+    .product-panel-heading h2 { font-size: .88rem; }
+    .product-fields-grid { gap: 11px 9px; }
+    .product-field { gap: 5px; }
+    .product-field label { font-size: .65rem; }
+    .product-field input,.product-field select {
+        height: 38px;
+        padding-inline: 9px;
+        font-size: .68rem;
+        border-radius: 5px;
+    }
+
+    .stock-number-grid { gap: 9px; }
+    .product-form-actions,.stock-form-actions { gap: 8px; margin-top: 13px; padding-top: 11px; }
+    .admin-primary-button,.admin-outline-button {
+        min-height: 34px;
+        padding-inline: 10px;
+        font-size: .62rem;
+    }
+    .form-feedback { font-size: .62rem; min-height: 14px; }
+}
+
+@media (max-width: 380px) {
+    .product-fields-grid { grid-template-columns: 1fr; }
+    .product-toolbar-actions { grid-template-columns: 1fr; }
+    .product-table { min-width: 580px; }
+    .admin-primary-button,.admin-outline-button { font-size: .58rem; }
+}
+
+
+/* =====================================================
+   FIX FINAL | ADMIN PRODUK & STOK - MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .product-page-content {
+        width: 100%;
+        min-width: 0;
+        padding: 0;
+        margin: 0;
+    }
+
+    .product-toolbar {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .product-search {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 36px;
+        overflow: hidden;
+    }
+
+    .product-search img {
+        display: block !important;
+        width: 15px !important;
+        height: 15px !important;
+        min-width: 15px;
+        max-width: 15px;
+        object-fit: contain;
+        flex: 0 0 15px;
+    }
+
+    .product-toolbar-actions {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+        gap: 8px;
+    }
+
+    .product-toolbar-actions button {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        width: 100%;
+        min-width: 0;
+        height: 36px;
+        padding: 0 7px;
+        font-size: 10px;
+    }
+
+    .product-toolbar-actions button img {
+        display: block !important;
+        width: 14px !important;
+        height: 14px !important;
+        min-width: 14px;
+        max-width: 14px;
+        object-fit: contain;
+        flex: 0 0 14px;
+    }
+
+    .product-table-card {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .product-table {
+        min-width: 620px;
+    }
+
+    .product-forms-grid {
+        display: grid !important;
+        grid-template-columns: 1fr;
+        width: 100%;
+        margin: 14px 0 0;
+        gap: 12px;
+    }
+
+    .product-form-panel,
+    .stock-form-panel {
+        width: 100%;
+        min-width: 0;
+    }
+
+}
+/* HIGHLIGHT PANEL PRODUK & STOK - MOBILE */
+
+@media (max-width: 768px) {
+
+    /* Data Produk aktif */
+    #mode-product:checked ~ .product-forms-grid
+    #productFormPanel {
+        border: 2px solid var(--admin-button);
+        box-shadow: none;
+    }
+
+    /* Penyesuaian Stok aktif */
+    #mode-stock:checked ~ .product-forms-grid
+    #stockFormPanel {
+        border: 2px solid var(--admin-button);
+        box-shadow: none;
+    }
+
+}

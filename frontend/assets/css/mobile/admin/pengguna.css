@@ -1,0 +1,39 @@
+/* ARTHA | ADMIN - MANAJEMEN PENGGUNA
+   MOBILE CONTENT ONLY. Shared layout tidak diulang. */
+@media (max-width: 768px) {
+    .desktop-page-title { display: none; }
+    .mobile-page-title {
+        display: block;
+        margin: 0 0 14px;
+        color: var(--color-primary);
+        font-size: clamp(1.05rem, 4.5vw, 1.25rem);
+        font-weight: 700;
+    }
+    .admin-users-content { width: 100%; min-width: 0; }
+    .users-toolbar { justify-content: flex-end; margin-bottom: 10px; }
+    .add-user-button { min-width: 140px; height: 34px; font-size: .68rem; }
+    .users-table-card { min-height: 0; border-radius: 8px; }
+    .users-table-wrapper { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .users-table { min-width: 650px; font-size: .68rem; }
+    .users-table th { height: 39px; padding-inline: 12px; }
+    .users-table td { height: 43px; padding-inline: 12px; }
+    .password-cell { max-width: 112px; }
+    .users-actions { gap: 10px; }
+    .user-form-card { margin-top: 12px; padding: 13px 12px; border-radius: 10px; }
+    .user-form-card h2 { font-size: .9rem; margin-bottom: 11px; }
+    .user-form { grid-template-columns: 1fr; gap: 10px; }
+    .form-field label { font-size: .68rem; }
+    .form-field input,.form-field select {
+        height: 40px;
+        padding-inline: 10px;
+        font-size: .72rem;
+        border-radius: 6px;
+    }
+    .form-actions { margin-top: 4px; gap: 8px; }
+    .save-user-button,.cancel-user-button { min-width: 76px; height: 34px; font-size: .68rem; }
+}
+@media (max-width: 380px) {
+    .users-table { min-width: 620px; }
+    .add-user-button { min-width: 128px; }
+    .user-form-card { padding-inline: 10px; }
+}

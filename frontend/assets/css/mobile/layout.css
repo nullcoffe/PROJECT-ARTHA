@@ -1,86 +1,205 @@
+
 /* =========================================================
    ARTHA | SHARED MOBILE LAYOUT
+   Digunakan bersama oleh Admin, Pemilik, dan Kasir.
+   Khusus Smartphone.
 ========================================================= */
 
-@media (max-width: 700px) {
-  body {
-    width: 100%;
-    min-width: 320px;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
 
-  .dashboard-layout {
-    display: block;
-    width: 100%;
-    min-height: 100vh;
-  }
+/* =========================================================
+   1. MOBILE BODY
+========================================================= */
 
-  .main-content {
-    display: block;
-    width: 100%;
-    min-width: 0;
-    min-height: 100vh;
-    margin-left: 0;
-    padding: var(--content-mobile-padding-y) var(--content-mobile-padding-x) 5%;
-    background: var(--color-background);
-  }
+@media (max-width: 768px) {
 
-  .page-container {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    margin: 0;
-  }
+    body {
+        width: 100%;
+        min-width: 320px;
+        min-height: 100vh;
 
-  .page-title {
-    margin-bottom: var(--spacing-4);
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-semibold);
-    line-height: 1.35;
-  }
+        overflow-x: hidden;
 
-  .content-section {
-    width: 100%;
-    min-width: 0;
-    margin-bottom: var(--content-section-gap);
-  }
+        background-color: var(--color-background);
+    }
 
-  .card {
-    width: 100%;
-    min-width: 0;
-    padding: clamp(12px, 4%, 18px);
-    background: var(--color-white);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-soft);
-  }
 
-  .content-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 3%;
-  }
+    /* =====================================================
+       2. DASHBOARD LAYOUT
+    ===================================================== */
 
-  .content-flex {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 3%;
-  }
+    .dashboard-layout {
+        display: block;
 
-  .table-container {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    background: var(--color-white);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-  }
+        position: relative;
+
+        width: 100%;
+        min-height: 100vh;
+    }
+
+
+    /* =====================================================
+       3. MAIN CONTENT
+       Menghilangkan ruang sidebar desktop.
+    ===================================================== */
+
+    .main-content {
+        display: block;
+
+        width: 100%;
+        min-width: 0;
+        min-height: 100vh;
+
+        margin-left: 0;
+
+        padding:
+            var(--content-mobile-padding-y)
+            var(--content-mobile-padding-x)
+            24px;
+
+        background-color: var(--color-background);
+    }
+
+
+    /* =====================================================
+       4. PAGE CONTAINER
+    ===================================================== */
+
+    .page-container {
+        width: 100%;
+        max-width: 100%;
+
+        min-width: 0;
+
+        margin: 0 auto;
+
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+
+    /* =====================================================
+       5. PAGE TITLE
+    ===================================================== */
+
+    .page-title {
+        margin-bottom: var(--content-section-gap);
+
+        color: var(--color-primary);
+
+        font-family: var(--font-primary);
+        font-size: clamp(1.05rem, 4.5vw, 1.25rem);
+        font-weight: 700;
+
+        line-height: 1.4;
+    }
+
+
+    /* =====================================================
+       6. CONTENT SECTION
+    ===================================================== */
+
+    .content-section {
+        width: 100%;
+        min-width: 0;
+
+        margin-bottom: var(--content-section-gap);
+    }
+
+
+    /* =====================================================
+       7. GENERAL CARD
+       Fondasi card umum untuk seluruh role.
+    ===================================================== */
+
+    .shared-card {
+        width: 100%;
+        min-width: 0;
+
+        padding: 14px;
+
+        background-color: var(--color-white);
+
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+
+        box-shadow: var(--shadow-soft);
+    }
+
+
+    /* =====================================================
+       8. CONTENT GRID
+    ===================================================== */
+
+    .content-grid {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 12px;
+
+        width: 100%;
+        min-width: 0;
+    }
+
+
+    /* =====================================================
+       9. CONTENT FLEX
+    ===================================================== */
+
+    .content-flex {
+        display: flex;
+        align-items: center;
+
+        flex-wrap: wrap;
+
+        gap: 12px;
+    }
+
+
+    /* =====================================================
+       10. TABLE CONTAINER
+       Mencegah tabel merusak lebar layar.
+    ===================================================== */
+
+    .table-container,
+    .shared-table-wrap {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        -webkit-overflow-scrolling: touch;
+
+        background-color: var(--color-white);
+
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+    }
+
 }
 
-@media (max-width: 400px) {
-  .main-content { padding-inline: 3.5%; }
-  .content-grid { grid-template-columns: 1fr; }
+
+/* =========================================================
+   11. SMALL MOBILE
+   Smartphone dengan lebar maksimal 380px.
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .main-content {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .shared-card {
+        padding: 12px;
+    }
+
 }
