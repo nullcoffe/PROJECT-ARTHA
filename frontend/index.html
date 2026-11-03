@@ -3,128 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARTHA - Login</title>
+    <meta name="theme-color" content="#FFFDF0">
+    <title>Login | ARTHA</title>
 
-    <!-- CSS lokal ARTHA -->
+    <!-- SHARED DESIGN TOKENS -->
     <link rel="stylesheet" href="assets/css/shared/variables.css">
+    <link rel="stylesheet" href="assets/css/shared/reset.css">
+
+    <!-- LOGIN: WEB -->
     <link rel="stylesheet" href="assets/css/web/auth.css">
+
+    <!-- LOGIN: MOBILE -->
     <link rel="stylesheet" href="assets/css/mobile/auth.css">
 </head>
-<body>
 
-  <!-- Kumpulan ikon -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <symbol id="i-user" viewBox="0 0 24 24">
-      <circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/>
-    </symbol>
-    <symbol id="i-lock" viewBox="0 0 24 24">
-      <path d="M7 10V7a5 5 0 0 1 10 0v3h1.5A1.5 1.5 0 0 1 20 11.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 20.5v-9A1.5 1.5 0 0 1 5.5 10H7Zm2 0h6V7a3 3 0 0 0-6 0v3Z"/>
-    </symbol>
-    <symbol id="i-users" viewBox="0 0 24 24">
-      <circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/>
-      <circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.8 0 4.5 1.8 4.5 4.5"/>
-    </symbol>
-    <symbol id="i-chevron" viewBox="0 0 24 24">
-      <path d="M5 9l7 7 7-7"/>
-    </symbol>
-  </svg>
-  <!--Kerangka utama login-->  
-  <main class="auth">
+<body class="auth-page">
 
-    <!-- PANEL KIRI -->
-    <section class="auth-left">
-      <div class="brand">
-        <img src="assets/images/Logo.png" alt="Logo ARTHA" class="brand-logo">
-        <span class="brand-name">ARTHA</span>
-      </div>
+    <main class="auth-shell">
 
-      <div class="hero">
-        <h1>Sistem Penjualan<br>dan Analisis Produk</h1>
-        <p>Kelola transaksi, stok, dan analisis pola pembelian<br class="br-web"> dalam satu platform</p>
-      </div>
-    </section>
+        <!-- PANEL KIRI: BRANDING DESKTOP -->
+        <section class="auth-brand-panel" aria-label="Tentang ARTHA">
 
-    <!-- PANEL KANAN -->
-    <section class="auth-right">
-      <form class="form" id="loginForm" autocomplete="off">
-        <h2>Selamat Datang!</h2>
-        <p class="subtitle">Silahkan masuk dengan akun anda</p>
+            <a href="index.html" class="auth-brand" aria-label="ARTHA">
+                <img src="assets/images/Logo.svg" alt="Logo ARTHA" class="auth-logo">
+                <span>ARTHA</span>
+            </a>
 
-        <label class="label" for="username">Username</label>
-        <div class="field">
-          <svg class="icon ic-stroke ic-dark"><use href="#i-user"/></svg>
-          <input type="text" id="username" placeholder="Masukkan Username anda">
-        </div>
+            <div class="auth-brand-copy">
+                <h1>
+                    Sistem Penjualan<br>
+                    dan Analisis Produk
+                </h1>
 
-        <label class="label" for="password">Kata sandi</label>
-        <div class="field">
-            <img src="assets/icons/login/lock.svg" class="icon" alt="">
-            <input type="password" id="password" placeholder="Masukkan Kata Sandi anda">
-        </div>
+                <p>
+                    Kelola transaksi, stok, dan analisis pola pembelian
+                    dalam satu platform
+                </p>
+            </div>
 
-        <span class="label">Jenis Pengguna</span>
-        <div class="select" id="roleSelect">
-        <button type="button" class="select-trigger" aria-haspopup="listbox" aria-expanded="false">
-            <img src="assets/icons/login/manyuser.svg" class="icon" alt="">
-            <span class="select-value">-Pilih-</span>
-            <span class="chevron"></span>
-        </button>
+        </section>
 
-        <ul class="select-menu" role="listbox">
-        <li role="option" data-value="admin">
-            <img src="assets/icons/login/manyuser.svg" class="icon" alt="">
-                Admin
-            </li>
-            <li role="option" data-value="pemilik">
-            <img src="assets/icons/login/manyuser.svg" class="icon" alt="">
-                Pemilik
-            </li>
-            <li role="option" data-value="kasir">
-            <img src="assets/icons/login/manyuser.svg" class="icon" alt="">
-                Kasir
-            </li>
-        </ul>
-          <input type="hidden" id="role" name="role">
-        </div>
 
-        <button type="submit" class="btn-login">
-          <span>Masuk</span>
-          <svg class="btn-arrow" viewBox="0 0 36 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M1 6H34M29 1.5L34 6L29 10.5"/>
-          </svg>
-        </button>
-      </form>
-    </section>
-  </main>
+        <!-- PANEL KANAN: FORM LOGIN -->
+        <section class="auth-form-panel">
 
-  <script>
-    const select  = document.getElementById('roleSelect');
-    const trigger = select.querySelector('.select-trigger');
-    const label   = select.querySelector('.select-value');
-    const hidden  = document.getElementById('role');
-    const options = select.querySelectorAll('li');
+            <!-- BRANDING KHUSUS MOBILE -->
+            <div class="auth-mobile-intro">
 
-    trigger.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const open = select.classList.toggle('open');
-      trigger.setAttribute('aria-expanded', open);
-    });
+                <a href="index.html" class="auth-mobile-brand" aria-label="ARTHA">
+                    <img src="assets/images/Logo.svg" alt="Logo ARTHA">
+                    <span>ARTHA</span>
+                </a>
 
-    options.forEach(opt => {
-      opt.addEventListener('click', () => {
-        label.textContent = opt.textContent.trim();
-        hidden.value = opt.dataset.value;
-        select.classList.remove('open');
-        trigger.setAttribute('aria-expanded', 'false');
-      });
-    });
+                <h1>Sistem Penjualan dan Analisis Produk</h1>
 
-    document.addEventListener('click', () => select.classList.remove('open'));
+                <p>
+                    Kelola transaksi, stok, dan analisis pola pembelian
+                    dalam satu platform
+                </p>
 
-    document.getElementById('loginForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      console.log('Role:', hidden.value);
-    });
-  </script>
+            </div>
+
+
+            <div class="auth-form-wrap">
+
+                <div class="auth-heading">
+                    <h2>Selamat Datang!</h2>
+                    <p>Silahkan masuk dengan akun anda</p>
+                </div>
+
+
+                <form class="login-form" action="#" method="get">
+
+                    <!-- USERNAME -->
+                    <div class="login-field">
+
+                        <label for="username">Username</label>
+
+                        <div class="login-input-wrap">
+
+                            <img
+                                src="assets/icons/login/user.svg"
+                                alt=""
+                                class="login-field-icon"
+                            >
+
+                            <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                placeholder="Masukkan Username anda"
+                                autocomplete="username"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+                    <div class="login-field">
+
+                        <label for="password">Kata sandi</label>
+
+                        <div class="login-input-wrap">
+
+                            <img
+                                src="assets/icons/login/lock.svg"
+                                alt=""
+                                class="login-field-icon"
+                            >
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Masukkan Kata Sandi anda"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- JENIS PENGGUNA -->
+                    <div class="login-field">
+
+                        <label id="role-label">Jenis Pengguna</label>
+
+                        <details class="role-picker">
+
+                            <summary
+                                class="role-picker-trigger"
+                                aria-labelledby="role-label"
+                            >
+
+                                <img
+                                    src="assets/icons/login/manyuser.svg"
+                                    alt=""
+                                    class="role-trigger-icon"
+                                >
+
+                                <span class="role-current role-default">
+                                    -Pilih-
+                                </span>
+
+                                <span class="role-current role-admin">
+                                    Admin
+                                </span>
+
+                                <span class="role-current role-owner">
+                                    Pemilik
+                                </span>
+
+                                <span class="role-current role-cashier">
+                                    Kasir
+                                </span>
+
+                                <span class="role-chevron" aria-hidden="true"></span>
+
+                            </summary>
+
+
+                            <div class="role-picker-menu">
+
+                                <label class="role-option" for="role-admin">
+                                    <input
+                                        type="radio"
+                                        name="jenis_pengguna"
+                                        id="role-admin"
+                                        value="admin"
+                                        required
+                                    >
+
+                                    <img
+                                        src="assets/icons/login/manyuser.svg"
+                                        alt=""
+                                    >
+
+                                    <span>Admin</span>
+                                </label>
+
+
+                                <label class="role-option" for="role-owner">
+                                    <input
+                                        type="radio"
+                                        name="jenis_pengguna"
+                                        id="role-owner"
+                                        value="pemilik"
+                                    >
+
+                                    <img
+                                        src="assets/icons/login/manyuser.svg"
+                                        alt=""
+                                    >
+
+                                    <span>Pemilik</span>
+                                </label>
+
+
+                                <label class="role-option" for="role-cashier">
+                                    <input
+                                        type="radio"
+                                        name="jenis_pengguna"
+                                        id="role-cashier"
+                                        value="kasir"
+                                    >
+
+                                    <img
+                                        src="assets/icons/login/manyuser.svg"
+                                        alt=""
+                                    >
+
+                                    <span>Kasir</span>
+                                </label>
+
+                            </div>
+
+                        </details>
+
+                    </div>
+
+
+                    <!-- LOGIN BUTTON -->
+                    <button type="button" class="login-button">
+                        <span>Masuk</span>
+                        <span class="login-arrow" aria-hidden="true">⟶</span>
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
 </body>
 </html>

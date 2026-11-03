@@ -1,0 +1,572 @@
+/* =========================================================
+   ARTHA | AUTH LOGIN - WEB
+   Desktop layout mengikuti acuan Figma.
+   Mobile layout diatur oleh mobile/auth.css.
+========================================================= */
+
+/* =====================================================
+   FIX LOGIN WEB — FULL DEVICE WIDTH & HEIGHT
+===================================================== */
+
+.auth-page {
+    display: block;
+
+    width: 100%;
+    min-width: 320px;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    margin: 0;
+    padding: 0;
+
+    overflow-x: hidden;
+
+    background: var(--color-background);
+}
+
+.auth-shell {
+    display: grid;
+
+    grid-template-columns: 1fr 1.03fr;
+
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+
+    height: 100vh;
+    min-height: 100vh;
+
+    margin: 0;
+    overflow: visible;
+
+    background: var(--color-background);
+}
+
+/* =========================================================
+   2. LEFT BRAND PANEL
+========================================================= */
+
+.auth-brand-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: clamp(32px, 4.3vw, 46px);
+    background: #001840;
+    color: #FFFFFF;
+}
+
+.auth-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: clamp(22px, 2.5vw, 27px);
+    font-weight: 700;
+    line-height: 1;
+}
+
+.auth-logo {
+    display: block;
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+    object-fit: contain;
+    filter: none !important;
+    opacity: 1;
+}
+
+.auth-brand-copy {
+    width: 100%;
+    max-width: 390px;
+    margin-top: clamp(66px, 8.2vh, 90px);
+}
+
+.auth-brand-copy h1 {
+    margin: 0 0 3px;
+    color: #FFFFFF;
+    font-size: clamp(22px, 2.45vw, 26px);
+    font-weight: 700;
+    line-height: 1.42;
+    letter-spacing: -0.45px;
+}
+
+.auth-brand-copy p {
+    max-width: 370px;
+    margin: 0;
+    color: #FFFFFF;
+    font-size: clamp(11px, 1.15vw, 12px);
+    font-weight: 400;
+    line-height: 1.55;
+}
+
+/* =========================================================
+   3. RIGHT FORM PANEL
+========================================================= */
+
+.auth-form-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    padding: 42px clamp(34px, 4.8vw, 52px);
+    background: var(--color-background);
+}
+
+.auth-form-wrap {
+    width: 100%;
+    max-width: 270px;
+}
+
+.auth-heading {
+    margin-bottom: 25px;
+}
+
+.auth-heading h2 {
+    margin: 0 0 1px;
+    color: #354764;
+    font-size: clamp(25px, 3vw, 29px);
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.35px;
+}
+
+.auth-heading p {
+    margin: 0;
+    color: #25385A;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* =========================================================
+   4. FORM FIELDS
+========================================================= */
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.login-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+.login-field > label {
+    color: #102A71;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.login-input-wrap {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 36px;
+    gap: 9px;
+    padding: 0 10px;
+    border: 1px solid #102A71;
+    border-radius: 5px;
+    background: #FFFFFF;
+    transition: background-color .18s ease, box-shadow .18s ease;
+}
+
+.login-input-wrap:focus-within {
+    background: var(--color-background);
+    box-shadow: 0 0 0 2px rgba(16, 42, 113, .08);
+}
+
+.login-field-icon {
+    display: block;
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+    object-fit: contain;
+    color: #102A71;
+}
+
+.login-input-wrap input {
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    color: #102A71;
+    background: transparent;
+    font-family: var(--font-primary);
+    font-size: 9px;
+    font-weight: 400;
+}
+
+.login-input-wrap input::placeholder {
+    color: #B5B8C0;
+    opacity: 1;
+}
+
+/* =========================================================
+   5. ROLE PICKER
+   HTML details + CSS, tanpa library dropdown.
+========================================================= */
+
+.role-picker {
+    position: relative;
+    width: 100%;
+}
+
+.role-picker[open] {
+    z-index: 20;
+}
+
+.role-picker-trigger {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    gap: 9px;
+    padding: 0 11px;
+    list-style: none;
+    border: 1px solid #102A71;
+    border-radius: 5px;
+    background: #FFFFFF;
+    color: #263A60;
+    cursor: pointer;
+    font-size: 10px;
+    transition: background-color .18s ease, box-shadow .18s ease;
+}
+
+.role-picker-trigger::-webkit-details-marker {
+    display: none;
+}
+
+.role-picker-trigger:hover,
+.role-picker[open] .role-picker-trigger {
+    background: var(--color-background);
+}
+
+.role-trigger-icon {
+    display: block;
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+    object-fit: contain;
+}
+
+.role-current {
+    display: none;
+    flex: 1;
+}
+
+.role-default {
+    display: inline;
+}
+
+.role-picker:has(#role-admin:checked) .role-default,
+.role-picker:has(#role-owner:checked) .role-default,
+.role-picker:has(#role-cashier:checked) .role-default {
+    display: none;
+}
+
+.role-picker:has(#role-admin:checked) .role-admin,
+.role-picker:has(#role-owner:checked) .role-owner,
+.role-picker:has(#role-cashier:checked) .role-cashier {
+    display: inline;
+}
+
+.role-chevron {
+    width: 8px;
+    height: 8px;
+    margin: -4px 2px 0 0;
+    border-right: 1px solid #102A71;
+    border-bottom: 1px solid #102A71;
+    transform: rotate(45deg);
+    transition: transform .18s ease;
+}
+
+.role-picker[open] .role-chevron {
+    margin-top: 4px;
+    transform: rotate(225deg);
+}
+
+.role-picker-menu {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    z-index: 30;
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #D8DFEA;
+    border-radius: 6px;
+    background: #FFFFFF;
+    box-shadow: 0 5px 16px rgba(16, 42, 113, .12);
+}
+
+.role-option {
+    display: flex;
+    align-items: center;
+    min-height: 34px;
+    gap: 9px;
+    padding: 0 8px;
+    border-radius: 4px;
+    color: #263A60;
+    background: #FFFFFF;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 500;
+    transition: background-color .15s ease;
+}
+
+.role-option:hover,
+.role-option:focus-within {
+    background: var(--color-background);
+}
+
+.role-option img {
+    display: block;
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+    object-fit: contain;
+}
+
+.role-option input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.role-option:has(input:checked) {
+    color: var(--color-primary);
+    background: var(--color-background);
+    font-weight: 600;
+}
+
+/* =========================================================
+   6. LOGIN BUTTON
+========================================================= */
+
+.login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 38px;
+    gap: 7px;
+    margin-top: 7px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 8px;
+    background: #F5C400;
+    color: #FFFFFF;
+    font-family: var(--font-primary);
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color .18s ease, transform .18s ease;
+}
+
+.login-button:hover {
+    background: #E6B800;
+}
+
+.login-button:active {
+    transform: translateY(1px);
+}
+
+.login-arrow {
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+/* =========================================================
+   7. MOBILE INTRO HIDDEN ON WEB
+========================================================= */
+
+.auth-mobile-intro {
+    display: none;
+}
+
+/* =========================================================
+   8. MEDIUM DESKTOP
+========================================================= */
+
+@media (min-width: 701px) and (max-width: 1000px) {
+    .auth-page {
+        padding: 20px;
+    }
+
+    .auth-shell {
+        width: min(86vw, 900px);
+        min-width: 0;
+        min-height: 78vh;
+    }
+
+    .auth-brand-panel {
+        padding: 32px;
+    }
+
+    .auth-form-panel {
+        padding-inline: 30px;
+    }
+
+    .auth-form-wrap {
+        max-width: 290px;
+    }
+}
+
+
+/* =====================================================
+   ARTHA LOGIN | DESKTOP FINAL SIZE
+   PANEL TETAP 50% : 50%
+===================================================== */
+
+@media (min-width: 701px) {
+
+    /* PEMBAGIAN PANEL */
+    .auth-shell {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+
+        height: 100vh;
+        min-height: 100vh;
+        margin: 0;
+    }
+
+    /* PANEL NAVY */
+    .auth-brand-panel {
+        padding: 55px 5.5%;
+    }
+
+    .auth-brand {
+        gap: 12px;
+        font-size: 30px;
+    }
+
+    .auth-logo {
+        width: 58px;
+        height: 58px;
+        flex-basis: 58px;
+    }
+
+    .auth-brand-copy {
+        width: 100%;
+        max-width: 510px;
+        margin-top: 90px;
+    }
+
+    .auth-brand-copy h1 {
+        font-size: clamp(32px, 2.7vw, 42px);
+        line-height: 1.4;
+    }
+
+    .auth-brand-copy p {
+        max-width: 460px;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    /* PANEL KREM */
+    .auth-form-panel {
+        padding: 45px 7%;
+    }
+
+    .auth-form-wrap {
+        width: 100%;
+        max-width: 480px;
+    }
+
+    /* JUDUL LOGIN */
+    .auth-heading {
+        margin-bottom: 34px;
+    }
+
+    .auth-heading h2 {
+        font-size: clamp(36px, 2.8vw, 44px);
+        line-height: 1.3;
+    }
+
+    .auth-heading p {
+        font-size: 14px;
+    }
+
+    /* FORM */
+    .login-form {
+        gap: 19px;
+    }
+
+    .login-field {
+        gap: 7px;
+    }
+
+    .login-field > label {
+        font-size: 15px;
+    }
+
+    /* INPUT */
+    .login-input-wrap {
+        height: 50px;
+        padding: 0 14px;
+        gap: 12px;
+        border-radius: 6px;
+    }
+
+    .login-field-icon {
+        width: 21px;
+        height: 21px;
+        flex-basis: 21px;
+    }
+
+    .login-input-wrap input {
+        font-size: 13px;
+    }
+
+    /* DROPDOWN */
+    .role-picker-trigger {
+        height: 52px;
+        padding: 0 14px;
+        gap: 12px;
+        font-size: 14px;
+    }
+
+    .role-trigger-icon {
+        width: 21px;
+        height: 21px;
+        flex-basis: 21px;
+    }
+
+    .role-option {
+        min-height: 44px;
+        font-size: 14px;
+        gap: 12px;
+    }
+
+    .role-option img {
+        width: 20px;
+        height: 20px;
+        flex-basis: 20px;
+    }
+
+    /* TOMBOL MASUK */
+    .login-button {
+        min-height: 54px;
+        margin-top: 7px;
+        border-radius: 9px;
+        font-size: 15px;
+    }
+
+    .login-arrow {
+        font-size: 22px;
+    }
+}
