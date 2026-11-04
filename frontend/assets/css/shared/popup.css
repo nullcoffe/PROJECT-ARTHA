@@ -1,0 +1,112 @@
+/* ARTHA | SHARED POPUP — seluruh role, web dan mobile; font/warna utama dari variables.css. */
+.artha-popup-overlay { position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:2000; overflow:auto; padding:22px; background:rgba(16,24,40,.22); }
+.artha-popup-overlay:target { display:flex; }
+.artha-popup-overlay, .artha-popup-overlay * { box-sizing:border-box; }
+.artha-popup { width:min(100%,560px); max-height:calc(100dvh - 44px); overflow-y:auto; background:var(--color-white,#fff); border:1px solid #E1E7F0; border-radius:20px; box-shadow:0 22px 38px rgba(0,0,0,.18); color:var(--admin-button,#081B3A); font-family:var(--font-primary,'Poppins',sans-serif); }
+.artha-popup h2,.artha-popup p { margin:0; }
+.artha-popup-btn { display:inline-flex; align-items:center; justify-content:center; text-decoration:none; padding:0 22px; min-height:44px; border-radius:9px; border:1px solid transparent; font:600 14px var(--font-primary,'Poppins',sans-serif); cursor:pointer; }
+.artha-popup-btn--dark { color:#fff; background:var(--admin-button,#081B3A); box-shadow:0 2px 4px rgba(0,0,0,.12); }
+.artha-popup-btn--cancel { color:#3A4658; border-color:#D3DBE5; background:#fff; }
+.artha-popup-btn--danger { background:#C92F32; color:#fff; }
+.artha-popup-btn--text { background:transparent; color:#64748B; border:0; }
+.artha-popup-btn--light { background:#fff; color:#45556E; border-color:#D8E1EC; }
+.artha-popup-btn:hover { filter:brightness(.97); }
+.artha-popup-btn:focus-visible,.artha-popup a:focus-visible,.artha-popup input:focus-visible + span { outline:3px solid #F5C400; outline-offset:2px; }
+/* SHARED dataset warning */
+.artha-popup--dataset { width:min(100%,530px); position:relative; border-top:6px solid #FFCB2D; border-radius:17px; padding:30px 29px 29px; }
+.dataset-popup-heading { display:flex; align-items:center; gap:17px; }
+.dataset-popup-icon { width:50px; height:50px; flex:0 0 50px; display:grid; place-items:center; border:1px solid #F9D887; background:#FFF9E9; border-radius:14px; }
+.dataset-popup-icon img { width:28px; height:28px; object-fit:contain; }
+.dataset-popup-heading h2 { color:#152841; font-size:18px; font-weight:700; line-height:1.3; }
+.dataset-popup-warning { color:#EA8500; font-size:12px; font-weight:600; margin-top:4px!important; }
+.dataset-popup-warning span { font-size:10px; margin-right:5px; }
+.dataset-popup-desc { margin-top:21px!important; color:#687993; font-size:14px; line-height:1.75; }
+.dataset-popup-actions { display:flex; justify-content:flex-end; margin-top:23px; }
+.dataset-popup-actions .artha-popup-btn { min-width:112px; }
+/* ADMIN delete user */
+.artha-popup--delete { width:min(100%,505px); text-align:center; padding:31px 30px 30px; }
+.delete-popup-icon { display:grid; place-items:center; width:67px; height:67px; margin:0 auto 18px; border:1px solid #FFE0E0; border-radius:50%; background:#FFF0F1; }
+.delete-popup-icon img { width:30px; height:30px; filter:brightness(0) saturate(100%) invert(23%) sepia(99%) saturate(3064%) hue-rotate(345deg) brightness(95%); }
+.artha-popup--delete h2 { font-size:22px; font-weight:700; line-height:1.3; color:#091B3A; }
+.artha-popup--delete p { max-width:430px; margin:12px auto 26px; color:#536176; font-size:16px; line-height:1.5; }
+.delete-popup-actions { display:grid; grid-template-columns:1fr 1fr; gap:13px; }
+.delete-popup-actions .artha-popup-btn { min-height:47px; font-size:16px; }
+/* ADMIN select month */
+.artha-popup--month { width:min(100%,545px); padding:32px 34px 28px; }
+.month-popup-header { display:flex; justify-content:space-between; align-items:center; padding:0 0 27px; border-bottom:1px solid #DDE6F0; }
+.month-popup-header h2 { display:flex; align-items:center; gap:12px; font-size:22px; font-weight:700; }
+.month-popup-header img { width:28px; height:28px; object-fit:contain; }
+.month-popup-close { text-decoration:none; color:#62748B; font-size:31px; font-weight:300; line-height:1; }
+.month-popup-options { padding:23px 0 30px; }
+.month-popup-option { position:relative; cursor:pointer; display:block; }
+.month-popup-option input { position:absolute; opacity:0; width:1px; height:1px; }
+.month-popup-option span { display:flex; align-items:center; justify-content:center; width:100%; min-height:46px; padding:8px 9px; text-align:center; border:1px solid #D9E3EE; border-radius:17px; color:#091B3A; font-size:15px; font-weight:500; background:#fff; }
+.month-popup-option:hover span { background:var(--color-background,#FFFDF0); }
+.month-popup-option input:checked + span { color:#fff; background:#091B3A; border-color:#091B3A; font-weight:600; }
+.month-popup-all { margin-bottom:17px; }
+.month-popup-all span { min-height:45px; }
+.month-popup-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:11px; }
+.month-popup-footer { display:flex; align-items:center; justify-content:flex-end; gap:12px; border-top:1px solid #DDE6F0; padding-top:17px; }
+/* PEMILIK Apriori success */
+.artha-popup--apriori { width:min(100%,685px); padding:0; overflow:hidden; border-radius:19px; }
+.apriori-popup-head { display:flex; align-items:center; gap:16px; min-height:119px; padding:22px 32px; background:linear-gradient(110deg,#0B1936,#1B315C); color:#fff; }
+.apriori-popup-icon { flex:0 0 54px; width:54px; height:54px; }
+.apriori-popup-icon img { width:100%; height:100%; }
+.apriori-popup-title-group { flex:1; }
+.apriori-popup-title-group h2 { font-size:23px; font-weight:700; line-height:1.25; }
+.apriori-popup-title-group p { font-size:14px; color:#C6D1E0; line-height:1.5; }
+.apriori-popup-x { align-self:flex-start; color:#9AA9BE; text-decoration:none; font-size:32px; font-weight:300; line-height:1; }
+.apriori-popup-body { padding:30px 32px 27px; }
+.apriori-popup-metrics { display:grid; grid-template-columns:repeat(3,1fr); padding:18px 12px; background:#F7F9FC; border:1px solid #DFE7F0; border-radius:15px; }
+.apriori-popup-metrics > div { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px; padding:8px; text-align:center; border-right:1px solid #DEE6F0; }
+.apriori-popup-metrics > div:last-child { border-right:0; }
+.apriori-popup-metrics span { font-size:13px; color:#697C96; }
+.apriori-popup-metrics strong { font-size:22px; line-height:1.25; color:#132C60; }
+.apriori-popup-metrics .apriori-green { color:#059669; }
+.apriori-popup-metrics .apriori-orange { color:#CF8A00; }
+.apriori-popup-details { display:flex; flex-direction:column; gap:13px; margin-top:20px; padding:18px; border:1px solid #D2E3FF; border-radius:10px; background:#F8FAFF; }
+.apriori-popup-details > div { display:flex; justify-content:space-between; gap:12px; font-size:14px; }
+.apriori-popup-details span { color:#62748E; }
+.apriori-popup-details strong { text-align:right; font-size:14px; color:#172641; }
+.apriori-popup-note { margin-top:20px!important; color:#6A7F9F; font-style:italic; font-size:14px; line-height:1.5; }
+.apriori-popup-footer { display:flex; justify-content:flex-end; background:#F7F9FC; border-top:1px solid #EDF1F6; padding:19px 30px; }
+@media(max-width:600px){
+  .artha-popup-overlay { padding:17px; align-items:center; }
+  .artha-popup { max-height:calc(100dvh - 34px); }
+  .artha-popup--dataset { width:min(100%,390px); text-align:center; padding:26px 24px 25px; border-top:0; border-radius:25px; }
+  .dataset-popup-heading { flex-direction:column-reverse; gap:18px; }
+  .dataset-popup-heading-text { display:contents; }
+  .dataset-popup-warning { order:0; display:inline-block; border:1px solid #FFDA73; background:#FFF9E9; padding:7px 10px; border-radius:30px; font-size:11px; }
+  .dataset-popup-icon { order:1; margin:0 auto; width:73px; height:73px; border:0; border-radius:20px; }
+  .dataset-popup-icon img { width:38px; height:38px; }
+  .dataset-popup-heading h2 { order:2; font-size:18px; }
+  .dataset-popup-desc { margin-top:12px!important; font-size:13px; line-height:1.7; }
+  .dataset-popup-desc strong { font-weight:600; }
+  .dataset-popup-actions { margin-top:25px; }
+  .dataset-popup-actions .artha-popup-btn { width:100%; min-height:46px; }
+  .artha-popup--delete { padding:28px 20px 23px; }
+  .artha-popup--delete h2 { font-size:20px; }
+  .artha-popup--delete p { font-size:13px; }
+  .delete-popup-actions .artha-popup-btn { font-size:13px; padding-inline:8px; }
+  .artha-popup--month { padding:23px 18px 18px; }
+  .month-popup-header { padding-bottom:19px; }
+  .month-popup-header h2 { font-size:18px; }
+  .month-popup-grid { gap:7px; }
+  .month-popup-option span { min-height:42px; border-radius:12px; padding:6px 2px; font-size:11px; }
+  .month-popup-footer { padding-top:12px; }
+  .apriori-popup-head { gap:10px; min-height:98px; padding:17px 17px; }
+  .apriori-popup-icon { width:40px; height:40px; flex-basis:40px; }
+  .apriori-popup-title-group h2 { font-size:16px; }
+  .apriori-popup-title-group p { font-size:11px; }
+  .apriori-popup-x { font-size:24px; }
+  .apriori-popup-body { padding:18px 14px; }
+  .apriori-popup-metrics { padding:10px 4px; }
+  .apriori-popup-metrics > div { padding:7px 3px; }
+  .apriori-popup-metrics span { font-size:9px; }
+  .apriori-popup-metrics strong { font-size:15px; }
+  .apriori-popup-details { padding:12px; gap:11px; }
+  .apriori-popup-details > div { font-size:11px; }
+  .apriori-popup-details strong { font-size:11px; }
+  .apriori-popup-note { font-size:11px; }
+  .apriori-popup-footer { padding:13px; }
+}
