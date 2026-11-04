@@ -1,0 +1,93 @@
+
+/* ANALISIS APRIORI - MOBILE */
+
+@media (max-width: 768px) {
+
+    .apriori-page {
+        padding-top: 5px;
+        gap: 13px;
+    }
+
+    .apriori-card {
+        padding: 17px 14px;
+        border-radius: 11px;
+        box-shadow: none;
+    }
+
+    .apriori-config h2 {
+        margin-bottom: 17px;
+        font-size: 15px;
+    }
+
+    /* FORM */
+
+    .apriori-form-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .apriori-field {
+        gap: 6px;
+    }
+
+    .apriori-field label {
+        font-size: 12px;
+    }
+
+    .apriori-field select,
+    .apriori-transaction-count {
+        height: 43px;
+        padding: 0 11px;
+        font-size: 12px;
+    }
+
+    .apriori-field small {
+        font-size: 10px;
+    }
+
+    /* BUTTON */
+
+    .apriori-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 9px;
+        margin-top: 18px;
+    }
+
+    .apriori-feedback {
+        width: 100%;
+        font-size: 11px;
+    }
+
+    .apriori-run-button {
+        width: 100%;
+        min-height: 43px;
+        font-size: 12px;
+    }
+
+    /* TABLE */
+
+    .apriori-results {
+        padding: 0;
+    }
+
+    .apriori-table {
+        min-width: 480px;
+        font-size: 11px;
+    }
+
+    .apriori-table th,
+    .apriori-table td {
+        padding: 13px 12px;
+    }
+
+    .apriori-table th:first-child,
+    .apriori-table td:first-child {
+        padding-left: 15px;
+    }
+
+    .apriori-table-caption {
+        padding: 11px 13px;
+        font-size: 10px;
+    }
+}
