@@ -1,232 +1,28 @@
-
-/* =========================================================
-   ARTHA | SHARED WEB HEADER
-   Digunakan bersama oleh Admin, Pemilik, dan Kasir.
-   Khusus Desktop dan Tablet.
-========================================================= */
-
-
-/* =========================================================
-   1. HEADER CONTAINER
-========================================================= */
-
+/* ARTHA - UNIVERSAL DESKTOP HEADER */
 .dashboard-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    width: 100%;
-    min-height: var(--header-height);
-
-    gap: 16px;
-    margin: 0 0 var(--content-section-gap);
-
-    color: var(--color-primary);
-    background: transparent;
+    display:flex; align-items:center; justify-content:space-between;
+    width:100%; min-height:76px; gap:16px; margin:0 0 36px;
+    color:var(--color-primary); background:transparent;
 }
-
-
-/* =========================================================
-   2. HEADER LEFT
-   Area judul halaman.
-========================================================= */
-
-.header-left {
-    display: flex;
-    align-items: center;
-
-    min-width: 0;
-}
-
-
-/* PAGE TITLE */
-
+.header-left { display:flex; align-items:center; min-width:0; }
 .dashboard-header h1 {
-    min-width: 0;
-
-    color: var(--color-primary);
-
-    font-family: var(--font-primary);
-    font-size: var(--text-page-title);
-    font-weight: 700;
-
-    line-height: 1.3;
-    letter-spacing: -0.025em;
+    min-width:0; margin:0; color:var(--color-primary);
+    font:700 clamp(1.65rem,2.5vw,2.35rem)/1.25 var(--font-primary);
+    letter-spacing:-.025em;
 }
-
-
-/* =========================================================
-   3. HEADER RIGHT
-   Area profil pengguna.
-========================================================= */
-
-.header-right {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-
-    gap: 12px;
-    margin-left: auto;
-
-    flex-shrink: 0;
-}
-
-
-/* =========================================================
-   4. USER PROFILE
-   Digunakan oleh Admin, Pemilik, dan Kasir.
-========================================================= */
-
-.user-profile,
-.admin-profile {
-    display: flex;
-    align-items: center;
-
-    gap: 8px;
-
-    flex-shrink: 0;
-}
-
-
-/* =========================================================
-   5. PROFILE CIRCLE
-   Lingkaran navy sesuai Figma.
-========================================================= */
-
-/* PROFILE CIRCLE */
-
+.header-right { display:flex; align-items:center; justify-content:flex-end; gap:12px; margin-left:auto; flex-shrink:0; }
+.user-profile,.admin-profile { display:flex; align-items:center; gap:9px; flex-shrink:0; }
 .profile-circle {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-
-    width: 40px !important;
-    height: 40px !important;
-
-    min-width: 40px;
-    min-height: 40px;
-
-    max-width: 40px;
-    max-height: 40px;
-
-    flex: 0 0 40px !important;
-    aspect-ratio: 1 / 1;
-
-    padding: 0;
-    overflow: hidden;
-
-    background: #102A71;
-    border-radius: 50% !important;
-
-    box-shadow: none;
+    display:flex !important; align-items:center; justify-content:center;
+    width:42px !important; height:42px !important; min-width:42px; min-height:42px;
+    flex:0 0 42px !important; padding:0; overflow:hidden;
+    background:#192D78; border-radius:50% !important;
 }
-
-.profile-circle img {
-    display: block;
-
-    width: 54%;
-    height: 54%;
-
-    max-width: 54%;
-    max-height: 54%;
-
-    object-fit: contain;
-    filter: none;
-}
-
-
-/* =========================================================
-   6. USER NAME
-========================================================= */
-
-.user-profile span,
-.admin-profile span {
-    color: var(--color-primary);
-
-    font-family: var(--font-primary);
-    font-size: var(--text-base);
-    font-weight: 600;
-
-    white-space: nowrap;
-}
-
-
-/* =========================================================
-   7. PROFILE IMAGE
-   Digunakan apabila role menggunakan foto profil.
-========================================================= */
-
-.profile-image {
-    width: var(--profile-size);
-    height: var(--profile-size);
-
-    flex: 0 0 var(--profile-size);
-
-    object-fit: cover;
-    border-radius: var(--radius-full);
-}
-
-
-/* =========================================================
-   8. HAMBURGER
-   Tidak ditampilkan pada Desktop.
-   Pengaturan Mobile ada di mobile/header.css.
-========================================================= */
-
-.hamburger-btn {
-    display: none;
-}
-
-
-/* =========================================================
-   9. TABLET
-========================================================= */
-
-@media (min-width: 769px) and (max-width: 1024px) {
-
-    .dashboard-header {
-        min-height: 64px;
-        gap: 12px;
-    }
-
-    .dashboard-header h1 {
-        font-size: clamp(1.3rem, 2.2vw, 1.6rem);
-    }
-
-    .profile-circle {
-        width: 36px;
-        height: 36px;
-        flex-basis: 36px;
-    }
-
-    .user-profile span,
-    .admin-profile span {
-        font-size: 13px;
-    }
-
-}
-/* =========================================
-   MOBILE BRAND — HANYA UNTUK MOBILE
-========================================= */
-
-/* SEMBUNYIKAN DI DESKTOP */
-
-.mobile-brand,
-.mobile-page-title {
-    display: none;
-}
-
-/* JUDUL DESKTOP */
-
-.desktop-page-title {
-    display: block;
-}
-
-/* BATASI UKURAN LOGO MOBILE BRAND */
-
-.mobile-brand img {
-    width: 26px;
-    height: 26px;
-    max-width: 26px;
-    object-fit: contain;
+.profile-circle img { display:block; width:54%; height:54%; object-fit:contain; }
+.user-profile span,.admin-profile span { color:var(--color-primary); font:600 15px var(--font-primary); white-space:nowrap; }
+.hamburger-btn { display:none; }
+.mobile-brand,.mobile-page-title { display:none; }
+@media (min-width:769px) and (max-width:1024px) {
+    .dashboard-header { min-height:64px; margin-bottom:28px; }
+    .dashboard-header h1 { font-size:clamp(1.4rem,2.3vw,1.8rem); }
 }

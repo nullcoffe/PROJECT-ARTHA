@@ -1,0 +1,76 @@
+
+/* =====================================================
+   ARTHA | PEMILIK - REKOMENDASI PAKET PROMOSI
+   MOBILE CONTENT ONLY
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .owner-promo-content {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .promo-list-card {
+        width: 100%;
+        padding: 17px 13px 20px;
+        border-radius: 11px;
+    }
+
+    .promo-section-heading {
+        margin-bottom: 15px;
+    }
+
+    .promo-section-heading h2 {
+        font-size: 0.95rem;
+        margin-bottom: 5px;
+    }
+
+    .promo-section-heading p {
+        font-size: 0.65rem;
+        line-height: 1.5;
+    }
+
+    .promo-list {
+            width: 100%;
+            max-width: 100%;
+            gap: 12px;
+        }
+
+        .promo-item {
+            min-height: 85px;
+            padding: 13px 14px;
+            border-radius: 8px;
+        }
+
+        .promo-item h3 {
+            font-size: .7rem;
+        }
+
+        .promo-product {
+            font-size: .72rem;
+        }
+
+        .promo-metric {
+            font-size: .65rem;
+        }
+
+
+}
+
+@media (max-width: 380px) {
+
+    .promo-list-card {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .promo-item {
+        padding: 11px;
+    }
+
+    .promo-product {
+        font-size: 0.64rem;
+    }
+
+}

@@ -1,341 +1,455 @@
 
-/* ANALISIS APRIORI - WEB */
+/* =====================================================
+   ARTHA | PEMILIK - ANALISIS APRIORI
+   WEB CONTENT ONLY
+   Shared layout, sidebar, header tidak diubah.
+===================================================== */
 
-.apriori-page {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding-top: 8px;
+
+/* =====================================================
+   1. JUDUL HALAMAN
+===================================================== */
+
+.apriori-page-header {
+    width: 100%;
+    margin-bottom: 20px;
 }
 
-.apriori-card {
+.apriori-page-header h2 {
+    margin: 0;
+    color: var(--color-primary);
+    font-family: var(--font-primary);
+    font-size: clamp(1.35rem, 2vw, 1.7rem);
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+
+/* =====================================================
+   2. KARTU KONFIGURASI
+===================================================== */
+
+.apriori-config-card {
     width: 100%;
     min-width: 0;
-    padding: 26px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 11px;
-    box-shadow: 0 2px 4px #00184016;
+    padding: 20px 26px 16px;
+
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
 }
 
-.apriori-config h2 {
-    margin: 0 0 24px;
-    color: #102a71;
-    font-size: 20px;
-    font-weight: 700;
+.apriori-config-card > h2 {
+    margin: 0 0 22px;
+
+    color: var(--color-primary);
+    font-family: var(--font-primary);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.4;
 }
 
-/* FORM */
 
-.apriori-form-grid {
+/* =====================================================
+   3. FORM KONFIGURASI
+===================================================== */
+
+.apriori-form {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 35px;
-    row-gap: 24px;
+    column-gap: 18px;
+    row-gap: 17px;
+    width: 100%;
 }
 
 .apriori-field {
     display: flex;
     flex-direction: column;
-    gap: 9px;
     min-width: 0;
+    gap: 7px;
 }
 
 .apriori-field label {
-    color: #203760;
-    font-size: 14px;
-    font-weight: 600;
+    color: var(--color-primary);
+    font-family: var(--font-primary);
+    font-size: .78rem;
+    font-weight: 500;
+    line-height: 1.4;
 }
 
-.apriori-field select,
-.apriori-transaction-count {
+
+/* =====================================================
+   4. DROPDOWN
+===================================================== */
+
+.apriori-select-wrap {
+    position: relative;
     width: 100%;
-    height: 48px;
-    padding: 0 14px;
-    border: 1px solid #d1d9e6;
+    min-width: 0;
+}
+
+.apriori-select-wrap select {
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 100%;
+    height: 49px;
+    padding: 0 44px 0 15px;
+
+    color: var(--color-primary);
+    background: var(--color-white);
+
+    border: 1px solid var(--color-primary);
     border-radius: 7px;
-    background: #ffffff;
-    color: #243755;
-    font-family: Poppins, sans-serif;
-    font-size: 14px;
-}
 
-.apriori-field select {
+    font-family: var(--font-primary);
+    font-size: .82rem;
+    font-weight: 400;
+
     cursor: pointer;
+    outline: none;
+    box-shadow: none;
+
+    transition: background-color .2s ease;
 }
 
-.apriori-field select:invalid {
-    color: #8691a4;
+/* Hover field abu-abu */
+.apriori-select-wrap select:hover {
+    background: #F3F4F6;
 }
 
-.apriori-transaction-count {
+/* Focus tetap putih */
+.apriori-select-wrap select:focus,
+.apriori-select-wrap select:focus-visible {
+    background: var(--color-white);
+    outline: none;
+    box-shadow: none;
+}
+
+/* Ikon panah */
+.apriori-chevron {
+    position: absolute;
+    top: 50%;
+    right: 18px;
+
+    width: 9px;
+    height: 9px;
+
+    border-right: 1.5px solid var(--color-primary);
+    border-bottom: 1.5px solid var(--color-primary);
+
+    transform: translateY(-70%) rotate(45deg);
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   5. JUMLAH TRANSAKSI
+===================================================== */
+
+.apriori-transaction-value {
     display: flex;
     align-items: center;
-    background: #f5f7fb;
-    font-weight: 600;
+
+    width: 100%;
+    min-width: 0;
+    height: 49px;
+    padding: 0 15px;
+
+    color: var(--color-primary);
+    background: var(--color-white);
+
+    border: 1px solid var(--color-primary);
+    border-radius: 7px;
+
+    font-family: var(--font-primary);
+    font-size: .82rem;
+
+    transition: background-color .2s ease;
 }
 
-.apriori-field small {
-    color: #7180a5;
-    font-size: 11px;
+.apriori-transaction-value:hover {
+    background: #F3F4F6;
 }
 
-/* BUTTON */
+.apriori-transaction-value span {
+    display: none;
+}
 
-.apriori-actions {
+.apriori-transaction-value .transaction-placeholder {
+    display: inline;
+    color: #8290AA;
+}
+
+/* Pilihan tahun 2024 */
+.apriori-form:has(
+    #transaction-period option[value="2024"]:checked
+) .transaction-placeholder {
+    display: none;
+}
+
+.apriori-form:has(
+    #transaction-period option[value="2024"]:checked
+) .transaction-2024 {
+    display: inline;
+}
+
+/* Pilihan tahun 2025 */
+.apriori-form:has(
+    #transaction-period option[value="2025"]:checked
+) .transaction-placeholder {
+    display: none;
+}
+
+.apriori-form:has(
+    #transaction-period option[value="2025"]:checked
+) .transaction-2025 {
+    display: inline;
+}
+
+/* Pilihan tahun 2026 */
+.apriori-form:has(
+    #transaction-period option[value="2026"]:checked
+) .transaction-placeholder {
+    display: none;
+}
+
+.apriori-form:has(
+    #transaction-period option[value="2026"]:checked
+) .transaction-2026 {
+    display: inline;
+}
+
+
+/* =====================================================
+   6. TOMBOL JALANKAN ANALISIS
+===================================================== */
+
+.apriori-action {
+    grid-column: 2;
+
     display: flex;
     justify-content: flex-end;
-    align-items: center;
-    gap: 18px;
-    margin-top: 24px;
-}
-
-.apriori-feedback {
-    flex: 1;
-    margin: 0;
-    color: #b45309;
-    font-size: 12px;
+    align-items: flex-end;
 }
 
 .apriori-run-button {
-    display: inline-flex;
+    display: flex;
     justify-content: center;
     align-items: center;
-    padding: 12px 22px;
-    border: 1px solid #0c2559;
+
+    width: 210px;
+    min-height: 46px;
+    padding: 10px 18px;
+
+    color: var(--color-primary);
+    background: var(--color-white);
+
+    border: 1px solid var(--color-primary);
     border-radius: 7px;
-    background: #ffffff;
-    color: #102a71;
-    font-family: Poppins, sans-serif;
-    font-size: 14px;
+
+    font-family: var(--font-primary);
+    font-size: .84rem;
     font-weight: 600;
-    text-decoration: none;
-    white-space: nowrap;
+
+    text-align: center;
     cursor: pointer;
+
+    transition: background-color .2s ease, color .2s ease;
 }
 
 .apriori-run-button:hover {
-    background: #102a71;
-    color: #ffffff;
+    color: var(--color-white);
+    background: var(--color-primary);
 }
 
-/* TABLE */
 
-.apriori-results {
-    padding: 0;
-    overflow: hidden;
+/* =====================================================
+   7. INFORMASI FORM
+===================================================== */
+
+.apriori-info {
+    margin: 13px 0 0;
+
+    color: var(--owner-table-header);
+    font-size: .68rem;
+    line-height: 1.5;
 }
 
-.apriori-table-scroll {
+
+/* =====================================================
+   8. KARTU HASIL ANALISIS
+===================================================== */
+
+.apriori-result-card {
+    width: 100%;
+    min-width: 0;
+
+    margin-top: 18px;
+    padding: 18px 24px 22px;
+
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
+}
+
+.apriori-result-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    margin-bottom: 15px;
+}
+
+.apriori-result-header h2 {
+    margin: 0;
+
+    color: var(--color-primary);
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.apriori-result-period {
+    color: var(--owner-table-header);
+    font-size: .68rem;
+}
+
+
+/* =====================================================
+   9. TABEL HASIL ANALISIS
+===================================================== */
+
+.apriori-table-wrapper {
     width: 100%;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .apriori-table {
     width: 100%;
-    min-width: 550px;
     border-collapse: collapse;
-    font-size: 13px;
-}
+    border-spacing: 0;
 
-.apriori-table thead {
-    background: #091b3a;
-    color: #ffffff;
-}
-
-.apriori-table th {
-    padding: 17px 19px;
-    text-align: center;
-    font-weight: 600;
-}
-
-.apriori-table th:first-child,
-.apriori-table td:first-child {
-    width: 50%;
-    padding-left: 26px;
+    color: var(--color-primary);
+    font-family: var(--font-primary);
+    font-size: .75rem;
     text-align: left;
 }
 
+.apriori-table thead {
+    color: var(--color-white);
+    background: var(--color-primary);
+}
+
+.apriori-table th {
+    padding: 13px 16px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.apriori-table th:first-child {
+    border-radius: 6px 0 0 0;
+}
+
+.apriori-table th:last-child {
+    border-radius: 0 6px 0 0;
+}
+
 .apriori-table td {
-    padding: 18px 19px;
-    border-bottom: 1px solid #e7ebf2;
-    color: #2a3c54;
-    text-align: center;
+    padding: 13px 16px;
+
+    border-bottom: 1px solid #E5EAF1;
+
+    color: #24324B;
+    font-weight: 400;
+    white-space: nowrap;
 }
 
-.apriori-table tbody tr:nth-child(even) {
-    background: #fafbfe;
-}
 
-.apriori-table-caption {
-    margin: 0;
-    padding: 12px 24px 16px;
-    color: #7180a5;
-    font-size: 11px;
-}
+/* =====================================================
+   10. POPUP APRIORI SUCCESS
+===================================================== */
 
-/* INTERAKSI CSS TANPA JAVASCRIPT */
-
-.apriori-total,
-.apriori-popup-count,
-.apriori-popup-support,
-.apriori-popup-confidence {
-    display: none;
-}
-
-.apriori-total--empty {
-    display: inline;
-}
-
-/* TAHUN 2024 */
-
-body:has(#transaction-year option[value="2024"]:checked)
-.apriori-total--empty {
-    display: none;
-}
-
-body:has(#transaction-year option[value="2024"]:checked)
-.apriori-total--2024 {
-    display: inline;
-}
-
-body:has(#transaction-year option[value="2024"]:checked)
-.apriori-popup-count--2024 {
-    display: inline;
-}
-
-/* TAHUN 2025 */
-
-body:has(#transaction-year option[value="2025"]:checked)
-.apriori-total--empty {
-    display: none;
-}
-
-body:has(#transaction-year option[value="2025"]:checked)
-.apriori-total--2025 {
-    display: inline;
-}
-
-body:has(#transaction-year option[value="2025"]:checked)
-.apriori-popup-count--2025 {
-    display: inline;
-}
-
-/* TAHUN 2026 */
-
-body:has(#transaction-year option[value="2026"]:checked)
-.apriori-total--empty {
-    display: none;
-}
-
-body:has(#transaction-year option[value="2026"]:checked)
-.apriori-total--2026 {
-    display: inline;
-}
-
-/* SUPPORT */
-
-body:has(#min-support option[value="5"]:checked)
-.apriori-popup-support--5 {
-    display: inline;
-}
-
-body:has(#min-support option[value="10"]:checked)
-.apriori-popup-support--10 {
-    display: inline;
-}
-
-body:has(#min-support option[value="20"]:checked)
-.apriori-popup-support--20 {
-    display: inline;
-}
-
-/* CONFIDENCE */
-
-body:has(#min-confidence option[value="60"]:checked)
-.apriori-popup-confidence--60 {
-    display: inline;
-}
-
-body:has(#min-confidence option[value="70"]:checked)
-.apriori-popup-confidence--70 {
-    display: inline;
-}
-
-body:has(#min-confidence option[value="80"]:checked)
-.apriori-popup-confidence--80 {
-    display: inline;
-}
-
-/* VALIDASI TOMBOL PROTOTYPE */
-
-.apriori-run-button {
-    opacity: 0.5;
+.apriori-popup-toggle {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
     pointer-events: none;
 }
 
-body:has(#apriori-form:valid)
-:not(:has(#transaction-year option[value="2026"]:checked))
-.apriori-run-button {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-/* PESAN VALIDASI */
-
-.apriori-hint-empty {
+.apriori-modal {
     display: none;
+
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
 }
 
-body:has(#apriori-form:valid)
-.apriori-hint-incomplete {
-    display: none;
+.apriori-popup-toggle:checked ~ .apriori-modal {
+    display: flex;
 }
 
-body:has(#transaction-year option[value="2026"]:checked)
-.apriori-hint-empty {
-    display: inline;
-}
+.apriori-modal-overlay {
+    position: absolute;
+    inset: 0;
 
-/* HASIL SETELAH POPUP DITUTUP */
-
-.apriori-demo-row {
-    display: none;
-}
-
-.apriori-caption-filled {
-    display: none;
-}
-
-.apriori-results:target .apriori-demo-row {
-    display: table-row;
-}
-
-.apriori-results:target .apriori-empty {
-    display: none;
-}
-
-.apriori-results:target .apriori-caption-empty {
-    display: none;
-}
-
-.apriori-results:target .apriori-caption-filled {
-    display: block;
-}
-
-.apriori-results {
-    scroll-margin-top: 22px;
-}
-
-/* AKSI POPUP */
-
-.apriori-popup-x,
-.apriori-popup-footer a {
+    background: rgba(0, 0, 0, .48);
     cursor: pointer;
 }
 
-.apriori-run-button:focus-visible,
-.apriori-field select:focus-visible {
-    outline: 2px solid #f5c400;
-    outline-offset: 2px;
+.apriori-modal-content {
+    position: relative;
+    z-index: 2;
+
+    width: min(100%, 520px);
+    height: min(580px, 85vh);
+
+    overflow: hidden;
+
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
+}
+
+.apriori-modal-close {
+    position: absolute;
+    top: 9px;
+    right: 13px;
+    z-index: 4;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    color: var(--color-primary);
+    background: var(--color-white);
+
+    border-radius: 50%;
+    font-size: 24px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.apriori-success-frame {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    border: 0;
+    background: var(--color-white);
 }

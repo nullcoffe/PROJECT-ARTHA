@@ -570,3 +570,123 @@
         font-size: 22px;
     }
 }
+
+/* ==========================================
+   LOGIN - TOGGLE LIHAT PASSWORD
+   WEB
+========================================== */
+
+.login-password-wrap {
+    display: flex;
+    align-items: center;
+}
+
+.login-password-wrap input {
+    flex: 1;
+    min-width: 0;
+}
+
+.login-password-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 27px;
+    height: 27px;
+    flex: 0 0 27px;
+
+    margin-left: auto;
+    padding: 0;
+
+    color: var(--color-primary, #142F7D);
+    background: transparent;
+    border: none;
+
+    cursor: pointer;
+}
+
+.login-password-toggle svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+}
+
+.login-password-toggle:hover {
+    opacity: .75;
+}
+
+/* Garis miring hanya muncul saat password terlihat */
+.login-password-toggle .eye-slash {
+    display: none;
+}
+
+.login-password-toggle[aria-pressed="true"] .eye-slash {
+    display: block;
+}
+
+.login-password-toggle:focus-visible {
+    outline: 2px solid var(--color-primary, #142F7D);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+
+/* =========================================
+   LOGIN - LIHAT / SEMBUNYIKAN PASSWORD
+========================================= */
+
+.login-password-wrap {
+    position: relative;
+}
+
+.login-password-wrap input {
+    padding-right: 50px !important;
+}
+
+.login-password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+
+    padding: 0;
+
+    color: #142F7D;
+    background: transparent;
+    border: none;
+
+    cursor: pointer;
+    z-index: 2;
+}
+
+.login-password-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Awalnya garis miring tidak terlihat */
+.login-eye-slash {
+    display: none;
+}
+
+/* Garis miring muncul ketika password terlihat */
+.login-password-toggle[aria-pressed="true"] .login-eye-slash {
+    display: block;
+}
+
+.login-password-toggle:hover {
+    opacity: .75;
+}
+
+.login-password-toggle:focus-visible {
+    outline: 2px solid #142F7D;
+    outline-offset: 3px;
+    border-radius: 5px;
+}

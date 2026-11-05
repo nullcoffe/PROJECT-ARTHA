@@ -230,3 +230,55 @@
         font-size: 15px;
     }
 }
+
+
+/* ==========================================
+   LOGIN - LIHAT PASSWORD MOBILE
+========================================== */
+
+@media (max-width: 768px) {
+
+    .login-password-wrap input {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .login-password-toggle {
+        width: 34px;
+        height: 34px;
+        flex: 0 0 34px;
+
+        margin-left: auto;
+        padding: 0;
+    }
+
+    .login-password-toggle svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+
+/* =========================================
+   LOGIN - ICON MATA MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .login-password-wrap input {
+        padding-right: 48px !important;
+    }
+
+    .login-password-toggle {
+        right: 12px;
+
+        width: 32px;
+        height: 32px;
+    }
+
+    .login-password-toggle svg {
+        width: 20px;
+        height: 20px;
+    }
+
+}

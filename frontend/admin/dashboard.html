@@ -18,6 +18,39 @@
     <link rel="stylesheet" href="../assets/css/web/admin/dashboard.css">
     <link rel="stylesheet" href="../assets/css/mobile/admin/dashboard.css">
 </head>
+
+
+<!-- POPUP DATA TAHUN 2026 BELUM TERSEDIA -->
+<div class="admin-year-popup-overlay">
+
+    <section class="admin-year-popup"
+             role="alertdialog"
+             aria-labelledby="admin-year-popup-title"
+             aria-describedby="admin-year-popup-desc">
+
+        <div class="admin-year-popup-icon">
+            !
+        </div>
+
+        <h2 id="admin-year-popup-title">
+            Data Tahun 2026 Belum Tersedia
+        </h2>
+
+        <p id="admin-year-popup-desc">
+            Data penjualan tahun 2026 belum tersedia.
+            Silakan pilih tahun 2024 atau 2025
+            untuk melihat grafik penjualan.
+        </p>
+
+        <button type="button"
+                class="admin-year-popup-close">
+            Mengerti
+        </button>
+
+    </section>
+
+</div>
+
 <body>
     <input type="checkbox" id="sidebar-toggle" class="sidebar-checkbox"
            aria-label="Buka atau tutup navigasi">
@@ -34,28 +67,46 @@
                 </label>
             </div>
 
+            <!-- MENU SIDEBAR ADMIN -->
             <nav class="sidebar-nav">
-                <a href="dashboard.html" class="nav-item active" aria-current="page">
-                    <img src="../assets/icons/sidebar/dashboard.svg" class="nav-icon" alt="">
+
+                <!-- DASHBOARD -->
+                <a href="dashboard.html" class="nav-item active">
+                    <img src="../assets/icons/sidebar/dashboard.svg"
+                        alt="" class="nav-icon">
                     <span>Dashboard</span>
                 </a>
+
+                <!-- PENGGUNA -->
                 <a href="pengguna.html" class="nav-item">
-                    <img src="../assets/icons/sidebar/pengguna.svg" class="nav-icon" alt="">
+                    <img src="../assets/icons/sidebar/pengguna.svg"
+                        alt="" class="nav-icon">
                     <span>Pengguna</span>
                 </a>
-                <a href="produk&stok.html" class="nav-item">
-                    <img src="../assets/icons/sidebar/produk&amp;stok.svg" class="nav-icon" alt="">
+
+                <!-- PRODUK & STOK -->
+                <a href="produk&amp;stok.html" class="nav-item">
+                    <img src="../assets/icons/sidebar/produk&amp;stok.svg"
+                        alt="" class="nav-icon">
                     <span>Produk &amp; Stok</span>
                 </a>
+
+                <!-- TRANSAKSI -->
                 <a href="transaksi.html" class="nav-item">
-                    <img src="../assets/icons/sidebar/transaksi.svg" class="nav-icon" alt="">
+                    <img src="../assets/icons/sidebar/transaksi.svg"
+                        alt="" class="nav-icon">
                     <span>Transaksi</span>
                 </a>
+
+                <!-- KELUAR -->
                 <a href="../index.html" class="nav-item logout">
-                    <img src="../assets/icons/actions/logout.svg" class="nav-icon" alt="">
+                    <img src="../assets/icons/actions/logout.svg"
+                        alt="" class="nav-icon">
                     <span>Keluar</span>
                 </a>
+
             </nav>
+
         </aside>
 
         <main class="main-content">

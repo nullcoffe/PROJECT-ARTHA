@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -11,355 +12,491 @@
     <link rel="stylesheet" href="../assets/css/shared/variables.css">
     <link rel="stylesheet" href="../assets/css/shared/reset.css">
 
-    <!-- WEB SHARED -->
+    <!-- WEB CSS -->
     <link rel="stylesheet" href="../assets/css/web/layout.css">
     <link rel="stylesheet" href="../assets/css/web/sidebar.css">
     <link rel="stylesheet" href="../assets/css/web/header.css">
+    <link rel="stylesheet" href="../assets/css/web/admin/transaksi.css">
 
-    <!-- MOBILE SHARED -->
+    <!-- MOBILE CSS -->
     <link rel="stylesheet" href="../assets/css/mobile/layout.css">
     <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
     <link rel="stylesheet" href="../assets/css/mobile/header.css">
-
-    <!-- ADMIN TRANSAKSI -->
-    <link rel="stylesheet" href="../assets/css/web/admin/transaksi.css">
     <link rel="stylesheet" href="../assets/css/mobile/admin/transaksi.css">
+
+    <!-- CSS POPUP ARTHA -->
+    <link rel="stylesheet" href="../assets/css/web/popup.css">
+    <link rel="stylesheet" href="../assets/css/mobile/popup.css">
 </head>
 
-<body>
 
-<input type="checkbox"
-       id="sidebar-toggle"
-       class="sidebar-checkbox"
-       aria-label="Buka atau tutup navigasi">
+<!-- ==========================================
+     POPUP PILIH BULAN - ADMIN TRANSAKSI
+========================================== -->
 
-<div class="dashboard-layout">
+<div class="artha-popup-overlay"
+     id="popup-select-month">
 
-    <!-- SIDEBAR ADMIN -->
-    <aside class="sidebar">
+    <section class="artha-popup artha-popup--month"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="month-popup-title">
 
-        <div class="sidebar-brand">
+        <!-- HEADER -->
+        <div class="month-popup-header">
 
-            <div class="brand-left">
-                <img src="../assets/images/Logo.svg"
-                     alt="Logo ARTHA"
-                     class="brand-logo">
+            <h2 id="month-popup-title">
+                <img src="../assets/icons/popup/calendar-select.svg"
+                     alt="">
+                Pilih Bulan
+            </h2>
 
-                <span class="brand-title">ARTHA</span>
-            </div>
-
-            <label for="sidebar-toggle"
-                   class="close-sidebar-btn"
-                   aria-label="Tutup sidebar">
-
-                <img src="../assets/icons/actions/cancel.svg" alt="">
-
-            </label>
+            <a href="#"
+               class="month-popup-close"
+               aria-label="Tutup popup">
+                &times;
+            </a>
 
         </div>
 
-        <nav class="sidebar-nav">
+        <!-- PILIHAN BULAN -->
+        <div class="month-popup-options"
+             role="group"
+             aria-label="Bulan transaksi">
 
-            <a href="dashboard.html" class="nav-item">
-                <img src="../assets/icons/sidebar/dashboard.svg"
-                     class="nav-icon" alt="">
-                <span>Dashboard</span>
-            </a>
+            <!-- SEMUA BULAN -->
+            <label class="month-popup-option month-popup-all">
 
-            <a href="pengguna.html" class="nav-item">
-                <img src="../assets/icons/sidebar/pengguna.svg"
-                     class="nav-icon" alt="">
-                <span>Pengguna</span>
-            </a>
+                <input type="radio"
+                       name="popup-selected-month"
+                       value="all"
+                       checked>
 
-            <a href="produk&stok.html" class="nav-item">
-                <img src="../assets/icons/sidebar/produk&amp;stok.svg"
-                     class="nav-icon" alt="">
-                <span>Produk &amp; Stok</span>
-            </a>
+                <span>✓ Semua Bulan</span>
 
-            <a href="transaksi.html"
-               class="nav-item active"
-               aria-current="page">
+            </label>
 
-                <img src="../assets/icons/sidebar/transaksi.svg"
-                     class="nav-icon" alt="">
+            <!-- JANUARI - DESEMBER -->
+            <div class="month-popup-grid">
 
-                <span>Transaksi</span>
-            </a>
-
-            <a href="../index.html" class="nav-item logout">
-                <img src="../assets/icons/actions/logout.svg"
-                     class="nav-icon" alt="">
-                <span>Keluar</span>
-            </a>
-
-        </nav>
-
-    </aside>
-
-
-    <!-- MAIN CONTENT -->
-    <main class="main-content">
-
-        <!-- HEADER -->
-        <header class="dashboard-header">
-
-            <div class="header-left">
-
-                <label for="sidebar-toggle"
-                       class="hamburger-btn"
-                       aria-label="Buka sidebar">
-
-                    <img src="../assets/icons/actions/hamburger.svg" alt="">
-
+                <label class="month-popup-option">
+                    <input type="radio"
+                           name="popup-selected-month"
+                           value="01">
+                    <span>Januari</span>
                 </label>
 
-                <a href="dashboard.html"
-                   class="mobile-brand"
-                   aria-label="ARTHA">
+                <label class="month-popup-option">
+                    <input type="radio"
+                           name="popup-selected-month"
+                           value="02">
+                    <span>Februari</span>
+                </label>
 
-                    <img src="../assets/images/Logo.svg" alt="">
-                    <span>ARTHA</span>
+                <label class="month-popup-option">
+                    <input type="radio"
+                           name="popup-selected-month"
+                           value="03">
+                    <span>Maret</span>
+                </label>
 
-                </a>
+                <label class="month-popup-option">
+                    <input type="radio"
+                           name="popup-selected-month"
+                           value="04">
+                    <span>April</span>
+                </label>
 
-                <h1 class="desktop-page-title">
-                    Transaksi
-                </h1>
+                <label class="month-popup-option">
+                    <input type="radio"
+                           name="popup-selected-month"
+                           value="05">
+                    <span>Mei</span>
+                </label>
+
+                <label class="month-popup-option">
+                    <input type="radio"
+                           name="popup-selected-month"
+                           value="06">
+                    <span>Juni</span>
+                </label>
+
+                <label class="month-popup-option">
+                    <input type="radio"
+                           name="popup-selected-month"
+                           value="07">
+                    <span>Juli</span>
+                </label>
+
+                <label class="month-popup-option">
+                    <input type="radio"
+                           name="popup-selected-month"
+                           value="08">
+                    <span>Agustus</span>
+                </label>
+
+                <label class="month-popup-option">
+                    <input type="radio"
+                           name="popup-selected-month"
+                           value="09">
+                    <span>September</span>
+                </label>
+
+                <label class="month-popup-option">
+                    <input type="radio"
+                           name="popup-selected-month"
+                           value="10">
+                    <span>Oktober</span>
+                </label>
+
+                <label class="month-popup-option">
+                    <input type="radio"
+                           name="popup-selected-month"
+                           value="11">
+                    <span>November</span>
+                </label>
+
+                <label class="month-popup-option">
+                    <input type="radio"
+                           name="popup-selected-month"
+                           value="12">
+                    <span>Desember</span>
+                </label>
 
             </div>
 
-            <div class="header-right">
+        </div>
 
-                <div class="admin-profile">
+        <!-- FOOTER -->
+        <div class="month-popup-footer">
 
-                    <div class="profile-circle">
-                        <img src="../assets/icons/header/profile.svg" alt="">
-                    </div>
+            <a href="#"
+               class="artha-popup-btn artha-popup-btn--text">
+                Batal
+            </a>
 
-                    <span>Admin</span>
+            <a href="#"
+               class="artha-popup-btn artha-popup-btn--dark">
+                Terapkan
+            </a>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<body>
+
+    <!-- KONTROL SIDEBAR -->
+    <input type="checkbox"
+           id="sidebar-toggle"
+           class="sidebar-checkbox"
+           aria-label="Buka atau tutup sidebar">
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="sidebar-brand">
+
+                <div class="brand-left">
+                    <img src="../assets/images/Logo.svg"
+                         alt="Logo ARTHA"
+                         class="brand-logo">
+
+                    <span class="brand-title">ARTHA</span>
+                </div>
+
+                <label for="sidebar-toggle"
+                       class="close-sidebar-btn"
+                       aria-label="Tutup sidebar">
+                    <img src="../assets/icons/actions/cancel.svg"
+                         alt="">
+                </label>
+
+            </div>
+
+            <!-- MENU ADMIN -->
+            <nav class="sidebar-nav">
+
+                <a href="dashboard.html" class="nav-item">
+                    <img src="../assets/icons/sidebar/dashboard.svg"
+                         alt="" class="nav-icon">
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="pengguna.html" class="nav-item">
+                    <img src="../assets/icons/sidebar/pengguna.svg"
+                         alt="" class="nav-icon">
+                    <span>Pengguna</span>
+                </a>
+
+                <a href="produk&amp;stok.html" class="nav-item">
+                    <img src="../assets/icons/sidebar/produk&amp;stok.svg"
+                         alt="" class="nav-icon">
+                    <span>Produk &amp; Stok</span>
+                </a>
+
+                <a href="transaksi.html"
+                   class="nav-item active"
+                   aria-current="page">
+                    <img src="../assets/icons/sidebar/transaksi.svg"
+                         alt="" class="nav-icon">
+                    <span>Transaksi</span>
+                </a>
+
+                <a href="../index.html" class="nav-item logout">
+                    <img src="../assets/icons/actions/logout.svg"
+                         alt="" class="nav-icon">
+                    <span>Keluar</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- HEADER -->
+            <header class="dashboard-header">
+
+                <div class="header-left">
+
+                    <!-- HAMBURGER MOBILE -->
+                    <label for="sidebar-toggle"
+                           class="hamburger-btn"
+                           aria-label="Buka sidebar">
+                        <img src="../assets/icons/actions/hamburger.svg"
+                             alt="">
+                    </label>
+
+                    <h1 class="desktop-page-title">
+                        Transaksi
+                    </h1>
 
                 </div>
 
-            </div>
+                <div class="header-right">
 
-        </header>
+                    <div class="admin-profile">
 
+                        <div class="profile-circle">
+                            <img src="../assets/icons/header/profile.svg"
+                                 alt="">
+                        </div>
 
-        <h1 class="mobile-page-title">Transaksi</h1>
+                        <span>Admin</span>
 
-
-        <!-- KONTEN TRANSAKSI -->
-        <div class="page-container transaction-content">
-
-
-            <!-- =====================================
-                 1. RINGKASAN TRANSAKSI
-            ====================================== -->
-
-            <section class="transaction-summary"
-                     aria-label="Ringkasan transaksi">
-
-                <article class="transaction-summary-card">
-
-                    <div class="transaction-summary-icon">
-                        <img src="../assets/icons/cards/totaljumlahtransaksi.svg"
-                             alt="">
                     </div>
 
-                    <div>
-                        <p>Total Transaksi</p>
-                        <h2>350</h2>
-                    </div>
+                </div>
 
-                </article>
+            </header>
 
+            <!-- JUDUL MOBILE -->
+            <h1 class="mobile-page-title">
+                Transaksi
+            </h1>
 
-                <article class="transaction-summary-card">
+            <!-- KONTEN TRANSAKSI -->
+            <div class="page-container transaction-content">
 
-                    <div class="transaction-summary-icon">
-                        <img src="../assets/icons/cards/jumlahproduk.svg"
-                             alt="">
-                    </div>
+                <!-- STATISTIK -->
+                <section class="transaction-summary">
 
-                    <div>
-                        <p>Total Produk Unik</p>
-                        <h2>60</h2>
-                    </div>
+                    <!-- TOTAL TRANSAKSI -->
+                    <article class="transaction-summary-card">
 
-                </article>
+                        <div class="transaction-summary-icon">
+                            <img src="../assets/icons/cards/totaljumlahtransaksi.svg"
+                                 alt="">
+                        </div>
 
+                        <div class="transaction-summary-info">
+                            <p>Total Transaksi</p>
+                            <h2>350</h2>
+                        </div>
 
-                <article class="transaction-summary-card">
+                    </article>
 
-                    <div class="transaction-summary-icon">
-                        <img src="../assets/icons/cards/multiuser.svg"
-                             alt="">
-                    </div>
+                    <!-- TOTAL PRODUK UNIK -->
+                    <article class="transaction-summary-card">
 
-                    <div>
-                        <p>Total Pelanggan</p>
-                        <h2>25</h2>
-                    </div>
+                        <div class="transaction-summary-icon">
+                            <img src="../assets/icons/cards/jumlahproduk.svg"
+                                 alt="">
+                        </div>
 
-                </article>
+                        <div class="transaction-summary-info">
+                            <p>Total Produk Unik</p>
+                            <h2>60</h2>
+                        </div>
 
-            </section>
+                    </article>
 
+                    <!-- TOTAL PELANGGAN -->
+                    <article class="transaction-summary-card">
 
-            <!-- =====================================
-                 2. FILTER TRANSAKSI
-            ====================================== -->
+                        <div class="transaction-summary-icon">
+                            <img src="../assets/icons/cards/multiuser.svg"
+                                 alt="">
+                        </div>
 
-            <section class="transaction-filters"
-                     aria-label="Filter transaksi">
+                        <div class="transaction-summary-info">
+                            <p>Total Pelanggan</p>
+                            <h2>25</h2>
+                        </div>
 
+                    </article>
 
+                </section>
+
+                <!-- FILTER TRANSAKSI -->
+                <section class="transaction-filters"
+                         aria-label="Filter transaksi">
+
+                    
                 <!-- FILTER TAHUN -->
                 <div class="transaction-filter-field">
 
                     <label for="filterYear">Tahun</label>
 
-                    <select id="filterYear">
+                    <div class="transaction-select-wrap">
 
-                        <option value="all">Semua Tahun</option>
-                        <option value="2024">2024</option>
-                        <option value="2025">2025</option>
-                        <option value="2026">2026</option>
+                        <select id="filterYear" name="tahun">
+                            <option value="all" selected>Semua Tahun</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                        </select>
 
-                    </select>
+                    </div>
 
                 </div>
 
-
-                <!-- FILTER BULAN (BELUM AKTIF) -->
+                <!-- FILTER BULAN -->
                 <div class="transaction-filter-field">
+                    <label>Bulan</label>
 
-                    <label for="filterMonth">Bulan</label>
-
-                    <select id="filterMonth" disabled>
-
-                        <option value="all" selected>
-                            Semua Bulan
-                        </option>
-
-                    </select>
+                    <a href="#popup-select-month"
+                    class="transaction-month-trigger"
+                    aria-label="Pilih bulan transaksi">
+                        <span>Semua Bulan</span>
+                    </a>
 
                 </div>
 
 
-                <!-- SEMUA PERIODE -->
-                <article class="all-period-card">
+                    <!-- INFORMASI PERIODE -->
+                    <article class="all-period-card">
 
-                    <div class="all-period-icon">
+                        <div class="all-period-icon">
+                            <img src="../assets/icons/sidebar/transaksi.svg"
+                                 alt="">
+                        </div>
 
-                        <img src="../assets/icons/sidebar/transaksi.svg"
-                             alt="">
+                        <div class="all-period-info">
+
+                            <strong>Semua Periode</strong>
+
+                            <span>
+                                Menampilkan Tahun<br>
+                                2024–2025
+                            </span>
+
+                        </div>
+
+                    </article>
+
+                </section>
+
+                <!-- DAFTAR TRANSAKSI -->
+                <section class="transaction-list-section">
+
+                    <div class="transaction-list-heading">
+                        <span>Daftar Transaksi</span>
+                    </div>
+
+                    <!-- TABEL -->
+                    <div class="transaction-table-card">
+
+                        <div class="transaction-table-wrapper">
+
+                            <table class="transaction-table">
+
+                                <thead>
+                                    <tr>
+                                        <th>ID Transaksi</th>
+                                        <th>Tanggal</th>
+                                        <th>Pelanggan</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="transactionTableBody">
+
+                                    <tr data-year="2025"
+                                        data-month="02">
+                                        <td>TRX-0350</td>
+                                        <td>26/02/25</td>
+                                        <td>Rina</td>
+                                        <td>Rp.120.000</td>
+                                    </tr>
+
+                                    <tr data-year="2025"
+                                        data-month="02">
+                                        <td>TRX-0359</td>
+                                        <td>17/02/25</td>
+                                        <td>Alya</td>
+                                        <td>Rp.130.000</td>
+                                    </tr>
+
+                                    <tr data-year="2025"
+                                        data-month="08">
+                                        <td>TRX-0220</td>
+                                        <td>08/08/25</td>
+                                        <td>Syifa</td>
+                                        <td>Rp.100.000</td>
+                                    </tr>
+
+                                    <tr data-year="2025"
+                                        data-month="11">
+                                        <td>TRX-0110</td>
+                                        <td>10/11/25</td>
+                                        <td>Indah</td>
+                                        <td>Rp.50.000</td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                        <p class="transaction-empty-state"
+                           id="transactionEmptyState"
+                           hidden>
+                            Tidak ada transaksi pada periode yang dipilih.
+                        </p>
 
                     </div>
 
-                    <div>
+                </section>
 
-                        <strong>Semua Periode</strong>
+            </div>
 
-                        <span>
-                            Menampilkan Tahun<br>
-                            2024–2025
-                        </span>
+        </main>
 
-                    </div>
+        <!-- OVERLAY MOBILE -->
+        <label for="sidebar-toggle"
+               class="sidebar-overlay"
+               aria-label="Tutup sidebar"></label>
 
-                </article>
-
-            </section>
-
-
-            <!-- =====================================
-                 3. DAFTAR TRANSAKSI
-            ====================================== -->
-
-            <section class="transaction-list-section">
-
-                <div class="transaction-list-heading">
-                    <span>Daftar Transaksi</span>
-                </div>
-
-
-                <div class="transaction-table-card">
-
-                    <div class="transaction-table-wrapper">
-
-                        <table class="transaction-table">
-
-                            <thead>
-                                <tr>
-                                    <th>ID Transaksi</th>
-                                    <th>Tanggal</th>
-                                    <th>Pelanggan</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-
-                            <tbody id="transactionTableBody">
-
-                                <tr data-year="2025" data-month="02">
-                                    <td>TRX-0350</td>
-                                    <td>26/02/25</td>
-                                    <td>Rina</td>
-                                    <td>Rp.120.000</td>
-                                </tr>
-
-                                <tr data-year="2025" data-month="02">
-                                    <td>TRX-0359</td>
-                                    <td>17/02/25</td>
-                                    <td>Alya</td>
-                                    <td>Rp.130.000</td>
-                                </tr>
-
-                                <tr data-year="2025" data-month="08">
-                                    <td>TRX-0220</td>
-                                    <td>08/08/25</td>
-                                    <td>Syifa</td>
-                                    <td>Rp.100.000</td>
-                                </tr>
-
-                                <tr data-year="2025" data-month="11">
-                                    <td>TRX-0110</td>
-                                    <td>10/11/25</td>
-                                    <td>Indah</td>
-                                    <td>Rp.50.000</td>
-                                </tr>
-
-                            </tbody>
-
-                        </table>
-
-                    </div>
-
-                    <p class="transaction-empty-state"
-                       id="transactionEmptyState"
-                       hidden>
-
-                        Tidak ada transaksi pada periode yang dipilih.
-
-                    </p>
-
-                </div>
-
-            </section>
-
-        </div>
-
-    </main>
-
-
-    <!-- MOBILE SIDEBAR OVERLAY -->
-    <label for="sidebar-toggle"
-           class="sidebar-overlay"
-           aria-label="Tutup sidebar"></label>
-
-</div>
+    </div>
 
 </body>
 </html>

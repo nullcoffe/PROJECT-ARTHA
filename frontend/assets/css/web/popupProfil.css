@@ -1,0 +1,28 @@
+
+/* ==========================================
+   ARTHA - PERBAIKAN FRAME POPUP MOBILE
+========================================== */
+
+@media (max-width: 768px) {
+
+    .artha-profile-frame {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+
+        width: 100vw;
+        height: 100dvh;
+
+        max-width: none;
+        max-height: none;
+
+        margin: 0;
+        padding: 0;
+
+        border: none;
+        background: transparent;
+
+        z-index: 99999;
+    }
+}

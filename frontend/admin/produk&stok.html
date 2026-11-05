@@ -5,61 +5,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FFFDF0">
-
     <title>Produk &amp; Stok | ARTHA</title>
 
     <!-- SHARED CSS -->
     <link rel="stylesheet" href="../assets/css/shared/variables.css">
     <link rel="stylesheet" href="../assets/css/shared/reset.css">
 
-    <!-- WEB SHARED -->
+    <!-- WEB CSS -->
     <link rel="stylesheet" href="../assets/css/web/layout.css">
     <link rel="stylesheet" href="../assets/css/web/sidebar.css">
     <link rel="stylesheet" href="../assets/css/web/header.css">
+    <link rel="stylesheet" href="../assets/css/web/admin/produk&stok.css">
 
-    <!-- MOBILE SHARED -->
+    <!-- MOBILE CSS -->
     <link rel="stylesheet" href="../assets/css/mobile/layout.css">
     <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
     <link rel="stylesheet" href="../assets/css/mobile/header.css">
-
-    <!-- WEB -->
-<link rel="stylesheet" href="../assets/css/web/admin/produk&stok.css">
-
-<!-- MOBILE -->
-<link rel="stylesheet" href="../assets/css/mobile/admin/produk&stok.css">
+    <link rel="stylesheet" href="../assets/css/mobile/admin/produk&stok.css">
 </head>
 
 <body>
 
-<input type="checkbox" id="sidebar-toggle"
+<input type="checkbox"
+       id="sidebar-toggle"
        class="sidebar-checkbox"
-       aria-label="Buka atau tutup navigasi">
+       aria-label="Buka atau tutup sidebar">
 
 <div class="dashboard-layout">
 
-    <!-- SIDEBAR ADMIN -->
+    <!-- SIDEBAR -->
     <aside class="sidebar">
 
         <div class="sidebar-brand">
-
             <div class="brand-left">
                 <img src="../assets/images/Logo.svg"
                      alt="Logo ARTHA"
                      class="brand-logo">
-
                 <span class="brand-title">ARTHA</span>
             </div>
 
             <label for="sidebar-toggle"
                    class="close-sidebar-btn"
                    aria-label="Tutup sidebar">
-
                 <img src="../assets/icons/actions/cancel.svg" alt="">
-
             </label>
-
         </div>
 
+        <!-- NAVIGASI ADMIN -->
         <nav class="sidebar-nav">
 
             <a href="dashboard.html" class="nav-item">
@@ -74,13 +66,11 @@
                 <span>Pengguna</span>
             </a>
 
-            <a href="produk-stok.html"
+            <a href="produk&amp;stok.html"
                class="nav-item active"
                aria-current="page">
-
                 <img src="../assets/icons/sidebar/produk&amp;stok.svg"
                      class="nav-icon" alt="">
-
                 <span>Produk &amp; Stok</span>
             </a>
 
@@ -97,9 +87,7 @@
             </a>
 
         </nav>
-
     </aside>
-
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
@@ -108,55 +96,38 @@
         <header class="dashboard-header">
 
             <div class="header-left">
-
                 <label for="sidebar-toggle"
                        class="hamburger-btn"
                        aria-label="Buka sidebar">
-
-                    <img src="../assets/icons/actions/hamburger.svg" alt="">
-
+                    <img src="../assets/icons/actions/hamburger.svg"
+                         alt="">
                 </label>
-
-                <a href="dashboard.html"
-                   class="mobile-brand"
-                   aria-label="ARTHA">
-
-                    <img src="../assets/images/Logo.svg" alt="">
-                    <span>ARTHA</span>
-
-                </a>
 
                 <h1 class="desktop-page-title">
                     Produk &amp; Stok
                 </h1>
-
             </div>
 
             <div class="header-right">
-
                 <div class="admin-profile">
-
                     <div class="profile-circle">
-                        <img src="../assets/icons/header/profile.svg" alt="">
+                        <img src="../assets/icons/header/profile.svg"
+                             alt="">
                     </div>
-
                     <span>Admin</span>
-
                 </div>
-
             </div>
 
         </header>
 
+        <!-- JUDUL MOBILE -->
+        <h1 class="mobile-page-title">
+            Produk &amp; Stok
+        </h1>
 
-        <h1 class="mobile-page-title">Produk &amp; Stok</h1>
-
-
-        <!-- KONTEN PRODUK & STOK -->
         <div class="page-container product-page-content">
 
-
-            <!-- RADIO PENGATUR HIGHLIGHT -->
+            <!-- MODE FORM TANPA JAVASCRIPT -->
             <input type="radio"
                    name="form-mode"
                    id="mode-product"
@@ -168,58 +139,44 @@
                    id="mode-stock"
                    class="form-mode-radio">
 
-
             <!-- TOOLBAR -->
-            <section class="product-toolbar"
-                     aria-label="Pencarian dan tindakan produk">
+            <section class="product-toolbar">
 
                 <label class="product-search">
-
-                    <img src="../assets/icons/actions/search.svg" alt="">
-
+                    <img src="../assets/icons/actions/search.svg"
+                         alt="">
                     <input type="search"
                            id="productSearch"
                            placeholder="Cari nama atau kode produk"
                            aria-label="Cari nama atau kode produk">
-
                 </label>
-
 
                 <div class="product-toolbar-actions">
 
-                    <!-- SESUAIKAN STOK -->
                     <label for="mode-stock"
                            class="stock-adjust-trigger">
-
-                        <img src="../assets/icons/cards/stoktipis.svg" alt="">
-
+                        <img src="../assets/icons/cards/stoktipis.svg"
+                             alt="">
                         <span>Sesuaikan stok</span>
-
                     </label>
 
-
-                    <!-- TAMBAH PRODUK -->
                     <label for="mode-product"
                            class="add-product-trigger">
-
-                        <img src="../assets/icons/actions/tambah.svg" alt="">
-
+                        <img src="../assets/icons/actions/tambah.svg"
+                             alt="">
                         <span>Tambah produk</span>
-
                     </label>
 
                 </div>
 
             </section>
 
-
             <!-- TABEL PRODUK -->
             <section class="product-table-card">
 
                 <div class="product-table-wrapper">
 
-                    <table class="product-table" id="productTable">
-
+                    <table class="product-table">
                         <thead>
                             <tr>
                                 <th>Kode</th>
@@ -230,86 +187,64 @@
                             </tr>
                         </thead>
 
-                        <tbody id="productTableBody">
-
-                            <tr data-code="P001"
-                                data-name="Beras 5 Kg"
-                                data-price="75000"
-                                data-stock="32"
-                                data-minimum="15">
-
+                        <tbody>
+                            <tr>
                                 <td>P001</td>
-                                <td>Beras 5 Kg</td>
-                                <td>Rp.75.000,00</td>
+                                <td>Beras 5 KG</td>
+                                <td>Rp75.000,00</td>
                                 <td class="stock-safe">32</td>
-                                <td><span class="stock-status safe">Stok Aman</span></td>
-
+                                <td>
+                                    <span class="stock-status safe">
+                                        Stok Aman
+                                    </span>
+                                </td>
                             </tr>
 
-                            <tr data-code="P002"
-                                data-name="Minyak Goreng 1L"
-                                data-price="23000"
-                                data-stock="15"
-                                data-minimum="10">
-
+                            <tr>
                                 <td>P002</td>
                                 <td>Minyak Goreng 1L</td>
-                                <td>Rp.23.000,00</td>
+                                <td>Rp23.000,00</td>
                                 <td class="stock-safe">15</td>
-                                <td><span class="stock-status safe">Stok Aman</span></td>
-
+                                <td>
+                                    <span class="stock-status safe">
+                                        Stok Aman
+                                    </span>
+                                </td>
                             </tr>
 
-                            <tr data-code="P003"
-                                data-name="Gula Pasir 1 KG"
-                                data-price="17000"
-                                data-stock="9"
-                                data-minimum="10">
-
+                            <tr>
                                 <td>P003</td>
                                 <td>Gula Pasir 1 KG</td>
-                                <td>Rp.17.000,00</td>
+                                <td>Rp17.000,00</td>
                                 <td class="stock-low">9</td>
-                                <td><span class="stock-status low">Stok Rendah</span></td>
-
+                                <td>
+                                    <span class="stock-status low">
+                                        Stok Rendah
+                                    </span>
+                                </td>
                             </tr>
 
-                            <tr data-code="P004"
-                                data-name="Susu UHT 1L"
-                                data-price="20000"
-                                data-stock="24"
-                                data-minimum="12">
-
+                            <tr>
                                 <td>P004</td>
                                 <td>Susu UHT 1L</td>
-                                <td>Rp.20.000,00</td>
+                                <td>Rp20.000,00</td>
                                 <td class="stock-safe">24</td>
-                                <td><span class="stock-status safe">Stok Aman</span></td>
-
+                                <td>
+                                    <span class="stock-status safe">
+                                        Stok Aman
+                                    </span>
+                                </td>
                             </tr>
-
                         </tbody>
-
                     </table>
 
                 </div>
-
-                <p class="product-empty-state"
-                   id="productEmptyState"
-                   hidden>
-
-                    Produk tidak ditemukan.
-
-                </p>
-
             </section>
 
-
-            <!-- DUA FORM -->
+            <!-- FORM PRODUK DAN STOK -->
             <section class="product-forms-grid">
 
-
-                <!-- FORM DATA PRODUK -->
+                <!-- DATA PRODUK -->
                 <article class="product-form-panel"
                          id="productFormPanel">
 
@@ -322,61 +257,70 @@
                         <div class="product-fields-grid">
 
                             <div class="product-field">
-                                <label for="productName">Nama Produk</label>
-                                <input id="productName"
+                                <label for="productName">
+                                    Nama Produk
+                                </label>
+                                <input type="text"
+                                       id="productName"
                                        name="productName"
-                                       type="text"
                                        placeholder="Contoh gula pasir 5 KG"
                                        required>
                             </div>
 
                             <div class="product-field">
-                                <label for="productCode">Kode Produk</label>
-                                <input id="productCode"
+                                <label for="productCode">
+                                    Kode Produk
+                                </label>
+                                <input type="text"
+                                       id="productCode"
                                        name="productCode"
-                                       type="text"
                                        placeholder="Contoh P001"
                                        required>
                             </div>
 
                             <div class="product-field">
-                                <label for="productUnit">Satuan</label>
-                                <input id="productUnit"
+                                <label for="productUnit">
+                                    Satuan
+                                </label>
+                                <input type="text"
+                                       id="productUnit"
                                        name="productUnit"
-                                       type="text"
                                        placeholder="Kg"
                                        required>
                             </div>
 
                             <div class="product-field">
-                                <label for="productPrice">Harga</label>
-                                <input id="productPrice"
+                                <label for="productPrice">
+                                    Harga
+                                </label>
+                                <input type="number"
+                                       id="productPrice"
                                        name="productPrice"
-                                       type="number"
                                        min="0"
-                                       step="100"
-                                       placeholder="Rp.0"
+                                       placeholder="Rp 0"
                                        required>
                             </div>
 
                             <div class="product-field">
-                                <label for="productInitialStock">Stok awal</label>
-                                <input id="productInitialStock"
+                                <label for="productInitialStock">
+                                    Stok awal
+                                </label>
+                                <input type="number"
+                                       id="productInitialStock"
                                        name="productInitialStock"
-                                       type="number"
                                        min="0"
-                                       step="1"
                                        placeholder="0"
                                        required>
                             </div>
 
                             <div class="product-field">
-                                <label for="productMinimumStock">Batas Minimum</label>
-                                <input id="productMinimumStock"
+                                <label for="productMinimumStock">
+                                    Batas Minimum
+                                </label>
+                                <input type="number"
+                                       id="productMinimumStock"
                                        name="productMinimumStock"
-                                       type="number"
                                        min="0"
-                                       step="1"
                                        placeholder="0"
                                        required>
                             </div>
@@ -384,34 +328,23 @@
                         </div>
 
                         <div class="product-form-actions">
-
-                            <button type="submit" class="admin-primary-button">
+                            <button type="submit"
+                                    class="admin-primary-button">
                                 <span class="button-symbol">▣</span>
                                 Simpan produk
                             </button>
 
                             <button type="reset"
-                                    class="admin-outline-button"
-                                    id="resetProductForm">
-
+                                    class="admin-outline-button">
                                 <span class="button-symbol">×</span>
                                 Batal
-
                             </button>
-
                         </div>
 
                     </form>
-
-                    <p class="form-feedback"
-                       id="productFeedback"
-                       aria-live="polite"></p>
-
                 </article>
 
-
-
-                <!-- FORM PENYESUAIAN STOK -->
+                <!-- PENYESUAIAN STOK -->
                 <article class="stock-form-panel"
                          id="stockFormPanel">
 
@@ -423,306 +356,91 @@
 
                         <div class="product-field stock-product-field">
 
-                            <label for="stockProduct">Pilih Produk</label>
+                            <label for="stockProduct">
+                                Pilih Produk
+                            </label>
 
                             <select id="stockProduct"
                                     name="stockProduct"
                                     required>
-
-                                <option value="">Pilih</option>
-                                <option value="P001">Beras 5 Kg</option>
+                                <option value="" selected disabled>
+                                    Pilih
+                                </option>
+                                <option value="P001">Beras 5 KG</option>
                                 <option value="P002">Minyak Goreng 1L</option>
                                 <option value="P003">Gula Pasir 1 KG</option>
                                 <option value="P004">Susu UHT 1L</option>
-
                             </select>
 
                         </div>
 
-
                         <div class="stock-number-grid">
 
                             <div class="product-field">
-                                <label for="currentStock">Stok saat ini</label>
-
-                                <input id="currentStock"
-                                       type="number"
+                                <label for="currentStock">
+                                    Stok saat ini
+                                </label>
+                                <input type="number"
+                                       id="currentStock"
                                        value="0"
                                        readonly>
                             </div>
 
                             <div class="product-field">
-                                <label for="newStock">Stok Baru</label>
-
-                                <input id="newStock"
+                                <label for="newStock">
+                                    Stok Baru
+                                </label>
+                                <input type="number"
+                                       id="newStock"
                                        name="newStock"
-                                       type="number"
                                        min="0"
-                                       step="1"
                                        placeholder="Masukan stok baru"
                                        required>
                             </div>
 
                         </div>
 
-
                         <div class="product-field total-stock-field">
-
-                            <label for="totalStock">Total Stok</label>
-
-                            <input id="totalStock"
-                                   type="number"
+                            <label for="totalStock">
+                                Total Stok
+                            </label>
+                            <input type="number"
+                                   id="totalStock"
                                    value="0"
                                    readonly>
-
                         </div>
-
 
                         <div class="stock-form-actions">
 
-                            <button type="submit" class="admin-primary-button">
+                            <button type="submit"
+                                    class="admin-primary-button">
                                 <span class="button-symbol">✓</span>
                                 Simpan penyesuaian
                             </button>
 
                             <button type="reset"
-                                    class="admin-outline-button"
-                                    id="resetStockForm">
-
+                                    class="admin-outline-button">
                                 <span class="button-symbol">×</span>
                                 Batal
-
                             </button>
 
                         </div>
 
                     </form>
 
-                    <p class="form-feedback"
-                       id="stockFeedback"
-                       aria-live="polite"></p>
-
                 </article>
 
             </section>
 
         </div>
-
     </main>
 
-
-    <!-- MOBILE SIDEBAR OVERLAY -->
+    <!-- OVERLAY MOBILE -->
     <label for="sidebar-toggle"
            class="sidebar-overlay"
            aria-label="Tutup sidebar"></label>
 
 </div>
-
-
-<!-- JAVASCRIPT LAMA TETAP DIPERTAHANKAN -->
-<script>
-    const productBody = document.getElementById("productTableBody");
-    const productSearch = document.getElementById("productSearch");
-
-    const productFormPanel = document.getElementById("productFormPanel");
-    const stockFormPanel = document.getElementById("stockFormPanel");
-
-    const stockSelect = document.getElementById("stockProduct");
-    const currentStock = document.getElementById("currentStock");
-    const newStock = document.getElementById("newStock");
-    const totalStock = document.getElementById("totalStock");
-
-
-    function updateProductOptions() {
-
-        const currentValue = stockSelect.value;
-
-        stockSelect.innerHTML = '<option value="">Pilih</option>';
-
-        [...productBody.querySelectorAll("tr")].forEach((row) => {
-
-            const option = document.createElement("option");
-
-            option.value = row.dataset.code;
-            option.textContent = row.dataset.name;
-
-            stockSelect.appendChild(option);
-
-        });
-
-        if ([...stockSelect.options].some((option) => option.value === currentValue)) {
-            stockSelect.value = currentValue;
-        }
-
-    }
-
-
-    function updateStockPreview() {
-
-        const row = [...productBody.querySelectorAll("tr")]
-            .find((item) => item.dataset.code === stockSelect.value);
-
-        const value = row ? Number(row.dataset.stock) : 0;
-
-        currentStock.value = value;
-
-        totalStock.value = newStock.value === ""
-            ? value
-            : Number(newStock.value);
-
-    }
-
-
-    stockSelect.addEventListener("change", updateStockPreview);
-    newStock.addEventListener("input", updateStockPreview);
-
-
-    productFormPanel.querySelector("form").addEventListener("submit", (event) => {
-
-        event.preventDefault();
-
-        const data = new FormData(event.currentTarget);
-
-        const code = String(data.get("productCode")).trim().toUpperCase();
-
-        if ([...productBody.querySelectorAll("tr")]
-            .some((row) => row.dataset.code === code)) {
-
-            document.getElementById("productFeedback").textContent =
-                "Kode produk sudah digunakan.";
-
-            return;
-        }
-
-        const name = String(data.get("productName")).trim();
-        const price = Number(data.get("productPrice"));
-        const stock = Number(data.get("productInitialStock"));
-        const minimum = Number(data.get("productMinimumStock"));
-
-        const row = document.createElement("tr");
-
-        row.dataset.code = code;
-        row.dataset.name = name;
-        row.dataset.price = price;
-        row.dataset.stock = stock;
-        row.dataset.minimum = minimum;
-
-        const status = stock <= minimum ? "Stok Rendah" : "Stok Aman";
-
-        row.innerHTML = `
-            <td></td>
-            <td></td>
-            <td></td>
-            <td class="${stock <= minimum ? "stock-low" : "stock-safe"}"></td>
-            <td>
-                <span class="stock-status ${stock <= minimum ? "low" : "safe"}">
-                    ${status}
-                </span>
-            </td>
-        `;
-
-        row.children[0].textContent = code;
-        row.children[1].textContent = name;
-        row.children[2].textContent = "Rp." + price.toLocaleString("id-ID");
-        row.children[3].textContent = stock;
-
-        productBody.appendChild(row);
-
-        updateProductOptions();
-
-        productFormPanel.querySelector("form").reset();
-
-        document.getElementById("productFeedback").textContent =
-            "Produk berhasil ditambahkan ke tabel tampilan.";
-
-    });
-
-
-    document.getElementById("stockForm").addEventListener("submit", (event) => {
-
-        event.preventDefault();
-
-        const row = [...productBody.querySelectorAll("tr")]
-            .find((item) => item.dataset.code === stockSelect.value);
-
-        if (!row) {
-
-            document.getElementById("stockFeedback").textContent =
-                "Pilih produk terlebih dahulu.";
-
-            return;
-        }
-
-        const stock = Number(newStock.value);
-        const minimum = Number(row.dataset.minimum || 10);
-
-        row.dataset.stock = stock;
-
-        row.children[3].textContent = stock;
-
-        row.children[3].className =
-            stock <= minimum ? "stock-low" : "stock-safe";
-
-        row.children[4].innerHTML = `
-            <span class="stock-status ${stock <= minimum ? "low" : "safe"}">
-                ${stock <= minimum ? "Stok Rendah" : "Stok Aman"}
-            </span>
-        `;
-
-        updateStockPreview();
-
-        document.getElementById("stockFeedback").textContent =
-            "Penyesuaian stok berhasil diterapkan pada tabel tampilan.";
-
-    });
-
-
-    productSearch.addEventListener("input", () => {
-
-        const query = productSearch.value.trim().toLowerCase();
-
-        let visible = 0;
-
-        [...productBody.querySelectorAll("tr")].forEach((row) => {
-
-            const match =
-                row.dataset.name.toLowerCase().includes(query) ||
-                row.dataset.code.toLowerCase().includes(query);
-
-            row.hidden = !match;
-
-            if (match) visible++;
-
-        });
-
-        document.getElementById("productEmptyState").hidden =
-            visible !== 0;
-
-    });
-
-
-    document.getElementById("resetProductForm")
-        .addEventListener("click", () => {
-
-            document.getElementById("productFeedback").textContent = "";
-
-        });
-
-
-    document.getElementById("resetStockForm")
-        .addEventListener("click", () => {
-
-            document.getElementById("stockFeedback").textContent = "";
-
-            currentStock.value = "0";
-            totalStock.value = "0";
-
-        });
-
-
-    updateProductOptions();
-
-</script>
 
 </body>
 </html>

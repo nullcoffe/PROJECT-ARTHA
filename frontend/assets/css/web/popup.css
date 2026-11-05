@@ -1,0 +1,695 @@
+
+/* =========================================================
+   ARTHA | SHARED POPUP — WEB
+   Seluruh role: Admin, Pemilik, dan Shared.
+   Mengikuti desain popup versi mobile.
+   Font dan warna utama menggunakan variables.css.
+========================================================= */
+
+
+/* =========================================================
+   1. OVERLAY DAN KOMPONEN DASAR
+========================================================= */
+
+.artha-popup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    overflow: auto;
+    padding: 22px;
+
+    background: rgba(16, 24, 40, .22);
+}
+
+.artha-popup-overlay:target {
+    display: flex;
+}
+
+.artha-popup-overlay,
+.artha-popup-overlay * {
+    box-sizing: border-box;
+}
+
+.artha-popup {
+    width: min(100%, 560px);
+    max-height: calc(100dvh - 44px);
+    overflow-y: auto;
+
+    color: var(--admin-button, #081B3A);
+    background: var(--color-white, #FFFFFF);
+
+    border: 1px solid #E1E7F0;
+    border-radius: 20px;
+
+    box-shadow: 0 22px 38px rgba(0, 0, 0, .18);
+
+    font-family: var(--font-primary, 'Poppins', sans-serif);
+}
+
+.artha-popup h2,
+.artha-popup p {
+    margin: 0;
+}
+
+
+/* Tombol dasar */
+
+.artha-popup-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+    padding: 0 22px;
+
+    border: 1px solid transparent;
+    border-radius: 9px;
+
+    font-family: var(--font-primary, 'Poppins', sans-serif);
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+    cursor: pointer;
+
+    transition: background .2s ease, color .2s ease;
+}
+
+
+/* Tombol utama navy */
+
+.artha-popup-btn--dark {
+    color: #FFFFFF;
+    background: var(--admin-button, #081B3A);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12);
+}
+
+.artha-popup-btn--dark:hover {
+    filter: brightness(.97);
+}
+
+
+/* Tombol batal */
+
+.artha-popup-btn--cancel {
+    color: #3A4658;
+    background: #FFFFFF;
+    border-color: #D3DBE5;
+}
+
+.artha-popup-btn--cancel:hover {
+    background: #F3F4F6;
+}
+
+
+/* Tombol hapus */
+
+.artha-popup-btn--danger {
+    color: #FFFFFF;
+    background: #C92F32;
+}
+
+.artha-popup-btn--danger:hover {
+    background: #B82429;
+}
+
+
+/* Tombol teks */
+
+.artha-popup-btn--text {
+    color: #64748B;
+    background: transparent;
+    border: 0;
+}
+
+
+/* Tombol sekunder */
+
+.artha-popup-btn--light {
+    color: #45556E;
+    background: #FFFFFF;
+    border-color: #D8E1EC;
+}
+
+.artha-popup-btn--light:hover {
+    background: #F3F4F6;
+}
+
+
+/* Fokus keyboard */
+
+.artha-popup-btn:focus-visible,
+.artha-popup a:focus-visible,
+.artha-popup input:focus-visible + span {
+    outline: 3px solid #F5C400;
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   2. POPUP DATASET TAHUN TERBARU BELUM TERSEDIA
+   shared/dataset-unavailable.html
+========================================================= */
+
+.artha-popup--dataset {
+    position: relative;
+
+    width: min(100%, 530px);
+    padding: 30px 29px 29px;
+
+    background: #FFFFFF;
+    border-top: 6px solid #FFCB2D;
+    border-radius: 17px;
+}
+
+
+/* Header dataset */
+
+.dataset-popup-heading {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+}
+
+
+/* Ikon kalender */
+
+.dataset-popup-icon {
+    display: grid;
+    place-items: center;
+
+    width: 50px;
+    height: 50px;
+    flex: 0 0 50px;
+
+    background: #FFF9E9;
+    border: 1px solid #F9D887;
+    border-radius: 14px;
+}
+
+.dataset-popup-icon img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+
+/* Judul dataset */
+
+.dataset-popup-heading h2 {
+    color: #152841;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+
+/* Informasi periode */
+
+.dataset-popup-warning {
+    margin-top: 4px !important;
+
+    color: #EA8500;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.dataset-popup-warning span {
+    margin-right: 5px;
+    font-size: 10px;
+}
+
+
+/* Deskripsi dataset */
+
+.dataset-popup-desc {
+    margin-top: 21px !important;
+
+    color: #687993;
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+
+/* Tombol mengerti */
+
+.dataset-popup-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 23px;
+}
+
+.dataset-popup-actions .artha-popup-btn {
+    min-width: 112px;
+}
+
+
+/* =========================================================
+   3. POPUP HAPUS AKUN PENGGUNA
+   admin/delete-user.html
+========================================================= */
+
+.artha-popup--delete {
+    width: min(100%, 505px);
+    padding: 31px 30px 30px;
+
+    text-align: center;
+}
+
+
+/* Ikon hapus */
+
+.delete-popup-icon {
+    display: grid;
+    place-items: center;
+
+    width: 67px;
+    height: 67px;
+    margin: 0 auto 18px;
+
+    background: #FFF0F1;
+    border: 1px solid #FFE0E0;
+    border-radius: 50%;
+}
+
+.delete-popup-icon img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+
+    filter:
+        brightness(0)
+        saturate(100%)
+        invert(23%)
+        sepia(99%)
+        saturate(3064%)
+        hue-rotate(345deg)
+        brightness(95%);
+}
+
+
+/* Judul hapus */
+
+.artha-popup--delete h2 {
+    color: #091B3A;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+
+/* Deskripsi hapus */
+
+.artha-popup--delete p {
+    max-width: 430px;
+    margin: 12px auto 26px;
+
+    color: #536176;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+
+/* Tombol batal dan hapus */
+
+.delete-popup-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+}
+
+.delete-popup-actions .artha-popup-btn {
+    width: 100%;
+    min-height: 47px;
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   4. POPUP PILIH BULAN
+   admin/select-month.html
+========================================================= */
+
+
+/* Container */
+
+.artha-popup--month {
+    width: min(100%, 545px);
+    padding: 32px 34px 28px;
+}
+
+
+/* Header */
+
+.month-popup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-bottom: 27px;
+    border-bottom: 1px solid #DDE6F0;
+}
+
+.month-popup-header h2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    color: var(--admin-button, #081B3A);
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.month-popup-header img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+
+/* Tombol silang */
+
+.month-popup-close {
+    color: #62748B;
+    font-size: 31px;
+    font-weight: 300;
+    line-height: 1;
+
+    text-decoration: none;
+}
+
+.month-popup-close:hover {
+    color: var(--admin-button, #081B3A);
+}
+
+
+/* Area pilihan bulan */
+
+.month-popup-options {
+    padding: 23px 0 30px;
+}
+
+.month-popup-option {
+    position: relative;
+    display: block;
+
+    cursor: pointer;
+}
+
+
+/* Input pilihan */
+
+.month-popup-option input {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    opacity: 0;
+}
+
+
+/* Tombol bulan */
+
+.month-popup-option span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: 46px;
+    padding: 8px 9px;
+
+    color: #091B3A;
+    background: #FFFFFF;
+
+    border: 1px solid #D9E3EE;
+    border-radius: 17px;
+
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+
+    transition: background .2s ease;
+}
+
+
+/* Hover bulan */
+
+.month-popup-option:hover span {
+    background: var(--color-background, #FFFDF0);
+}
+
+
+/* Bulan terpilih */
+
+.month-popup-option input:checked + span {
+    color: #FFFFFF;
+    background: #091B3A;
+    border-color: #091B3A;
+    font-weight: 600;
+}
+
+
+/* Pilihan semua bulan */
+
+.month-popup-all {
+    margin-bottom: 17px;
+}
+
+.month-popup-all span {
+    min-height: 45px;
+}
+
+
+/* Grid bulan */
+
+.month-popup-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 11px;
+}
+
+
+/* Footer */
+
+.month-popup-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+
+    padding-top: 17px;
+    border-top: 1px solid #DDE6F0;
+}
+
+
+/* =========================================================
+   5. POPUP ANALISIS APRIORI BERHASIL
+   pemilik/apriori-success.html
+========================================================= */
+
+
+/* Container */
+
+.artha-popup--apriori {
+    width: min(100%, 685px);
+    padding: 0;
+
+    overflow: hidden;
+    border-radius: 19px;
+}
+
+
+/* Header navy */
+
+.apriori-popup-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    min-height: 119px;
+    padding: 22px 32px;
+
+    color: #FFFFFF;
+    background: linear-gradient(110deg, #0B1936, #1B315C);
+}
+
+
+/* Ikon sukses */
+
+.apriori-popup-icon {
+    width: 54px;
+    height: 54px;
+    flex: 0 0 54px;
+}
+
+.apriori-popup-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+/* Judul dan deskripsi */
+
+.apriori-popup-title-group {
+    flex: 1;
+    min-width: 0;
+}
+
+.apriori-popup-title-group h2 {
+    color: #FFFFFF;
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.apriori-popup-title-group p {
+    margin-top: 3px;
+
+    color: #C6D1E0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* Tombol silang */
+
+.apriori-popup-x {
+    align-self: flex-start;
+
+    color: #9AA9BE;
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 1;
+
+    text-decoration: none;
+}
+
+.apriori-popup-x:hover {
+    color: #FFFFFF;
+}
+
+
+/* Body */
+
+.apriori-popup-body {
+    padding: 30px 32px 27px;
+}
+
+
+/* Ringkasan statistik */
+
+.apriori-popup-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    padding: 18px 12px;
+
+    background: #F7F9FC;
+    border: 1px solid #DFE7F0;
+    border-radius: 15px;
+}
+
+.apriori-popup-metrics > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    padding: 8px;
+
+    text-align: center;
+    border-right: 1px solid #DEE6F0;
+}
+
+.apriori-popup-metrics > div:last-child {
+    border-right: 0;
+}
+
+.apriori-popup-metrics span {
+    color: #697C96;
+    font-size: 13px;
+}
+
+.apriori-popup-metrics strong {
+    color: #132C60;
+    font-size: 22px;
+    line-height: 1.25;
+}
+
+.apriori-popup-metrics .apriori-green {
+    color: #059669;
+}
+
+.apriori-popup-metrics .apriori-orange {
+    color: #CF8A00;
+}
+
+
+/* Detail hasil analisis */
+
+.apriori-popup-details {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+
+    margin-top: 20px;
+    padding: 18px;
+
+    background: #F8FAFF;
+    border: 1px solid #D2E3FF;
+    border-radius: 10px;
+}
+
+.apriori-popup-details > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+
+    font-size: 14px;
+}
+
+.apriori-popup-details span {
+    color: #62748E;
+}
+
+.apriori-popup-details strong {
+    color: #172641;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: right;
+}
+
+
+/* Catatan hasil */
+
+.apriori-popup-note {
+    margin-top: 20px !important;
+
+    color: #6A7F9F;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.5;
+}
+
+
+/* Footer */
+
+.apriori-popup-footer {
+    display: flex;
+    justify-content: flex-end;
+
+    padding: 19px 30px;
+
+    background: #F7F9FC;
+    border-top: 1px solid #EDF1F6;
+}

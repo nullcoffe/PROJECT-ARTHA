@@ -37,3 +37,323 @@
     .add-user-button { min-width: 128px; }
     .user-form-card { padding-inline: 10px; }
 }
+
+
+/* ==========================================
+   ARTHA - ADMIN MANAJEMEN PENGGUNA
+   REVISI MOBILE
+========================================== */
+
+@media (max-width: 768px) {
+
+    /* HEADER: HAMBURGER SEJAJAR PROFIL */
+    .main-content > .dashboard-header {
+        position: relative !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+
+        width: 100%;
+        height: 60px !important;
+        min-height: 60px !important;
+        margin: 0 0 10px !important;
+        padding: 9px 0 !important;
+    }
+
+    .dashboard-header .header-left {
+        display: flex;
+        align-items: center;
+        height: 40px;
+    }
+
+    .dashboard-header .hamburger-btn {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+
+        width: 36px;
+        height: 36px;
+        margin: 0;
+        padding: 0;
+        background: transparent;
+    }
+
+    .dashboard-header .hamburger-btn img {
+        width: 23px;
+        height: 23px;
+        filter: brightness(0) saturate(100%) invert(58%);
+    }
+
+    .dashboard-header .header-right {
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        min-height: 40px;
+        margin-left: auto;
+        padding: 0;
+    }
+
+    .dashboard-header .admin-profile {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .dashboard-header .profile-circle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 38px !important;
+        height: 38px !important;
+        flex: 0 0 38px;
+
+        border-radius: 50%;
+    }
+
+    .dashboard-header .desktop-page-title {
+        display: none !important;
+    }
+
+    .main-content > .mobile-page-title {
+        display: block !important;
+        margin: 7px 0 20px !important;
+        padding: 0 !important;
+
+        color: var(--color-primary);
+        font-family: var(--font-primary);
+        font-size: clamp(1.3rem, 5.3vw, 1.65rem);
+        font-weight: 700;
+        line-height: 1.3;
+    }
+
+    /* AREA KONTEN */
+    .admin-users-content {
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* TOMBOL TAMBAH */
+    .users-toolbar {
+        justify-content: flex-end;
+        margin-bottom: 12px;
+    }
+
+    .add-user-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        min-width: 140px;
+        height: 35px;
+        padding: 0 10px;
+
+        font-size: .68rem;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    /* TABEL SCROLL HORIZONTAL */
+    .users-table-card {
+        min-height: 0;
+        border-radius: 8px;
+    }
+
+    .users-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .users-table {
+        width: 100%;
+        min-width: 630px;
+        font-size: .67rem;
+    }
+
+    .users-table th {
+        height: 40px;
+        padding: 0 11px;
+    }
+
+    .users-table td {
+        height: 43px;
+        padding: 7px 11px;
+    }
+
+    .password-hidden {
+        display: inline-flex;
+        align-items: center;
+
+        min-width: 76px;
+        height: 23px;
+        padding: 0 8px;
+
+        color: var(--color-primary);
+        border: 1px solid #AAB5CA;
+        border-radius: 3px;
+
+        font-size: .75rem;
+        letter-spacing: 2px;
+        user-select: none;
+    }
+
+    .users-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* FORM MOBILE */
+    .user-form-card {
+        margin-top: 13px;
+        padding: 14px 12px;
+        border-radius: 9px;
+    }
+
+    .user-form-card h2 {
+        margin-bottom: 12px;
+        font-size: .95rem;
+    }
+
+    .user-form {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 11px;
+    }
+
+    .form-field label {
+        font-size: .68rem;
+    }
+
+    .form-field input,
+    .form-field select {
+        height: 40px;
+        font-size: .72rem;
+    }
+
+    .form-password-field {
+        width: 100%;
+        max-width: none;
+    }
+
+    .form-password-field input {
+        width: 100%;
+        padding-right: 10px;
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 9px;
+        margin-top: 5px;
+    }
+
+    .save-user-button,
+    .cancel-user-button {
+        min-width: 78px;
+        height: 35px;
+        font-size: .7rem;
+    }
+
+    /* TOMBOL X ABU-ABU */
+    .sidebar .close-sidebar-btn img {
+        filter: brightness(0) saturate(100%) invert(58%);
+    }
+}
+
+
+/* ==========================================
+   ARTHA - MANAJEMEN PENGGUNA
+   PERBAIKAN MOBILE
+========================================== */
+
+@media (max-width: 768px) {
+
+    /* JUDUL MOBILE TETAP TERPISAH DARI PROFIL */
+    .main-content > .mobile-page-title {
+        margin-bottom: 14px !important;
+    }
+
+    /* KONTEN LEBIH RAPAT */
+    .main-content > .admin-users-content,
+    .main-content > .page-container.admin-users-content {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+
+    .users-toolbar {
+        margin-top: 0 !important;
+        margin-bottom: 12px !important;
+    }
+
+    /* IKON HAPUS MERAH */
+    .users-actions .delete-button img {
+        filter: brightness(0) saturate(100%)
+                invert(26%) sepia(97%)
+                saturate(5488%) hue-rotate(351deg)
+                brightness(101%) contrast(111%) !important;
+
+        opacity: 1 !important;
+    }
+}
+
+/* ==========================================
+   POPUP DELETE USER - MOBILE
+========================================== */
+
+@media (max-width: 768px) {
+
+    .delete-user-overlay {
+        padding: 18px;
+    }
+
+    .delete-user-popup {
+        width: 100%;
+        max-width: 340px;
+
+        padding: 25px 20px 22px;
+        border-radius: 12px;
+    }
+
+    .delete-popup-icon {
+        width: 55px;
+        height: 55px;
+        margin-bottom: 15px;
+    }
+
+    .delete-popup-icon img {
+        width: 26px;
+        height: 26px;
+    }
+
+    .delete-user-popup h2 {
+        font-size: 18px;
+    }
+
+    .delete-user-popup p {
+        margin-bottom: 20px;
+        font-size: 12px;
+    }
+
+    .delete-popup-actions {
+        gap: 9px;
+    }
+
+    .delete-popup-cancel,
+    .delete-popup-confirm {
+        min-height: 40px;
+        padding: 9px 10px;
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,8 @@
+@media (max-width: 768px) {
+    .artha-profile-frame {
+        top: 65px;
+        right: 12px;
+        width: min(320px, calc(100vw - 24px));
+        height: 250px;
+    }
+}

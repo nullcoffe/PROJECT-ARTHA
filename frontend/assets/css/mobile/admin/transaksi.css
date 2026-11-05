@@ -1,69 +1,363 @@
-/* ARTHA | ADMIN - TRANSAKSI MOBILE */
-@media (max-width: 768px) {
-    .desktop-page-title { display: none; }
-    .mobile-page-title {
-        display: block;
-        margin: 0 0 14px;
-        color: var(--color-primary);
-        font-size: clamp(1.05rem, 4.5vw, 1.25rem);
-        font-weight: 700;
-    }
-    .transaction-content { width: 100%; min-width: 0; }
 
-    .transaction-summary {
-        grid-template-columns: 1fr;
+/* ==========================================
+   ARTHA - ADMIN TRANSAKSI MOBILE
+========================================== */
+
+@media (max-width: 768px) {
+
+    /* ======================================
+       HEADER: HAMBURGER SEJAJAR PROFIL
+    ====================================== */
+
+    .main-content > .dashboard-header {
+        position: relative !important;
+
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+
+        width: 100%;
+        height: 60px !important;
+        min-height: 60px !important;
+
+        margin: 0 0 9px !important;
+        padding: 9px 0 !important;
         gap: 10px;
-        margin-bottom: 15px;
     }
+
+    .dashboard-header .header-left {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        min-width: 0;
+    }
+
+    /* HAMBURGER */
+    .dashboard-header .hamburger-btn {
+        position: relative !important;
+
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+
+        width: 36px;
+        height: 36px;
+        flex: 0 0 36px;
+
+        margin: 0;
+        padding: 0;
+
+        background: transparent;
+        border: none;
+    }
+
+    .dashboard-header .hamburger-btn img {
+        width: 23px;
+        height: 23px;
+        object-fit: contain;
+
+        filter: brightness(0) saturate(100%)
+                invert(58%);
+    }
+
+    /* PROFIL */
+    .dashboard-header .header-right {
+        position: relative !important;
+
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        min-height: 40px;
+        margin: 0 0 0 auto;
+        padding: 0;
+    }
+
+    .dashboard-header .admin-profile {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .dashboard-header .profile-circle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 38px !important;
+        height: 38px !important;
+        flex: 0 0 38px !important;
+
+        border-radius: 50%;
+    }
+
+    .dashboard-header .profile-circle img {
+        width: 19px;
+        height: 19px;
+        object-fit: contain;
+    }
+
+    /* JUDUL */
+    .desktop-page-title {
+        display: none !important;
+    }
+
+    .main-content > .mobile-page-title {
+        display: block !important;
+
+        margin: 8px 0 20px !important;
+        padding: 0 !important;
+
+        color: var(--color-primary);
+        font-family: var(--font-primary);
+        font-size: clamp(1.3rem, 5.3vw, 1.65rem);
+        font-weight: 700;
+        line-height: 1.3;
+    }
+
+    /* ======================================
+       KONTEN
+    ====================================== */
+
+    .transaction-content {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    /* STATISTIK MOBILE */
+    .transaction-summary {
+        display: grid;
+        grid-template-columns: 1fr;
+
+        width: 100%;
+        gap: 11px;
+        margin-bottom: 17px;
+    }
+
     .transaction-summary-card {
-        min-height: 70px;
-        gap: 12px;
-        padding: 10px 14px;
-        border-radius: 10px;
+        display: flex;
+        align-items: center;
+
+        width: 100%;
+        min-height: 96px;
+        padding: 15px 17px;
+        gap: 14px;
+
+        background: var(--color-white);
+        border: 1.5px solid var(--color-primary);
+        border-radius: 9px;
     }
-    .transaction-summary-icon { width: 34px; height: 34px; flex-basis: 34px; }
-    .transaction-summary-card p { font-size: .68rem; }
-    .transaction-summary-card h2 { font-size: 1.6rem; }
+
+    .transaction-summary-icon {
+        width: 43px;
+        height: 43px;
+        flex: 0 0 43px;
+    }
+
+    .transaction-summary-icon img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .transaction-summary-info p {
+        margin-bottom: 3px;
+        font-size: .75rem;
+    }
+
+    .transaction-summary-info h2 {
+        font-size: 2.2rem;
+    }
+
+    /* ======================================
+       FILTER MOBILE
+    ====================================== */
 
     .transaction-filters {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        margin-bottom: 13px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        align-items: start;
+
+        width: 100%;
+        gap: 11px;
+        margin-bottom: 17px;
     }
-    .transaction-filter-field label { font-size: .65rem; }
-    .transaction-filter-field select { height: 36px; padding-inline: 8px; font-size: .66rem; }
+
+    .transaction-filter-field {
+        gap: 6px;
+        min-width: 0;
+    }
+
+    .transaction-filter-field label {
+        font-size: .7rem;
+    }
+
+    .transaction-filter-field select {
+        width: 100%;
+        height: 39px;
+        padding: 0 9px;
+
+        font-size: .7rem;
+        border-radius: 6px;
+    }
+
+    /* SEMUA PERIODE DI BARIS BAWAH */
     .all-period-card {
         grid-column: 1 / -1;
-        min-height: 58px;
-        padding: 8px 12px;
-    }
-    .all-period-icon { width: 30px; height: 34px; flex-basis: 30px; }
-    .all-period-card strong { font-size: .72rem; }
-    .all-period-card span { font-size: .6rem; }
 
-    .transaction-list-heading { min-height: 31px; font-size: .65rem; }
-    .transaction-table-card { border-radius: 8px; }
-    .transaction-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .transaction-table { min-width: 550px; font-size: .68rem; }
-    .transaction-table th { height: 38px; padding-inline: 12px; font-size: .62rem; }
-    .transaction-table td { height: 43px; padding-inline: 12px; }
-}
-
-@media (max-width: 380px) {
-    .transaction-summary-card { padding-inline: 11px; }
-    .transaction-filters { gap: 8px; }
-    .transaction-table { min-width: 520px; }
-}
-@media (max-width: 768px) {
-    
+        width: 100%;
+        min-height: 70px;
+        padding: 11px 14px;
+        gap: 12px;
     }
 
+    .all-period-icon {
+        width: 35px;
+        height: 39px;
+        flex: 0 0 35px;
+    }
+
+    .all-period-info strong {
+        font-size: .78rem;
+    }
+
+    .all-period-info span {
+        font-size: .65rem;
+    }
+
+    /* ======================================
+       DAFTAR TRANSAKSI
+    ====================================== */
+
+    .transaction-list-heading {
+        min-height: 33px;
+        margin-bottom: 9px;
+        padding: 0 12px;
+        font-size: .68rem;
+    }
+
+    .transaction-table-card {
+        width: 100%;
+        border-radius: 9px;
+        overflow: hidden;
+    }
+
+    .transaction-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .transaction-table {
+        width: 100%;
+        min-width: 520px;
+        font-size: .68rem;
+    }
+
+    .transaction-table th {
+        height: 39px;
+        padding: 0 13px;
+        font-size: .64rem;
+    }
+
+    .transaction-table td {
+        height: 44px;
+        padding: 0 13px;
+        font-size: .66rem;
+    }
+
+    /* X SIDEBAR ABU-ABU */
+    .sidebar .close-sidebar-btn img {
+        filter: brightness(0) saturate(100%)
+                invert(58%);
+    }
+}
+
+
+/* ==========================================
+   FILTER TRANSAKSI MOBILE
+========================================== */
 
 @media (max-width: 768px) {
-    .transaction-filter-field select:disabled {
-        opacity: 1;
-        cursor: not-allowed;
-        background-color: #FFFFFF;
-        color: #657391;
+
+    .transaction-select-wrap {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .transaction-select-wrap select,
+    .transaction-month-trigger {
+        width: 100%;
+        height: 39px;
+        padding-left: 10px;
+        padding-right: 34px;
+        font-size: .7rem;
+        border-radius: 6px;
+    }
+
+    .transaction-select-wrap::after,
+    .transaction-month-trigger::after {
+        right: 13px;
+        width: 7px;
+        height: 7px;
+    }
+
+    /* UKURAN POPUP PILIH BULAN */
+    .artha-popup--month {
+        width: 100%;
+        max-width: 360px;
+        padding: 23px 18px 20px;
+        border-radius: 15px;
+    }
+
+    .month-popup-header {
+        padding-bottom: 18px;
+    }
+
+    .month-popup-header h2 {
+        font-size: 17px;
+        gap: 9px;
+    }
+
+    .month-popup-header img {
+        width: 23px;
+        height: 23px;
+    }
+
+    .month-popup-options {
+        padding: 18px 0 22px;
+    }
+
+    .month-popup-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .month-popup-option span {
+        min-height: 39px;
+        padding: 7px 5px;
+        font-size: 11px;
+        border-radius: 10px;
+    }
+
+    .month-popup-footer {
+        gap: 8px;
+        padding-top: 14px;
+    }
+
+    .month-popup-footer .artha-popup-btn {
+        min-height: 39px;
+        padding: 0 15px;
+        font-size: 12px;
     }
 }

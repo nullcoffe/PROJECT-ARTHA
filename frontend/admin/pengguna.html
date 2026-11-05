@@ -1,97 +1,379 @@
+
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FFFDF0">
+
     <title>Manajemen Pengguna | ARTHA</title>
-    <!-- SHARED: warna, reset, layout, sidebar, header -->
+
+    <!-- SHARED CSS -->
     <link rel="stylesheet" href="../assets/css/shared/variables.css">
     <link rel="stylesheet" href="../assets/css/shared/reset.css">
+
+    <!-- WEB CSS -->
     <link rel="stylesheet" href="../assets/css/web/layout.css">
     <link rel="stylesheet" href="../assets/css/web/sidebar.css">
     <link rel="stylesheet" href="../assets/css/web/header.css">
+    <link rel="stylesheet" href="../assets/css/web/admin/pengguna.css">
+
+    <!-- MOBILE CSS -->
     <link rel="stylesheet" href="../assets/css/mobile/layout.css">
     <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
     <link rel="stylesheet" href="../assets/css/mobile/header.css">
-
-    <link rel="stylesheet" href="../assets/css/web/admin/pengguna.css">
     <link rel="stylesheet" href="../assets/css/mobile/admin/pengguna.css">
+
+    <!-- POPUP CSS -->
+    <style>
+        /* POPUP KONFIRMASI HAPUS */
+        .delete-user-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(0, 15, 42, 0.58);
+
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.2s ease,
+                        visibility 0.2s ease;
+        }
+
+        .delete-user-overlay:target {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .delete-user-popup {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 420px;
+            padding: 30px 28px 26px;
+            background: #FFFFFF;
+            border-radius: 14px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.22);
+            font-family: var(--font-primary);
+            text-align: center;
+        }
+
+        .delete-popup-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            margin-bottom: 18px;
+            background: #FDE8E8;
+            border-radius: 50%;
+        }
+
+        .delete-popup-icon img {
+            width: 30px;
+            height: 30px;
+            filter: brightness(0) saturate(100%)
+                    invert(26%) sepia(97%)
+                    saturate(5488%) hue-rotate(351deg)
+                    brightness(101%) contrast(111%);
+        }
+
+        .delete-user-popup h2 {
+            margin: 0 0 10px;
+            color: var(--color-primary);
+            font-size: 21px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .delete-user-popup p {
+            margin: 0 0 25px;
+            color: #7180A5;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .delete-popup-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            gap: 12px;
+        }
+
+        .delete-popup-cancel,
+        .delete-popup-confirm {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            min-height: 43px;
+            padding: 10px 14px;
+            border-radius: 7px;
+            font-family: var(--font-primary);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .delete-popup-cancel {
+            color: var(--color-primary);
+            background: #FFFFFF;
+            border: 1px solid var(--color-primary);
+        }
+
+        .delete-popup-cancel:hover {
+            background: #F2F5FA;
+        }
+
+        .delete-popup-confirm {
+            color: #FFFFFF;
+            background: #E53935;
+            border: 1px solid #E53935;
+        }
+
+        .delete-popup-confirm:hover {
+            background: #C62828;
+        }
+
+        /* SEMUA IKON SAMPAH MERAH */
+        .users-actions .delete-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .users-actions .delete-button img {
+            filter: brightness(0) saturate(100%)
+                    invert(26%) sepia(97%)
+                    saturate(5488%) hue-rotate(351deg)
+                    brightness(101%) contrast(111%) !important;
+            opacity: 1 !important;
+        }
+
+        @media (max-width: 768px) {
+            .delete-user-overlay {
+                padding: 18px;
+            }
+
+            .delete-user-popup {
+                max-width: 340px;
+                padding: 25px 20px 22px;
+                border-radius: 12px;
+            }
+
+            .delete-popup-icon {
+                width: 55px;
+                height: 55px;
+                margin-bottom: 15px;
+            }
+
+            .delete-popup-icon img {
+                width: 26px;
+                height: 26px;
+            }
+
+            .delete-user-popup h2 {
+                font-size: 18px;
+            }
+
+            .delete-user-popup p {
+                margin-bottom: 20px;
+                font-size: 12px;
+            }
+
+            .delete-popup-actions {
+                gap: 9px;
+            }
+
+            .delete-popup-cancel,
+            .delete-popup-confirm {
+                min-height: 40px;
+                padding: 9px 10px;
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <input type="checkbox" id="sidebar-toggle" class="sidebar-checkbox"
-           aria-label="Buka atau tutup navigasi">
+
+    <!-- KONTROL SIDEBAR -->
+    <input
+        type="checkbox"
+        id="sidebar-toggle"
+        class="sidebar-checkbox"
+        aria-label="Buka atau tutup sidebar"
+    >
 
     <div class="dashboard-layout">
-        <aside class="sidebar" aria-label="Navigasi Admin">
+
+        <!-- SIDEBAR ADMIN -->
+        <aside class="sidebar">
+
             <div class="sidebar-brand">
+
                 <div class="brand-left">
-                    <img src="../assets/images/Logo.svg" alt="Logo ARTHA" class="brand-logo">
+                    <img
+                        src="../assets/images/Logo.svg"
+                        alt="Logo ARTHA"
+                        class="brand-logo"
+                    >
                     <span class="brand-title">ARTHA</span>
                 </div>
-                <label for="sidebar-toggle" class="close-sidebar-btn" aria-label="Tutup sidebar">
-                    <img src="../assets/icons/actions/cancel.svg" alt="">
+
+                <label
+                    for="sidebar-toggle"
+                    class="close-sidebar-btn"
+                    aria-label="Tutup sidebar"
+                >
+                    <img
+                        src="../assets/icons/actions/cancel.svg"
+                        alt=""
+                    >
                 </label>
+
             </div>
 
+            <!-- MENU ADMIN -->
             <nav class="sidebar-nav">
+
                 <a href="dashboard.html" class="nav-item">
-                    <img src="../assets/icons/sidebar/dashboard.svg" class="nav-icon" alt="">
+                    <img
+                        src="../assets/icons/sidebar/dashboard.svg"
+                        class="nav-icon"
+                        alt=""
+                    >
                     <span>Dashboard</span>
                 </a>
-                <a href="pengguna.html" class="nav-item active" aria-current="page">
-                    <img src="../assets/icons/sidebar/pengguna.svg" class="nav-icon" alt="">
+
+                <a
+                    href="pengguna.html"
+                    class="nav-item active"
+                    aria-current="page"
+                >
+                    <img
+                        src="../assets/icons/sidebar/pengguna.svg"
+                        class="nav-icon"
+                        alt=""
+                    >
                     <span>Pengguna</span>
                 </a>
-                <a href="produk&stok.html" class="nav-item">
-                    <img src="../assets/icons/sidebar/produk&amp;stok.svg" class="nav-icon" alt="">
+
+                <a href="produk&amp;stok.html" class="nav-item">
+                    <img
+                        src="../assets/icons/sidebar/produk&amp;stok.svg"
+                        class="nav-icon"
+                        alt=""
+                    >
                     <span>Produk &amp; Stok</span>
                 </a>
+
                 <a href="transaksi.html" class="nav-item">
-                    <img src="../assets/icons/sidebar/transaksi.svg" class="nav-icon" alt="">
+                    <img
+                        src="../assets/icons/sidebar/transaksi.svg"
+                        class="nav-icon"
+                        alt=""
+                    >
                     <span>Transaksi</span>
                 </a>
+
                 <a href="../index.html" class="nav-item logout">
-                    <img src="../assets/icons/actions/logout.svg" class="nav-icon" alt="">
+                    <img
+                        src="../assets/icons/actions/logout.svg"
+                        class="nav-icon"
+                        alt=""
+                    >
                     <span>Keluar</span>
                 </a>
+
             </nav>
         </aside>
 
+        <!-- MAIN CONTENT -->
         <main class="main-content">
+
+            <!-- HEADER -->
             <header class="dashboard-header">
+
                 <div class="header-left">
-                    <label for="sidebar-toggle" class="hamburger-btn" aria-label="Buka sidebar">
-                        <img src="../assets/icons/actions/hamburger.svg" alt="">
+
+                    <label
+                        for="sidebar-toggle"
+                        class="hamburger-btn"
+                        aria-label="Buka sidebar"
+                    >
+                        <img
+                            src="../assets/icons/actions/hamburger.svg"
+                            alt=""
+                        >
                     </label>
-                    <a href="dashboard.html" class="mobile-brand" aria-label="ARTHA">
-                        <img src="../assets/images/Logo.svg" alt="">
-                        <span>ARTHA</span>
-                    </a>
-                    <h1 class="desktop-page-title">Manajemen Pengguna</h1>
+
+                    <h1 class="desktop-page-title">
+                        Manajemen Pengguna
+                    </h1>
+
                 </div>
+
                 <div class="header-right">
+
                     <div class="admin-profile">
+
                         <div class="profile-circle">
-                            <img src="../assets/icons/header/profile.svg" alt="">
+                            <img
+                                src="../assets/icons/header/profile.svg"
+                                alt=""
+                            >
                         </div>
+
                         <span>Admin</span>
+
                     </div>
+
                 </div>
+
             </header>
 
-            <h1 class="mobile-page-title">Manajemen Pengguna</h1>
+            <!-- JUDUL KHUSUS MOBILE -->
+            <h1 class="mobile-page-title">
+                Manajemen Pengguna
+            </h1>
 
+            <!-- KONTEN -->
             <div class="page-container admin-users-content">
+
+                <!-- TOMBOL TAMBAH PENGGUNA -->
                 <div class="users-toolbar">
-                    <button type="button" class="add-user-button" id="showUserForm">
+
+                    <a
+                        href="#userFormSection"
+                        class="add-user-button"
+                    >
                         + Tambah Pengguna
-                    </button>
+                    </a>
+
                 </div>
 
-                <section class="users-table-card" aria-label="Daftar pengguna">
+                <!-- TABEL PENGGUNA -->
+                <section
+                    class="users-table-card"
+                    aria-label="Daftar pengguna"
+                >
+
                     <div class="users-table-wrapper">
+
                         <table class="users-table">
+
                             <thead>
                                 <tr>
                                     <th>Nama</th>
@@ -101,159 +383,564 @@
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
+
                             <tbody>
-                            <tr>
-                                <td>Muthe</td>
-                                <td>Muthe.Pemilik</td>
-                                <td><span class="role-badge role-owner">Pemilik</span></td>
-                                <td>
-                                    <div class="password-cell">
-                                        <input type="password" value="muthe123" readonly aria-label="Kata sandi Muthe">
-                                        <button type="button" class="password-toggle" aria-label="Tampilkan kata sandi">
-                                            <img src="../assets/icons/actions/eye.svg" alt="">
-                                        </button>
-                                    </div>
-                                </td>
-                                <td class="users-actions">
-                                    <button type="button" class="action-button edit-button" aria-label="Edit Muthe">
-                                        <img src="../assets/icons/actions/edit.svg" alt="">
-                                    </button>
-                                    <button type="button" class="action-button delete-button" aria-label="Hapus Muthe">
-                                        <img src="../assets/icons/actions/delete.svg" alt="">
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Laudya</td>
-                                <td>Laudya.Pemilik</td>
-                                <td><span class="role-badge role-owner">Pemilik</span></td>
-                                <td>
-                                    <div class="password-cell">
-                                        <input type="password" value="laudya123" readonly aria-label="Kata sandi Laudya">
-                                        <button type="button" class="password-toggle" aria-label="Tampilkan kata sandi">
-                                            <img src="../assets/icons/actions/eye.svg" alt="">
-                                        </button>
-                                    </div>
-                                </td>
-                                <td class="users-actions">
-                                    <button type="button" class="action-button edit-button" aria-label="Edit Laudya">
-                                        <img src="../assets/icons/actions/edit.svg" alt="">
-                                    </button>
-                                    <button type="button" class="action-button delete-button" aria-label="Hapus Laudya">
-                                        <img src="../assets/icons/actions/delete.svg" alt="">
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Abin</td>
-                                <td>Abin.Kasir</td>
-                                <td><span class="role-badge role-cashier">Kasir</span></td>
-                                <td>
-                                    <div class="password-cell">
-                                        <input type="password" value="abin123" readonly aria-label="Kata sandi Abin">
-                                        <button type="button" class="password-toggle" aria-label="Tampilkan kata sandi">
-                                            <img src="../assets/icons/actions/eye.svg" alt="">
-                                        </button>
-                                    </div>
-                                </td>
-                                <td class="users-actions">
-                                    <button type="button" class="action-button edit-button" aria-label="Edit Abin">
-                                        <img src="../assets/icons/actions/edit.svg" alt="">
-                                    </button>
-                                    <button type="button" class="action-button delete-button" aria-label="Hapus Abin">
-                                        <img src="../assets/icons/actions/delete.svg" alt="">
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Alra</td>
-                                <td>Alra.Kasir</td>
-                                <td><span class="role-badge role-cashier">Kasir</span></td>
-                                <td>
-                                    <div class="password-cell">
-                                        <input type="password" value="alra123" readonly aria-label="Kata sandi Alra">
-                                        <button type="button" class="password-toggle" aria-label="Tampilkan kata sandi">
-                                            <img src="../assets/icons/actions/eye.svg" alt="">
-                                        </button>
-                                    </div>
-                                </td>
-                                <td class="users-actions">
-                                    <button type="button" class="action-button edit-button" aria-label="Edit Alra">
-                                        <img src="../assets/icons/actions/edit.svg" alt="">
-                                    </button>
-                                    <button type="button" class="action-button delete-button" aria-label="Hapus Alra">
-                                        <img src="../assets/icons/actions/delete.svg" alt="">
-                                    </button>
-                                </td>
-                            </tr>
+
+                                <!-- PENGGUNA 1: MUTHE -->
+                                <tr>
+                                    <td>Muthe</td>
+                                    <td>Muthe.Pemilik</td>
+
+                                    <td>
+                                        <span class="role-badge role-owner">
+                                            Pemilik
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span
+                                            class="password-hidden"
+                                            aria-label="Kata sandi disembunyikan"
+                                        >
+                                            ••••••••
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <div class="users-actions">
+
+                                            <!-- EDIT MUTHE -->
+                                            <a
+                                                href="#userFormSection"
+                                                class="action-button edit-button"
+                                                aria-label="Ubah akun Muthe"
+                                            >
+                                                <img
+                                                    src="../assets/icons/actions/edit.svg"
+                                                    alt=""
+                                                >
+                                            </a>
+
+                                            <!-- HAPUS MUTHE -->
+                                            <a
+                                                href="#popup-delete-muthe"
+                                                class="action-button delete-button"
+                                                aria-label="Hapus akun Muthe"
+                                            >
+                                                <img
+                                                    src="../assets/icons/actions/delete.svg"
+                                                    alt=""
+                                                >
+                                            </a>
+
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- PENGGUNA 2: LAUDYA -->
+                                <tr>
+                                    <td>Laudya</td>
+                                    <td>Laudya.Pemilik</td>
+
+                                    <td>
+                                        <span class="role-badge role-owner">
+                                            Pemilik
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span
+                                            class="password-hidden"
+                                            aria-label="Kata sandi disembunyikan"
+                                        >
+                                            ••••••••
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <div class="users-actions">
+
+                                            <!-- EDIT LAUDYA -->
+                                            <a
+                                                href="#userFormSection"
+                                                class="action-button edit-button"
+                                                aria-label="Ubah akun Laudya"
+                                            >
+                                                <img
+                                                    src="../assets/icons/actions/edit.svg"
+                                                    alt=""
+                                                >
+                                            </a>
+
+                                            <!-- HAPUS LAUDYA -->
+                                            <a
+                                                href="#popup-delete-laudya"
+                                                class="action-button delete-button"
+                                                aria-label="Hapus akun Laudya"
+                                            >
+                                                <img
+                                                    src="../assets/icons/actions/delete.svg"
+                                                    alt=""
+                                                >
+                                            </a>
+
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- PENGGUNA 3: ABIN -->
+                                <tr>
+                                    <td>Abin</td>
+                                    <td>Abin.Kasir</td>
+
+                                    <td>
+                                        <span class="role-badge role-cashier">
+                                            Kasir
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span
+                                            class="password-hidden"
+                                            aria-label="Kata sandi disembunyikan"
+                                        >
+                                            ••••••••
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <div class="users-actions">
+
+                                            <!-- EDIT ABIN -->
+                                            <a
+                                                href="#userFormSection"
+                                                class="action-button edit-button"
+                                                aria-label="Ubah akun Abin"
+                                            >
+                                                <img
+                                                    src="../assets/icons/actions/edit.svg"
+                                                    alt=""
+                                                >
+                                            </a>
+
+                                            <!-- HAPUS ABIN -->
+                                            <a
+                                                href="#popup-delete-abin"
+                                                class="action-button delete-button"
+                                                aria-label="Hapus akun Abin"
+                                            >
+                                                <img
+                                                    src="../assets/icons/actions/delete.svg"
+                                                    alt=""
+                                                >
+                                            </a>
+
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- PENGGUNA 4: ALRA -->
+                                <tr>
+                                    <td>Alra</td>
+                                    <td>Alra.Kasir</td>
+
+                                    <td>
+                                        <span class="role-badge role-cashier">
+                                            Kasir
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span
+                                            class="password-hidden"
+                                            aria-label="Kata sandi disembunyikan"
+                                        >
+                                            ••••••••
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <div class="users-actions">
+
+                                            <!-- EDIT ALRA -->
+                                            <a
+                                                href="#userFormSection"
+                                                class="action-button edit-button"
+                                                aria-label="Ubah akun Alra"
+                                            >
+                                                <img
+                                                    src="../assets/icons/actions/edit.svg"
+                                                    alt=""
+                                                >
+                                            </a>
+
+                                            <!-- HAPUS ALRA -->
+                                            <a
+                                                href="#popup-delete-alra"
+                                                class="action-button delete-button"
+                                                aria-label="Hapus akun Alra"
+                                            >
+                                                <img
+                                                    src="../assets/icons/actions/delete.svg"
+                                                    alt=""
+                                                >
+                                            </a>
+
+                                        </div>
+                                    </td>
+                                </tr>
+
                             </tbody>
+
                         </table>
+
                     </div>
+
                 </section>
 
-                <section class="user-form-card" id="userFormSection">
+                <!-- FORM PENGGUNA -->
+                <section
+                    class="user-form-card"
+                    id="userFormSection"
+                >
+
                     <h2>Form Pengguna</h2>
+
                     <form class="user-form" id="userForm">
+
+                        <!-- NAMA -->
                         <div class="form-field">
-                            <label for="newName">Nama</label>
-                            <input type="text" id="newName" name="name" placeholder="Masukan nama pengguna" required>
+
+                            <label for="newName">
+                                Nama
+                            </label>
+
+                            <input
+                                type="text"
+                                id="newName"
+                                name="name"
+                                placeholder="Masukan nama pengguna"
+                                autocomplete="off"
+                                required
+                            >
+
                         </div>
+
+                        <!-- USERNAME -->
                         <div class="form-field">
-                            <label for="newUsername">Username</label>
-                            <input type="text" id="newUsername" name="username" placeholder="Masukan Username" required>
+
+                            <label for="newUsername">
+                                Username
+                            </label>
+
+                            <input
+                                type="text"
+                                id="newUsername"
+                                name="username"
+                                placeholder="Masukan Username"
+                                autocomplete="off"
+                                required
+                            >
+
                         </div>
+
+                        <!-- JENIS PENGGUNA -->
                         <div class="form-field">
-                            <label for="newRole">Nama Pengguna</label>
-                            <select id="newRole" name="role" required>
-                                <option value="">Pilih Pengguna</option>
-                                <option value="pemilik">Pemilik</option>
-                                <option value="kasir">Kasir</option>
+
+                            <label for="newRole">
+                                Jenis Pengguna
+                            </label>
+
+                            <select
+                                id="newRole"
+                                name="role"
+                                required
+                            >
+                                <option value="" selected disabled>
+                                    Pilih Pengguna
+                                </option>
+
+                                <option value="pemilik">
+                                    Pemilik
+                                </option>
+
+                                <option value="kasir">
+                                    Kasir
+                                </option>
                             </select>
+
                         </div>
+
+                        <!-- PASSWORD BARU -->
                         <div class="form-field">
-                            <label for="newPassword">Kata Sandi</label>
+
+                            <label for="newPassword">
+                                Kata Sandi Baru
+                            </label>
+
                             <div class="form-password-field">
-                                <input type="password" id="newPassword" name="password" placeholder="Masukan kata sandi" required>
-                                <button type="button" class="password-toggle form-eye" aria-label="Tampilkan kata sandi">
-                                    <img src="../assets/icons/actions/eye.svg" alt="">
-                                </button>
+
+                                <input
+                                    type="password"
+                                    id="newPassword"
+                                    name="password"
+                                    placeholder="Masukan kata sandi baru"
+                                    autocomplete="new-password"
+                                    minlength="8"
+                                    required
+                                >
+
                             </div>
+
                         </div>
+
+                        <!-- TOMBOL FORM -->
                         <div class="form-actions">
-                            <button type="submit" class="save-user-button">Simpan</button>
-                            <button type="reset" class="cancel-user-button">Batal</button>
+
+                            <button
+                                type="submit"
+                                class="save-user-button"
+                            >
+                                Simpan
+                            </button>
+
+                            <button
+                                type="reset"
+                                class="cancel-user-button"
+                            >
+                                Batal
+                            </button>
+
                         </div>
+
                     </form>
+
                 </section>
+
             </div>
+
         </main>
-        <label for="sidebar-toggle" class="sidebar-overlay" aria-label="Tutup sidebar"></label>
+
+        <!-- OVERLAY MOBILE -->
+        <label
+            for="sidebar-toggle"
+            class="sidebar-overlay"
+            aria-label="Tutup sidebar"
+        ></label>
+
     </div>
 
-    <script>
-        // Interaksi UI: tampilkan/sembunyikan kata sandi.
-        document.querySelectorAll(".password-toggle").forEach((button) => {
-            button.addEventListener("click", () => {
-                const input = button.parentElement.querySelector("input");
-                if (!input) return;
-                input.type = input.type === "password" ? "text" : "password";
-            });
-        });
 
-        // Tombol tambah mengarahkan pengguna ke form di bawah tabel.
-        document.getElementById("showUserForm").addEventListener("click", () => {
-            document.getElementById("userFormSection").scrollIntoView({
-                behavior: "smooth",
-                block: "nearest"
-            });
-            document.getElementById("newName").focus({ preventScroll: true });
-        });
+    <!-- ==========================================
+         POPUP 1: HAPUS MUTHE
+    ========================================== -->
+    <div
+        id="popup-delete-muthe"
+        class="delete-user-overlay"
+    >
+        <section
+            class="delete-user-popup"
+            role="dialog"
+            aria-labelledby="delete-muthe-title"
+            aria-describedby="delete-muthe-desc"
+        >
 
-        // Form belum terhubung ke backend/database.
-        document.getElementById("userForm").addEventListener("submit", (event) => {
-            event.preventDefault();
-            alert("Tampilan form siap. Hubungkan proses Simpan ke backend untuk menyimpan pengguna.");
-        });
-    </script>
+            <div class="delete-popup-icon">
+                <img
+                    src="../assets/icons/actions/delete.svg"
+                    alt=""
+                >
+            </div>
+
+            <h2 id="delete-muthe-title">
+                Hapus Pengguna?
+            </h2>
+
+            <p id="delete-muthe-desc">
+                Apakah Anda yakin ingin menghapus pengguna
+                <strong>Muthe</strong>?
+                Tindakan ini tidak dapat dibatalkan.
+            </p>
+
+            <div class="delete-popup-actions">
+
+                <a
+                    href="#"
+                    class="delete-popup-cancel"
+                >
+                    Batal
+                </a>
+
+                <button
+                    type="button"
+                    class="delete-popup-confirm"
+                >
+                    Ya, Hapus
+                </button>
+
+            </div>
+
+        </section>
+    </div>
+
+
+    <!-- ==========================================
+         POPUP 2: HAPUS LAUDYA
+    ========================================== -->
+    <div
+        id="popup-delete-laudya"
+        class="delete-user-overlay"
+    >
+        <section
+            class="delete-user-popup"
+            role="dialog"
+            aria-labelledby="delete-laudya-title"
+            aria-describedby="delete-laudya-desc"
+        >
+
+            <div class="delete-popup-icon">
+                <img
+                    src="../assets/icons/actions/delete.svg"
+                    alt=""
+                >
+            </div>
+
+            <h2 id="delete-laudya-title">
+                Hapus Pengguna?
+            </h2>
+
+            <p id="delete-laudya-desc">
+                Apakah Anda yakin ingin menghapus pengguna
+                <strong>Laudya</strong>?
+                Tindakan ini tidak dapat dibatalkan.
+            </p>
+
+            <div class="delete-popup-actions">
+
+                <a
+                    href="#"
+                    class="delete-popup-cancel"
+                >
+                    Batal
+                </a>
+
+                <button
+                    type="button"
+                    class="delete-popup-confirm"
+                >
+                    Ya, Hapus
+                </button>
+
+            </div>
+
+        </section>
+    </div>
+
+
+    <!-- ==========================================
+         POPUP 3: HAPUS ABIN
+    ========================================== -->
+    <div
+        id="popup-delete-abin"
+        class="delete-user-overlay"
+    >
+        <section
+            class="delete-user-popup"
+            role="dialog"
+            aria-labelledby="delete-abin-title"
+            aria-describedby="delete-abin-desc"
+        >
+
+            <div class="delete-popup-icon">
+                <img
+                    src="../assets/icons/actions/delete.svg"
+                    alt=""
+                >
+            </div>
+
+            <h2 id="delete-abin-title">
+                Hapus Pengguna?
+            </h2>
+
+            <p id="delete-abin-desc">
+                Apakah Anda yakin ingin menghapus pengguna
+                <strong>Abin</strong>?
+                Tindakan ini tidak dapat dibatalkan.
+            </p>
+
+            <div class="delete-popup-actions">
+
+                <a
+                    href="#"
+                    class="delete-popup-cancel"
+                >
+                    Batal
+                </a>
+
+                <button
+                    type="button"
+                    class="delete-popup-confirm"
+                >
+                    Ya, Hapus
+                </button>
+
+            </div>
+
+        </section>
+    </div>
+
+
+    <!-- ==========================================
+         POPUP 4: HAPUS ALRA
+    ========================================== -->
+    <div
+        id="popup-delete-alra"
+        class="delete-user-overlay"
+    >
+        <section
+            class="delete-user-popup"
+            role="dialog"
+            aria-labelledby="delete-alra-title"
+            aria-describedby="delete-alra-desc"
+        >
+
+            <div class="delete-popup-icon">
+                <img
+                    src="../assets/icons/actions/delete.svg"
+                    alt=""
+                >
+            </div>
+
+            <h2 id="delete-alra-title">
+                Hapus Pengguna?
+            </h2>
+
+            <p id="delete-alra-desc">
+                Apakah Anda yakin ingin menghapus pengguna
+                <strong>Alra</strong>?
+                Tindakan ini tidak dapat dibatalkan.
+            </p>
+
+            <div class="delete-popup-actions">
+
+                <a
+                    href="#"
+                    class="delete-popup-cancel"
+                >
+                    Batal
+                </a>
+
+                <button
+                    type="button"
+                    class="delete-popup-confirm"
+                >
+                    Ya, Hapus
+                </button>
+
+            </div>
+
+        </section>
+    </div>
+
 </body>
 </html>

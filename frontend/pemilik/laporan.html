@@ -27,305 +27,372 @@
     <link rel="stylesheet" href="../assets/css/mobile/pemilik/laporan.css">
 </head>
 
-<body>
 
-<input type="checkbox" id="sidebar-toggle"
-       class="sidebar-checkbox"
-       aria-label="Buka atau tutup sidebar">
+<!-- POPUP DATA TAHUN 2026 BELUM TERSEDIA -->
+<div class="year-unavailable-overlay">
 
-<div class="dashboard-layout">
+    <div class="year-unavailable-modal"
+         role="alertdialog"
+         aria-labelledby="year-unavailable-title"
+         aria-describedby="year-unavailable-desc">
 
-    <!-- SIDEBAR PEMILIK -->
-    <aside class="sidebar">
-
-        <div class="sidebar-brand">
-            <div class="brand-left">
-                <img src="../assets/images/Logo.svg"
-                     alt="Logo ARTHA"
-                     class="brand-logo">
-
-                <span class="brand-title">ARTHA</span>
-            </div>
-
-            <label for="sidebar-toggle"
-                   class="close-sidebar-btn"
-                   aria-label="Tutup sidebar">
-                <img src="../assets/icons/actions/cancel.svg" alt="">
-            </label>
+        <div class="year-unavailable-icon">
+            !
         </div>
 
-        <nav class="sidebar-nav">
+        <h2 id="year-unavailable-title">
+            Data Tahun 2026 Belum Tersedia
+        </h2>
 
-            <a href="dashboard.html" class="nav-item">
-                <img src="../assets/icons/sidebar/dashboard.svg"
-                     class="nav-icon" alt="">
-                <span>Dashboard</span>
-            </a>
+        <p id="year-unavailable-desc">
+            Data penjualan untuk tahun 2026 belum tersedia.
+            Silakan pilih tahun 2024 atau 2025 untuk
+            melihat laporan penjualan.
+        </p>
 
-            <a href="laporan.html"
-               class="nav-item active"
-               aria-current="page">
-                <img src="../assets/icons/sidebar/laporan.svg"
-                     class="nav-icon" alt="">
-                <span>Laporan</span>
-            </a>
+        <button type="button"
+                class="year-unavailable-close">
+            Mengerti
+        </button>
 
-            <a href="analisis-apriori.html" class="nav-item">
-                <img src="../assets/icons/sidebar/analisisApriori.svg"
-                     class="nav-icon" alt="">
-                <span>Analisis Apriori</span>
-            </a>
-
-            <a href="paket-promosi.html" class="nav-item">
-                <img src="../assets/icons/sidebar/paketPromosi.svg"
-                     class="nav-icon" alt="">
-                <span>Paket Promosi</span>
-            </a>
-
-            <a href="prioritas-stok.html" class="nav-item">
-                <img src="../assets/icons/sidebar/prioritasStok.svg"
-                     class="nav-icon" alt="">
-                <span>Prioritas Stok</span>
-            </a>
-
-            <a href="../index.html" class="nav-item logout">
-                <img src="../assets/icons/actions/logout.svg"
-                     class="nav-icon" alt="">
-                <span>Keluar</span>
-            </a>
-
-        </nav>
-    </aside>
-
-    <!-- MAIN CONTENT -->
-    <main class="main-content">
-
-        <!-- HEADER -->
-        <header class="dashboard-header">
-
-            <div class="header-left">
-
-                <label for="sidebar-toggle"
-                       class="hamburger-btn"
-                       aria-label="Buka sidebar">
-                    <img src="../assets/icons/actions/hamburger.svg"
-                         alt="">
-                </label>
-
-                <a href="dashboard.html"
-                   class="mobile-brand"
-                   aria-label="ARTHA">
-                    <img src="../assets/images/Logo.svg" alt="">
-                    <span>ARTHA</span>
-                </a>
-
-                <h1 class="desktop-page-title">
-                    Laporan Penjualan
-                </h1>
-
-            </div>
-
-            <div class="header-right">
-                <div class="user-profile">
-                    <div class="profile-circle">
-                        <img src="../assets/icons/header/profile.svg"
-                             alt="">
-                    </div>
-                    <span>Pemilik</span>
-                </div>
-            </div>
-
-        </header>
-
-        <!-- JUDUL MOBILE -->
-        <h1 class="mobile-page-title">
-            Laporan Penjualan
-        </h1>
-
-        <!-- CONTENT LAPORAN -->
-        <div class="report-content">
-
-            <!-- STATISTIK -->
-            <section class="report-statistics">
-
-                <article class="report-stat-card">
-                    <p>Total Transaksi</p>
-                    <h2>350</h2>
-                </article>
-
-                <article class="report-stat-card">
-                    <p>Produk Unik</p>
-                    <h2>60</h2>
-                </article>
-
-                <article class="report-stat-card">
-                    <p>Periode</p>
-                    <h2>2024–2026</h2>
-                </article>
-
-            </section>
-
-            <!-- GRAFIK PENJUALAN -->
-            <section class="report-chart-card">
-
-                <div class="report-chart-header">
-
-                    <h2>Tren Penjualan Bulanan</h2>
-
-                    <select class="report-year-select"
-                            aria-label="Pilih tahun">
-
-                        <option value="2024">2024</option>
-                        <option value="2025" selected>2025</option>
-                        <option value="2026">2026</option>
-
-                    </select>
-
-                </div>
-
-                <div class="report-chart-content">
-
-                    <div class="report-y-axis">
-                        <span>Rp12 jt</span>
-                        <span>Rp9 jt</span>
-                        <span>Rp6 jt</span>
-                        <span>Rp3 jt</span>
-                        <span>0</span>
-                    </div>
-
-                    <div class="report-chart-bars">
-
-                        <div class="report-bar-group">
-                            <div class="report-bar-area">
-                                <div class="report-bar blue" style="--bar-height:35%"></div>
-                            </div>
-                            <span>Jan</span>
-                        </div>
-
-                        <div class="report-bar-group">
-                            <div class="report-bar-area">
-                                <div class="report-bar blue" style="--bar-height:55%"></div>
-                            </div>
-                            <span>Feb</span>
-                        </div>
-
-                        <div class="report-bar-group">
-                            <div class="report-bar-area">
-                                <div class="report-bar yellow" style="--bar-height:43%"></div>
-                            </div>
-                            <span>Mar</span>
-                        </div>
-
-                        <div class="report-bar-group">
-                            <div class="report-bar-area">
-                                <div class="report-bar blue" style="--bar-height:63%"></div>
-                            </div>
-                            <span>Apr</span>
-                        </div>
-
-                        <div class="report-bar-group">
-                            <div class="report-bar-area">
-                                <div class="report-bar blue" style="--bar-height:56%"></div>
-                            </div>
-                            <span>Mei</span>
-                        </div>
-
-                        <div class="report-bar-group">
-                            <div class="report-bar-area">
-                                <div class="report-bar yellow" style="--bar-height:76%"></div>
-                            </div>
-                            <span>Jun</span>
-                        </div>
-
-                        <div class="report-bar-group">
-                            <div class="report-bar-area">
-                                <div class="report-bar blue" style="--bar-height:54%"></div>
-                            </div>
-                            <span>Jul</span>
-                        </div>
-
-                        <div class="report-bar-group">
-                            <div class="report-bar-area">
-                                <div class="report-bar blue" style="--bar-height:74%"></div>
-                            </div>
-                            <span>Agu</span>
-                        </div>
-
-                        <div class="report-bar-group">
-                            <div class="report-bar-area">
-                                <div class="report-bar yellow" style="--bar-height:62%"></div>
-                            </div>
-                            <span>Sep</span>
-                        </div>
-
-                        <div class="report-bar-group">
-                            <div class="report-bar-area">
-                                <div class="report-bar blue" style="--bar-height:88%"></div>
-                            </div>
-                            <span>Okt</span>
-                        </div>
-
-                        <div class="report-bar-group">
-                            <div class="report-bar-area">
-                                <div class="report-bar blue" style="--bar-height:80%"></div>
-                            </div>
-                            <span>Nov</span>
-                        </div>
-
-                        <div class="report-bar-group">
-                            <div class="report-bar-area">
-                                <div class="report-bar yellow" style="--bar-height:94%"></div>
-                            </div>
-                            <span>Des</span>
-                        </div>
-
-                    </div>
-                </div>
-
-            </section>
-
-            <!-- TABEL LAPORAN PRODUK -->
-            <section class="report-table-card">
-
-                <h2>Tabel Laporan Produk</h2>
-
-                <div class="report-table-wrapper">
-
-                    <table class="report-table">
-
-                        <thead>
-                            <tr>
-                                <th>Produk</th>
-                                <th>Qty terjual</th>
-                                <th>Kontribusi</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td>Beras 5 kg</td>
-                                <td>Beras 5 kg</td>
-                                <td>Beras 5 kg</td>
-                            </tr>
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-            </section>
-
-        </div>
-
-    </main>
-
-    <!-- MOBILE OVERLAY -->
-    <label for="sidebar-toggle"
-           class="sidebar-overlay"
-           aria-label="Tutup sidebar"></label>
+    </div>
 
 </div>
+
+
+<body>
+
+    <!-- SIDEBAR CONTROL -->
+    <input type="checkbox"
+           id="sidebar-toggle"
+           class="sidebar-checkbox"
+           aria-label="Buka atau tutup sidebar">
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR PEMILIK -->
+        <aside class="sidebar">
+
+            <div class="sidebar-brand">
+                <div class="brand-left">
+                    <img src="../assets/images/Logo.svg"
+                         alt="Logo ARTHA"
+                         class="brand-logo">
+
+                    <span class="brand-title">ARTHA</span>
+                </div>
+
+                <label for="sidebar-toggle"
+                       class="close-sidebar-btn"
+                       aria-label="Tutup sidebar">
+                    <img src="../assets/icons/actions/cancel.svg" alt="">
+                </label>
+            </div>
+
+            <!-- MENU PEMILIK -->
+            <nav class="sidebar-nav">
+
+                <!-- DASHBOARD -->
+                <a href="dashboard.html" class="nav-item">
+                    <img src="../assets/icons/sidebar/dashboard.svg"
+                         class="nav-icon" alt="">
+                    <span>Dashboard</span>
+                </a>
+
+                <!-- LAPORAN -->
+                <a href="laporan.html"
+                   class="nav-item active"
+                   aria-current="page">
+                    <img src="../assets/icons/sidebar/laporan.svg"
+                         class="nav-icon" alt="">
+                    <span>Laporan</span>
+                </a>
+
+                <!-- ANALISIS APRIORI -->
+                <a href="analisisApriori.html" class="nav-item">
+                    <img src="../assets/icons/sidebar/analisisApriori.svg"
+                         class="nav-icon" alt="">
+                    <span>Analisis Apriori</span>
+                </a>
+
+                <!-- PAKET PROMOSI -->
+                <a href="paketPromosi.html" class="nav-item">
+                    <img src="../assets/icons/sidebar/paketPromosi.svg"
+                         class="nav-icon" alt="">
+                    <span>Paket Promosi</span>
+                </a>
+
+                <!-- PRIORITAS STOK -->
+                <a href="prioritasStok.html" class="nav-item">
+                    <img src="../assets/icons/sidebar/prioritasStok.svg"
+                         class="nav-icon" alt="">
+                    <span>Prioritas Stok</span>
+                </a>
+
+                <!-- KELUAR -->
+                <a href="../index.html" class="nav-item logout">
+                    <img src="../assets/icons/actions/logout.svg"
+                         class="nav-icon" alt="">
+                    <span>Keluar</span>
+                </a>
+
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- HEADER -->
+            <header class="dashboard-header">
+
+                <div class="header-left">
+
+                    <label for="sidebar-toggle"
+                           class="hamburger-btn"
+                           aria-label="Buka sidebar">
+                        <img src="../assets/icons/actions/hamburger.svg"
+                             alt="">
+                    </label>
+
+                    <a href="dashboard.html"
+                       class="mobile-brand"
+                       aria-label="ARTHA">
+                        <img src="../assets/images/Logo.svg" alt="">
+                        <span>ARTHA</span>
+                    </a>
+
+                    <h1 class="desktop-page-title">
+                        Laporan Penjualan
+                    </h1>
+
+                </div>
+
+                <div class="header-right">
+                    <div class="user-profile">
+                        <div class="profile-circle">
+                            <img src="../assets/icons/header/profile.svg"
+                                 alt="">
+                        </div>
+                        <span>Pemilik</span>
+                    </div>
+                </div>
+
+            </header>
+
+            <!-- JUDUL MOBILE -->
+            <h1 class="mobile-page-title">
+                Laporan Penjualan
+            </h1>
+
+            <!-- CONTENT LAPORAN -->
+            <div class="report-content">
+
+                <!-- STATISTIK -->
+                <section class="report-statistics">
+
+                    <article class="report-stat-card">
+                        <p>Total Transaksi</p>
+                        <h2>350</h2>
+                    </article>
+
+                    <article class="report-stat-card">
+                        <p>Produk Unik</p>
+                        <h2>60</h2>
+                    </article>
+
+                    <article class="report-stat-card">
+                        <p>Periode</p>
+                        <h2>2024–2026</h2>
+                    </article>
+
+                </section>
+
+                <!-- GRAFIK PENJUALAN -->
+                <section class="report-chart-card">
+
+                    <div class="report-chart-header">
+
+                        <h2>Tren Penjualan Bulanan</h2>
+
+                        <select class="report-year-select"
+                                aria-label="Pilih tahun">
+
+                            <option value="2024">2024</option>
+                            <option value="2025" selected>2025</option>
+                            <option value="2026">2026</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="report-chart-content">
+
+                        <!-- SUMBU Y -->
+                        <div class="report-y-axis">
+                            <span>Rp12 jt</span>
+                            <span>Rp9 jt</span>
+                            <span>Rp6 jt</span>
+                            <span>Rp3 jt</span>
+                            <span>0</span>
+                        </div>
+
+                        <!-- BATANG GRAFIK -->
+                        <div class="report-chart-bars">
+
+                            <!-- JANUARI -->
+                            <div class="report-bar-group">
+                                <div class="report-bar-area">
+                                    <div class="report-bar blue"
+                                         style="--bar-height:35%"></div>
+                                </div>
+                                <span>Jan</span>
+                            </div>
+
+                            <!-- FEBRUARI -->
+                            <div class="report-bar-group">
+                                <div class="report-bar-area">
+                                    <div class="report-bar blue"
+                                         style="--bar-height:55%"></div>
+                                </div>
+                                <span>Feb</span>
+                            </div>
+
+                            <!-- MARET -->
+                            <div class="report-bar-group">
+                                <div class="report-bar-area">
+                                    <div class="report-bar yellow"
+                                         style="--bar-height:43%"></div>
+                                </div>
+                                <span>Mar</span>
+                            </div>
+
+                            <!-- APRIL -->
+                            <div class="report-bar-group">
+                                <div class="report-bar-area">
+                                    <div class="report-bar blue"
+                                         style="--bar-height:63%"></div>
+                                </div>
+                                <span>Apr</span>
+                            </div>
+
+                            <!-- MEI -->
+                            <div class="report-bar-group">
+                                <div class="report-bar-area">
+                                    <div class="report-bar blue"
+                                         style="--bar-height:56%"></div>
+                                </div>
+                                <span>Mei</span>
+                            </div>
+
+                            <!-- JUNI -->
+                            <div class="report-bar-group">
+                                <div class="report-bar-area">
+                                    <div class="report-bar yellow"
+                                         style="--bar-height:76%"></div>
+                                </div>
+                                <span>Jun</span>
+                            </div>
+
+                            <!-- JULI -->
+                            <div class="report-bar-group">
+                                <div class="report-bar-area">
+                                    <div class="report-bar blue"
+                                         style="--bar-height:54%"></div>
+                                </div>
+                                <span>Jul</span>
+                            </div>
+
+                            <!-- AGUSTUS -->
+                            <div class="report-bar-group">
+                                <div class="report-bar-area">
+                                    <div class="report-bar blue"
+                                         style="--bar-height:74%"></div>
+                                </div>
+                                <span>Agu</span>
+                            </div>
+
+                            <!-- SEPTEMBER -->
+                            <div class="report-bar-group">
+                                <div class="report-bar-area">
+                                    <div class="report-bar yellow"
+                                         style="--bar-height:62%"></div>
+                                </div>
+                                <span>Sep</span>
+                            </div>
+
+                            <!-- OKTOBER -->
+                            <div class="report-bar-group">
+                                <div class="report-bar-area">
+                                    <div class="report-bar blue"
+                                         style="--bar-height:88%"></div>
+                                </div>
+                                <span>Okt</span>
+                            </div>
+
+                            <!-- NOVEMBER -->
+                            <div class="report-bar-group">
+                                <div class="report-bar-area">
+                                    <div class="report-bar blue"
+                                         style="--bar-height:80%"></div>
+                                </div>
+                                <span>Nov</span>
+                            </div>
+
+                            <!-- DESEMBER -->
+                            <div class="report-bar-group">
+                                <div class="report-bar-area">
+                                    <div class="report-bar yellow"
+                                         style="--bar-height:94%"></div>
+                                </div>
+                                <span>Des</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- TABEL LAPORAN PRODUK -->
+                <section class="report-table-card">
+
+                    <h2>Tabel Laporan Produk</h2>
+
+                    <div class="report-table-wrapper">
+
+                        <table class="report-table">
+
+                            <thead>
+                                <tr>
+                                    <th>Produk</th>
+                                    <th>Qty terjual</th>
+                                    <th>Kontribusi</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>Beras 5 kg</td>
+                                    <td>Beras 5 kg</td>
+                                    <td>Beras 5 kg</td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+        <!-- MOBILE OVERLAY -->
+        <label for="sidebar-toggle"
+               class="sidebar-overlay"
+               aria-label="Tutup sidebar"></label>
+
+    </div>
 
 </body>
 </html>

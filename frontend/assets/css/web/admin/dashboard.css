@@ -1,166 +1,753 @@
-/* =====================================================
-   ARTHA | ADMIN DASHBOARD - WEB CONTENT ONLY
-   Layout/sidebar/header memakai shared CSS.
-===================================================== */
 
-.desktop-page-title { display: block; }
-.mobile-page-title { display: none; }
-.admin-dashboard-content { width: 100%; min-width: 0; }
+/* ===========================================
+   ARTHA - DASHBOARD ADMIN WEB
+   Sesuai Figma
+=========================================== */
+
+.desktop-page-title {
+    display: block;
+}
+
+.mobile-page-title {
+    display: none;
+}
+
+/* HEADER WEB */
+@media (min-width: 769px) {
+
+    .main-content > .dashboard-header {
+        min-height: 60px;
+        margin-bottom: 14px;
+    }
+
+    .dashboard-header .desktop-page-title {
+        display: block;
+        font-family: var(--font-primary);
+        font-size: clamp(1.65rem, 2.5vw, 2.25rem);
+        font-weight: 700;
+        line-height: 1.25;
+        color: var(--color-primary);
+    }
+}
+
+/* AREA DASHBOARD */
+.admin-dashboard-content {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+/* ===========================================
+   3 KARTU STATISTIK
+=========================================== */
 
 .admin-statistics {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 13px;
+
     width: 100%;
-    margin: 0 0 20px;
+    margin: 0 0 19px;
 }
 
 .admin-stat-card {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
+    gap: 10px;
+
     min-width: 0;
-    min-height: 122px;
-    padding: 22px 16px 14px;
+    min-height: 116px;
+
+    padding: 20px 15px 14px;
+
     background: var(--color-white);
     border: 1.5px solid var(--color-primary);
-    border-radius: 7px;
+    border-radius: 6px;
 }
 
+/* ICON NAVY */
 .admin-stat-icon {
     display: flex;
     align-items: center;
     justify-content: center;
+
     flex: 0 0 40px;
     width: 40px;
     height: 40px;
 }
 
 .admin-stat-icon img {
+    display: block;
     width: 38px;
     height: 38px;
     object-fit: contain;
+
+    filter: brightness(0) saturate(100%)
+        invert(15%) sepia(61%) saturate(1717%)
+        hue-rotate(211deg) brightness(88%) contrast(97%);
 }
 
-.admin-users-icon { flex-basis: 44px; width: 44px; }
-.admin-users-icon img { width: 44px; height: 40px; }
+/* ICON PENGGUNA */
+.admin-users-icon {
+    width: 44px;
+    flex-basis: 44px;
+}
 
-.admin-stat-info { min-width: 0; padding-top: 2px; }
+.admin-users-icon img {
+    width: 44px;
+    height: 40px;
+}
+
+/* INFORMASI KARTU */
+.admin-stat-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    min-width: 0;
+    padding-top: 1px;
+}
+
 .admin-stat-info p {
-    margin: 3px 0 5px;
-    color: var(--color-primary);
-    font-size: clamp(.68rem, .82vw, .76rem);
-    font-weight: 600;
-    line-height: 1.45;
-}
-.admin-stat-info h2 {
-    margin: 0;
+    margin: 0 0 5px;
+
     color: var(--color-primary);
     font-family: var(--font-primary);
-    font-size: clamp(2rem, 3.2vw, 2.8rem);
-    font-weight: 700;
-    line-height: 1.08;
+    font-size: clamp(.62rem, .83vw, .75rem);
+    font-weight: 600;
+    line-height: 1.4;
 }
+
+.admin-stat-info h2 {
+    margin: 0;
+
+    color: var(--color-primary);
+    font-family: var(--font-primary);
+    font-size: clamp(2.2rem, 3.5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+/* ===========================================
+   KARTU GRAFIK PENJUALAN
+=========================================== */
 
 .admin-chart-card {
     width: 100%;
     min-width: 0;
-    min-height: 342px;
-    padding: 20px 22px 22px;
+    min-height: 323px;
+
+    padding: 21px 22px 22px;
+
     background: var(--color-white);
     border: 1px solid var(--color-border);
-    border-radius: 9px;
-    box-shadow: 0 2px 3px rgba(0,0,0,.18);
+    border-radius: 8px;
+
+    box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
 }
+
+/* HEADER GRAFIK */
 .admin-chart-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
 }
+
 .admin-chart-header h2 {
+    margin: 0;
+
     color: var(--color-primary);
-    font-size: .88rem;
+    font-family: var(--font-primary);
+    font-size: .85rem;
     font-weight: 600;
 }
+
+/* DROPDOWN TAHUN */
 .admin-year-select {
-    width: 78px;
-    height: 34px;
+    width: 77px;
+    height: 32px;
+
     padding: 0 8px;
+
     color: var(--color-primary);
     background: var(--color-white);
-    border: 1px solid var(--color-primary);
-    border-radius: 6px;
+
+    border: 1.5px solid var(--color-primary);
+    border-radius: 5px;
+
     font-family: var(--font-primary);
     font-size: .78rem;
     font-weight: 600;
+
     cursor: pointer;
 }
-.admin-year-select:hover,
-.admin-year-select:focus { background: var(--color-background); }
 
+.admin-year-select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+/* AREA GRAFIK */
 .admin-chart-content {
     display: grid;
-    grid-template-columns: 38px minmax(0,1fr);
-    gap: 8px;
-    height: 250px;
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 10px;
+
+    width: 100%;
+    height: 227px;
+
     margin-top: 25px;
 }
+
+/* SUMBU Y */
 .admin-chart-y-axis {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     justify-content: space-between;
+
     padding-bottom: 20px;
 }
+
 .admin-chart-y-axis span {
     color: #7180A5;
+    font-family: var(--font-primary);
     font-size: .56rem;
     line-height: 1;
+    white-space: nowrap;
 }
+
+/* AREA BATANG GRAFIK */
 .admin-chart-bars {
     display: grid;
-    grid-template-columns: repeat(12,minmax(0,1fr));
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: clamp(4px, 1vw, 14px);
+
+    width: 100%;
     min-width: 0;
     height: 100%;
-    column-gap: clamp(5px, 1.2vw, 15px);
+
     border-bottom: 1px solid var(--color-border);
 }
+
+/* KELOMPOK PER BULAN */
 .admin-bar-group {
     display: flex;
     flex-direction: column;
     align-items: center;
+
     min-width: 0;
 }
+
+/* BATANG */
 .admin-bar-area {
     display: flex;
     align-items: flex-end;
     justify-content: center;
+
     width: 100%;
     flex: 1;
     min-height: 0;
 }
+
 .admin-bar {
-    width: min(100%, 18px);
+    width: min(100%, 19px);
     height: var(--bar-height);
     min-height: 3px;
+
     border-radius: 4px 4px 0 0;
 }
-.admin-bar.blue { background: var(--chart-blue); }
-.admin-bar.yellow { background: var(--chart-yellow); }
+
+/* WARNA GRAFIK BERDASARKAN VARIABLES */
+.admin-bar.blue {
+    background: var(--chart-blue);
+}
+
+.admin-bar.yellow {
+    background: var(--chart-yellow);
+}
+
+/* LABEL BULAN */
 .admin-bar-group > span {
     height: 19px;
-    padding-top: 6px;
+    padding-top: 5px;
+
     color: #7180A5;
-    font-size: .56rem;
+    font-family: var(--font-primary);
+    font-size: .55rem;
     white-space: nowrap;
 }
 
-@media (min-width: 769px) and (max-width: 1024px) {
-    .admin-stat-card { min-height: 112px; padding: 18px 10px; gap: 8px; }
-    .admin-stat-icon { flex-basis: 32px; width: 32px; }
-    .admin-stat-icon img { width: 32px; height: 32px; }
-    .admin-stat-info p { font-size: .62rem; }
-    .admin-stat-info h2 { font-size: 2rem; }
-    .admin-chart-content { height: 220px; }
+/* ===========================================
+   PENYESUAIAN WEB LEBAR SEDANG
+=========================================== */
+
+@media (min-width: 769px) and (max-width: 1100px) {
+
+    .admin-stat-card {
+        gap: 8px;
+        padding: 17px 12px 12px;
+    }
+
+    .admin-stat-icon {
+        width: 34px;
+        flex-basis: 34px;
+    }
+
+    .admin-stat-icon img {
+        width: 33px;
+        height: 33px;
+    }
+
+    .admin-users-icon {
+        width: 36px;
+        flex-basis: 36px;
+    }
+
+    .admin-users-icon img {
+        width: 36px;
+        height: 36px;
+    }
+
+    .admin-stat-info p {
+        font-size: .62rem;
+    }
+
+    .admin-stat-info h2 {
+        font-size: 2.25rem;
+    }
+}
+
+
+/* ==========================================
+   ARTHA - ADMIN DASHBOARD
+   GRAFIK SAMA DENGAN DASHBOARD PEMILIK
+   WEB
+========================================== */
+
+@media (min-width: 769px) {
+
+    /* CARD GRAFIK */
+    .admin-chart-card {
+        width: 100%;
+        min-width: 0;
+        min-height: 420px;
+        height: auto;
+
+        padding: 20px 22px 16px;
+
+        background: var(--color-white);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-soft);
+    }
+
+    /* HEADER GRAFIK */
+    .admin-chart-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+
+        gap: 12px;
+        margin: 0 0 20px;
+        padding: 6px 8px;
+    }
+
+    .admin-chart-header h2 {
+        flex: 1 1 auto;
+        min-width: 0;
+        margin: 0;
+
+        color: var(--color-primary);
+        font-family: var(--font-primary);
+        font-size: .95rem;
+        font-weight: 600;
+        line-height: 1.4;
+        white-space: nowrap;
+    }
+
+    /* DROPDOWN TAHUN */
+    .admin-year-select {
+        display: block;
+        flex: 0 0 80px;
+
+        appearance: none;
+        -webkit-appearance: none;
+
+        width: 80px;
+        min-width: 80px;
+        height: 32px;
+
+        margin-right: 5px;
+        padding: 0 28px 0 9px;
+
+        color: var(--color-primary);
+        background-color: var(--color-white);
+
+        background-image:
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%23142f7d' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 11px;
+
+        border: 1px solid var(--color-primary);
+        border-radius: 7px;
+
+        font-family: var(--font-primary);
+        font-size: .8rem;
+        font-weight: 600;
+        text-align: center;
+
+        cursor: pointer;
+        outline: none;
+        box-shadow: none;
+    }
+
+    .admin-year-select:hover {
+        background-color: var(--chart-yellow);
+    }
+
+    .admin-year-select:focus {
+        border: 1px solid var(--color-primary);
+        outline: none;
+        box-shadow: none;
+    }
+
+    /* AREA GRAFIK */
+    .admin-chart-content {
+        display: grid;
+        grid-template-columns: 38px minmax(0, 1fr);
+        gap: 8px;
+
+        width: 100%;
+        height: 315px;
+        margin-top: 0;
+    }
+
+    /* SUMBU Y */
+    .admin-chart-y-axis {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: space-between;
+
+        padding-bottom: 18px;
+    }
+
+    .admin-chart-y-axis span {
+        color: #8290AA;
+        font-family: var(--font-primary);
+        font-size: .58rem;
+        line-height: 1;
+        white-space: nowrap;
+    }
+
+    /* AREA BATANG */
+    .admin-chart-bars {
+        position: relative;
+
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+
+        width: 100%;
+        min-width: 0;
+        height: 100%;
+
+        column-gap: clamp(5px, 1vw, 13px);
+        border-bottom: none;
+    }
+
+    /* GARIS DASAR GRAFIK */
+    .admin-chart-bars::after {
+        content: "";
+        position: absolute;
+
+        left: 0;
+        right: 0;
+        bottom: 18px;
+
+        height: 1px;
+        background: #E5EAF1;
+
+        pointer-events: none;
+    }
+
+    /* KELOMPOK BULAN */
+    .admin-bar-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        min-width: 0;
+        height: 100%;
+    }
+
+    .admin-bar-area {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+
+        width: 100%;
+        flex: 1 1 auto;
+        min-height: 0;
+    }
+
+    /* BATANG GRAFIK */
+    .admin-bar {
+        display: block;
+
+        width: clamp(9px, 1.4vw, 17px);
+        height: var(--bar-height);
+        min-height: 3px;
+
+        border-radius: 3px 3px 0 0;
+    }
+
+    .admin-bar.blue {
+        background: var(--chart-blue);
+    }
+
+    .admin-bar.yellow {
+        background: var(--chart-yellow);
+    }
+
+    /* NAMA BULAN */
+    .admin-bar-group > span {
+        display: block;
+
+        width: 100%;
+        height: 18px;
+        flex: 0 0 18px;
+
+        padding-top: 5px;
+
+        color: #64748B;
+        font-family: var(--font-primary);
+        font-size: .56rem;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+    }
+}
+
+
+/* ==============================================
+   ARTHA - DASHBOARD ADMIN WEB
+   REVISI JARAK HEADER, CARD & GRAFIK
+============================================== */
+
+@media (min-width: 769px) {
+
+    /* AREA DASHBOARD */
+    .admin-dashboard-content {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    /* ==========================================
+       CARD STATISTIK
+       Turun tanpa menggeser header
+    ========================================== */
+
+    .admin-statistics {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+
+        width: 100%;
+        gap: 13px;
+
+        /* Jarak dari header ditambah */
+        margin-top: 22px !important;
+
+        /* Jarak card ke grafik */
+        margin-bottom: 20px !important;
+    }
+
+    .admin-stat-card {
+        display: flex;
+        align-items: flex-start;
+
+        width: 100%;
+        min-width: 0;
+
+        /* Card diperpanjang ke bawah */
+        min-height: 155px !important;
+        height: 155px;
+
+        padding: 24px 17px 18px;
+
+        background: var(--color-white);
+        border: 1.5px solid var(--color-primary);
+        border-radius: 6px;
+    }
+
+    /* Posisi ikon tetap rapi */
+    .admin-stat-icon {
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .admin-stat-info {
+        padding-top: 0;
+    }
+
+    .admin-stat-info p {
+        margin-bottom: 7px;
+        line-height: 1.4;
+    }
+
+    .admin-stat-info h2 {
+        margin-top: 0;
+        line-height: 1.1;
+    }
+
+    /* ==========================================
+       GRAFIK PENJUALAN
+       Turun mengikuti card dan lebih tinggi
+    ========================================== */
+
+    .admin-chart-card {
+        width: 100%;
+        min-width: 0;
+
+        min-height: 460px !important;
+        height: auto;
+
+        margin-top: 0 !important;
+
+        padding: 23px 22px 22px;
+
+        background: var(--color-white);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-soft);
+    }
+
+    /* Header grafik */
+    .admin-chart-header {
+        margin-bottom: 25px;
+    }
+
+    /* Area batang dibuat lebih tinggi */
+    .admin-chart-content {
+        width: 100%;
+        height: 340px !important;
+        margin-top: 0;
+    }
+
+    /* Batang dan label mengikuti tinggi baru */
+    .admin-chart-bars,
+    .admin-bar-group {
+        height: 100%;
+    }
+}
+
+
+/* ==========================================
+   ARTHA - POPUP TAHUN 2026
+   DASHBOARD ADMIN
+========================================== */
+
+.admin-year-popup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+    background: rgba(0, 15, 42, 0.58);
+}
+
+/* Muncul ketika tahun 2026 dipilih */
+body:has(
+    .admin-year-select:focus
+    option[value="2026"]:checked
+) .admin-year-popup-overlay {
+    display: flex;
+}
+
+/* CARD POPUP */
+.admin-year-popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    max-width: 410px;
+    padding: 32px 28px;
+
+    background: var(--color-white);
+    border-radius: 15px;
+    box-shadow: 0 14px 38px rgba(0, 0, 0, .2);
+
+    font-family: var(--font-primary);
+    text-align: center;
+}
+
+/* IKON PERINGATAN */
+.admin-year-popup-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 62px;
+    height: 62px;
+    margin-bottom: 18px;
+
+    color: var(--color-primary);
+    background: #FFF2BE;
+    border: 2px solid #F5C000;
+    border-radius: 50%;
+
+    font-size: 34px;
+    font-weight: 700;
+}
+
+/* JUDUL */
+.admin-year-popup h2 {
+    margin: 0 0 12px;
+
+    color: var(--color-primary);
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+/* DESKRIPSI */
+.admin-year-popup p {
+    margin: 0 0 24px;
+
+    color: #7180A5;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* TOMBOL MENGERTI */
+.admin-year-popup-close {
+    width: 100%;
+    min-height: 43px;
+
+    padding: 11px 18px;
+
+    color: #FFFFFF;
+    background: var(--color-primary);
+    border: none;
+    border-radius: 8px;
+
+    font-family: var(--font-primary);
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.admin-year-popup-close:hover {
+    background: #00183F;
 }

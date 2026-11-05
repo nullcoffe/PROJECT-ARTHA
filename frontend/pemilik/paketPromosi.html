@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rekomendasi Paket Promosi | ARTHA</title>
+
+    <!-- SHARED CSS -->
+    <link rel="stylesheet" href="../assets/css/shared/variables.css">
+    <link rel="stylesheet" href="../assets/css/shared/reset.css">
+
+    <!-- WEB CSS -->
+    <link rel="stylesheet" href="../assets/css/web/layout.css">
+    <link rel="stylesheet" href="../assets/css/web/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/web/header.css">
+    <link rel="stylesheet" href="../assets/css/web/pemilik/paketPromosi.css">
+
+    <!-- MOBILE CSS -->
+    <link rel="stylesheet" href="../assets/css/mobile/layout.css">
+    <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/mobile/header.css">
+    <link rel="stylesheet" href="../assets/css/mobile/pemilik/paketPromosi.css">
+</head>
+
+<body>
+
+    <!-- SIDEBAR CONTROL -->
+    <input type="checkbox"
+           id="sidebar-toggle"
+           class="sidebar-checkbox"
+           aria-label="Buka sidebar">
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="sidebar-brand">
+
+                <div class="brand-left">
+                    <img src="../assets/images/Logo.svg"
+                         alt="Logo ARTHA"
+                         class="brand-logo">
+
+                    <span class="brand-title">ARTHA</span>
+                </div>
+
+                <label for="sidebar-toggle"
+                       class="close-sidebar-btn"
+                       aria-label="Tutup sidebar">
+                    <img src="../assets/icons/actions/cancel.svg"
+                         alt="">
+                </label>
+
+            </div>
+
+            <!-- MENU PEMILIK -->
+            <nav class="sidebar-nav">
+
+                <!-- DASHBOARD -->
+                <a href="dashboard.html" class="nav-item">
+                    <img src="../assets/icons/sidebar/dashboard.svg"
+                         alt="" class="nav-icon">
+                    <span>Dashboard</span>
+                </a>
+
+                <!-- LAPORAN -->
+                <a href="laporan.html" class="nav-item">
+                    <img src="../assets/icons/sidebar/laporan.svg"
+                         alt="" class="nav-icon">
+                    <span>Laporan</span>
+                </a>
+
+                <!-- ANALISIS APRIORI -->
+                <a href="analisisApriori.html" class="nav-item">
+                    <img src="../assets/icons/sidebar/analisisApriori.svg"
+                         alt="" class="nav-icon">
+                    <span>Analisis Apriori</span>
+                </a>
+
+                <!-- PAKET PROMOSI AKTIF -->
+                <a href="paketPromosi.html"
+                   class="nav-item active"
+                   aria-current="page">
+                    <img src="../assets/icons/sidebar/paketPromosi.svg"
+                         alt="" class="nav-icon">
+                    <span>Paket Promosi</span>
+                </a>
+
+                <!-- PRIORITAS STOK -->
+                <a href="prioritasStok.html" class="nav-item">
+                    <img src="../assets/icons/sidebar/prioritasStok.svg"
+                         alt="" class="nav-icon">
+                    <span>Prioritas Stok</span>
+                </a>
+
+                <!-- KELUAR -->
+                <a href="../index.html" class="nav-item logout">
+                    <img src="../assets/icons/actions/logout.svg"
+                         alt="" class="nav-icon">
+                    <span>Keluar</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+        <!-- HAMBURGER MOBILE -->
+        <label for="sidebar-toggle"
+               class="hamburger-btn"
+               aria-label="Buka sidebar">
+            <img src="../assets/icons/actions/hamburger.svg"
+                 alt="">
+        </label>
+
+        <!-- OVERLAY SIDEBAR -->
+        <label for="sidebar-toggle"
+               class="sidebar-overlay"
+               aria-label="Tutup sidebar"></label>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- HEADER -->
+            <header class="dashboard-header">
+
+                <h1>Rekomendasi Paket Promosi</h1>
+
+                <div class="header-right">
+
+                    <div class="user-profile">
+
+                        <div class="profile-circle">
+                            <img src="../assets/icons/header/profile.svg"
+                                 alt="">
+                        </div>
+
+                        <span>Pemilik</span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <!-- CONTENT -->
+            <div class="page-container">
+
+                <main class="owner-promo-content">
+
+                    <!-- KANDIDAT PAKET -->
+                    <section class="promo-list-card">
+
+                        <div class="promo-section-heading">
+                            <h2>Kandidat Paket</h2>
+                            <p>Kombinasi Produk berdasarkan aturan asosiasi</p>
+                        </div>
+
+                        <div class="promo-list">
+
+                            <!-- PAKET 1 -->
+                            <article class="promo-item">
+                                <h3>Nama Paket</h3>
+                                <p class="promo-product">
+                                    Beras 5Kg + Minyak Goreng 1L
+                                </p>
+                                <p class="promo-metric">
+                                    Confidence 18% | Lift 1.49
+                                </p>
+                            </article>
+
+                            <!-- PAKET 2 -->
+                            <article class="promo-item">
+                                <h3>Nama Paket</h3>
+                                <p class="promo-product">
+                                    Beras 5Kg + Minyak Goreng 1L
+                                </p>
+                                <p class="promo-metric">
+                                    Confidence 18% | Lift 1.49
+                                </p>
+                            </article>
+
+                            <!-- PAKET 3 -->
+                            <article class="promo-item">
+                                <h3>Nama Paket</h3>
+                                <p class="promo-product">
+                                    Beras 5Kg + Minyak Goreng 1L
+                                </p>
+                                <p class="promo-metric">
+                                    Confidence 18% | Lift 1.49
+                                </p>
+                            </article>
+
+                            <!-- PAKET 4 -->
+                            <article class="promo-item">
+                                <h3>Nama Paket</h3>
+                                <p class="promo-product">
+                                    Beras 5Kg + Minyak Goreng 1L
+                                </p>
+                                <p class="promo-metric">
+                                    Confidence 18% | Lift 1.49
+                                </p>
+                            </article>
+
+                            <!-- PAKET 5 -->
+                            <article class="promo-item">
+                                <h3>Nama Paket</h3>
+                                <p class="promo-product">
+                                    Beras 5Kg + Minyak Goreng 1L
+                                </p>
+                                <p class="promo-metric">
+                                    Confidence 18% | Lift 1.49
+                                </p>
+                            </article>
+
+                        </div>
+
+                    </section>
+
+                </main>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+</html>

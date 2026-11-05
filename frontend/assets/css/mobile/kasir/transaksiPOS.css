@@ -1,0 +1,389 @@
+/* ARTHA KASIR - SHARED MOBILE PAGE COMPONENTS */
+@media (max-width:768px) {
+    .cashier-page .main-content { padding:0 5% 34px; }
+    .cashier-page .dashboard-header { min-height:66px; margin:0 0 20px; padding:12px 0; }
+    .cashier-page .dashboard-header h1 { display:none; }
+    .cashier-page .mobile-brand { display:inline-flex; }
+    .cashier-page .mobile-page-title { display:block; margin:0 0 18px; color:#192D78; font:700 1.35rem/1.3 var(--font-primary); }
+    .cashier-page .header-left { gap:9px; }
+    .cashier-page .profile-circle { width:36px!important; height:36px!important; min-width:36px; min-height:36px; flex-basis:36px!important; }
+    .cashier-page .user-profile span { font-size:12px; }
+
+    .summary-cards { grid-template-columns:1fr; gap:12px; margin:0 0 18px; }
+    .summary-card { min-height:100px; gap:18px; padding:16px; border-radius:15px; }
+    .summary-icon { width:66px; height:66px; flex:0 0 66px; border-radius:17px; }
+    .summary-icon img {
+        width:36px;
+        height:36px;
+        filter:brightness(0) saturate(100%) invert(78%) sepia(71%) saturate(570%) hue-rotate(2deg) brightness(101%);
+    }
+    .summary-card p { font-size:15px; margin-bottom:2px; }
+    .summary-card strong { font-size:27px; }
+    .new-transaction { min-height:62px; margin-bottom:24px; border-radius:12px; font-size:17px; }
+    .new-transaction span { font-size:29px; }
+    .section-heading { margin-bottom:12px; }
+    .section-heading h2 { font-size:20px; }
+    .section-heading p { font-size:14px; }
+    .table-wrap { border-radius:17px; }
+    .cashier-page table { min-width:540px; font-size:13px; }
+    .cashier-page th { padding:15px 12px; }
+    .cashier-page td { padding:16px 12px; }
+
+    .product-search,.stock-search { height:48px; margin-bottom:14px; padding:0 14px; }
+    .pos-layout { display:flex; flex-direction:column; gap:16px; }
+    .product-list,.cart-panel { width:100%; }
+    .product-table { min-width:560px!important; }
+    .product-table th { padding:13px 10px; }
+    .product-table td { padding:14px 10px; font-size:13px; }
+    .add-item { width:30px; height:30px; font-size:20px; }
+    .cart-panel { padding:16px; border-radius:14px; }
+    .cart-heading h2 { font-size:17px; }
+    .clear-cart { font-size:12px; padding:7px 10px; }
+    .cart-labels { font-size:12px; padding:10px 8px; }
+    .cart-row { grid-template-columns:minmax(0,1fr) 88px 74px 16px; gap:7px; padding:18px 4px; font-size:12px; }
+    .cart-row strong { font-size:12px; }
+    .qty-control { font-size:12px; padding:6px 3px; }
+    .cart-row b { font-size:12px; }
+    .remove-item { font-size:18px; }
+    .cart-total { padding:18px 0; }
+    .cart-total strong { font-size:17px; }
+    .cart-total b { font-size:20px; }
+    .checkout-button { min-height:56px; border-radius:12px; font-size:16px; }
+
+    .payment-layout { display:flex; flex-direction:column; gap:14px; }
+    .payment-summary,.payment-card { width:100%; padding:15px; border:1px solid #DCE3EE; border-radius:13px; }
+    .payment-summary h2 { font-size:15px; margin-bottom:12px; }
+    .payment-summary table { min-width:0; }
+    .payment-summary table th,.payment-summary table td { padding:10px 5px; font-size:10px; }
+    .payment-card h2 { font-size:15px; }
+    .form-label { font-size:13px; }
+    .method-box { min-height:44px; font-size:14px; }
+    .received-box { min-height:50px; }
+    .received-box input { font-size:19px; }
+    .quick-amounts a { padding:10px 3px; font-size:11px; }
+    .change-box { min-height:52px; padding:10px 12px; font-size:14px; }
+    .change-box strong { font-size:20px; }
+    .payment-equation { padding:13px 8px; font-size:12px; }
+    .payment-actions { display:flex; flex-direction:column; gap:9px; margin-top:20px; }
+    .payment-actions a { width:100%; min-height:48px; font-size:14px; }
+    .receipt-area { width:100%; margin:0; }
+    .receipt-paper { padding:24px 20px; border-radius:13px; }
+    .receipt-paper h2 { font-size:23px; }
+    .receipt-subtitle { font-size:14px; margin-bottom:22px; }
+    .receipt-line { font-size:15px; margin:16px 0; }
+    .receipt-thanks { font-size:14px; padding-top:20px; }
+    .receipt-actions { grid-template-columns:1fr; gap:10px; margin-top:16px; }
+    .receipt-actions a { min-height:48px; font-size:15px; }
+    .stock-toolbar { display:flex; flex-direction:column; align-items:stretch; gap:10px; }
+    .stock-toolbar .stock-search { margin:0; }
+    .stock-filter { height:48px; font-size:13px; }
+    .stock-table { margin-top:16px; }
+    .stock-table table { min-width:560px; }
+    .stock-table th,.stock-table td { padding:15px 12px; font-size:12px; }
+}
+@media (max-width:380px) {
+    .cashier-page .main-content { padding-left:4%; padding-right:4%; }
+    .summary-card { padding:13px; gap:13px; }
+    .summary-icon { width:58px; height:58px; flex-basis:58px; }
+    .summary-card p { font-size:13px; }
+    .summary-card strong { font-size:24px; }
+    .cart-row { grid-template-columns:minmax(0,1fr) 80px 68px 14px; }
+}
+
+/* =========================================================
+   ARTHA | TRANSAKSI POS - MOBILE
+   Smartphone dan layar kecil
+========================================================= */
+
+@media (max-width: 768px) {
+
+    /* MAIN CONTENT */
+    .pos-page .main-content {
+        width: 100%;
+        margin: 0;
+        padding: 0 5% 36px;
+        background: #FFFDF0;
+    }
+
+
+    /* HEADER */
+    .pos-page .dashboard-header {
+        min-height: 66px;
+        margin-bottom: 14px;
+        padding: 12px 0;
+    }
+
+    .pos-page .dashboard-header h1 {
+        display: none;
+    }
+
+    .pos-page .mobile-brand {
+        display: inline-flex;
+    }
+
+    .pos-page .mobile-page-title {
+        display: block;
+
+        margin: 0 0 18px;
+
+        color: #192D78;
+
+        font: 700 1.35rem/1.3 var(--font-primary);
+    }
+
+
+    /* SEARCH */
+    .pos-page .product-search {
+        width: 100%;
+        height: 46px;
+
+        padding: 0 14px;
+        margin-bottom: 14px;
+
+        border-radius: 25px;
+    }
+
+    .pos-page .product-search img {
+        width: 17px;
+        height: 17px;
+    }
+
+    .pos-page .product-search input {
+        font-size: 13px;
+    }
+
+
+    /* POS LAYOUT */
+    .pos-page .pos-layout {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 16px;
+        width: 100%;
+    }
+
+    .pos-page .product-list {
+        width: 100%;
+        min-width: 0;
+    }
+
+
+    /* PRODUCT TABLE */
+    .pos-page .product-list .table-wrap {
+        width: 100%;
+        overflow-x: auto;
+
+        border-radius: 11px;
+
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .pos-page .product-table {
+        width: 100%;
+        min-width: 510px;
+
+        table-layout: fixed;
+    }
+
+    .pos-page .product-table th {
+        padding: 13px 9px;
+        font-size: 11px;
+    }
+
+    .pos-page .product-table td {
+        padding: 13px 9px;
+        font-size: 12px;
+    }
+
+    .pos-page .product-table td.product-name {
+        padding-left: 10px;
+        text-align: left;
+    }
+
+    .pos-page .product-table td.product-price {
+        font-size: 11px;
+    }
+
+    .pos-page .add-item {
+        width: 30px;
+        height: 30px;
+        font-size: 20px;
+    }
+
+
+    /* CART PANEL */
+    .pos-page .cart-panel {
+        width: 100%;
+        padding: 15px;
+
+        border-radius: 13px;
+    }
+
+    .pos-page .cart-heading {
+        gap: 8px;
+        margin-bottom: 14px;
+    }
+
+    .pos-page .cart-heading h2 {
+        font-size: 16px;
+    }
+
+
+    /* CLEAR CART */
+    .pos-page .clear-cart {
+        min-height: 32px;
+        padding: 5px 9px;
+        font-size: 10px;
+    }
+
+    .pos-page .clear-cart img {
+        width: 12px;
+        height: 12px;
+    }
+
+
+    /* CART COLUMN HEADER */
+    .pos-page .cart-labels {
+        grid-template-columns:
+            minmax(0, 1fr)
+            88px
+            75px
+            20px;
+
+        gap: 5px;
+        padding: 10px 6px;
+
+        font-size: 10px;
+    }
+
+
+    /* CART ROW */
+    .pos-page .cart-row {
+        grid-template-columns:
+            minmax(0, 1fr)
+            88px
+            75px
+            20px;
+
+        gap: 5px;
+        padding: 17px 5px;
+    }
+
+    .pos-page .cart-product-name {
+        font-size: 11px;
+        line-height: 1.45;
+    }
+
+
+    /* QUANTITY */
+    .pos-page .qty-control {
+        width: 88px;
+        height: 34px;
+
+        padding: 0 4px;
+    }
+
+    .pos-page .qty-btn {
+        width: 21px;
+        height: 26px;
+
+        font-size: 14px;
+    }
+
+    .pos-page .qty-value {
+        min-width: 18px;
+        font-size: 11px;
+    }
+
+
+    /* SUBTOTAL */
+    .pos-page .cart-subtotal {
+        font-size: 10px;
+    }
+
+
+    /* DELETE ICON */
+    .pos-page .remove-item {
+        width: 20px;
+        height: 28px;
+    }
+
+    .pos-page .remove-item img {
+        width: 13px;
+        height: 13px;
+    }
+
+
+    /* TOTAL */
+    .pos-page .cart-total {
+        padding: 17px 0;
+    }
+
+    .pos-page .cart-total strong {
+        font-size: 16px;
+    }
+
+    .pos-page .cart-total b {
+        font-size: 19px;
+    }
+
+
+    /* CHECKOUT */
+    .pos-page .checkout-button {
+        min-height: 52px;
+
+        border-radius: 12px;
+
+        font-size: 15px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .pos-page .main-content {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+
+    .pos-page .cart-panel {
+        padding: 12px;
+    }
+
+    .pos-page .cart-labels,
+    .pos-page .cart-row {
+        grid-template-columns:
+            minmax(0, 1fr)
+            78px
+            66px
+            18px;
+
+        gap: 4px;
+    }
+
+    .pos-page .qty-control {
+        width: 78px;
+        padding: 0 2px;
+    }
+
+    .pos-page .qty-btn {
+        width: 19px;
+    }
+
+    .pos-page .cart-product-name,
+    .pos-page .cart-subtotal {
+        font-size: 9px;
+    }
+
+    .pos-page .clear-cart {
+        padding: 5px 7px;
+        font-size: 9px;
+    }
+
+}

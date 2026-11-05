@@ -1,86 +1,90 @@
 
 /* =========================================================
-   ARTHA | SHARED WEB LAYOUT
-   Digunakan bersama oleh Admin, Pemilik, dan Kasir.
-   Khusus tampilan Desktop dan Tablet.
+   ARTHA | UNIVERSAL WEB LAYOUT
+   Desktop dan Tablet
 ========================================================= */
 
 
 /* =========================================================
-   1. BODY LAYOUT
+   1. GLOBAL LAYOUT
 ========================================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    min-height: 100%;
+}
 
 body {
     width: 100%;
     min-width: 320px;
     min-height: 100vh;
-
+    margin: 0;
     overflow-x: hidden;
-    background-color: var(--color-background);
+    background: #F4F4F4;
 }
 
 
 /* =========================================================
    2. DASHBOARD LAYOUT
-   Membentuk kerangka utama halaman.
 ========================================================= */
 
 .dashboard-layout {
     display: flex;
-
+    position: relative;
     width: 100%;
     min-height: 100vh;
-
-    position: relative;
 }
 
 
 /* =========================================================
    3. MAIN CONTENT
-   Area utama setelah sidebar.
+   Lebar dan posisi harus sama dengan sidebar.
 ========================================================= */
 
 .main-content {
     flex: 1 1 auto;
-    width: calc(100% - clamp(
-        var(--sidebar-min-width),
-        var(--sidebar-width),
-        var(--sidebar-max-width)
-    ));
+
+    /* Samakan ukuran dengan sidebar.css */
+    width: calc(100% - clamp(210px, 22vw, 280px));
 
     min-width: 0;
     min-height: 100vh;
 
-    margin-left: clamp(
-        var(--sidebar-min-width),
-        var(--sidebar-width),
-        var(--sidebar-max-width)
-    );
+    /* Hilangkan jarak abu-abu antara sidebar dan konten */
+    margin-left: clamp(210px, 22vw, 280px);
 
-    padding:
-        var(--content-padding-y)
-        var(--content-padding-x);
+    padding: 28px clamp(24px, 3.2vw, 48px) 40px;
 
-    background-color: var(--color-background);
+    background-color: var(--color-background, #FFFDF0);
 }
+
+
+/* =========================================================
+   4. PAGE CONTAINER
+========================================================= */
 
 .page-container {
     width: 100%;
-    max-width: 100%;
+    max-width: 1440px;
     min-width: 0;
-    margin: 0 auto;
 
-    padding-inline: var(--content-inner-padding-x);
+    margin: 0 auto;
+    padding: 0;
 }
 
 
 /* =========================================================
    5. PAGE TITLE
-   Standar judul halaman.
 ========================================================= */
 
 .page-title {
-    margin-bottom: var(--content-section-gap);
+    margin: 0 0 24px;
 
     color: var(--color-primary);
 
@@ -94,57 +98,52 @@ body {
 
 /* =========================================================
    6. CONTENT SECTION
-   Pengelompokan area konten.
 ========================================================= */
 
 .content-section {
     width: 100%;
     min-width: 0;
 
-    margin-bottom: var(--content-section-gap);
+    margin-bottom: 24px;
 }
 
 
 /* =========================================================
    7. CONTENT GRID
-   Layout grid umum untuk berbagai halaman.
 ========================================================= */
 
 .content-grid {
     display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-    gap: var(--spacing-4, 16px);
+    gap: 16px;
 }
 
 
 /* =========================================================
    8. CONTENT FLEX
-   Susunan horizontal komponen.
 ========================================================= */
 
 .content-flex {
     display: flex;
     align-items: center;
 
-    gap: var(--spacing-4, 16px);
+    gap: 16px;
 }
 
 
 /* =========================================================
    9. TABLE CONTAINER
-   Membungkus tabel agar tidak merusak layout.
 ========================================================= */
 
-.table-container {
+.table-container,
+.shared-table-wrap {
     width: 100%;
     min-width: 0;
 
     overflow-x: auto;
 
-    background-color: var(--color-white);
+    background: #FFFFFF;
 
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
@@ -152,21 +151,42 @@ body {
 
 
 /* =========================================================
-   10. TABLET
-   Penyesuaian untuk layar 769px–1024px.
+   10. TABLET LAYOUT
+   Lebar sidebar mengikuti sidebar.css.
 ========================================================= */
 
 @media (min-width: 769px) and (max-width: 1024px) {
 
     .main-content {
-        padding:
-            var(--content-padding-y)
-            var(--content-padding-x);
+        width: calc(100% - clamp(210px, 26.7vw, 280px));
+
+        margin-left: clamp(210px, 26.7vw, 280px);
+
+        padding: 24px 24px 32px;
     }
 
     .page-container {
-        padding-left: var(--content-inner-padding-x);
-        padding-right: var(--content-inner-padding-x);
+        padding: 0;
+    }
+
+    .content-grid {
+        gap: 12px;
     }
 
 }
+
+
+/* =========================================================
+   11. SMALL DESKTOP
+========================================================= */
+
+@media (min-width: 1025px) {
+
+    .main-content {
+        width: calc(100% - clamp(210px, 22vw, 280px));
+
+        margin-left: clamp(210px, 22vw, 280px);
+    }
+
+}
+ 

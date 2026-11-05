@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FFFDF0">
+    <title>Cek Ketersediaan Produk | ARTHA</title>
+
+    <link rel="stylesheet" href="../assets/css/shared/variables.css">
+    <link rel="stylesheet" href="../assets/css/shared/reset.css">
+
+    <link rel="stylesheet" href="../assets/css/web/layout.css">
+    <link rel="stylesheet" href="../assets/css/web/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/web/header.css">
+
+    <link rel="stylesheet" href="../assets/css/mobile/layout.css">
+    <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/mobile/header.css">
+    <link rel="stylesheet" href="../assets/css/web/kasir/cekStok.css">
+    <link rel="stylesheet" href="../assets/css/mobile/kasir/cekStok.css">
+</head>
+<body class="cashier-page">
+    <input class="sidebar-checkbox" type="checkbox" id="sidebar-toggle">
+
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <a href="dashboard.html" class="brand-left">
+                    <img src="../assets/images/Logo.svg" class="brand-logo" alt="Logo ARTHA">
+                    <span class="brand-title">ARTHA</span>
+                </a>
+                <label class="sidebar-close" for="sidebar-toggle" aria-label="Tutup menu">&times;</label>
+            </div>
+
+            <nav class="sidebar-nav" aria-label="Navigasi kasir">
+                <a class="nav-item" href="dashboard.html">
+                    <img class="nav-icon" src="../assets/icons/sidebar/dashboard.svg" alt="">
+                    <span>Dashboard</span>
+                </a>
+                <a class="nav-item" href="transaksiPOS.html">
+                    <img class="nav-icon" src="../assets/icons/sidebar/transaksiPos.svg" alt="">
+                    <span>Transaksi POS</span>
+                </a>
+                <a class="nav-item" href="pembayaran.html">
+                    <img class="nav-icon" src="../assets/icons/sidebar/pembayaran.svg" alt="">
+                    <span>Pembayaran</span>
+                </a>
+                <a class="nav-item" href="cetakStruk.html">
+                    <img class="nav-icon" src="../assets/icons/sidebar/cetakStruk.svg" alt="">
+                    <span>Cetak Struk</span>
+                </a>
+                <a class="nav-item active" href="cekStok.html">
+                    <img class="nav-icon" src="../assets/icons/sidebar/cekStok.svg" alt="">
+                    <span>Cek Stok</span>
+                </a>
+                <a class="nav-item logout" href="../index.html">
+                    <img class="nav-icon" src="../assets/icons/actions/logout.svg" alt="">
+                    <span>Keluar</span>
+                </a>
+            </nav>
+        </aside>
+
+        <label class="sidebar-overlay" for="sidebar-toggle" aria-label="Tutup menu"></label>
+
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <label class="hamburger-btn" for="sidebar-toggle" aria-label="Buka menu">
+                        <img src="../assets/icons/actions/hamburger.svg" alt="">
+                    </label>
+                    <h1>Cek Ketersediaan Produk</h1>
+                    <a class="mobile-brand" href="dashboard.html">
+                        <img src="../assets/images/Logo.svg" alt="">
+                        <span>ARTHA</span>
+                    </a>
+                </div>
+                <div class="header-right">
+                    <div class="user-profile">
+                        <div class="profile-circle">
+                            <img src="../assets/icons/header/profile.svg" alt="">
+                        </div>
+                        <span>Kasir</span>
+                    </div>
+                </div>
+            </header>
+            <h1 class="mobile-page-title">Cek Ketersediaan Produk</h1>
+
+            <div class="stock-toolbar">
+                <form class="stock-search" action="cekStok.html" method="get">
+                    <img src="../assets/icons/actions/search.svg" alt="">
+                    <input type="search" name="q" placeholder="Cari nama produk, Kode Produk,Harga atau Stok" aria-label="Cari nama produk, kode produk, harga atau stok">
+                </form>
+                <select class="stock-filter" aria-label="Filter status">
+                    <option>Semua Status</option>
+                    <option>Aman</option>
+                    <option>Stok rendah</option>
+                    <option>Habis</option>
+                </select>
+            </div>
+
+            <div class="table-wrap stock-table">
+                <table>
+                    <thead><tr><th>ID<br>produk</th><th>Nama Produk</th><th>Harga</th><th>Stok</th><th>Status</th></tr></thead>
+                    <tbody>
+                        <tr><td>P001</td><td>Beras 5 kg</td><td>Rp 75.000</td><td><strong>32</strong></td><td class="stock-safe">Aman</td></tr>
+                        <tr><td>P002</td><td>Minyak goreng 1 Lt</td><td>Rp 18.000</td><td><strong>15</strong></td><td class="stock-safe">Aman</td></tr>
+                        <tr><td>P003</td><td>Gula pasir 1 kg</td><td>Rp 17.000</td><td class="stock-low">9</td><td class="stock-low">Stok rendah</td></tr>
+                        <tr><td>P004</td><td>Susu UHT 1L</td><td>Rp 21.000</td><td><strong>24</strong></td><td class="stock-safe">Aman</td></tr>
+                        <tr><td>P005</td><td>Teh celup 25s</td><td>Rp 8.000</td><td class="stock-low">5</td><td class="stock-low">Stok rendah</td></tr>
+                        <tr><td>P006</td><td>Kopi bubuk 200 gr</td><td>Rp 25.000</td><td class="stock-empty">0</td><td class="stock-empty">Habis</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

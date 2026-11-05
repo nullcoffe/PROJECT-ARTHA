@@ -26,6 +26,38 @@
 
 </head>
 
+<!-- POPUP DATA TAHUN 2026 BELUM TERSEDIA -->
+<div class="year-unavailable-overlay">
+
+    <div class="year-unavailable-modal"
+         role="alertdialog"
+         aria-labelledby="year-unavailable-title"
+         aria-describedby="year-unavailable-desc">
+
+        <div class="year-unavailable-icon">
+            !
+        </div>
+
+        <h2 id="year-unavailable-title">
+            Data Tahun 2026 Belum Tersedia
+        </h2>
+
+        <p id="year-unavailable-desc">
+            Data penjualan untuk tahun 2026 belum tersedia.
+            Silakan pilih tahun 2024 atau 2025 untuk
+            melihat laporan penjualan.
+        </p>
+
+        <button type="button"
+                class="year-unavailable-close">
+            Mengerti
+        </button>
+
+    </div>
+
+</div>
+
+
 <body>
 
     <!-- SIDEBAR CONTROL -->
@@ -69,55 +101,86 @@
 
             </div>
 
-            <!-- SIDEBAR MENU -->
+            <!-- SIDEBAR MENU PEMILIK -->
             <nav class="sidebar-nav">
 
-                <a href="dashboard.html" class="nav-item active">
-                    <img src="../assets/icons/sidebar/dashboard.svg"
-                         alt=""
-                         class="nav-icon">
+                <!-- DASHBOARD -->
+                <a href="dashboard.html"
+                   class="nav-item active"
+                   aria-current="page">
+
+                    <img
+                        src="../assets/icons/sidebar/dashboard.svg"
+                        alt=""
+                        class="nav-icon"
+                    >
+
                     <span>Dashboard</span>
                 </a>
 
+                <!-- LAPORAN -->
                 <a href="laporan.html" class="nav-item">
-                    <img src="../assets/icons/sidebar/laporan.svg"
-                         alt=""
-                         class="nav-icon">
+
+                    <img
+                        src="../assets/icons/sidebar/laporan.svg"
+                        alt=""
+                        class="nav-icon"
+                    >
+
                     <span>Laporan</span>
                 </a>
 
-                <a href="analisis-apriori.html" class="nav-item">
-                    <img src="../assets/icons/sidebar/analisisApriori.svg"
-                         alt=""
-                         class="nav-icon">
+                <!-- ANALISIS APRIORI -->
+                <a href="analisisApriori.html" class="nav-item">
+
+                    <img
+                        src="../assets/icons/sidebar/analisisApriori.svg"
+                        alt=""
+                        class="nav-icon"
+                    >
+
                     <span>Analisis Apriori</span>
                 </a>
 
-                <a href="paket-promosi.html" class="nav-item">
-                    <img src="../assets/icons/sidebar/paketPromosi.svg"
-                         alt=""
-                         class="nav-icon">
+                <!-- PAKET PROMOSI -->
+                <a href="paketPromosi.html" class="nav-item">
+
+                    <img
+                        src="../assets/icons/sidebar/paketPromosi.svg"
+                        alt=""
+                        class="nav-icon"
+                    >
+
                     <span>Paket Promosi</span>
                 </a>
 
-                <a href="prioritas-stok.html" class="nav-item">
-                    <img src="../assets/icons/sidebar/prioritasStok.svg"
-                         alt=""
-                         class="nav-icon">
+                <!-- PRIORITAS STOK -->
+                <a href="prioritasStok.html" class="nav-item">
+
+                    <img
+                        src="../assets/icons/sidebar/prioritasStok.svg"
+                        alt=""
+                        class="nav-icon"
+                    >
+
                     <span>Prioritas Stok</span>
                 </a>
 
+                <!-- KELUAR -->
                 <a href="../index.html" class="nav-item logout">
-                    <img src="../assets/icons/actions/logout.svg"
-                         alt=""
-                         class="nav-icon">
+
+                    <img
+                        src="../assets/icons/actions/logout.svg"
+                        alt=""
+                        class="nav-icon"
+                    >
+
                     <span>Keluar</span>
                 </a>
 
             </nav>
 
         </aside>
-
 
         <!-- HAMBURGER BUTTON -->
         <label for="sidebar-toggle"
@@ -131,13 +194,11 @@
 
         </label>
 
-
         <!-- SIDEBAR OVERLAY -->
         <label for="sidebar-toggle"
                class="sidebar-overlay"
                aria-label="Tutup sidebar">
         </label>
-
 
         <!-- MAIN CONTENT -->
         <main class="main-content">
@@ -168,7 +229,6 @@
 
             </header>
 
-
             <!-- DASHBOARD CONTENT -->
             <div class="page-container">
 
@@ -195,7 +255,6 @@
 
                     </article>
 
-
                     <!-- JUMLAH TRANSAKSI -->
                     <article class="owner-stat-card">
 
@@ -215,7 +274,6 @@
                         </div>
 
                     </article>
-
 
                     <!-- REKOMENDASI PAKET -->
                     <article class="owner-stat-card">
@@ -239,7 +297,6 @@
 
                 </section>
 
-
                 <!-- SALES CHART -->
                 <section class="owner-chart-card">
 
@@ -259,7 +316,6 @@
 
                     </div>
 
-
                     <!-- CHART CONTENT -->
                     <div class="owner-chart-content">
 
@@ -274,90 +330,113 @@
 
                         </div>
 
-
                         <!-- CHART BARS -->
                         <div class="owner-chart-bars">
 
+                            <!-- JANUARI -->
                             <div class="owner-bar-group">
                                 <div class="owner-bar-area">
-                                    <div class="owner-bar blue" style="height:35%"></div>
+                                    <div class="owner-bar blue"
+                                         style="height:35%"></div>
                                 </div>
                                 <span>Jan</span>
                             </div>
 
+                            <!-- FEBRUARI -->
                             <div class="owner-bar-group">
                                 <div class="owner-bar-area">
-                                    <div class="owner-bar blue" style="height:55%"></div>
+                                    <div class="owner-bar blue"
+                                         style="height:55%"></div>
                                 </div>
                                 <span>Feb</span>
                             </div>
 
+                            <!-- MARET -->
                             <div class="owner-bar-group">
                                 <div class="owner-bar-area">
-                                    <div class="owner-bar yellow" style="height:43%"></div>
+                                    <div class="owner-bar yellow"
+                                         style="height:43%"></div>
                                 </div>
                                 <span>Mar</span>
                             </div>
 
+                            <!-- APRIL -->
                             <div class="owner-bar-group">
                                 <div class="owner-bar-area">
-                                    <div class="owner-bar blue" style="height:63%"></div>
+                                    <div class="owner-bar blue"
+                                         style="height:63%"></div>
                                 </div>
                                 <span>Apr</span>
                             </div>
 
+                            <!-- MEI -->
                             <div class="owner-bar-group">
                                 <div class="owner-bar-area">
-                                    <div class="owner-bar blue" style="height:56%"></div>
+                                    <div class="owner-bar blue"
+                                         style="height:56%"></div>
                                 </div>
                                 <span>Mei</span>
                             </div>
 
+                            <!-- JUNI -->
                             <div class="owner-bar-group">
                                 <div class="owner-bar-area">
-                                    <div class="owner-bar yellow" style="height:76%"></div>
+                                    <div class="owner-bar yellow"
+                                         style="height:76%"></div>
                                 </div>
                                 <span>Jun</span>
                             </div>
 
+                            <!-- JULI -->
                             <div class="owner-bar-group">
                                 <div class="owner-bar-area">
-                                    <div class="owner-bar blue" style="height:54%"></div>
+                                    <div class="owner-bar blue"
+                                         style="height:54%"></div>
                                 </div>
                                 <span>Jul</span>
                             </div>
 
+                            <!-- AGUSTUS -->
                             <div class="owner-bar-group">
                                 <div class="owner-bar-area">
-                                    <div class="owner-bar blue" style="height:74%"></div>
+                                    <div class="owner-bar blue"
+                                         style="height:74%"></div>
                                 </div>
                                 <span>Agu</span>
                             </div>
 
+                            <!-- SEPTEMBER -->
                             <div class="owner-bar-group">
                                 <div class="owner-bar-area">
-                                    <div class="owner-bar yellow" style="height:62%"></div>
+                                    <div class="owner-bar yellow"
+                                         style="height:62%"></div>
                                 </div>
                                 <span>Sep</span>
                             </div>
 
+                            <!-- OKTOBER -->
                             <div class="owner-bar-group">
                                 <div class="owner-bar-area">
-                                    <div class="owner-bar blue" style="height:88%"></div>
+                                    <div class="owner-bar blue"
+                                         style="height:88%"></div>
                                 </div>
                                 <span>Okt</span>
                             </div>
 
+                            <!-- NOVEMBER -->
                             <div class="owner-bar-group">
                                 <div class="owner-bar-area">
-                                    <div class="owner-bar blue" style="height:80%"></div>
+                                    <div class="owner-bar blue"
+                                         style="height:80%"></div>
                                 </div>
                                 <span>Nov</span>
                             </div>
 
+                            <!-- DESEMBER -->
                             <div class="owner-bar-group">
                                 <div class="owner-bar-area">
-                                    <div class="owner-bar yellow" style="height:94%"></div>
+                                    <div class="owner-bar yellow"
+                                         style="height:94%"></div>
                                 </div>
                                 <span>Des</span>
                             </div>

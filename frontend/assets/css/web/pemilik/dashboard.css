@@ -1,34 +1,53 @@
-/* ARTHA | PEMILIK DASHBOARD — WEB
-   Hanya komponen yang unik di halaman Dashboard Pemilik:
-   kartu ringkasan dan grafik penjualan. Layout global di shared CSS.
-*/
+
+/* =====================================================
+   ARTHA | PEMILIK DASHBOARD — WEB
+   Hanya komponen unik halaman Dashboard Pemilik.
+   Layout global tetap menggunakan shared CSS.
+===================================================== */
+
+
+/* =====================================================
+   1. KARTU STATISTIK
+===================================================== */
+
 .owner-statistics {
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:clamp(12px,1.5vw,18px);
-  width:100%;
-  margin-bottom:18px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    width: 100%;
+    margin-bottom: 18px;
 }
+
+/* Kartu statistik */
 .owner-stat-card {
-  display:flex;
-  align-items:center;
-  min-width:0;
-  min-height:clamp(92px,15vh,112px);
-  gap:12px;
-  padding:clamp(13px,1.5vw,20px);
-  background:var(--color-white);
-  border:1px solid var(--color-border);
-  border-radius:var(--radius-md);
-  box-shadow:var(--shadow-soft);
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    min-height: 140px; /* Sebelumnya 110px */
+    gap: 9px;
+    padding: 14px 12px;
+
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
 }
+
+
+/* =====================================================
+   2. IKON STATISTIK
+===================================================== */
+
 .owner-stat-icon {
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:clamp(30px,3.2vw,40px);
-  height:clamp(32px,3.5vw,42px);
-  flex:0 0 clamp(30px,3.2vw,40px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: clamp(30px, 3.2vw, 40px);
+    height: clamp(32px, 3.5vw, 42px);
+    flex: 0 0 clamp(30px, 3.2vw, 40px);
 }
+
 .owner-stat-icon img {
     width: 100%;
     height: 100%;
@@ -43,98 +62,419 @@
         hue-rotate(2deg)
         brightness(105%);
 }
-.owner-stat-info { min-width:0; }
-/* LABEL KARTU */
-.owner-stat-info p {
-  margin: 0 0 3px;
-  color: #657391;
-  font-size: clamp(.68rem, .82vw, .78rem);
-  font-weight: 500;
-  line-height: 1.4;
+
+
+/* =====================================================
+   3. INFORMASI STATISTIK
+===================================================== */
+
+.owner-stat-info {
+    min-width: 0;
 }
 
-/* ANGKA STATISTIK */
-.owner-stat-info h2 {
-  color: var(--color-primary);
-  font-family: var(--font-primary);
-  font-size: clamp(1.25rem, 1.8vw, 1.65rem);
-  font-weight: 700;
-  line-height: 1.2;
-  white-space: nowrap;
+/* Label statistik */
+.owner-stat-info p {
+    margin: 0 0 3px;
+
+    color: #657391;
+    font-size: clamp(.68rem, .82vw, .78rem);
+    font-weight: 500;
+    line-height: 1.4;
 }
+
+/* Angka statistik */
+.owner-stat-info h2 {
+    margin: 0;
+
+    color: var(--color-primary);
+    font-family: var(--font-primary);
+    font-size: clamp(1.25rem, 1.8vw, 1.65rem);
+    font-weight: 700;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   4. CONTAINER GRAFIK PENJUALAN
+   Mengikuti gaya grafik pada halaman Laporan,
+   tetapi ukurannya disesuaikan dengan Figma Dashboard.
+===================================================== */
 
 .owner-chart-card {
-  width:100%;
-  min-width:0;
-  min-height:clamp(300px,46vh,350px);
-  padding:clamp(16px,1.8vw,22px);
-  background:var(--color-white);
-  border:1px solid var(--color-border);
-  border-radius:var(--radius-md);
-  box-shadow:var(--shadow-soft);
+    width: 100%;
+    min-width: 0;
+    min-height: 420px; /* Sebelumnya 310px */
+
+    padding: 20px 22px 16px;
+
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
 }
+
+
+/* =====================================================
+   5. HEADER GRAFIK
+===================================================== */
+
 .owner-chart-header {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  margin-bottom:clamp(18px,2.7vh,26px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+
+    gap: 12px;
+
+    /* Padding atas dan bawah seimbang */
+    margin: 0 0 20px;
+    padding: 6px 8px;
 }
-.owner-chart-header h2 {
-  color:var(--color-primary);
-  font-size:.95rem;
-  font-weight:var(--font-semibold);
+
+/* Judul grafik */
+.owner-chart-header h3 {
+    flex: 1 1 auto;
+    min-width: 0;
+
+    margin: 0;
+
+    color: var(--color-primary);
+    font-family: var(--font-primary);
+    font-size: .95rem;
+    font-weight: var(--font-semibold);
+    line-height: 1.4;
+    white-space: nowrap;
 }
+
+
+/* =====================================================
+   6. DROPDOWN TAHUN
+===================================================== */
+
 .owner-year-select {
-  min-width: 80px;
-  width: 80px;
-  height: 36px;
-  padding: 0 10px;
+    display: block;
+    flex: 0 0 80px;
 
-  color: var(--color-primary);
-  background-color: var(--color-white);
+    appearance: none;
+    -webkit-appearance: none;
 
-  border: 1px solid var(--color-primary);
-  border-radius: 7px;
+    width: 80px;
+    min-width: 80px;
+    height: 32px;
 
-  font-family: var(--font-primary);
-  font-size: 14px;
-  font-weight: 600;
+    margin-right: 5px;
+    padding: 0 28px 0 9px;
 
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+    color: var(--color-primary);
+    background-color: var(--color-white);
+
+    /* Ikon panah diberi jarak dari tepi kanan */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%23142f7d' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 11px;
+
+    border: 1px solid var(--color-primary);
+    border-radius: 7px;
+
+    font-family: var(--font-primary);
+    font-size: .8rem;
+    font-weight: 600;
+    text-align: center;
+
+    cursor: pointer;
+    outline: none;
+    box-shadow: none;
+
+    transition: background-color .2s ease;
 }
 
-.owner-year-select:hover,
-.owner-year-select:focus {
-  background-color: var(--color-background);
+/* Hover kuning */
+.owner-year-select:hover {
+    background-color: var(--chart-yellow);
 }
+
+/* Fokus tetap putih */
+.owner-year-select:focus,
+.owner-year-select:focus-visible,
+.owner-year-select:active {
+    color: var(--color-primary);
+    background-color: var(--color-white);
+
+    border: 1px solid var(--color-primary);
+    outline: none;
+    box-shadow: none;
+}
+
+/* Fokus sekaligus hover */
+.owner-year-select:focus:hover {
+    background-color: var(--chart-yellow);
+}
+
+
+/* =====================================================
+   7. AREA GRAFIK
+   Sumbu Y dan batang disusun menggunakan Grid.
+===================================================== */
+
 .owner-chart-content {
-  display:grid;
-  grid-template-columns:38px minmax(0,1fr);
-  gap:8px;
-  height:clamp(190px,30vh,230px);
-}
-.owner-chart-y-axis {
-  display:flex;
-  flex-direction:column;
-  align-items:flex-end;
-  justify-content:space-between;
-  padding-bottom:19px;
-}
-.owner-chart-y-axis span { color:#8290AA; font-size:.58rem; line-height:1; }
-.owner-chart-bars {
-  display:grid;
-  grid-template-columns:repeat(12,minmax(0,1fr));
-  min-width:0;
-  height:100%;
-  column-gap:clamp(5px,1vw,13px);
-  border-bottom:1px solid #E5EAF1;
-}
-.owner-bar-group { display:flex; flex-direction:column; align-items:center; min-width:0; }
-.owner-bar-area { display:flex; align-items:flex-end; justify-content:center; width:100%; flex:1; min-height:0; }
-.owner-bar { width:clamp(9px,1.4vw,17px); height:var(--bar-height); min-height:3px; border-radius:3px 3px 0 0; }
-.owner-bar.blue { background:var(--chart-blue); }
-.owner-bar.yellow { background:var(--chart-yellow); }
-.owner-bar-group>span { height:18px; padding-top:5px; color:#64748B; font-size:.56rem; white-space:nowrap; }
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 8px;
 
+    width: 100%;
+    height: 315px; /* Sebelumnya 205px */
+}
+
+
+/* =====================================================
+   8. SUMBU Y
+===================================================== */
+
+.owner-chart-y-axis {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    padding-bottom: 18px;
+}
+
+.owner-chart-y-axis span {
+    color: #8290AA;
+    font-size: .58rem;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   9. AREA BATANG GRAFIK
+===================================================== */
+
+.owner-chart-bars {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+
+    column-gap: clamp(5px, 1vw, 13px);
+}
+
+/* Garis dasar grafik tepat di atas label bulan */
+.owner-chart-bars::after {
+    content: "";
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 18px;
+
+    height: 1px;
+    background: #E5EAF1;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   10. KELOMPOK BATANG
+===================================================== */
+
+.owner-bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    min-width: 0;
+    height: 100%;
+}
+
+
+/* =====================================================
+   11. AREA MASING-MASING BATANG
+===================================================== */
+
+.owner-bar-area {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+
+/* =====================================================
+   12. BATANG PENJUALAN
+===================================================== */
+
+.owner-bar {
+    display: block;
+
+    width: clamp(9px, 1.4vw, 17px);
+    height: var(--bar-height);
+    min-height: 3px;
+
+    border-radius: 3px 3px 0 0;
+}
+
+/* Batang biru */
+.owner-bar.blue {
+    background: var(--chart-blue);
+}
+
+/* Batang kuning */
+.owner-bar.yellow {
+    background: var(--chart-yellow);
+}
+
+
+/* =====================================================
+   13. LABEL BULAN
+===================================================== */
+
+.owner-bar-group > span {
+    display: block;
+
+    width: 100%;
+    height: 18px;
+    flex: 0 0 18px;
+
+    padding-top: 5px;
+
+    color: #64748B;
+    font-size: .56rem;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   14. RESPONSIVE TABLET
+===================================================== */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    .owner-stat-card {
+        min-height: 100px;
+        padding: 12px 10px;
+    }
+
+    .owner-chart-card {
+        min-height: 295px;
+        padding: 18px 16px 14px;
+    }
+
+    .owner-chart-content {
+        height: 190px;
+    }
+
+}
+
+
+/* =========================================
+   POPUP TAHUN 2026 BELUM TERSEDIA
+   DASHBOARD PEMILIK
+========================================= */
+
+.year-unavailable-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+    background: rgba(0, 15, 42, 0.58);
+}
+
+/* TAMPIL KETIKA DROPDOWN MEMILIH 2026 */
+body:has(
+    .owner-year-select:focus
+    option[value="2026"]:checked
+) .year-unavailable-overlay {
+    display: flex;
+}
+
+.year-unavailable-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    max-width: 420px;
+    padding: 32px 28px;
+
+    background: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+
+    text-align: center;
+    font-family: var(--font-primary);
+}
+
+.year-unavailable-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 64px;
+    height: 64px;
+    margin-bottom: 20px;
+
+    color: #142F7D;
+    background: #FFF0B3;
+    border: 2px solid #F5C000;
+    border-radius: 50%;
+
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.year-unavailable-modal h2 {
+    margin: 0 0 12px;
+
+    color: #142F7D;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.year-unavailable-modal p {
+    margin: 0 0 24px;
+
+    color: #7180A5;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.year-unavailable-close {
+    width: 100%;
+    min-height: 44px;
+
+    padding: 11px 20px;
+
+    color: #FFFFFF;
+    background: #142F7D;
+    border: none;
+    border-radius: 8px;
+
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.year-unavailable-close:hover {
+    background: #00183F;
+}

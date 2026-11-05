@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,24 +11,25 @@
     <!-- SHARED CSS -->
     <link rel="stylesheet" href="../assets/css/shared/variables.css">
     <link rel="stylesheet" href="../assets/css/shared/reset.css">
-    <link rel="stylesheet" href="../assets/css/shared/popup.css">
 
     <!-- WEB CSS -->
     <link rel="stylesheet" href="../assets/css/web/layout.css">
     <link rel="stylesheet" href="../assets/css/web/sidebar.css">
     <link rel="stylesheet" href="../assets/css/web/header.css">
-    <link rel="stylesheet" href="../assets/css/web/pemilik/analisisApiori.css">
+    <link rel="stylesheet" href="../assets/css/web/popup.css">
+    <link rel="stylesheet" href="../assets/css/web/pemilik/analisisApriori.css">
 
     <!-- MOBILE CSS -->
     <link rel="stylesheet" href="../assets/css/mobile/layout.css">
     <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
     <link rel="stylesheet" href="../assets/css/mobile/header.css">
-    <link rel="stylesheet" href="../assets/css/mobile/pemilik/analisisApiori.css">
+    <link rel="stylesheet" href="../assets/css/mobile/popup.css">
+    <link rel="stylesheet" href="../assets/css/mobile/pemilik/analisisApriori.css">
 </head>
 
 <body>
 
-    <!-- SIDEBAR TOGGLE -->
+    <!-- SIDEBAR CONTROL -->
     <input
         type="checkbox"
         id="sidebar-toggle"
@@ -40,11 +42,12 @@
         <!-- SIDEBAR -->
         <aside class="sidebar">
 
+            <!-- BRAND -->
             <div class="sidebar-brand">
 
                 <div class="brand-left">
                     <img
-                        src="../assets/images/Logo.png"
+                        src="../assets/images/Logo.svg"
                         alt="Logo ARTHA"
                         class="brand-logo"
                     >
@@ -86,7 +89,11 @@
                     <span>Laporan</span>
                 </a>
 
-                <a href="analisisApiori.html" class="nav-item active" aria-current="page">
+                <a
+                    href="analisisApriori.html"
+                    class="nav-item active"
+                    aria-current="page"
+                >
                     <img
                         src="../assets/icons/sidebar/analisisApriori.svg"
                         alt=""
@@ -95,7 +102,7 @@
                     <span>Analisis Apriori</span>
                 </a>
 
-                <a href="paket-promosi.html" class="nav-item">
+                <a href="paketPromosi.html" class="nav-item">
                     <img
                         src="../assets/icons/sidebar/paketPromosi.svg"
                         alt=""
@@ -104,7 +111,7 @@
                     <span>Paket Promosi</span>
                 </a>
 
-                <a href="prioritas-stok.html" class="nav-item">
+                <a href="prioritasStok.html" class="nav-item">
                     <img
                         src="../assets/icons/sidebar/prioritasStok.svg"
                         alt=""
@@ -126,7 +133,7 @@
 
         </aside>
 
-        <!-- HAMBURGER MOBILE -->
+        <!-- HAMBURGER BUTTON -->
         <label
             for="sidebar-toggle"
             class="hamburger-btn"
@@ -146,15 +153,14 @@
         ></label>
 
         <!-- MAIN CONTENT -->
-        <main class="main-content">
+        <div class="main-content">
 
             <!-- HEADER -->
             <header class="dashboard-header">
 
-                <h1>Analisis Asosiasi Apriori</h1>
+                <h1>Analisis Apriori</h1>
 
                 <div class="header-right">
-
                     <div class="user-profile">
 
                         <div class="profile-circle">
@@ -167,294 +173,269 @@
                         <span>Pemilik</span>
 
                     </div>
-
                 </div>
 
             </header>
 
-            <div class="page-container apriori-page">
+            <!-- PAGE CONTENT -->
+            <div class="page-container">
 
-                <!-- KONFIGURASI ANALISIS -->
-                <section
-                    class="apriori-card apriori-config"
-                    aria-labelledby="apriori-config-title"
-                >
+                <main class="owner-apriori">
 
-                    <h2 id="apriori-config-title">
-                        Konfigurasi Analisis Apriori
-                    </h2>
+                    <!-- KONFIGURASI ANALISIS -->
+                    <section class="apriori-config-card">
 
-                    <form
-                        id="apriori-form"
-                        autocomplete="off"
-                        action="#popup-apriori-success"
-                    >
+                        <h2>Konfigurasi Analisis Apriori</h2>
 
-                        <div class="apriori-form-grid">
+                        <form
+                            class="apriori-form"
+                            action="#popup-apriori-success"
+                            method="GET"
+                        >
 
-                            <!-- SUPPORT -->
+                            <!-- MINIMUM SUPPORT -->
                             <div class="apriori-field">
 
-                                <label for="min-support">
+                                <label for="minimum-support">
                                     Minimum Support
                                 </label>
 
-                                <select
-                                    id="min-support"
-                                    name="support"
-                                    required
-                                >
-                                    <option value="" selected disabled>
-                                        Pilih support
-                                    </option>
-                                    <option value="5">5%</option>
-                                    <option value="10">10%</option>
-                                    <option value="20">20%</option>
-                                </select>
+                                <div class="apriori-select-wrap">
+
+                                    <select
+                                        id="minimum-support"
+                                        name="support"
+                                        required
+                                    >
+                                        <option value="" selected disabled>
+                                            Pilih support
+                                        </option>
+
+                                        <option value="5">5%</option>
+                                        <option value="10">10%</option>
+                                        <option value="20">20%</option>
+                                    </select>
+
+                                    <span class="apriori-chevron"></span>
+
+                                </div>
 
                             </div>
 
-                            <!-- CONFIDENCE -->
+                            <!-- MINIMUM CONFIDENCE -->
                             <div class="apriori-field">
 
-                                <label for="min-confidence">
+                                <label for="minimum-confidence">
                                     Minimum Confidence
                                 </label>
 
-                                <select
-                                    id="min-confidence"
-                                    name="confidence"
-                                    required
-                                >
-                                    <option value="" selected disabled>
-                                        Pilih confidence
-                                    </option>
-                                    <option value="60">60%</option>
-                                    <option value="70">70%</option>
-                                    <option value="80">80%</option>
-                                </select>
+                                <div class="apriori-select-wrap">
+
+                                    <select
+                                        id="minimum-confidence"
+                                        name="confidence"
+                                        required
+                                    >
+                                        <option value="" selected disabled>
+                                            Pilih confidence
+                                        </option>
+
+                                        <option value="60">60%</option>
+                                        <option value="70">70%</option>
+                                        <option value="80">80%</option>
+                                    </select>
+
+                                    <span class="apriori-chevron"></span>
+
+                                </div>
 
                             </div>
 
-                            <!-- TAHUN -->
+                            <!-- PERIODE TRANSAKSI -->
                             <div class="apriori-field">
 
-                                <label for="transaction-year">
+                                <label for="transaction-period">
                                     Periode Transaksi (Tahun)
                                 </label>
 
-                                <select
-                                    id="transaction-year"
-                                    name="year"
-                                    required
-                                >
-                                    <option value="" selected disabled>
-                                        Pilih periode transaksi
-                                    </option>
+                                <div class="apriori-select-wrap">
 
-                                    <option value="2024">
-                                        2024
-                                    </option>
+                                    <select
+                                        id="transaction-period"
+                                        name="tahun"
+                                        required
+                                    >
+                                        <option value="" selected disabled>
+                                            Pilih periode transaksi
+                                        </option>
 
-                                    <option value="2025">
-                                        2025
-                                    </option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                    </select>
 
-                                    <option value="2026">
-                                        2026
-                                    </option>
-                                </select>
+                                    <span class="apriori-chevron"></span>
+
+                                </div>
 
                             </div>
 
                             <!-- JUMLAH TRANSAKSI -->
                             <div class="apriori-field">
 
-                                <label>
+                                <label for="transaction-total">
                                     Jumlah Transaksi
                                 </label>
 
                                 <div
-                                    class="apriori-transaction-count"
-                                    aria-label="Jumlah transaksi"
+                                    class="apriori-transaction-value"
+                                    id="transaction-total"
                                 >
-                                    <span class="apriori-total apriori-total--empty">
-                                        —
+
+                                    <span class="transaction-placeholder">
+                                        Jumlah transaksi akan ditampilkan oleh sistem
                                     </span>
 
-                                    <span class="apriori-total apriori-total--2024">
-                                        149
+                                    <span class="transaction-2024">
+                                        149 Transaksi
                                     </span>
 
-                                    <span class="apriori-total apriori-total--2025">
-                                        201
+                                    <span class="transaction-2025">
+                                        201 Transaksi
                                     </span>
 
-                                    <span class="apriori-total apriori-total--2026">
-                                        0
+                                    <span class="transaction-2026">
+                                        0 Transaksi
                                     </span>
+
                                 </div>
-
-                                <small>
-                                    Terisi berdasarkan tahun yang dipilih.
-                                </small>
 
                             </div>
 
+                            <!-- TOMBOL ANALISIS -->
+                            <div class="apriori-action">
+
+                                <button
+                                    type="submit"
+                                    class="apriori-run-button"
+                                >
+                                    Jalankan Analisis
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                        <p class="apriori-info">
+                            Pilih parameter analisis dan periode transaksi
+                            sebelum menjalankan analisis asosiasi.
+                        </p>
+
+                    </section>
+
+                    <!-- HASIL ANALISIS -->
+                    <section
+                        class="apriori-result-card"
+                        id="hasil-analisis"
+                    >
+
+                        <div class="apriori-result-header">
+
+                            <h2>Hasil Analisis Asosiasi</h2>
+
+                            <span class="apriori-result-period">
+                                Data contoh / dummy
+                            </span>
+
                         </div>
 
-                        <!-- TOMBOL ANALISIS -->
-                        <div class="apriori-actions">
+                        <!-- TABEL HASIL -->
+                        <div class="apriori-table-wrapper">
 
-                            <p class="apriori-feedback">
+                            <table class="apriori-table">
 
-                                <span class="apriori-hint-incomplete">
-                                    Pilih support, confidence, dan tahun terlebih dahulu.
-                                </span>
+                                <thead>
+                                    <tr>
+                                        <th>Aturan Asosiasi</th>
+                                        <th>Support</th>
+                                        <th>Confidence</th>
+                                        <th>Lift</th>
+                                    </tr>
+                                </thead>
 
-                                <span class="apriori-hint-empty">
-                                    Tidak ada transaksi tahun 2026.
-                                    Analisis tidak dapat dijalankan.
-                                </span>
+                                <tbody>
 
-                            </p>
+                                    <tr>
+                                        <td>Beras → Minyak</td>
+                                        <td>18%</td>
+                                        <td>72%</td>
+                                        <td>1,43</td>
+                                    </tr>
 
-                            <!-- Prototype CSS-only -->
-                            <a
-                                href="#popup-apriori-success"
-                                class="apriori-run-button"
-                            >
-                                Jalankan Analisis
-                            </a>
+                                    <tr>
+                                        <td>Gula → Kopi</td>
+                                        <td>14%</td>
+                                        <td>65%</td>
+                                        <td>1,31</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Minyak → Beras</td>
+                                        <td>18%</td>
+                                        <td>72%</td>
+                                        <td>1,43</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Kopi → Gula</td>
+                                        <td>14%</td>
+                                        <td>65%</td>
+                                        <td>1,31</td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
 
                         </div>
 
-                    </form>
+                    </section>
 
-                </section>
-
-                <!-- HASIL ANALISIS -->
-                <section
-                    class="apriori-card apriori-results"
-                    id="apriori-results"
-                    aria-label="Hasil Analisis Apriori"
-                >
-
-                    <div class="apriori-table-scroll">
-
-                        <table class="apriori-table">
-
-                            <thead>
-                                <tr>
-                                    <th>Aturan Asosiasi</th>
-                                    <th>Support</th>
-                                    <th>Confidence</th>
-                                    <th>Lift</th>
-                                </tr>
-                            </thead>
-
-                            <tbody id="apriori-results-body">
-
-                                <!-- KONDISI AWAL -->
-                                <tr class="apriori-empty">
-                                    <td>—</td>
-                                    <td>—</td>
-                                    <td>—</td>
-                                    <td>—</td>
-                                </tr>
-
-                                <!-- DATA DUMMY -->
-                                <tr class="apriori-demo-row">
-                                    <td>Beras → Minyak</td>
-                                    <td>18%</td>
-                                    <td>72%</td>
-                                    <td>1.43</td>
-                                </tr>
-
-                                <tr class="apriori-demo-row">
-                                    <td>Gula → Kopi</td>
-                                    <td>14%</td>
-                                    <td>65%</td>
-                                    <td>1.31</td>
-                                </tr>
-
-                                <tr class="apriori-demo-row">
-                                    <td>Beras → Minyak</td>
-                                    <td>18%</td>
-                                    <td>72%</td>
-                                    <td>1.43</td>
-                                </tr>
-
-                                <tr class="apriori-demo-row">
-                                    <td>Gula → Kopi</td>
-                                    <td>14%</td>
-                                    <td>65%</td>
-                                    <td>1.43</td>
-                                </tr>
-
-                            </tbody>
-
-                        </table>
-
-                    </div>
-
-                    <p class="apriori-table-caption apriori-caption-empty">
-                        Tabel akan terisi setelah analisis dijalankan.
-                    </p>
-
-                    <p class="apriori-table-caption apriori-caption-filled">
-                        Data simulasi untuk prototype.
-                    </p>
-
-                </section>
+                </main>
 
             </div>
 
-        </main>
+        </div>
 
     </div>
 
-    <!-- POPUP APRIORI -->
-    <!-- Markup disisipkan untuk preview HTML tanpa PHP/JS. -->
-    <!-- Menggunakan CSS popup shared yang sudah tersedia. -->
-
+    <!-- POPUP APRIORI SUCCESS -->
     <div
         class="artha-popup-overlay"
         id="popup-apriori-success"
-        role="presentation"
     >
 
-        <section
-            class="artha-popup artha-popup--apriori"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="apriori-popup-title"
-        >
+        <section class="artha-popup artha-popup--apriori">
 
             <!-- HEADER POPUP -->
             <div class="apriori-popup-head">
 
-                <span class="apriori-popup-icon">
-                    <img
-                        src="../assets/icons/popup/check-success.svg"
-                        alt=""
-                    >
-                </span>
+                <div class="apriori-popup-icon">
+                    <span aria-hidden="true">✓</span>
+                </div>
 
                 <div class="apriori-popup-title-group">
 
-                    <h2 id="apriori-popup-title">
-                        Analisis Berhasil Dijalankan!
-                    </h2>
+                    <h2>Analisis Berhasil Dijalankan!</h2>
 
                     <p>
-                        Pemrosesan data transaksi berhasil diselesaikan
+                        Pemrosesan data transaksi berhasil diselesaikan.
                     </p>
 
                 </div>
 
                 <a
-                    href="#apriori-results"
+                    href="#"
                     class="apriori-popup-x"
                     aria-label="Tutup popup"
                 >
@@ -471,91 +452,56 @@
 
                     <div>
                         <span>TRANSAKSI</span>
-
-                        <strong>
-                            <span class="apriori-popup-count apriori-popup-count--2024">
-                                149
-                            </span>
-
-                            <span class="apriori-popup-count apriori-popup-count--2025">
-                                201
-                            </span>
-                        </strong>
+                        <strong>149</strong>
                     </div>
 
                     <div>
                         <span>ATURAN DITEMUKAN</span>
-                        <strong class="apriori-green">
-                            4 Aturan
-                        </strong>
+                        <strong class="apriori-green">4</strong>
                     </div>
 
                     <div>
                         <span>MAX LIFT</span>
-                        <strong class="apriori-orange">
-                            1.43
-                        </strong>
+                        <strong class="apriori-orange">1.43</strong>
                     </div>
 
                 </div>
 
-                <!-- DETAIL -->
+                <!-- DETAIL HASIL -->
                 <div class="apriori-popup-details">
 
                     <div>
-                        <span>Minimum Support Terpenuhi:</span>
-
-                        <strong>
-                            <span class="apriori-popup-support apriori-popup-support--5">
-                                5%
-                            </span>
-                            <span class="apriori-popup-support apriori-popup-support--10">
-                                10%
-                            </span>
-                            <span class="apriori-popup-support apriori-popup-support--20">
-                                20%
-                            </span>
-                        </strong>
+                        <span>Minimum Support</span>
+                        <strong>20%</strong>
                     </div>
 
                     <div>
-                        <span>Minimum Confidence Terpenuhi:</span>
-
-                        <strong>
-                            <span class="apriori-popup-confidence apriori-popup-confidence--60">
-                                60%
-                            </span>
-                            <span class="apriori-popup-confidence apriori-popup-confidence--70">
-                                70%
-                            </span>
-                            <span class="apriori-popup-confidence apriori-popup-confidence--80">
-                                80%
-                            </span>
-                        </strong>
+                        <span>Minimum Confidence</span>
+                        <strong>60%</strong>
                     </div>
 
                     <div>
-                        <span>Kombinasi Pola Terbaik:</span>
-
-                        <strong>
-                            Beras &amp; Minyak (Lift 1.43)
-                        </strong>
+                        <span>Kombinasi Pola Terbaik</span>
+                        <strong>Beras → Minyak</strong>
                     </div>
 
                 </div>
 
+                <!-- CATATAN -->
                 <p class="apriori-popup-note">
-                    *Data simulasi untuk tampilan prototype.
+                    *Hasil ini merupakan data contoh untuk tampilan
+                    antarmuka dan akan diisi berdasarkan hasil
+                    pemrosesan backend.
                 </p>
 
             </div>
 
-            <!-- FOOTER POPUP -->
+            <!-- FOOTER -->
             <div class="apriori-popup-footer">
 
                 <a
-                    href="#apriori-results"
-                    class="artha-popup-btn artha-popup-btn--light"
+                    href="#"
+                    class="artha-popup-btn apriori-popup-btn-close"
                 >
                     Tutup
                 </a>
@@ -565,6 +511,8 @@
         </section>
 
     </div>
+
+
 
 </body>
 </html>

@@ -1,56 +1,420 @@
-/* ARTHA | PEMILIK DASHBOARD — MOBILE
-   Hanya kartu ringkasan dan grafik. Shared frame tetap di mobile/*.css.
-*/
-@media (max-width:768px) {
-  .owner-statistics {
-    display:grid;
-    grid-template-columns:minmax(0,1fr);
-    gap:8px;
-    width:100%;
-    margin-bottom:10px;
-  }
-  .owner-stat-card {
-    display:flex;
-    align-items:center;
-    width:100%;
-    min-height:clamp(62px,16vw,72px);
-    gap:11px;
-    padding:10px 14px;
-    background:var(--color-white);
-    border:1px solid var(--color-border);
-    border-radius:11px;
-    box-shadow:none;
-  }
-  .owner-stat-icon { width:31px; height:34px; flex:0 0 31px; }
-  .owner-stat-icon img {
-    width:100%; height:100%; object-fit:contain;
-    filter:brightness(0) saturate(100%) invert(77%) sepia(95%) saturate(1000%) hue-rotate(2deg) brightness(105%);
-  }
-  .owner-stat-info { display:flex; flex-direction:column; justify-content:center; min-width:0; }
-  .owner-stat-info p { margin:0 0 1px; color:#64748B; font-size:.62rem; line-height:1.35; }
-  .owner-stat-info h2 { color:var(--color-primary); font-size:1.2rem; line-height:1.2; }
 
-  .owner-chart-card {
-    width:100%;
-    min-height:0;
-    padding:11px 9px 12px;
-    background:var(--color-white);
-    border:1px solid #F0EBD9;
-    border-radius:11px;
-    box-shadow:none;
-  }
-  .owner-chart-header { gap:8px; margin-bottom:12px; }
-  .owner-chart-header h2 { font-size:.68rem; }
-  .owner-year-select { width:58px; height:23px; padding:0 3px; font-size:.61rem; }
-  .owner-year-select:hover,.owner-year-select:focus { background:var(--color-background); }
-  .owner-chart-content { grid-template-columns:25px minmax(0,1fr); gap:5px; height:clamp(130px,37vw,158px); }
-  .owner-chart-y-axis { padding-bottom:15px; }
-  .owner-chart-y-axis span { font-size:.42rem; }
-  .owner-chart-bars { column-gap:clamp(2px,.8vw,4px); }
-  .owner-bar { width:min(68%,9px); min-width:4px; border-radius:2px 2px 0 0; }
-  .owner-bar-group>span { height:16px; padding-top:4px; font-size:.42rem; }
+/* =====================================================
+   ARTHA | PEMILIK DASHBOARD — MOBILE
+   Hanya kartu statistik dan grafik.
+   Sidebar, header, dan layout menggunakan Shared CSS.
+===================================================== */
+
+
+/* =====================================================
+   1. KARTU STATISTIK
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .owner-statistics {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
+
+        width: 100%;
+        margin-bottom: 12px;
+    }
+
+    .owner-stat-card {
+        display: flex;
+        align-items: center;
+
+        width: 100%;
+        min-width: 0;
+        min-height: 82px;
+        height: auto;
+
+        gap: 11px;
+        padding: 12px 14px;
+
+        background: var(--color-white);
+        border: 1px solid var(--color-border);
+        border-radius: 11px;
+        box-shadow: none;
+    }
+
+
+    /* =================================================
+       2. IKON STATISTIK
+    ================================================= */
+
+    .owner-stat-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 31px;
+        height: 34px;
+        flex: 0 0 31px;
+    }
+
+    .owner-stat-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+
+        filter:
+            brightness(0)
+            saturate(100%)
+            invert(77%)
+            sepia(95%)
+            saturate(1000%)
+            hue-rotate(2deg)
+            brightness(105%);
+    }
+
+
+    /* =================================================
+       3. INFORMASI STATISTIK
+    ================================================= */
+
+    .owner-stat-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        min-width: 0;
+    }
+
+    .owner-stat-info p {
+        margin: 0 0 1px;
+
+        color: #64748B;
+        font-size: .62rem;
+        font-weight: 500;
+        line-height: 1.35;
+    }
+
+    .owner-stat-info h2 {
+        margin: 0;
+
+        color: var(--color-primary);
+        font-family: var(--font-primary);
+        font-size: 1.2rem;
+        font-weight: 700;
+        line-height: 1.2;
+        white-space: nowrap;
+    }
+
+
+    /* =================================================
+       4. CONTAINER GRAFIK PENJUALAN
+    ================================================= */
+
+    .owner-chart-card {
+        width: 100%;
+        min-width: 0;
+        min-height: 0;
+        height: auto;
+
+        padding: 11px 9px 14px;
+
+        background: var(--color-white);
+        border: 1px solid #F0EBD9;
+        border-radius: 11px;
+        box-shadow: none;
+    }
+
+
+    /* =================================================
+       5. HEADER GRAFIK
+    ================================================= */
+
+    .owner-chart-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+
+        gap: 8px;
+        margin: 0 0 12px;
+        padding: 5px 4px;
+    }
+
+    .owner-chart-header h3 {
+        flex: 1 1 auto;
+        min-width: 0;
+
+        margin: 0;
+
+        color: var(--color-primary);
+        font-family: var(--font-primary);
+        font-size: .68rem;
+        font-weight: 600;
+        line-height: 1.4;
+        white-space: nowrap;
+    }
+
+
+    /* =================================================
+       6. DROPDOWN TAHUN
+    ================================================= */
+
+    .owner-year-select {
+        display: block;
+        flex: 0 0 58px;
+
+        appearance: none;
+        -webkit-appearance: none;
+
+        width: 58px;
+        min-width: 58px;
+        height: 23px;
+
+        margin-right: 4px;
+        padding: 0 19px 0 3px;
+
+        color: var(--color-primary);
+        background-color: var(--color-white);
+
+        background-position: right 6px center;
+        background-size: 9px;
+
+        border: 1px solid var(--color-primary);
+        border-radius: 5px;
+
+        font-family: var(--font-primary);
+        font-size: .61rem;
+        font-weight: 600;
+        text-align: center;
+
+        cursor: pointer;
+        outline: none;
+        box-shadow: none;
+    }
+
+    /* Hover kuning */
+    .owner-year-select:hover {
+        background-color: var(--chart-yellow);
+    }
+
+    /* Fokus tetap putih */
+    .owner-year-select:focus,
+    .owner-year-select:focus-visible,
+    .owner-year-select:active {
+        background-color: var(--color-white);
+        border: 1px solid var(--color-primary);
+        outline: none;
+        box-shadow: none;
+    }
+
+
+    /* =================================================
+       7. AREA GRAFIK
+       Tinggi ditambah ke bawah agar ruang lebih terisi.
+    ================================================= */
+
+    .owner-chart-content {
+        display: grid;
+        grid-template-columns: 25px minmax(0, 1fr);
+
+        gap: 5px;
+        width: 100%;
+        height: clamp(155px, 43vw, 185px);
+    }
+
+
+    /* =================================================
+       8. SUMBU Y
+    ================================================= */
+
+    .owner-chart-y-axis {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: space-between;
+
+        padding-bottom: 15px;
+    }
+
+    .owner-chart-y-axis span {
+        color: #8290AA;
+        font-size: .42rem;
+        line-height: 1;
+        white-space: nowrap;
+    }
+
+
+    /* =================================================
+       9. BATANG GRAFIK
+    ================================================= */
+
+    .owner-chart-bars {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+
+        position: relative;
+
+        width: 100%;
+        min-width: 0;
+        height: 100%;
+
+        column-gap: clamp(2px, .8vw, 4px);
+    }
+
+    /* Garis dasar grafik */
+    .owner-chart-bars::after {
+        content: "";
+        position: absolute;
+
+        left: 0;
+        right: 0;
+        bottom: 16px;
+
+        height: 1px;
+        background: #E5EAF1;
+
+        pointer-events: none;
+    }
+
+
+    /* =================================================
+       10. KELOMPOK BATANG
+    ================================================= */
+
+    .owner-bar-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        min-width: 0;
+        height: 100%;
+    }
+
+
+    /* =================================================
+       11. AREA MASING-MASING BATANG
+    ================================================= */
+
+    .owner-bar-area {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+
+        width: 100%;
+        flex: 1 1 auto;
+        min-height: 0;
+    }
+
+
+    /* =================================================
+       12. BATANG PENJUALAN
+    ================================================= */
+
+    .owner-bar {
+        display: block;
+
+        width: min(68%, 9px);
+        min-width: 4px;
+        min-height: 3px;
+        height: var(--bar-height);
+
+        border-radius: 2px 2px 0 0;
+    }
+
+    .owner-bar.blue {
+        background: var(--chart-blue);
+    }
+
+    .owner-bar.yellow {
+        background: var(--chart-yellow);
+    }
+
+
+    /* =================================================
+       13. LABEL BULAN
+    ================================================= */
+
+    .owner-bar-group > span {
+        display: block;
+
+        width: 100%;
+        height: 16px;
+        flex: 0 0 16px;
+
+        padding-top: 4px;
+
+        color: #64748B;
+        font-size: .42rem;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+    }
+
 }
-@media(max-width:360px) {
-  .owner-chart-card { padding-inline:7px; }
-  .owner-chart-content { grid-template-columns:23px minmax(0,1fr); }
+
+
+/* =====================================================
+   14. RESPONSIVE HP KECIL
+===================================================== */
+
+@media (max-width: 360px) {
+
+    .owner-chart-card {
+        padding-left: 7px;
+        padding-right: 7px;
+    }
+
+    .owner-chart-content {
+        grid-template-columns: 23px minmax(0, 1fr);
+    }
+
+    .owner-chart-bars {
+        column-gap: 2px;
+    }
+
+    .owner-bar {
+        width: 65%;
+        min-width: 3px;
+    }
+
+    .owner-bar-group > span {
+        font-size: .4rem;
+    }
+
+}
+
+
+/* =========================================
+   POPUP TAHUN BELUM TERSEDIA - MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .year-unavailable-overlay {
+        padding: 18px;
+    }
+
+    .year-unavailable-modal {
+        max-width: 340px;
+        padding: 26px 20px;
+        border-radius: 14px;
+    }
+
+    .year-unavailable-icon {
+        width: 54px;
+        height: 54px;
+        margin-bottom: 15px;
+        font-size: 30px;
+    }
+
+    .year-unavailable-modal h2 {
+        font-size: 17px;
+    }
+
+    .year-unavailable-modal p {
+        font-size: 12px;
+        line-height: 1.7;
+    }
+
+    .year-unavailable-close {
+        min-height: 42px;
+        font-size: 13px;
+    }
 }

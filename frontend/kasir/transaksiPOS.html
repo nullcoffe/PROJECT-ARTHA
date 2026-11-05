@@ -1,0 +1,504 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FFFDF0">
+
+    <title>Kasir / Input Penjualan | ARTHA</title>
+
+    <!-- SHARED CSS -->
+    <link rel="stylesheet" href="../assets/css/shared/variables.css">
+    <link rel="stylesheet" href="../assets/css/shared/reset.css">
+
+    <!-- WEB CSS -->
+    <link rel="stylesheet" href="../assets/css/web/layout.css">
+    <link rel="stylesheet" href="../assets/css/web/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/web/header.css">
+
+    <!-- MOBILE CSS -->
+    <link rel="stylesheet" href="../assets/css/mobile/layout.css">
+    <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/mobile/header.css">
+    <link rel="stylesheet" href="../assets/css/web/kasir/transaksiPOS.css">
+    <link rel="stylesheet" href="../assets/css/mobile/kasir/transaksiPOS.css">
+
+    <!-- KASIR CSS -->
+
+    <!-- KHUSUS TRANSAKSI POS -->
+
+    <!-- POS JAVASCRIPT -->
+    <script src="../assets/js/kasir/pos.js" defer></script>
+</head>
+
+<body class="cashier-page pos-page">
+
+    <!-- SIDEBAR CONTROL -->
+    <input
+        class="sidebar-checkbox"
+        type="checkbox"
+        id="sidebar-toggle"
+    >
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="sidebar-brand">
+
+                <a href="dashboard.html" class="brand-left">
+                    <img
+                        src="../assets/images/Logo.svg"
+                        class="brand-logo"
+                        alt="Logo ARTHA"
+                    >
+
+                    <span class="brand-title">ARTHA</span>
+                </a>
+
+                <label
+                    class="sidebar-close"
+                    for="sidebar-toggle"
+                    aria-label="Tutup menu"
+                >
+                    &times;
+                </label>
+
+            </div>
+
+            <nav class="sidebar-nav" aria-label="Navigasi kasir">
+
+                <a class="nav-item" href="dashboard.html">
+                    <img
+                        class="nav-icon"
+                        src="../assets/icons/sidebar/dashboard.svg"
+                        alt=""
+                    >
+                    <span>Dashboard</span>
+                </a>
+
+                <a class="nav-item active" href="transaksiPOS.html">
+                    <img
+                        class="nav-icon"
+                        src="../assets/icons/sidebar/transaksiPos.svg"
+                        alt=""
+                    >
+                    <span>Transaksi POS</span>
+                </a>
+
+                <a class="nav-item" href="pembayaran.html">
+                    <img
+                        class="nav-icon"
+                        src="../assets/icons/sidebar/pembayaran.svg"
+                        alt=""
+                    >
+                    <span>Pembayaran</span>
+                </a>
+
+                <a class="nav-item" href="cetakStruk.html">
+                    <img
+                        class="nav-icon"
+                        src="../assets/icons/sidebar/cetakStruk.svg"
+                        alt=""
+                    >
+                    <span>Cetak Struk</span>
+                </a>
+
+                <a class="nav-item" href="cekStok.html">
+                    <img
+                        class="nav-icon"
+                        src="../assets/icons/sidebar/cekStok.svg"
+                        alt=""
+                    >
+                    <span>Cek Stok</span>
+                </a>
+
+                <a class="nav-item logout" href="../index.html">
+                    <img
+                        class="nav-icon"
+                        src="../assets/icons/actions/logout.svg"
+                        alt=""
+                    >
+                    <span>Keluar</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+        <!-- SIDEBAR OVERLAY -->
+        <label
+            class="sidebar-overlay"
+            for="sidebar-toggle"
+            aria-label="Tutup menu"
+        ></label>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- HEADER -->
+            <header class="dashboard-header">
+
+                <div class="header-left">
+
+                    <label
+                        class="hamburger-btn"
+                        for="sidebar-toggle"
+                        aria-label="Buka menu"
+                    >
+                        <img
+                            src="../assets/icons/actions/hamburger.svg"
+                            alt=""
+                        >
+                    </label>
+
+                    <h1>Kasir / Input Penjualan</h1>
+
+                    <a href="dashboard.html" class="mobile-brand">
+                        <img
+                            src="../assets/images/Logo.svg"
+                            alt="Logo ARTHA"
+                        >
+                        <span>ARTHA</span>
+                    </a>
+
+                </div>
+
+                <div class="header-right">
+
+                    <div class="user-profile">
+
+                        <div class="profile-circle">
+                            <img
+                                src="../assets/icons/header/profile.svg"
+                                alt=""
+                            >
+                        </div>
+
+                        <span>Kasir</span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- MOBILE PAGE TITLE -->
+            <h1 class="mobile-page-title">
+                Kasir / Input Penjualan
+            </h1>
+
+
+            <!-- PRODUCT SEARCH -->
+            <div class="product-search">
+
+                <img
+                    src="../assets/icons/actions/search.svg"
+                    alt=""
+                >
+
+                <input
+                    type="search"
+                    id="productSearch"
+                    placeholder="Cari produk / nama barang"
+                    aria-label="Cari produk atau nama barang"
+                >
+
+            </div>
+
+
+            <!-- POS LAYOUT -->
+            <div class="pos-layout">
+
+                <!-- PRODUCT LIST -->
+                <section class="product-list">
+
+                    <div class="table-wrap">
+
+                        <table class="product-table">
+
+                            <thead>
+                                <tr>
+                                    <th>ID Produk</th>
+                                    <th>Nama Produk</th>
+                                    <th>Harga</th>
+                                    <th>Stok</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="productTableBody">
+
+                                <tr
+                                    data-product-id="P001"
+                                    data-product-name="Beras 5 kg"
+                                    data-price="75000"
+                                    data-stock="32"
+                                >
+                                    <td><strong>P001</strong></td>
+                                    <td class="product-name">Beras 5 kg</td>
+                                    <td class="product-price">Rp 75.000</td>
+                                    <td>32</td>
+                                    <td>
+                                        <button
+                                            class="add-item"
+                                            type="button"
+                                            aria-label="Tambah Beras 5 kg"
+                                        >+</button>
+                                    </td>
+                                </tr>
+
+                                <tr
+                                    data-product-id="P002"
+                                    data-product-name="Minyak goreng 1 L"
+                                    data-price="18000"
+                                    data-stock="15"
+                                >
+                                    <td><strong>P002</strong></td>
+                                    <td class="product-name">Minyak goreng 1 L</td>
+                                    <td class="product-price">Rp 18.000</td>
+                                    <td>15</td>
+                                    <td>
+                                        <button
+                                            class="add-item"
+                                            type="button"
+                                            aria-label="Tambah Minyak goreng"
+                                        >+</button>
+                                    </td>
+                                </tr>
+
+                                <tr
+                                    data-product-id="P003"
+                                    data-product-name="Gula pasir 1 kg"
+                                    data-price="17000"
+                                    data-stock="9"
+                                >
+                                    <td><strong>P003</strong></td>
+                                    <td class="product-name">Gula pasir 1 kg</td>
+                                    <td class="product-price">Rp 17.000</td>
+                                    <td>9</td>
+                                    <td>
+                                        <button
+                                            class="add-item"
+                                            type="button"
+                                            aria-label="Tambah Gula pasir"
+                                        >+</button>
+                                    </td>
+                                </tr>
+
+                                <tr
+                                    data-product-id="P004"
+                                    data-product-name="Susu UHT 1 L"
+                                    data-price="21000"
+                                    data-stock="24"
+                                >
+                                    <td><strong>P004</strong></td>
+                                    <td class="product-name">Susu UHT 1 L</td>
+                                    <td class="product-price">Rp 21.000</td>
+                                    <td>24</td>
+                                    <td>
+                                        <button
+                                            class="add-item"
+                                            type="button"
+                                            aria-label="Tambah Susu UHT"
+                                        >+</button>
+                                    </td>
+                                </tr>
+
+                                <tr
+                                    data-product-id="P005"
+                                    data-product-name="Teh celup 25s"
+                                    data-price="8000"
+                                    data-stock="5"
+                                >
+                                    <td><strong>P005</strong></td>
+                                    <td class="product-name">Teh celup 25s</td>
+                                    <td class="product-price">Rp 8.000</td>
+                                    <td>5</td>
+                                    <td>
+                                        <button
+                                            class="add-item"
+                                            type="button"
+                                            aria-label="Tambah Teh celup"
+                                        >+</button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SHOPPING CART -->
+                <aside class="cart-panel" id="keranjang">
+
+                    <!-- CART HEADER -->
+                    <div class="cart-heading">
+
+                        <h2>Keranjang Belanja</h2>
+
+                        <button
+                            class="clear-cart"
+                            type="button"
+                            id="clearCart"
+                        >
+                            <img
+                                src="../assets/icons/actions/delete.svg"
+                                alt=""
+                            >
+                            <span>Hapus semua</span>
+                        </button>
+
+                    </div>
+
+
+                    <!-- CART TABLE HEADER -->
+                    <div class="cart-labels">
+
+                        <span>PRODUK</span>
+                        <span>QTY</span>
+                        <span>JUMLAH</span>
+                        <span></span>
+
+                    </div>
+
+
+                    <!-- CART ITEMS -->
+                    <div class="cart-items" id="cartItems">
+
+                        <div
+                            class="cart-row"
+                            data-product-id="P001"
+                            data-unit-price="75000"
+                            data-stock="32"
+                        >
+
+                            <strong class="cart-product-name">
+                                Beras 5 kg
+                            </strong>
+
+                            <div class="qty-control">
+
+                                <button
+                                    type="button"
+                                    class="qty-btn minus"
+                                    aria-label="Kurangi jumlah"
+                                >−</button>
+
+                                <span class="qty-value">1</span>
+
+                                <button
+                                    type="button"
+                                    class="qty-btn plus"
+                                    aria-label="Tambah jumlah"
+                                >+</button>
+
+                            </div>
+
+                            <b class="cart-subtotal">Rp 75.000</b>
+
+                            <button
+                                class="remove-item"
+                                type="button"
+                                aria-label="Hapus Beras 5 kg"
+                            >
+                                <img
+                                    src="../assets/icons/actions/delete.svg"
+                                    alt=""
+                                >
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            class="cart-row"
+                            data-product-id="P002"
+                            data-unit-price="18000"
+                            data-stock="15"
+                        >
+
+                            <strong class="cart-product-name">
+                                Minyak goreng 1 L
+                            </strong>
+
+                            <div class="qty-control">
+
+                                <button
+                                    type="button"
+                                    class="qty-btn minus"
+                                    aria-label="Kurangi jumlah"
+                                >−</button>
+
+                                <span class="qty-value">2</span>
+
+                                <button
+                                    type="button"
+                                    class="qty-btn plus"
+                                    aria-label="Tambah jumlah"
+                                >+</button>
+
+                            </div>
+
+                            <b class="cart-subtotal">Rp 36.000</b>
+
+                            <button
+                                class="remove-item"
+                                type="button"
+                                aria-label="Hapus Minyak goreng"
+                            >
+                                <img
+                                    src="../assets/icons/actions/delete.svg"
+                                    alt=""
+                                >
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EMPTY CART -->
+                    <p class="empty-cart" id="emptyCart">
+                        Keranjang belanja masih kosong.
+                    </p>
+
+
+                    <!-- CART TOTAL -->
+                    <div class="cart-total">
+
+                        <strong>Total</strong>
+
+                        <b id="cartTotal">Rp 111.000</b>
+
+                    </div>
+
+
+                    <!-- CHECKOUT -->
+                    <a
+                        href="pembayaran.html"
+                        class="checkout-button"
+                        id="checkoutButton"
+                    >
+                        <span>Lanjut Pembayaran</span>
+                        <span class="checkout-arrow">→</span>
+                    </a>
+
+                </aside>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+</html>

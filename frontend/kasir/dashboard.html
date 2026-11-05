@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FFFDF0">
+    <title>Dashboard Kasir | ARTHA</title>
+
+    <link rel="stylesheet" href="../assets/css/shared/variables.css">
+    <link rel="stylesheet" href="../assets/css/shared/reset.css">
+
+    <link rel="stylesheet" href="../assets/css/web/layout.css">
+    <link rel="stylesheet" href="../assets/css/web/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/web/header.css">
+
+    <link rel="stylesheet" href="../assets/css/mobile/layout.css">
+    <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/mobile/header.css">
+    <link rel="stylesheet" href="../assets/css/web/kasir/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/mobile/kasir/dashboard.css">
+</head>
+<body class="cashier-page">
+    <input class="sidebar-checkbox" type="checkbox" id="sidebar-toggle">
+
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <a href="dashboard.html" class="brand-left">
+                    <img src="../assets/images/Logo.svg" class="brand-logo" alt="Logo ARTHA">
+                    <span class="brand-title">ARTHA</span>
+                </a>
+                <label class="sidebar-close" for="sidebar-toggle" aria-label="Tutup menu">&times;</label>
+            </div>
+
+            <nav class="sidebar-nav" aria-label="Navigasi kasir">
+                <a class="nav-item active" href="dashboard.html">
+                    <img class="nav-icon" src="../assets/icons/sidebar/dashboard.svg" alt="">
+                    <span>Dashboard</span>
+                </a>
+                <a class="nav-item" href="transaksiPOS.html">
+                    <img class="nav-icon" src="../assets/icons/sidebar/transaksiPos.svg" alt="">
+                    <span>Transaksi POS</span>
+                </a>
+                <a class="nav-item" href="pembayaran.html">
+                    <img class="nav-icon" src="../assets/icons/sidebar/pembayaran.svg" alt="">
+                    <span>Pembayaran</span>
+                </a>
+                <a class="nav-item" href="cetakStruk.html">
+                    <img class="nav-icon" src="../assets/icons/sidebar/cetakStruk.svg" alt="">
+                    <span>Cetak Struk</span>
+                </a>
+                <a class="nav-item" href="cekStok.html">
+                    <img class="nav-icon" src="../assets/icons/sidebar/cekStok.svg" alt="">
+                    <span>Cek Stok</span>
+                </a>
+                <a class="nav-item logout" href="../index.html">
+                    <img class="nav-icon" src="../assets/icons/actions/logout.svg" alt="">
+                    <span>Keluar</span>
+                </a>
+            </nav>
+        </aside>
+
+        <label class="sidebar-overlay" for="sidebar-toggle" aria-label="Tutup menu"></label>
+
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <label class="hamburger-btn" for="sidebar-toggle" aria-label="Buka menu">
+                        <img src="../assets/icons/actions/hamburger.svg" alt="">
+                    </label>
+                    <h1>Dashboard Kasir</h1>
+                    <a class="mobile-brand" href="dashboard.html">
+                        <img src="../assets/images/Logo.svg" alt="">
+                        <span>ARTHA</span>
+                    </a>
+                </div>
+                <div class="header-right">
+                    <div class="user-profile">
+                        <div class="profile-circle">
+                            <img src="../assets/icons/header/profile.svg" alt="">
+                        </div>
+                        <span>Kasir</span>
+                    </div>
+                </div>
+            </header>
+            <h1 class="mobile-page-title">Dashboard Kasir</h1>
+
+            <section class="summary-cards" aria-label="Ringkasan kasir">
+                <article class="summary-card">
+                    <div class="summary-icon"><img src="../assets/icons/cards/penjualanhariini.svg" alt=""></div>
+                    <div><p>Penjualan Hari Ini</p><strong>Rp 1.25 jt</strong></div>
+                </article>
+                <article class="summary-card">
+                    <div class="summary-icon"><img src="../assets/icons/cards/transaksihariini.svg" alt=""></div>
+                    <div><p>Transaksi Hari Ini</p><strong>19</strong></div>
+                </article>
+                <article class="summary-card">
+                    <div class="summary-icon"><img src="../assets/icons/cards/totalproduktersedia.svg" alt=""></div>
+                    <div><p>Total Produk<br>Tersedia</p><strong>60</strong></div>
+                </article>
+            </section>
+
+            <a class="new-transaction" href="transaksiPOS.html">
+                <span aria-hidden="true">＋</span> Transaksi Baru
+            </a>
+
+            <section class="history-section">
+                <div class="section-heading">
+                    <h2>Riwayat Transaksi Terbaru</h2>
+                    <p>Menampilkan 5 riwayat teratas</p>
+                </div>
+                <div class="table-wrap">
+                    <table class="history-table">
+                        <thead><tr><th>ID Transaksi</th><th>Waktu</th><th>Total</th><th>Status</th></tr></thead>
+                        <tbody>
+                            <tr><td>TRX-0350</td><td>10:42</td><td>Rp 112.000</td><td class="status-done">Selesai</td></tr>
+                            <tr><td>TRX-0349</td><td>10:35</td><td>Rp 56.000</td><td class="status-done">Selesai</td></tr>
+                            <tr><td>TRX-0348</td><td>10:18</td><td>Rp 78.000</td><td class="status-done">Selesai</td></tr>
+                            <tr><td>TRX-0347</td><td>10:00</td><td>Rp 92.000</td><td class="status-done">Selesai</td></tr>
+                            <tr><td>TRX-0346</td><td>09:45</td><td>Rp 145.000</td><td class="status-done">Selesai</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+</body>
+</html>

@@ -172,3 +172,402 @@
     .users-table th,.users-table td { padding-inline: 9px; }
     .user-form-card { padding-inline: 12px; }
 }
+
+
+/* ==========================================
+   ARTHA - ADMIN MANAJEMEN PENGGUNA
+   REVISI FIGMA WEB
+========================================== */
+
+@media (min-width: 769px) {
+
+    .admin-users-content {
+        width: 100%;
+        min-width: 0;
+        padding-top: 12px;
+    }
+
+    /* TOMBOL TAMBAH PENGGUNA */
+    .users-toolbar {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 13px;
+    }
+
+    .add-user-button {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+
+        min-width: 165px;
+        height: 36px;
+        padding: 0 12px;
+
+        color: var(--color-primary);
+        background: var(--color-white);
+        border: 1px solid var(--color-primary);
+        border-radius: 3px;
+
+        font-family: var(--font-primary);
+        font-size: .72rem;
+        font-weight: 600;
+        text-decoration: none;
+        white-space: nowrap;
+        cursor: pointer;
+    }
+
+    /* TABEL */
+    .users-table-card {
+        width: 100%;
+        min-height: 245px;
+        border: 1px solid var(--color-primary);
+        border-radius: 8px;
+        background: var(--color-white);
+        overflow: hidden;
+    }
+
+    .users-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: var(--font-primary);
+        font-size: .68rem;
+    }
+
+    .users-table thead {
+        background: var(--admin-table-header);
+        color: var(--color-white);
+    }
+
+    .users-table th {
+        height: 43px;
+        padding: 0 14px;
+        font-size: .67rem;
+        font-weight: 600;
+        text-align: left;
+    }
+
+    .users-table td {
+        height: 43px;
+        padding: 7px 14px;
+        font-size: .66rem;
+        vertical-align: middle;
+    }
+
+    /* PASSWORD HANYA MASKING STATIS */
+    .password-hidden {
+        display: inline-flex;
+        align-items: center;
+
+        min-width: 84px;
+        height: 22px;
+        padding: 0 9px;
+
+        color: var(--color-primary);
+        background: var(--color-white);
+        border: 1px solid #AAB5CA;
+        border-radius: 3px;
+
+        font-size: .8rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        user-select: none;
+    }
+
+    /* TOMBOL EDIT & HAPUS */
+    .users-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        white-space: nowrap;
+    }
+
+    .action-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 23px;
+        height: 25px;
+        padding: 2px;
+
+        border: none;
+        background: transparent;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .action-button img {
+        width: 16px;
+        height: 16px;
+        object-fit: contain;
+    }
+
+    /* FORM */
+    .user-form-card {
+        width: 100%;
+        margin-top: 13px;
+        padding: 15px 14px 14px;
+
+        background: var(--color-white);
+        border: 1px solid #657391;
+        border-radius: 8px;
+    }
+
+    .user-form-card h2 {
+        margin: 0 0 10px;
+        color: var(--color-primary);
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    .user-form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px 13px;
+    }
+
+    .form-field label {
+        font-size: .62rem;
+        font-weight: 600;
+    }
+
+    .form-field input,
+    .form-field select {
+        width: 100%;
+        height: 35px;
+        padding: 0 10px;
+
+        border: 1px solid #8B9AB8;
+        border-radius: 5px;
+        background: var(--color-white);
+
+        font-family: var(--font-primary);
+        font-size: .67rem;
+    }
+
+    /* PASSWORD BARU, TANPA IKON MATA */
+    .form-password-field {
+        width: 100%;
+        max-width: none;
+    }
+
+    .form-password-field input {
+        width: 100%;
+        padding-right: 10px;
+    }
+
+    /* TOMBOL FORM */
+    .form-actions {
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        margin-top: 4px;
+    }
+
+    .save-user-button,
+    .cancel-user-button {
+        min-width: 72px;
+        height: 32px;
+        border: 1px solid var(--color-primary);
+        border-radius: 3px;
+        font-size: .65rem;
+    }
+}
+
+
+/* ==========================================
+   ARTHA - MANAJEMEN PENGGUNA
+   PERBAIKAN JARAK & IKON HAPUS
+   WEB
+========================================== */
+
+@media (min-width: 769px) {
+
+    /* RAPATKAN HEADER DENGAN KONTEN */
+    .main-content > .dashboard-header {
+        margin-bottom: 0 !important;
+    }
+
+    .main-content > .admin-users-content,
+    .main-content > .page-container.admin-users-content {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+
+    /* TOMBOL TAMBAH PENGGUNA */
+    .users-toolbar {
+        margin-top: 0 !important;
+        margin-bottom: 12px !important;
+    }
+
+    /* TABEL TETAP DI BAWAH TOMBOL */
+    .users-table-card {
+        margin-top: 0 !important;
+    }
+
+    /* IKON TEMPAT SAMPAH MERAH */
+    .users-actions .delete-button img {
+        filter: brightness(0) saturate(100%)
+                invert(26%) sepia(97%)
+                saturate(5488%) hue-rotate(351deg)
+                brightness(101%) contrast(111%) !important;
+
+        opacity: 1 !important;
+    }
+
+    .users-actions .delete-button:hover img {
+        opacity: .75 !important;
+    }
+}
+
+
+/* ==========================================
+   POPUP DELETE USER - WEB
+========================================== */
+
+/* BACKDROP */
+.delete-user-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+    background: rgba(0, 15, 42, .58);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: opacity .2s ease,
+                visibility .2s ease;
+}
+
+/* POPUP TERBUKA */
+.delete-user-overlay:target {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* KOTAK POPUP */
+.delete-user-popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    max-width: 420px;
+
+    padding: 30px 28px 26px;
+
+    background: var(--color-white);
+    border-radius: 14px;
+
+    box-shadow: 0 12px 40px rgba(0, 0, 0, .22);
+
+    font-family: var(--font-primary);
+    text-align: center;
+}
+
+/* IKON SAMPAH */
+.delete-popup-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 64px;
+    height: 64px;
+    margin-bottom: 18px;
+
+    background: #FDE8E8;
+    border-radius: 50%;
+}
+
+.delete-popup-icon img {
+    width: 30px;
+    height: 30px;
+
+    filter: brightness(0) saturate(100%)
+            invert(26%) sepia(97%)
+            saturate(5488%) hue-rotate(351deg)
+            brightness(101%) contrast(111%);
+}
+
+/* JUDUL */
+.delete-user-popup h2 {
+    margin: 0 0 10px;
+
+    color: var(--color-primary);
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+/* DESKRIPSI */
+.delete-user-popup p {
+    margin: 0 0 25px;
+
+    color: #7180A5;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.7;
+}
+
+/* TOMBOL */
+.delete-popup-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    gap: 12px;
+}
+
+.delete-popup-cancel,
+.delete-popup-confirm {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 1;
+    min-height: 43px;
+
+    padding: 10px 14px;
+
+    border-radius: 7px;
+
+    font-family: var(--font-primary);
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* BATAL */
+.delete-popup-cancel {
+    color: var(--color-primary);
+    background: var(--color-white);
+    border: 1px solid var(--color-primary);
+}
+
+.delete-popup-cancel:hover {
+    background: #F2F5FA;
+}
+
+/* KONFIRMASI HAPUS */
+.delete-popup-confirm {
+    color: #FFFFFF;
+    background: #E53935;
+    border: 1px solid #E53935;
+}
+
+.delete-popup-confirm:hover {
+    background: #C62828;
+    border-color: #C62828;
+}

@@ -73,7 +73,8 @@
                 </div>
 
 
-                <form class="login-form" action="#" method="get">
+                    <!-- GANTI TUJUAN LOGIN DI SINI -->
+                    <form class="login-form" action="admin/dashboard.html" method="get">
 
                     <!-- USERNAME -->
                     <div class="login-field">
@@ -102,19 +103,22 @@
                     </div>
 
 
+                                        
                     <!-- PASSWORD -->
                     <div class="login-field">
 
                         <label for="password">Kata sandi</label>
 
-                        <div class="login-input-wrap">
+                        <div class="login-input-wrap login-password-wrap">
 
+                            <!-- ICON LOCK -->
                             <img
                                 src="assets/icons/login/lock.svg"
                                 alt=""
                                 class="login-field-icon"
                             >
 
+                            <!-- INPUT PASSWORD -->
                             <input
                                 type="password"
                                 id="password"
@@ -124,9 +128,54 @@
                                 required
                             >
 
+                            <!-- TOMBOL MATA -->
+                            <button
+                                type="button"
+                                class="login-password-toggle"
+                                aria-label="Lihat kata sandi"
+                                aria-pressed="false"
+                                onclick="
+                                    const passwordInput = document.getElementById('password');
+                                    const isVisible = passwordInput.type === 'text';
+
+                                    passwordInput.type = isVisible ? 'password' : 'text';
+
+                                    this.setAttribute('aria-pressed', String(!isVisible));
+                                    this.setAttribute(
+                                        'aria-label',
+                                        isVisible ? 'Lihat kata sandi' : 'Sembunyikan kata sandi'
+                                    );
+                                "
+                            >
+
+                                <!-- IKON MATA -->
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    width="20"
+                                    height="20"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true"
+                                >
+                                    <path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12Z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+
+                                    <!-- GARIS MATA TERTUTUP -->
+                                    <path
+                                        class="login-eye-slash"
+                                        d="M3 21L21 3"
+                                    />
+                                </svg>
+
+                            </button>
+
                         </div>
 
                     </div>
+
 
 
                     <!-- JENIS PENGGUNA -->
@@ -229,7 +278,7 @@
 
 
                     <!-- LOGIN BUTTON -->
-                    <button type="button" class="login-button">
+                    <button type="submit" class="login-button">
                         <span>Masuk</span>
                         <span class="login-arrow" aria-hidden="true">⟶</span>
                     </button>
