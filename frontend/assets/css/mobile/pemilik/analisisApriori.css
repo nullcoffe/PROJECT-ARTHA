@@ -2,41 +2,16 @@
 /* =====================================================
    ARTHA | PEMILIK - ANALISIS APRIORI
    MOBILE CONTENT ONLY
-   Shared sidebar, header, dan layout tidak diubah.
 ===================================================== */
 
 @media (max-width: 768px) {
 
-
-    /* ==========================================
-       1. JUDUL HALAMAN
-    ========================================== */
-
-    .apriori-page-header {
-        width: 100%;
-        margin-bottom: 14px;
-    }
-
-    .apriori-page-header h2 {
-        margin: 0;
-        color: var(--color-primary);
-        font-family: var(--font-primary);
-        font-size: 1.12rem;
-        font-weight: 700;
-        line-height: 1.4;
-    }
-
-
-    /* ==========================================
-       2. KARTU KONFIGURASI
-    ========================================== */
+    /* 1. KONFIGURASI */
 
     .apriori-config-card {
         width: 100%;
         min-width: 0;
-
         padding: 14px 12px 13px;
-
         background: var(--color-white);
         border: 1px solid var(--color-border);
         border-radius: 11px;
@@ -45,22 +20,16 @@
 
     .apriori-config-card > h2 {
         margin: 0 0 15px;
-
         color: var(--color-primary);
         font-size: .88rem;
         font-weight: 600;
-        line-height: 1.4;
     }
 
-
-    /* ==========================================
-       3. FORM KONFIGURASI
-    ========================================== */
+    /* 2. FORM */
 
     .apriori-form {
         display: grid;
         grid-template-columns: minmax(0, 1fr);
-
         width: 100%;
         gap: 12px;
     }
@@ -72,18 +41,14 @@
         gap: 5px;
     }
 
-    .apriori-field label {
+    .apriori-field > label {
         color: var(--color-primary);
         font-family: var(--font-primary);
         font-size: .68rem;
         font-weight: 500;
-        line-height: 1.4;
     }
 
-
-    /* ==========================================
-       4. DROPDOWN
-    ========================================== */
+    /* 3. DROPDOWN */
 
     .apriori-select-wrap {
         position: relative;
@@ -91,150 +56,126 @@
     }
 
     .apriori-select-wrap select {
-        display: block;
         appearance: none;
         -webkit-appearance: none;
-
+        display: block;
         width: 100%;
         height: 42px;
         padding: 0 36px 0 12px;
-
         color: var(--color-primary);
         background: var(--color-white);
-
         border: 1px solid var(--color-primary);
         border-radius: 6px;
-
         font-family: var(--font-primary);
         font-size: .72rem;
-
         outline: none;
-        box-shadow: none;
         cursor: pointer;
-
-        transition: background-color .2s ease;
+        box-sizing: border-box;
     }
 
-    /* Hover abu-abu */
+    .apriori-select-wrap select:invalid {
+        color: #8290AA;
+    }
+
     .apriori-select-wrap select:hover {
         background: #F3F4F6;
     }
 
-    /* Focus tetap putih */
-    .apriori-select-wrap select:focus,
-    .apriori-select-wrap select:focus-visible {
-        background: var(--color-white);
-        outline: none;
-        box-shadow: none;
-    }
-
-    /* Ikon dropdown */
     .apriori-chevron {
         position: absolute;
         top: 50%;
         right: 15px;
-
         width: 8px;
         height: 8px;
-
         border-right: 1.5px solid var(--color-primary);
         border-bottom: 1.5px solid var(--color-primary);
-
         transform: translateY(-70%) rotate(45deg);
         pointer-events: none;
     }
 
+    /* 4. CUSTOM INPUT */
 
-    /* ==========================================
-       5. JUMLAH TRANSAKSI
-    ========================================== */
+    .apriori-custom-input {
+        display: none;
+        width: 100%;
+        height: 39px;
+        margin-top: 6px;
+        padding: 0 11px;
+        color: var(--color-primary);
+        background: var(--color-white);
+        border: 1px solid var(--color-primary);
+        border-radius: 6px;
+        font-family: var(--font-primary);
+        font-size: .70rem;
+        box-sizing: border-box;
+    }
+
+    .apriori-custom-input::placeholder {
+        color: #8290AA;
+    }
+
+    .apriori-field:has(#minimum-support option[value="custom"]:checked)
+    .apriori-support-custom {
+        display: block;
+    }
+
+    .apriori-field:has(#minimum-confidence option[value="custom"]:checked)
+    .apriori-confidence-custom {
+        display: block;
+    }
+
+    /* 5. TRANSAKSI */
 
     .apriori-transaction-value {
         display: flex;
         align-items: center;
-
         width: 100%;
         min-width: 0;
         height: 42px;
         padding: 0 12px;
-
         color: var(--color-primary);
         background: var(--color-white);
-
         border: 1px solid var(--color-primary);
         border-radius: 6px;
-
         font-family: var(--font-primary);
         font-size: .72rem;
-
-        transition: background-color .2s ease;
-    }
-
-    .apriori-transaction-value:hover {
-        background: #F3F4F6;
+        box-sizing: border-box;
     }
 
     .apriori-transaction-value span {
         display: none;
     }
 
-    /* Default */
     .apriori-transaction-value .transaction-placeholder {
         display: inline;
         color: #8290AA;
     }
 
-    /* Tahun 2024 */
-    .apriori-form:has(
-        #transaction-period option[value="2024"]:checked
-    ) .transaction-placeholder {
+    .apriori-form:has(#transaction-period option[value="2024"]:checked)
+    .transaction-placeholder,
+    .apriori-form:has(#transaction-period option[value="2025"]:checked)
+    .transaction-placeholder,
+    .apriori-form:has(#transaction-period option[value="2026"]:checked)
+    .transaction-placeholder {
         display: none;
     }
 
-    .apriori-form:has(
-        #transaction-period option[value="2024"]:checked
-    ) .transaction-2024 {
+    .apriori-form:has(#transaction-period option[value="2024"]:checked)
+    .transaction-2024,
+    .apriori-form:has(#transaction-period option[value="2025"]:checked)
+    .transaction-2025,
+    .apriori-form:has(#transaction-period option[value="2026"]:checked)
+    .transaction-2026 {
         display: inline;
     }
 
-    /* Tahun 2025 */
-    .apriori-form:has(
-        #transaction-period option[value="2025"]:checked
-    ) .transaction-placeholder {
-        display: none;
-    }
-
-    .apriori-form:has(
-        #transaction-period option[value="2025"]:checked
-    ) .transaction-2025 {
-        display: inline;
-    }
-
-    /* Tahun 2026 */
-    .apriori-form:has(
-        #transaction-period option[value="2026"]:checked
-    ) .transaction-placeholder {
-        display: none;
-    }
-
-    .apriori-form:has(
-        #transaction-period option[value="2026"]:checked
-    ) .transaction-2026 {
-        display: inline;
-    }
-
-
-    /* ==========================================
-       6. TOMBOL JALANKAN ANALISIS
-    ========================================== */
+    /* 6. TOMBOL */
 
     .apriori-action {
         grid-column: 1;
-
         display: flex;
         justify-content: stretch;
         align-items: center;
-
         width: 100%;
         margin-top: 3px;
     }
@@ -243,58 +184,33 @@
         display: flex;
         justify-content: center;
         align-items: center;
-
         width: 100%;
         min-height: 42px;
         padding: 10px 14px;
-
         color: var(--color-primary);
         background: var(--color-white);
-
         border: 1px solid var(--color-primary);
         border-radius: 6px;
-
         font-family: var(--font-primary);
         font-size: .75rem;
         font-weight: 600;
-
-        text-align: center;
         cursor: pointer;
-
-        transition: background-color .2s ease, color .2s ease;
     }
-
-    .apriori-run-button:hover {
-        color: var(--color-white);
-        background: var(--color-primary);
-    }
-
-
-    /* ==========================================
-       7. INFORMASI FORM
-    ========================================== */
 
     .apriori-info {
         margin: 10px 0 0;
-
         color: var(--owner-table-header);
         font-size: .59rem;
         line-height: 1.5;
     }
 
-
-    /* ==========================================
-       8. KARTU HASIL
-    ========================================== */
+    /* 7. HASIL */
 
     .apriori-result-card {
         width: 100%;
         min-width: 0;
-        min-height: 0;
-
         margin-top: 12px;
         padding: 13px 10px;
-
         background: var(--color-white);
         border-radius: 11px;
         box-shadow: none;
@@ -305,28 +221,40 @@
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
-
         gap: 4px;
         margin-bottom: 11px;
     }
 
     .apriori-result-header h2 {
         margin: 0;
-
         color: var(--color-primary);
         font-size: .83rem;
         font-weight: 600;
     }
 
     .apriori-result-period {
-        color: var(--owner-table-header);
         font-size: .59rem;
     }
 
+    /* 8. LEGENDA */
 
-    /* ==========================================
-       9. TABEL HASIL
-    ========================================== */
+    .apriori-lift-legend {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 10px;
+        font-size: .59rem;
+    }
+
+    .lift-color {
+        min-width: 34px;
+        padding: 5px 9px;
+        font-size: .62rem;
+    }
+
+    /* 9. TABEL */
 
     .apriori-table-wrapper {
         width: 100%;
@@ -336,11 +264,9 @@
 
     .apriori-table {
         width: 100%;
-        min-width: 460px;
-
+        min-width: 590px;
         border-collapse: collapse;
-
-        color: var(--color-primary);
+        border-spacing: 0;
         font-family: var(--font-primary);
         font-size: .65rem;
         text-align: left;
@@ -356,31 +282,103 @@
         white-space: nowrap;
     }
 
-
-    /* ==========================================
-       10. POPUP APRIORI SUCCESS
-    ========================================== */
-
-    .apriori-modal {
-        padding: 12px;
+    .lift-value {
+        min-width: 40px;
+        padding: 5px 8px;
+        font-size: .63rem;
     }
 
-    .apriori-modal-content {
+    /* 10. EXPAND */
+
+    .apriori-expand-button {
+        width: 29px;
+        height: 29px;
+    }
+
+    .apriori-expand-chevron {
+        width: 7px;
+        height: 7px;
+    }
+
+    .apriori-detail-row > td {
+        padding: 7px !important;
+        white-space: normal;
+    }
+
+    .apriori-expand-content {
         width: 100%;
-        height: min(540px, 85vh);
-        border-radius: 11px;
+        padding: 9px;
+        box-sizing: border-box;
     }
 
-    .apriori-modal-close {
-        top: 7px;
-        right: 9px;
+    .apriori-expand-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
+        width: 100%;
     }
 
+    .apriori-detail-box {
+        min-width: 0;
+        padding: 10px;
+    }
+
+    .apriori-detail-box h3 {
+        margin: 0 0 9px;
+        font-size: .72rem;
+    }
+
+    .apriori-detail-line {
+        display: grid;
+        grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+        gap: 7px;
+        margin-bottom: 8px;
+        font-size: .62rem;
+        line-height: 1.45;
+    }
+
+    .apriori-detail-line:last-child {
+        margin-bottom: 0;
+    }
+
+    .apriori-detail-line strong {
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    /* 11. PAGINATION */
+
+    .apriori-pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .apriori-page-numbers {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .apriori-page-button,
+    .apriori-page-number {
+        min-width: 30px;
+        height: 30px;
+        padding: 0 9px;
+        font-size: .65rem;
+    }
+
+    .apriori-pagination-info {
+        margin-top: 8px;
+        font-size: .59rem;
+    }
 }
 
 
 /* =====================================================
-   11. HP KECIL
+   HP KECIL
 ===================================================== */
 
 @media (max-width: 380px) {
@@ -393,12 +391,17 @@
         padding: 12px 8px;
     }
 
-    .apriori-page-header h2 {
-        font-size: 1.05rem;
+    .apriori-detail-box {
+        padding: 9px;
     }
 
-    .apriori-modal {
-        padding: 8px;
+    .apriori-detail-line {
+        grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+        gap: 6px;
+        font-size: .59rem;
     }
 
+    .apriori-pagination {
+        gap: 7px;
+    }
 }

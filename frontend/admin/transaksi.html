@@ -414,14 +414,17 @@
 
                 </section>
 
-                <!-- DAFTAR TRANSAKSI -->
+                
+            
+                <!--DAFTAR TRANSAKSI-->
+
                 <section class="transaction-list-section">
 
                     <div class="transaction-list-heading">
-                        <span>Daftar Transaksi</span>
+                        <h2>Daftar Transaksi</h2>
                     </div>
 
-                    <!-- TABEL -->
+                    <!-- TABEL TRANSAKSI -->
                     <div class="transaction-table-card">
 
                         <div class="transaction-table-wrapper">
@@ -439,32 +442,28 @@
 
                                 <tbody id="transactionTableBody">
 
-                                    <tr data-year="2025"
-                                        data-month="02">
+                                    <tr data-year="2025" data-month="02">
                                         <td>TRX-0350</td>
                                         <td>26/02/25</td>
                                         <td>Rina</td>
                                         <td>Rp.120.000</td>
                                     </tr>
 
-                                    <tr data-year="2025"
-                                        data-month="02">
+                                    <tr data-year="2025" data-month="02">
                                         <td>TRX-0359</td>
                                         <td>17/02/25</td>
                                         <td>Alya</td>
                                         <td>Rp.130.000</td>
                                     </tr>
 
-                                    <tr data-year="2025"
-                                        data-month="08">
+                                    <tr data-year="2025" data-month="08">
                                         <td>TRX-0220</td>
                                         <td>08/08/25</td>
                                         <td>Syifa</td>
                                         <td>Rp.100.000</td>
                                     </tr>
 
-                                    <tr data-year="2025"
-                                        data-month="11">
+                                    <tr data-year="2025" data-month="11">
                                         <td>TRX-0110</td>
                                         <td>10/11/25</td>
                                         <td>Indah</td>
@@ -477,11 +476,35 @@
 
                         </div>
 
-                        <p class="transaction-empty-state"
-                           id="transactionEmptyState"
-                           hidden>
-                            Tidak ada transaksi pada periode yang dipilih.
-                        </p>
+                        <!-- PAGINATION -->
+                        <div class="transaction-pagination">
+
+                            <button class="transaction-page-nav" disabled>
+                                Sebelumnya
+                            </button>
+
+                            <div class="transaction-page-numbers">
+
+                                <button class="transaction-page-number active"
+                                        aria-current="page">
+                                    1
+                                </button>
+
+                                <button class="transaction-page-number" disabled>
+                                    2
+                                </button>
+
+                                <button class="transaction-page-number" disabled>
+                                    3
+                                </button>
+
+                            </div>
+
+                            <button class="transaction-page-nav" disabled>
+                                Selanjutnya
+                            </button>
+
+                        </div>
 
                     </div>
 

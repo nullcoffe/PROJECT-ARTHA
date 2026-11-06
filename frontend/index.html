@@ -103,78 +103,78 @@
                     </div>
 
 
-                                        
-                    <!-- PASSWORD -->
-                    <div class="login-field">
+                                
+            <!-- PASSWORD -->
+            <div class="login-field">
 
-                        <label for="password">Kata sandi</label>
+                <label for="password">Kata sandi</label>
 
-                        <div class="login-input-wrap login-password-wrap">
+                <div class="login-input-wrap login-password-wrap">
 
-                            <!-- ICON LOCK -->
-                            <img
-                                src="assets/icons/login/lock.svg"
-                                alt=""
-                                class="login-field-icon"
-                            >
+                    <!-- ICON LOCK -->
+                    <img
+                        src="assets/icons/login/lock.svg"
+                        alt=""
+                        class="login-field-icon"
+                    >
 
-                            <!-- INPUT PASSWORD -->
-                            <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                placeholder="Masukkan Kata Sandi anda"
-                                autocomplete="current-password"
-                                required
-                            >
+                    <!-- INPUT PASSWORD -->
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Masukkan Kata Sandi anda"
+                        autocomplete="current-password"
+                        required
+                    >
 
-                            <!-- TOMBOL MATA -->
-                            <button
-                                type="button"
-                                class="login-password-toggle"
-                                aria-label="Lihat kata sandi"
-                                aria-pressed="false"
-                                onclick="
-                                    const passwordInput = document.getElementById('password');
-                                    const isVisible = passwordInput.type === 'text';
+                    <!-- TOMBOL MATA -->
+                    <button
+                        type="button"
+                        class="login-password-toggle"
+                        aria-label="Lihat kata sandi"
+                        aria-pressed="false"
+                        onclick="
+                            const passwordInput = document.getElementById('password');
+                            const isVisible = passwordInput.type === 'text';
 
-                                    passwordInput.type = isVisible ? 'password' : 'text';
+                            passwordInput.type = isVisible ? 'password' : 'text';
 
-                                    this.setAttribute('aria-pressed', String(!isVisible));
-                                    this.setAttribute(
-                                        'aria-label',
-                                        isVisible ? 'Lihat kata sandi' : 'Sembunyikan kata sandi'
-                                    );
-                                "
-                            >
+                            this.setAttribute('aria-pressed', String(!isVisible));
+                            this.setAttribute(
+                                'aria-label',
+                                isVisible ? 'Lihat kata sandi' : 'Sembunyikan kata sandi'
+                            );
+                        "
+                    >
 
-                                <!-- IKON MATA -->
-                                <svg
-                                    viewBox="0 0 24 24"
-                                    width="20"
-                                    height="20"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="1.8"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    aria-hidden="true"
-                                >
-                                    <path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12Z"/>
-                                    <circle cx="12" cy="12" r="3"/>
+                        <!-- IKON MATA -->
+                        <svg
+                            viewBox="0 0 24 24"
+                            width="20"
+                            height="20"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12Z"/>
+                            <circle cx="12" cy="12" r="3"/>
 
-                                    <!-- GARIS MATA TERTUTUP -->
-                                    <path
-                                        class="login-eye-slash"
-                                        d="M3 21L21 3"
-                                    />
-                                </svg>
+                            <!-- GARIS MATA TERTUTUP -->
+                            <path
+                                class="login-eye-slash"
+                                d="M3 21L21 3"
+                            />
+                        </svg>
 
-                            </button>
+                    </button>
 
-                        </div>
+                </div>
 
-                    </div>
+            </div>
 
 
 

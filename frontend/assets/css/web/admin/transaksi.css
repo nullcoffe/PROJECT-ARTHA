@@ -329,107 +329,146 @@
     text-align: center;
 }
 
+
 /* ==========================================
-   ADMIN TRANSAKSI
-   FILTER TAHUN DAN TOMBOL BULAN
+   DROPDOWN BULAN - SAMAKAN DENGAN TAHUN
 ========================================== */
 
-/* WRAPPER TAHUN */
-.transaction-select-wrap {
-    position: relative;
-    width: 100%;
-    min-width: 0;
-}
+.transaction-filter-field .transaction-month-trigger {
+    display: flex !important;
+    align-items: center !important;
 
-/* DROPDOWN TAHUN */
-.transaction-select-wrap select {
-    display: block;
-    appearance: none;
-    -webkit-appearance: none;
+    width: 100% !important;
+    height: 33px !important;
+    min-height: 33px !important;
+    max-height: 33px !important;
 
-    width: 100%;
-    height: 33px;
-
-    padding: 0 37px 0 12px;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 12px !important;
 
     color: var(--color-primary);
     background: var(--color-white);
 
-    border: 1px solid var(--color-primary);
+    border: 1.5px solid var(--color-primary);
     border-radius: 6px;
 
     font-family: var(--font-primary);
     font-size: .72rem;
-    cursor: pointer;
+    line-height: normal;
+
+    text-decoration: none;
+    box-shadow: none;
 }
 
-/* PANAH TAHUN - TIDAK MENEMPEL FRAME */
-.transaction-select-wrap::after {
-    content: "";
-
-    position: absolute;
-    top: 50%;
-    right: 15px;
-
-    width: 7px;
-    height: 7px;
-
-    border-right: 1.5px solid var(--color-primary);
-    border-bottom: 1.5px solid var(--color-primary);
-
-    transform: translateY(-70%) rotate(45deg);
-
-    pointer-events: none;
+/* Tanpa ikon panah tambahan */
+.transaction-filter-field .transaction-month-trigger::after {
+    content: none !important;
+    display: none !important;
 }
 
-/* TOMBOL PILIH BULAN */
-.transaction-month-trigger {
-    position: relative;
+/* ==========================================
+   PAGINATION DAFTAR TRANSAKSI
+========================================== */
 
+.transaction-pagination {
     display: flex;
     align-items: center;
+    justify-content: center;
+    gap: 8px;
 
     width: 100%;
-    height: 33px;
+    padding: 17px 12px;
 
-    padding: 0 37px 0 12px;
+    border-top: 1px solid #E5EAF1;
+    background: var(--color-white);
+}
+
+.transaction-page-numbers {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.transaction-page-number,
+.transaction-page-nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 36px;
+    height: 35px;
+    padding: 0 10px;
 
     color: var(--color-primary);
     background: var(--color-white);
 
-    border: 1px solid var(--color-primary);
-    border-radius: 6px;
+    border: 1px solid #DCE3EF;
+    border-radius: 7px;
 
     font-family: var(--font-primary);
-    font-size: .72rem;
-    font-weight: 400;
-    text-decoration: none;
+    font-size: .7rem;
+    font-weight: 500;
 
     cursor: pointer;
 }
 
-/* PANAH TOMBOL BULAN */
-.transaction-month-trigger::after {
-    content: "";
-
-    position: absolute;
-    top: 50%;
-    right: 15px;
-
-    width: 7px;
-    height: 7px;
-
-    border-right: 1.5px solid var(--color-primary);
-    border-bottom: 1.5px solid var(--color-primary);
-
-    transform: translateY(-70%) rotate(45deg);
-
-    pointer-events: none;
+.transaction-page-number.active {
+    color: var(--color-white);
+    background: var(--color-primary);
+    border-color: var(--color-primary);
 }
 
-.transaction-select-wrap select:focus,
-.transaction-month-trigger:focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 2px;
+.transaction-page-number:disabled,
+.transaction-page-nav:disabled {
+    color: #AAB4C5;
+    background: #F7F8FA;
+    cursor: not-allowed;
+}
+/* ==========================================
+   FIX JUDUL DAFTAR TRANSAKSI
+   POLOS TANPA TAMPILAN BUTTON
+========================================== */
+
+.transaction-list-heading {
+    display: block !important;
+
+    width: 100% !important;
+    min-height: unset !important;
+    height: auto !important;
+
+    margin: 25px 0 13px !important;
+    padding: 0 !important;
+
+    color: var(--color-primary);
+    background: transparent !important;
+
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
 }
 
+/* Jika judul menggunakan elemen button */
+.transaction-list-heading button {
+    all: unset;
+    display: block;
+    color: var(--color-primary);
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: default;
+}
+
+/* Judul */
+.transaction-list-heading h2 {
+    margin: 0 !important;
+    padding: 0 !important;
+    color: var(--color-primary);
+    font-size: 1rem;
+    font-weight: 700;
+}

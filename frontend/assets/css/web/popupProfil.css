@@ -1,28 +1,277 @@
 
 /* ==========================================
-   ARTHA - PERBAIKAN FRAME POPUP MOBILE
+   ARTHA - POPUP PROFIL WEB
 ========================================== */
 
-@media (max-width: 768px) {
+.profile-popup-toggle,
+.password-expand-toggle {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
 
-    .artha-profile-frame {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
+/* PEMANGGIL PROFIL */
+.user-profile {
+    cursor: pointer;
+}
 
-        width: 100vw;
-        height: 100dvh;
+/* OVERLAY */
+.profile-popup-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 76px 32px 24px;
+}
 
-        max-width: none;
-        max-height: none;
+.profile-popup-toggle:checked ~ .profile-popup-overlay {
+    display: flex;
+}
 
-        margin: 0;
-        padding: 0;
+.profile-popup-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 15, 40, .35);
+    cursor: pointer;
+}
 
-        border: none;
-        background: transparent;
+/* POPUP */
+.profile-popup {
+    position: relative;
+    z-index: 2;
+    width: 410px;
+    max-width: 100%;
+    height: fit-content;
+    padding: 17px;
+    background: #FFFFFF;
+    border: 1px solid #E1E6EF;
+    border-radius: 10px;
+    box-shadow: 0 8px 28px rgba(0, 24, 63, .15);
+    font-family: var(--font-primary);
+}
 
-        z-index: 99999;
-    }
+/* HEADER */
+.profile-popup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 17px;
+}
+
+.profile-popup-header h2 {
+    margin: 0;
+    color: var(--color-primary);
+    font-size: .9rem;
+    font-weight: 700;
+}
+
+.profile-popup-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    color: #7180A5;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+/* INFORMASI PENGGUNA */
+.profile-user-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.profile-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 61px;
+    height: 61px;
+    flex: 0 0 61px;
+    background: #142F78;
+    border-radius: 50%;
+}
+
+.profile-avatar img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+.profile-user-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    min-width: 0;
+}
+
+.profile-user-detail strong {
+    color: var(--color-primary);
+    font-size: .83rem;
+    font-weight: 700;
+}
+
+.profile-user-detail span {
+    color: #7180A5;
+    font-size: .73rem;
+}
+
+.profile-role {
+    width: fit-content;
+    margin-top: 2px;
+    padding: 4px 11px;
+    color: #18366B;
+    background: #E9EFFB;
+    border-radius: 20px;
+    font-size: .65rem;
+    font-weight: 600;
+}
+
+/* PEMISAH */
+.profile-divider {
+    height: 1px;
+    margin: 18px 0 9px;
+    background: #E5EAF1;
+}
+
+/* UBAH PASSWORD */
+.password-expand-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 37px;
+    color: var(--color-primary);
+    font-size: .78rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.password-chevron {
+    width: 8px;
+    height: 8px;
+    margin-right: 3px;
+    border-right: 1.5px solid var(--color-primary);
+    border-bottom: 1.5px solid var(--color-primary);
+    transform: rotate(45deg);
+    transition: transform .2s ease;
+}
+
+.password-expand-toggle:checked
+~ .password-expand-label .password-chevron {
+    transform: rotate(225deg);
+}
+
+/* EXPAND FIELD */
+.password-expand-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .22s ease;
+}
+
+.password-expand-toggle:checked
+~ .password-expand-content {
+    grid-template-rows: 1fr;
+}
+
+.profile-password-form {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.profile-password-form > label {
+    margin-top: 5px;
+    color: var(--color-primary);
+    font-size: .72rem;
+    font-weight: 500;
+}
+
+/* INPUT PASSWORD DAN IKON MATA */
+.password-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.password-input-wrapper input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 47px;
+    padding: 0 43px 0 13px;
+    color: var(--color-primary);
+    background: #FFFFFF;
+    border: 1px solid #AAB4C5;
+    border-radius: 7px;
+    font-family: var(--font-primary);
+    font-size: .75rem;
+    outline: none;
+}
+
+.password-input-wrapper input:focus {
+    border-color: var(--color-primary);
+}
+
+.password-input-wrapper input::placeholder {
+    color: #91A0B8;
+}
+
+.password-visibility-toggle {
+    position: absolute;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 29px;
+    height: 29px;
+    padding: 0;
+    color: #7180A5;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.password-visibility-toggle svg {
+    width: 19px;
+    height: 19px;
+}
+
+/* SIMPAN */
+.profile-save-button {
+    align-self: flex-end;
+    min-width: 113px;
+    height: 42px;
+    margin-top: 6px;
+    padding: 0 18px;
+    color: #FFFFFF;
+    background: #142F78;
+    border: 1px solid #142F78;
+    border-radius: 7px;
+    font-family: var(--font-primary);
+    font-size: .73rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.profile-save-button:hover {
+    background: #0D245E;
+}
+
+.profile-save-button:focus-visible,
+.password-visibility-toggle:focus-visible,
+.profile-popup-close:focus-visible {
+    outline: 2px solid #6C8EDB;
+    outline-offset: 3px;
 }

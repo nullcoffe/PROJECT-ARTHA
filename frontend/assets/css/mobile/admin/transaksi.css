@@ -361,3 +361,71 @@
         font-size: 12px;
     }
 }
+
+@media (max-width: 768px) {
+    .transaction-filter-field .transaction-month-trigger {
+        height: 33px !important;
+        min-height: 33px !important;
+        max-height: 33px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .transaction-pagination {
+        gap: 5px;
+        padding: 13px 6px;
+    }
+
+    .transaction-page-numbers {
+        gap: 4px;
+    }
+
+    .transaction-page-number,
+    .transaction-page-nav {
+        min-width: 30px;
+        height: 32px;
+        padding: 0 7px;
+        font-size: .62rem;
+        border-radius: 6px;
+    }
+
+}
+/* ==========================================
+   FIX JUDUL DAFTAR TRANSAKSI - MOBILE
+========================================== */
+
+@media (max-width: 768px) {
+
+    .transaction-list-heading {
+        display: block !important;
+
+        width: 100% !important;
+        min-height: unset !important;
+        height: auto !important;
+
+        margin: 19px 0 11px !important;
+        padding: 0 !important;
+
+        color: var(--color-primary);
+        background: transparent !important;
+
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+
+        font-family: var(--font-primary);
+        font-size: .88rem;
+        font-weight: 700;
+    }
+
+    .transaction-list-heading h2 {
+        margin: 0 !important;
+        padding: 0 !important;
+
+        color: var(--color-primary);
+        font-size: .88rem;
+        font-weight: 700;
+    }
+}

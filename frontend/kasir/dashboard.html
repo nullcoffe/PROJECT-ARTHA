@@ -1,129 +1,682 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FFFDF0">
+
     <title>Dashboard Kasir | ARTHA</title>
 
+    <!-- SHARED CSS -->
     <link rel="stylesheet" href="../assets/css/shared/variables.css">
     <link rel="stylesheet" href="../assets/css/shared/reset.css">
 
+    <!-- WEB CSS -->
     <link rel="stylesheet" href="../assets/css/web/layout.css">
     <link rel="stylesheet" href="../assets/css/web/sidebar.css">
     <link rel="stylesheet" href="../assets/css/web/header.css">
+    <link rel="stylesheet" href="../assets/css/web/kasir/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/web/popupProfil.css">
 
+    <!-- MOBILE CSS -->
     <link rel="stylesheet" href="../assets/css/mobile/layout.css">
     <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
     <link rel="stylesheet" href="../assets/css/mobile/header.css">
-    <link rel="stylesheet" href="../assets/css/web/kasir/dashboard.css">
     <link rel="stylesheet" href="../assets/css/mobile/kasir/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/mobile/popupProfil.css">
 </head>
-<body class="cashier-page">
-    <input class="sidebar-checkbox" type="checkbox" id="sidebar-toggle">
 
-    <div class="dashboard-layout">
-        <aside class="sidebar">
-            <div class="sidebar-brand">
-                <a href="dashboard.html" class="brand-left">
-                    <img src="../assets/images/Logo.svg" class="brand-logo" alt="Logo ARTHA">
-                    <span class="brand-title">ARTHA</span>
-                </a>
-                <label class="sidebar-close" for="sidebar-toggle" aria-label="Tutup menu">&times;</label>
+<body class="cashier-page">
+
+    <!-- ==========================================
+         KONTROL POPUP PROFIL
+    ========================================== -->
+
+    <input type="checkbox"
+           id="profile-popup-toggle"
+           class="profile-popup-toggle">
+
+
+    <!-- ==========================================
+         POPUP PROFIL KASIR
+    ========================================== -->
+
+    <div class="profile-popup-overlay">
+
+        <!-- OVERLAY UNTUK MENUTUP POPUP -->
+        <label for="profile-popup-toggle"
+               class="profile-popup-backdrop"
+               aria-label="Tutup popup profil">
+        </label>
+
+        <section class="profile-popup"
+                 role="dialog"
+                 aria-modal="true"
+                 aria-labelledby="profile-popup-title">
+
+            <!-- HEADER POPUP -->
+            <div class="profile-popup-header">
+
+                <h2 id="profile-popup-title">
+                    Profil Pengguna
+                </h2>
+
+                <label for="profile-popup-toggle"
+                       class="profile-popup-close"
+                       aria-label="Tutup popup">
+
+                    &times;
+
+                </label>
+
             </div>
 
-            <nav class="sidebar-nav" aria-label="Navigasi kasir">
-                <a class="nav-item active" href="dashboard.html">
-                    <img class="nav-icon" src="../assets/icons/sidebar/dashboard.svg" alt="">
+
+            <!-- INFORMASI PENGGUNA -->
+            <div class="profile-user-info">
+
+                <!-- IKON PROFIL -->
+                <div class="profile-avatar">
+
+                    <img src="../assets/icons/header/profile.svg"
+                         alt="Ikon pengguna">
+
+                </div>
+
+                <!-- DATA AKUN -->
+                <div class="profile-user-detail">
+
+                    <strong>Nama Pengguna</strong>
+
+                    <span>username</span>
+
+                    <small class="profile-role">
+                        Kasir
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- GARIS PEMISAH -->
+            <div class="profile-divider"></div>
+
+
+            <!-- ==================================
+                 KONTROL UBAH PASSWORD
+            =================================== -->
+
+            <input type="checkbox"
+                   id="password-expand"
+                   class="password-expand-toggle">
+
+            <label for="password-expand"
+                   class="password-expand-label">
+
+                <span>Ubah Password</span>
+
+                <span class="password-chevron"
+                      aria-hidden="true"></span>
+
+            </label>
+
+
+            <!-- ==================================
+                 FORM PASSWORD
+                 AWALNYA TERSEMBUNYI
+            =================================== -->
+
+            <div class="password-expand-content">
+
+                <form class="profile-password-form"
+                      action="#"
+                      method="post">
+
+                    <label for="new-password">
+                        Password Baru
+                    </label>
+
+                    <!-- INPUT PASSWORD + IKON MATA -->
+                    <div class="password-input-wrapper">
+
+                        <input type="password"
+                               id="new-password"
+                               name="new_password"
+                               placeholder="Masukkan password baru"
+                               autocomplete="new-password"
+                               required>
+
+                        <!-- TOMBOL LIHAT PASSWORD -->
+                        <button type="button"
+                                class="password-visibility-toggle"
+                                id="toggle-password"
+                                aria-label="Lihat password"
+                                aria-pressed="false">
+
+                            <svg id="password-eye-icon"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="1.8"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
+
+                                <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/>
+
+                                <circle cx="12"
+                                        cy="12"
+                                        r="3"/>
+
+                            </svg>
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- SIMPAN PASSWORD -->
+                    <button type="submit"
+                            class="profile-save-button">
+
+                        Simpan
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- ==========================================
+         KONTROL SIDEBAR
+    ========================================== -->
+
+    <input class="sidebar-checkbox"
+           type="checkbox"
+           id="sidebar-toggle">
+
+
+    <!-- ==========================================
+         MAIN LAYOUT
+    ========================================== -->
+
+    <div class="dashboard-layout">
+
+
+        <!-- ======================================
+             SIDEBAR KASIR
+        ======================================= -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-brand">
+
+                <a href="dashboard.html"
+                   class="brand-left">
+
+                    <img src="../assets/images/Logo.svg"
+                         class="brand-logo"
+                         alt="Logo ARTHA">
+
+                    <span class="brand-title">
+                        ARTHA
+                    </span>
+
+                </a>
+
+                <label class="sidebar-close"
+                       for="sidebar-toggle"
+                       aria-label="Tutup menu">
+
+                    &times;
+
+                </label>
+
+            </div>
+
+
+            <!-- MENU KASIR -->
+            <nav class="sidebar-nav"
+                 aria-label="Navigasi kasir">
+
+                <!-- DASHBOARD -->
+                <a class="nav-item active"
+                   href="dashboard.html"
+                   aria-current="page">
+
+                    <img class="nav-icon"
+                         src="../assets/icons/sidebar/dashboard.svg"
+                         alt="">
+
                     <span>Dashboard</span>
+
                 </a>
-                <a class="nav-item" href="transaksiPOS.html">
-                    <img class="nav-icon" src="../assets/icons/sidebar/transaksiPos.svg" alt="">
+
+
+                <!-- TRANSAKSI POS -->
+                <a class="nav-item"
+                   href="transaksiPOS.html">
+
+                    <img class="nav-icon"
+                         src="../assets/icons/sidebar/transaksiPos.svg"
+                         alt="">
+
                     <span>Transaksi POS</span>
+
                 </a>
-                <a class="nav-item" href="pembayaran.html">
-                    <img class="nav-icon" src="../assets/icons/sidebar/pembayaran.svg" alt="">
+
+
+                <!-- PEMBAYARAN -->
+                <a class="nav-item"
+                   href="pembayaran.html">
+
+                    <img class="nav-icon"
+                         src="../assets/icons/sidebar/pembayaran.svg"
+                         alt="">
+
                     <span>Pembayaran</span>
+
                 </a>
-                <a class="nav-item" href="cetakStruk.html">
-                    <img class="nav-icon" src="../assets/icons/sidebar/cetakStruk.svg" alt="">
+
+
+                <!-- CETAK STRUK -->
+                <a class="nav-item"
+                   href="cetakStruk.html">
+
+                    <img class="nav-icon"
+                         src="../assets/icons/sidebar/cetakStruk.svg"
+                         alt="">
+
                     <span>Cetak Struk</span>
+
                 </a>
-                <a class="nav-item" href="cekStok.html">
-                    <img class="nav-icon" src="../assets/icons/sidebar/cekStok.svg" alt="">
+
+
+                <!-- CEK STOK -->
+                <a class="nav-item"
+                   href="cekStok.html">
+
+                    <img class="nav-icon"
+                         src="../assets/icons/sidebar/cekStok.svg"
+                         alt="">
+
                     <span>Cek Stok</span>
+
                 </a>
-                <a class="nav-item logout" href="../index.html">
-                    <img class="nav-icon" src="../assets/icons/actions/logout.svg" alt="">
+
+
+                <!-- KELUAR -->
+                <a class="nav-item logout"
+                   href="../index.html">
+
+                    <img class="nav-icon"
+                         src="../assets/icons/actions/logout.svg"
+                         alt="">
+
                     <span>Keluar</span>
+
                 </a>
+
             </nav>
+
         </aside>
 
-        <label class="sidebar-overlay" for="sidebar-toggle" aria-label="Tutup menu"></label>
+
+        <!-- OVERLAY SIDEBAR -->
+        <label class="sidebar-overlay"
+               for="sidebar-toggle"
+               aria-label="Tutup menu">
+        </label>
+
+
+        <!-- ======================================
+             MAIN CONTENT KASIR
+        ======================================= -->
 
         <main class="main-content">
-            <header class="dashboard-header">
-                <div class="header-left">
-                    <label class="hamburger-btn" for="sidebar-toggle" aria-label="Buka menu">
-                        <img src="../assets/icons/actions/hamburger.svg" alt="">
-                    </label>
-                    <h1>Dashboard Kasir</h1>
-                    <a class="mobile-brand" href="dashboard.html">
-                        <img src="../assets/images/Logo.svg" alt="">
-                        <span>ARTHA</span>
-                    </a>
-                </div>
-                <div class="header-right">
-                    <div class="user-profile">
-                        <div class="profile-circle">
-                            <img src="../assets/icons/header/profile.svg" alt="">
-                        </div>
-                        <span>Kasir</span>
-                    </div>
-                </div>
-            </header>
-            <h1 class="mobile-page-title">Dashboard Kasir</h1>
 
-            <section class="summary-cards" aria-label="Ringkasan kasir">
+
+            <!-- HEADER -->
+            <header class="dashboard-header">
+
+                <div class="header-left">
+
+                    <!-- HAMBURGER -->
+                    <label class="hamburger-btn"
+                           for="sidebar-toggle"
+                           aria-label="Buka menu">
+
+                        <img src="../assets/icons/actions/hamburger.svg"
+                             alt="">
+
+                    </label>
+
+
+                    <h1>Dashboard Kasir</h1>
+
+
+                    <!-- BRAND MOBILE -->
+                    <a class="mobile-brand"
+                       href="dashboard.html">
+
+                        <img src="../assets/images/Logo.svg"
+                             alt="">
+
+                        <span>ARTHA</span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- PROFIL KASIR -->
+                <div class="header-right">
+
+                    <!-- PEMANGGIL POPUP PROFIL -->
+                    <label for="profile-popup-toggle"
+                           class="user-profile"
+                           aria-label="Buka profil Kasir">
+
+                        <div class="profile-circle">
+
+                            <img src="../assets/icons/header/profile.svg"
+                                 alt="">
+
+                        </div>
+
+                        <span>Kasir</span>
+
+                    </label>
+
+                </div>
+
+            </header>
+
+
+            <!-- JUDUL MOBILE -->
+            <h1 class="mobile-page-title">
+                Dashboard Kasir
+            </h1>
+
+
+            <!-- ======================================
+                 RINGKASAN KASIR
+            ======================================= -->
+
+            <section class="summary-cards"
+                     aria-label="Ringkasan kasir">
+
+
+                <!-- PENJUALAN HARI INI -->
                 <article class="summary-card">
-                    <div class="summary-icon"><img src="../assets/icons/cards/penjualanhariini.svg" alt=""></div>
-                    <div><p>Penjualan Hari Ini</p><strong>Rp 1.25 jt</strong></div>
+
+                    <div class="summary-icon">
+
+                        <img src="../assets/icons/cards/penjualanhariini.svg"
+                             alt="">
+
+                    </div>
+
+                    <div>
+
+                        <p>Penjualan Hari Ini</p>
+
+                        <strong>Rp 1.25 jt</strong>
+
+                    </div>
+
                 </article>
+
+
+                <!-- TRANSAKSI HARI INI -->
                 <article class="summary-card">
-                    <div class="summary-icon"><img src="../assets/icons/cards/transaksihariini.svg" alt=""></div>
-                    <div><p>Transaksi Hari Ini</p><strong>19</strong></div>
+
+                    <div class="summary-icon">
+
+                        <img src="../assets/icons/cards/transaksihariini.svg"
+                             alt="">
+
+                    </div>
+
+                    <div>
+
+                        <p>Transaksi Hari Ini</p>
+
+                        <strong>19</strong>
+
+                    </div>
+
                 </article>
+
+
+                <!-- PRODUK TERSEDIA -->
                 <article class="summary-card">
-                    <div class="summary-icon"><img src="../assets/icons/cards/totalproduktersedia.svg" alt=""></div>
-                    <div><p>Total Produk<br>Tersedia</p><strong>60</strong></div>
+
+                    <div class="summary-icon">
+
+                        <img src="../assets/icons/cards/totalproduktersedia.svg"
+                             alt="">
+
+                    </div>
+
+                    <div>
+
+                        <p>
+                            Total Produk<br>
+                            Tersedia
+                        </p>
+
+                        <strong>60</strong>
+
+                    </div>
+
                 </article>
+
             </section>
 
-            <a class="new-transaction" href="transaksiPOS.html">
-                <span aria-hidden="true">＋</span> Transaksi Baru
+
+            <!-- ======================================
+                 TOMBOL TRANSAKSI BARU
+            ======================================= -->
+
+            <a class="new-transaction"
+               href="transaksiPOS.html">
+
+                <span aria-hidden="true">＋</span>
+
+                Transaksi Baru
+
             </a>
 
+
+            <!-- ======================================
+                 RIWAYAT TRANSAKSI
+            ======================================= -->
+
             <section class="history-section">
+
                 <div class="section-heading">
+
                     <h2>Riwayat Transaksi Terbaru</h2>
+
                     <p>Menampilkan 5 riwayat teratas</p>
+
                 </div>
+
+
                 <div class="table-wrap">
+
                     <table class="history-table">
-                        <thead><tr><th>ID Transaksi</th><th>Waktu</th><th>Total</th><th>Status</th></tr></thead>
+
+                        <thead>
+                            <tr>
+                                <th>ID Transaksi</th>
+                                <th>Waktu</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+
                         <tbody>
-                            <tr><td>TRX-0350</td><td>10:42</td><td>Rp 112.000</td><td class="status-done">Selesai</td></tr>
-                            <tr><td>TRX-0349</td><td>10:35</td><td>Rp 56.000</td><td class="status-done">Selesai</td></tr>
-                            <tr><td>TRX-0348</td><td>10:18</td><td>Rp 78.000</td><td class="status-done">Selesai</td></tr>
-                            <tr><td>TRX-0347</td><td>10:00</td><td>Rp 92.000</td><td class="status-done">Selesai</td></tr>
-                            <tr><td>TRX-0346</td><td>09:45</td><td>Rp 145.000</td><td class="status-done">Selesai</td></tr>
+
+                            <tr>
+                                <td>TRX-0350</td>
+                                <td>10:42</td>
+                                <td>Rp 112.000</td>
+                                <td class="status-done">Selesai</td>
+                            </tr>
+
+                            <tr>
+                                <td>TRX-0349</td>
+                                <td>10:35</td>
+                                <td>Rp 56.000</td>
+                                <td class="status-done">Selesai</td>
+                            </tr>
+
+                            <tr>
+                                <td>TRX-0348</td>
+                                <td>10:18</td>
+                                <td>Rp 78.000</td>
+                                <td class="status-done">Selesai</td>
+                            </tr>
+
+                            <tr>
+                                <td>TRX-0347</td>
+                                <td>10:00</td>
+                                <td>Rp 92.000</td>
+                                <td class="status-done">Selesai</td>
+                            </tr>
+
+                            <tr>
+                                <td>TRX-0346</td>
+                                <td>09:45</td>
+                                <td>Rp 145.000</td>
+                                <td class="status-done">Selesai</td>
+                            </tr>
+
                         </tbody>
+
                     </table>
+
                 </div>
+
             </section>
+
         </main>
+
     </div>
+
+
+    <!-- ==========================================
+         INTERAKSI IKON MATA PASSWORD
+         KHUSUS TAMPILAN
+    ========================================== -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const passwordInput =
+                document.getElementById("new-password");
+
+            const toggleButton =
+                document.getElementById("toggle-password");
+
+            const eyeIcon =
+                document.getElementById("password-eye-icon");
+
+            const popupToggle =
+                document.getElementById("profile-popup-toggle");
+
+            const passwordExpand =
+                document.getElementById("password-expand");
+
+
+            if (!passwordInput || !toggleButton || !eyeIcon) {
+                return;
+            }
+
+
+            const eyeVisible = `
+                <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/>
+                <circle cx="12" cy="12" r="3"/>
+            `;
+
+            const eyeHidden = `
+                <path d="M3 3l18 18"/>
+                <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/>
+                <path d="M9.9 5.2A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a15.8 15.8 0 0 1-3.1 3.8"/>
+                <path d="M6.2 6.2C3.5 8 2 12 2 12s3.6 7 10 7c1.2 0 2.3-.2 3.3-.6"/>
+            `;
+
+
+            toggleButton.addEventListener("click", function () {
+
+                const showPassword =
+                    passwordInput.type === "password";
+
+                passwordInput.type =
+                    showPassword ? "text" : "password";
+
+                toggleButton.setAttribute(
+                    "aria-label",
+                    showPassword
+                        ? "Sembunyikan password"
+                        : "Lihat password"
+                );
+
+                toggleButton.setAttribute(
+                    "aria-pressed",
+                    String(showPassword)
+                );
+
+                eyeIcon.innerHTML =
+                    showPassword ? eyeHidden : eyeVisible;
+
+            });
+
+
+            // RESET SAAT POPUP DITUTUP
+            if (popupToggle) {
+
+                popupToggle.addEventListener("change", function () {
+
+                    if (!this.checked) {
+
+                        passwordInput.value = "";
+                        passwordInput.type = "password";
+
+                        if (passwordExpand) {
+                            passwordExpand.checked = false;
+                        }
+
+                        toggleButton.setAttribute(
+                            "aria-label",
+                            "Lihat password"
+                        );
+
+                        toggleButton.setAttribute(
+                            "aria-pressed",
+                            "false"
+                        );
+
+                        eyeIcon.innerHTML = eyeVisible;
+
+                    }
+
+                });
+
+            }
+
+        });
+    </script>
 
 </body>
 </html>

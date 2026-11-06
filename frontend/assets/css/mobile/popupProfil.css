@@ -1,8 +1,96 @@
+
+/* ==========================================
+   ARTHA - POPUP PROFIL MOBILE
+========================================== */
+
 @media (max-width: 768px) {
-    .artha-profile-frame {
-        top: 65px;
-        right: 12px;
-        width: min(320px, calc(100vw - 24px));
-        height: 250px;
+
+    .profile-popup-overlay {
+        align-items: flex-start;
+        justify-content: center;
+        padding: 70px 12px 15px;
     }
+
+    .profile-popup {
+        width: 100%;
+        max-width: 410px;
+        padding: 16px;
+        border-radius: 10px;
+    }
+
+    .profile-popup-header {
+        margin-bottom: 15px;
+    }
+
+    .profile-popup-header h2 {
+        font-size: .87rem;
+    }
+
+    .profile-avatar {
+        width: 55px;
+        height: 55px;
+        flex-basis: 55px;
+    }
+
+    .profile-avatar img {
+        width: 26px;
+        height: 26px;
+    }
+
+    .profile-user-detail strong {
+        font-size: .79rem;
+    }
+
+    .profile-user-detail span {
+        font-size: .69rem;
+    }
+
+    .profile-role {
+        font-size: .62rem;
+    }
+
+    .profile-divider {
+        margin: 15px 0 8px;
+    }
+
+    .password-expand-label {
+        min-height: 37px;
+        font-size: .75rem;
+    }
+
+    .profile-password-form > label {
+        font-size: .69rem;
+    }
+
+    .password-input-wrapper input {
+        height: 46px;
+        font-size: .72rem;
+    }
+
+    .password-visibility-toggle {
+        right: 9px;
+    }
+
+    .password-visibility-toggle svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .profile-save-button {
+        min-width: 105px;
+        height: 41px;
+        font-size: .71rem;
+    }
+}
+
+@media (max-width: 380px) {
+
+    .profile-popup-overlay {
+        padding: 65px 10px 12px;
+    }
+
+    .profile-popup {
+        padding: 14px;
+    }
+
 }
