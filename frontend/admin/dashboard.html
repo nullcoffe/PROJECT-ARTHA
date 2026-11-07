@@ -19,38 +19,6 @@
     <link rel="stylesheet" href="../assets/css/mobile/admin/dashboard.css">
 </head>
 
-
-<!-- POPUP DATA TAHUN 2026 BELUM TERSEDIA -->
-<div class="admin-year-popup-overlay">
-
-    <section class="admin-year-popup"
-             role="alertdialog"
-             aria-labelledby="admin-year-popup-title"
-             aria-describedby="admin-year-popup-desc">
-
-        <div class="admin-year-popup-icon">
-            !
-        </div>
-
-        <h2 id="admin-year-popup-title">
-            Data Tahun 2026 Belum Tersedia
-        </h2>
-
-        <p id="admin-year-popup-desc">
-            Data penjualan tahun 2026 belum tersedia.
-            Silakan pilih tahun 2024 atau 2025
-            untuk melihat grafik penjualan.
-        </p>
-
-        <button type="button"
-                class="admin-year-popup-close">
-            Mengerti
-        </button>
-
-    </section>
-
-</div>
-
 <body>
     <input type="checkbox" id="sidebar-toggle" class="sidebar-checkbox"
            aria-label="Buka atau tutup navigasi">
@@ -141,7 +109,8 @@
                         </div>
                         <div class="admin-stat-info">
                             <p>Total Jumlah Produk</p>
-                            <h2>60</h2>
+                            <!-- MODIF -->
+                            <h2 id="adminTotalProduk" aria-live="polite">60</h2>
                         </div>
                     </article>
 
@@ -151,7 +120,8 @@
                         </div>
                         <div class="admin-stat-info">
                             <p>Total Jumlah<br>Pengguna</p>
-                            <h2>8</h2>
+                            <!-- MODIF -->
+                            <h2 id="adminTotalPengguna" aria-live="polite">8</h2>
                         </div>
                     </article>
 
@@ -161,7 +131,8 @@
                         </div>
                         <div class="admin-stat-info">
                             <p>Total Stok Menipis</p>
-                            <h2>6</h2>
+                            <!-- MODIF -->
+                            <h2 id="adminStokMenipis" aria-live="polite">6</h2>
                         </div>
                     </article>
                 </section>
@@ -169,20 +140,36 @@
                 <section class="admin-chart-card" aria-labelledby="admin-chart-title">
                     <div class="admin-chart-header">
                         <h2 id="admin-chart-title">Tren Penjualan Bulanan</h2>
-                        <select class="admin-year-select" aria-label="Pilih tahun">
+                        <!-- MODIF id dropdown-->
+                        <select 
+                            id="adminYearSelect"
+                            class="admin-year-select" 
+                            aria-label="Pilih tahun"
+                            > 
                             <option value="2024">2024</option>
                             <option value="2025" selected>2025</option>
                             <option value="2026">2026</option>
                         </select>
                     </div>
 
-                    <div class="admin-chart-content" role="img"
-                         aria-label="Grafik contoh penjualan bulanan Januari sampai Desember">
-                        <div class="admin-chart-y-axis" aria-hidden="true">
+                    <!-- MODIF id area grafik -->
+                    <div 
+                        id="adminSalesChart"
+                        class="admin-chart-content"
+                        role="img"
+                        aria-label="Grafik penjualan bulanan Januari sampai Desember">
+                        <!-- MODIF id -->
+                        <div 
+                            id="adminChartYAxis"
+                            class="admin-chart-y-axis"
+                            aria-hidden="true">
                             <span>Rp12 jt</span><span>Rp9 jt</span><span>Rp6 jt</span>
                             <span>Rp3 jt</span><span>0</span>
                         </div>
-                        <div class="admin-chart-bars" aria-hidden="true">
+                        <!-- MODIF id -->
+                        <div id="adminChartBars"
+                            class="admin-chart-bars"
+                            aria-hidden="true">
                             <div class="admin-bar-group"><div class="admin-bar-area"><div class="admin-bar blue" style="--bar-height:28.33%"></div></div><span>Jan</span></div>
                             <div class="admin-bar-group"><div class="admin-bar-area"><div class="admin-bar blue" style="--bar-height:45.83%"></div></div><span>Feb</span></div>
                             <div class="admin-bar-group"><div class="admin-bar-area"><div class="admin-bar yellow" style="--bar-height:33.33%"></div></div><span>Mar</span></div>
@@ -202,5 +189,41 @@
         </main>
         <label for="sidebar-toggle" class="sidebar-overlay" aria-label="Tutup sidebar"></label>
     </div>
+
+    <!-- POPUP DATA TAHUN 2026 BELUM TERSEDIA -->
+    <div id="adminYearModal"
+        class="admin-year-popup-overlay"
+        role="presentation"
+        hidden>
+
+        <section class="admin-year-popup"
+                role="alertdialog"
+                aria-modal="true"
+                aria-labelledby="admin-year-popup-title"
+                aria-describedby="admin-year-popup-desc">
+
+            <div class="admin-year-popup-icon" aria-hidden="true">
+                <img src="../assets/icons/popup/calendar-warning.svg"
+                    alt="">
+            </div>
+
+            <h2 id="admin-year-popup-title">
+                Data Tahun 2026 Belum Tersedia
+            </h2>
+
+            <p id="admin-year-popup-desc">
+                Data penjualan tahun 2026 belum tersedia.
+                Silakan pilih tahun 2024 atau 2025
+                untuk melihat grafik penjualan.
+            </p>
+
+            <button type="button"
+                    id="adminYearModalClose"
+                    class="admin-year-popup-close">
+                Mengerti
+            </button>
+
+        </section>
+</div>
 </body>
 </html>

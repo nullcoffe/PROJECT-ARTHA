@@ -51,7 +51,7 @@
 .remove-item { color:#E15B50; text-decoration:none; text-align:center; font-size:16px; }
 .cart-total { display:flex; align-items:center; justify-content:space-between; padding:15px 0; border-top:1px solid #EDF1F6; }
 .cart-total strong { font-size:14px; }.cart-total b { color:#192D78; font-size:18px; }
-.checkout-button { display:flex; align-items:center; justify-content:center; gap:10px; min-height:42px; color:#fff; background:#192D78; border-radius:24px; text-decoration:none; font-size:13px; font-weight:600; }
+.checkout-button { display:flex; align-items:center; justify-content:center; gap:10px; min-height:42px; color:#fff; background:#192D78; border-radius:24px; text-decoration:none; font: size 10px; font-weight:600; }
 .checkout-button span { font-size:18px; }
 
 /* PAYMENT */
@@ -793,4 +793,21 @@
         font-size: 10px;
     }
 
+}
+/* IKON PANAH LANJUT PEMBAYARAN */
+.checkout-button .checkout-icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    flex-shrink: 0;
+
+    /* Mengubah warna ikon menjadi putih */
+    filter: brightness(0) invert(1);
+}
+.add-item img {
+    display: block;
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
 }

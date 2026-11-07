@@ -735,3 +735,22 @@
     }
 
 }
+/* CHEVRON KEMBALI - BIRU */
+.payment-actions .action-arrow-icon {
+    display: block;
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: brightness(0) saturate(100%) invert(17%) sepia(35%) saturate(2963%) hue-rotate(207deg) brightness(92%) contrast(95%);
+}
+
+/* CHECK SELESAI TRANSAKSI - PUTIH */
+.payment-actions .action-check-icon {
+    display: block;
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: brightness(0) invert(1);
+}

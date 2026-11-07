@@ -1,9 +1,11 @@
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Analisis Apriori | ARTHA</title>
 
     <!-- SHARED CSS -->
@@ -24,479 +26,1501 @@
     <link rel="stylesheet" href="../assets/css/mobile/header.css">
     <link rel="stylesheet" href="../assets/css/mobile/popup.css">
     <link rel="stylesheet" href="../assets/css/mobile/pemilik/analisisApriori.css">
+
+    <!-- PENYESUAIAN TABEL & EXPAND APRIORI -->
+    <style>
+        /* ==========================================
+           TABEL ATURAN ASOSIASI
+        ========================================== */
+
+        .apriori-table.apriori-rules-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .apriori-rules-table th,
+        .apriori-rules-table td {
+            vertical-align: middle;
+        }
+
+        .apriori-rules-table th {
+            white-space: nowrap;
+        }
+
+        .apriori-rules-table th:first-child,
+        .apriori-rules-table td:first-child {
+            width: 50px;
+            text-align: center;
+        }
+
+        .apriori-rules-table th:last-child,
+        .apriori-rules-table td:last-child {
+            width: 75px;
+            text-align: center;
+        }
+
+        .apriori-rules-table .apriori-rule-name {
+            min-width: 190px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .apriori-itemset-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px 11px;
+            border-radius: 20px;
+            background: #E9EFFB;
+            color: #18366B;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        /* ==========================================
+           TOMBOL EXPAND
+        ========================================== */
+
+        .artha-detail-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 33px;
+            height: 33px;
+            padding: 0;
+            border: 1px solid #D9E1EF;
+            border-radius: 7px;
+            background: #FFFFFF;
+            color: #142F78;
+            cursor: pointer;
+        }
+
+        .artha-detail-button:hover {
+            background: #EFF3FC;
+        }
+
+        .artha-detail-button:focus-visible {
+            outline: 2px solid #6487D5;
+            outline-offset: 2px;
+        }
+
+        .artha-detail-chevron {
+            display: block;
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: translateY(-2px) rotate(45deg);
+            transition: transform 0.2s ease;
+        }
+
+        .artha-detail-button[aria-expanded="true"]
+        .artha-detail-chevron {
+            transform: translateY(2px) rotate(225deg);
+        }
+
+        .artha-detail-unavailable {
+            color: #9AA6BA;
+        }
+
+        /* ==========================================
+           ROW DETAIL
+        ========================================== */
+
+        .apriori-rules-table tr.artha-rule-detail[hidden] {
+            display: none !important;
+        }
+
+        .apriori-rules-table tr.artha-rule-detail {
+            display: table-row;
+        }
+
+        .apriori-rules-table .artha-rule-detail > td {
+            padding: 0 !important;
+            border-bottom: 1px solid #E3E8F2;
+            background: #F5F7FC;
+            text-align: left !important;
+        }
+
+        .artha-expand {
+            padding: 16px 18px;
+            color: #263A5B;
+            font-family: var(--font-primary);
+        }
+
+        /* JUDUL RINCIAN */
+        .artha-expand-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .artha-expand-header h3 {
+            margin: 0;
+            color: #142F78;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .artha-expand-header span {
+            color: #74829B;
+            font-size: 12px;
+        }
+
+        /* KOTAK DETAIL */
+        .artha-expand-box {
+            margin-bottom: 10px;
+            padding: 12px 14px;
+            background: #FFFFFF;
+            border: 1px solid #E2E8F2;
+            border-radius: 9px;
+        }
+
+        .artha-expand-box:last-child {
+            margin-bottom: 0;
+        }
+
+        .artha-expand-box h4 {
+            margin: 0 0 10px;
+            color: #142F78;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* JIKA DAN MAKA */
+        .artha-rule-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .artha-rule-pair > div {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            min-width: 0;
+        }
+
+        .artha-detail-label {
+            color: #78869C;
+            font-size: 11px;
+        }
+
+        .artha-rule-pair strong {
+            color: #253C60;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        /* BUKTI TRANSAKSI */
+        .artha-evidence-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .artha-evidence-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .artha-evidence-item span {
+            color: #78869C;
+            font-size: 11px;
+        }
+
+        .artha-evidence-item strong {
+            color: #142F78;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        /* PERHITUNGAN RINGKAS */
+        .artha-calculation {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .artha-calc-row {
+            display: grid;
+            grid-template-columns: 100px minmax(0, 1fr);
+            align-items: center;
+            gap: 10px;
+            padding: 7px 0;
+            border-bottom: 1px solid #EDF0F5;
+        }
+
+        .artha-calc-row:first-child {
+            padding-top: 0;
+        }
+
+        .artha-calc-row:last-child {
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .artha-calc-row > span {
+            color: #263A5B;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .artha-calc-row p {
+            margin: 0;
+            color: #586780;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .artha-calc-row strong {
+            color: #142F78;
+        }
+
+        /* INTERPRETASI */
+        .artha-interpretation {
+            margin: 0;
+            color: #586780;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        /* ==========================================
+           RESPONSIVE
+        ========================================== */
+
+        @media (max-width: 768px) {
+
+            .apriori-table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .apriori-rules-table {
+                min-width: 850px;
+            }
+
+            .artha-expand {
+                padding: 12px;
+            }
+
+            .artha-expand-box {
+                padding: 11px 12px;
+            }
+        }
+    </style>
 </head>
+
+<!-- JAVA DISINI GAIS BUAT tambahan dari asisten -->
 
 <body>
 
-<input type="checkbox" id="sidebar-toggle" class="sidebar-checkbox">
+    <!-- SIDEBAR CONTROL -->
+    <input type="checkbox"
+           id="sidebar-toggle"
+           class="sidebar-checkbox">
 
-<div class="dashboard-layout">
+    <div class="dashboard-layout">
 
-    <!-- SIDEBAR ASLI ARTHA -->
-    <aside class="sidebar">
+        <!-- ======================================
+             SIDEBAR ASLI ARTHA
+        ======================================= -->
 
-        <div class="sidebar-brand">
-            <div class="brand-left">
-                <img src="../assets/images/Logo.svg" alt="Logo ARTHA" class="brand-logo">
-                <span class="brand-title">ARTHA</span>
-            </div>
+        <aside class="sidebar">
 
-            <label for="sidebar-toggle" class="close-sidebar-btn">
-                <img src="../assets/icons/actions/cancel.svg" alt="">
-            </label>
-        </div>
+            <div class="sidebar-brand">
 
-        <nav class="sidebar-nav">
+                <div class="brand-left">
+                    <img src="../assets/images/Logo.svg"
+                         alt="Logo ARTHA"
+                         class="brand-logo">
 
-            <a href="dashboard.html" class="nav-item">
-                <img src="../assets/icons/sidebar/dashboard.svg" alt="" class="nav-icon">
-                <span>Dashboard</span>
-            </a>
-
-            <a href="laporan.html" class="nav-item">
-                <img src="../assets/icons/sidebar/laporan.svg" alt="" class="nav-icon">
-                <span>Laporan</span>
-            </a>
-
-            <a href="analisisApriori.html" class="nav-item active" aria-current="page">
-                <img src="../assets/icons/sidebar/analisisApriori.svg" alt="" class="nav-icon">
-                <span>Analisis Apriori</span>
-            </a>
-
-            <a href="paketPromosi.html" class="nav-item">
-                <img src="../assets/icons/sidebar/paketPromosi.svg" alt="" class="nav-icon">
-                <span>Paket Promosi</span>
-            </a>
-
-            <a href="prioritasStok.html" class="nav-item">
-                <img src="../assets/icons/sidebar/prioritasStok.svg" alt="" class="nav-icon">
-                <span>Prioritas Stok</span>
-            </a>
-
-            <a href="../index.html" class="nav-item logout">
-                <img src="../assets/icons/actions/logout.svg" alt="" class="nav-icon">
-                <span>Keluar</span>
-            </a>
-
-        </nav>
-    </aside>
-
-    <!-- HAMBURGER -->
-    <label for="sidebar-toggle" class="hamburger-btn">
-        <img src="../assets/icons/actions/hamburger.svg" alt="">
-    </label>
-
-    <!-- OVERLAY SIDEBAR -->
-    <label for="sidebar-toggle" class="sidebar-overlay"></label>
-
-    <!-- MAIN CONTENT -->
-    <div class="main-content">
-
-        <!-- HEADER ASLI ARTHA -->
-        <header class="dashboard-header">
-            <h1>Analisis Apriori</h1>
-
-            <div class="header-right">
-                <div class="user-profile">
-                    <div class="profile-circle">
-                        <img src="../assets/icons/header/profile.svg" alt="">
-                    </div>
-                    <span>Pemilik</span>
+                    <span class="brand-title">ARTHA</span>
                 </div>
+
+                <label for="sidebar-toggle"
+                       class="close-sidebar-btn">
+
+                    <img src="../assets/icons/actions/cancel.svg"
+                         alt="">
+
+                </label>
+
             </div>
-        </header>
 
-        <!-- PAGE CONTENT -->
-        <div class="page-container">
+            <nav class="sidebar-nav">
 
-            <main class="owner-apriori">
+                <a href="dashboard.html" class="nav-item">
+                    <img src="../assets/icons/sidebar/dashboard.svg"
+                         alt="" class="nav-icon">
+                    <span>Dashboard</span>
+                </a>
 
-                <!-- =====================================
-                     KONFIGURASI ANALISIS
-                ====================================== -->
-                <section class="apriori-config-card">
+                <a href="laporan.html" class="nav-item">
+                    <img src="../assets/icons/sidebar/laporan.svg"
+                         alt="" class="nav-icon">
+                    <span>Laporan</span>
+                </a>
 
-                    <h2>Konfigurasi Analisis Apriori</h2>
+                <a href="analisisApriori.html"
+                   class="nav-item active"
+                   aria-current="page">
 
-                    <form class="apriori-form"
-                          action="#popup-apriori-success"
-                          method="GET">
+                    <img src="../assets/icons/sidebar/analisisApriori.svg"
+                         alt="" class="nav-icon">
 
-                        <!-- SUPPORT -->
-                        <div class="apriori-field">
-                            <label for="minimum-support">Minimum Support</label>
+                    <span>Analisis Apriori</span>
+                </a>
 
-                            <div class="apriori-select-wrap">
-                                <select id="minimum-support" name="support" required>
-                                    <option value="" selected disabled>Pilih support</option>
-                                    <option value="3">3%</option>
-                                    <option value="5">5%</option>
-                                    <option value="7">7%</option>
-                                    <option value="custom">Custom</option>
-                                </select>
-                                <span class="apriori-chevron"></span>
-                            </div>
+                <a href="paketPromosi.html" class="nav-item">
+                    <img src="../assets/icons/sidebar/paketPromosi.svg"
+                         alt="" class="nav-icon">
+                    <span>Paket Promosi</span>
+                </a>
 
-                            <input type="number" name="support_custom"
-                                   class="apriori-custom-input apriori-support-custom"
-                                   min="0.01" max="100" step="0.01"
-                                   placeholder="Masukkan support custom (%)">
+                <a href="prioritasStok.html" class="nav-item">
+                    <img src="../assets/icons/sidebar/prioritasStok.svg"
+                         alt="" class="nav-icon">
+                    <span>Prioritas Stok</span>
+                </a>
+
+                <a href="../index.html" class="nav-item logout">
+                    <img src="../assets/icons/actions/logout.svg"
+                         alt="" class="nav-icon">
+                    <span>Keluar</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+
+        <!-- HAMBURGER -->
+        <label for="sidebar-toggle" class="hamburger-btn">
+            <img src="../assets/icons/actions/hamburger.svg"
+                 alt="">
+        </label>
+
+        <!-- OVERLAY SIDEBAR -->
+        <label for="sidebar-toggle"
+               class="sidebar-overlay"></label>
+
+
+        <!-- ======================================
+             MAIN CONTENT
+        ======================================= -->
+
+        <div class="main-content">
+
+            <!-- HEADER -->
+            <header class="dashboard-header">
+
+                <h1>Analisis Apriori</h1>
+
+                <div class="header-right">
+
+                    <div class="user-profile">
+
+                        <div class="profile-circle">
+                            <img src="../assets/icons/header/profile.svg"
+                                 alt="">
                         </div>
 
-                        <!-- CONFIDENCE -->
-                        <div class="apriori-field">
-                            <label for="minimum-confidence">Minimum Confidence</label>
+                        <span>Pemilik</span>
 
-                            <div class="apriori-select-wrap">
-                                <select id="minimum-confidence" name="confidence" required>
-                                    <option value="" selected disabled>Pilih confidence</option>
-                                    <option value="50">50%</option>
-                                    <option value="60">60%</option>
-                                    <option value="70">70%</option>
-                                    <option value="custom">Custom</option>
-                                </select>
-                                <span class="apriori-chevron"></span>
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- PAGE CONTENT -->
+            <div class="page-container">
+
+                <main class="owner-apriori">
+
+
+                    <!-- =====================================
+                         KONFIGURASI ANALISIS
+                    ====================================== -->
+
+                    <section class="apriori-config-card">
+
+                        <h2>Konfigurasi Analisis Apriori</h2>
+
+                        <form class="apriori-form"
+                              action="#popup-apriori-success"
+                              method="GET">
+
+                            <!-- SUPPORT -->
+                            <div class="apriori-field">
+
+                                <label for="minimum-support">
+                                    Minimum Support
+                                </label>
+
+                                <div class="apriori-select-wrap">
+
+                                    <select id="minimum-support"
+                                            name="support"
+                                            required>
+
+                                        <option value=""
+                                                selected disabled>
+                                            Pilih support
+                                        </option>
+
+                                        <option value="3">3%</option>
+                                        <option value="5">5%</option>
+                                        <option value="7">7%</option>
+                                        <option value="custom">Custom</option>
+
+                                    </select>
+
+                                    <span class="apriori-chevron"></span>
+
+                                </div>
+
+                                <input type="number"
+                                       name="support_custom"
+                                       class="apriori-custom-input apriori-support-custom"
+                                       min="0.01"
+                                       max="100"
+                                       step="0.01"
+                                       placeholder="Masukkan support custom (%)">
+
                             </div>
 
-                            <input type="number" name="confidence_custom"
-                                   class="apriori-custom-input apriori-confidence-custom"
-                                   min="0.01" max="100" step="0.01"
-                                   placeholder="Masukkan confidence custom (%)">
-                        </div>
 
-                        <!-- PERIODE -->
-                        <div class="apriori-field">
-                            <label for="transaction-period">Periode Transaksi (Tahun)</label>
+                            <!-- CONFIDENCE -->
+                            <div class="apriori-field">
 
-                            <div class="apriori-select-wrap">
-                                <select id="transaction-period" name="tahun" required>
-                                    <option value="" selected disabled>Pilih periode transaksi</option>
-                                    <option value="2024">2024</option>
-                                    <option value="2025">2025</option>
-                                    <option value="2026">2026</option>
-                                </select>
-                                <span class="apriori-chevron"></span>
+                                <label for="minimum-confidence">
+                                    Minimum Confidence
+                                </label>
+
+                                <div class="apriori-select-wrap">
+
+                                    <select id="minimum-confidence"
+                                            name="confidence"
+                                            required>
+
+                                        <option value=""
+                                                selected disabled>
+                                            Pilih confidence
+                                        </option>
+
+                                        <option value="50">50%</option>
+                                        <option value="60">60%</option>
+                                        <option value="70">70%</option>
+                                        <option value="custom">Custom</option>
+
+                                    </select>
+
+                                    <span class="apriori-chevron"></span>
+
+                                </div>
+
+                                <input type="number"
+                                       name="confidence_custom"
+                                       class="apriori-custom-input apriori-confidence-custom"
+                                       min="0.01"
+                                       max="100"
+                                       step="0.01"
+                                       placeholder="Masukkan confidence custom (%)">
+
                             </div>
-                        </div>
 
-                        <!-- JUMLAH TRANSAKSI -->
-                        <div class="apriori-field">
-                            <label>Jumlah Transaksi</label>
 
-                            <div class="apriori-transaction-value">
-                                <span class="transaction-placeholder">
-                                    Jumlah transaksi akan ditampilkan oleh sistem
-                                </span>
-                                <span class="transaction-2024">149 Transaksi</span>
-                                <span class="transaction-2025">201 Transaksi</span>
-                                <span class="transaction-2026">0 Transaksi</span>
+                            <!-- PERIODE -->
+                            <div class="apriori-field">
+
+                                <label for="transaction-period">
+                                    Periode Transaksi (Tahun)
+                                </label>
+
+                                <div class="apriori-select-wrap">
+
+                                    <select id="transaction-period"
+                                            name="tahun"
+                                            required>
+
+                                        <option value=""
+                                                selected disabled>
+                                            Pilih periode transaksi
+                                        </option>
+
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+
+                                    </select>
+
+                                    <span class="apriori-chevron"></span>
+
+                                </div>
+
                             </div>
-                        </div>
 
-                        <!-- TOMBOL -->
-                        <div class="apriori-action">
-                            <button type="submit" class="apriori-run-button">
-                                Jalankan Analisis
+
+                            <!-- JUMLAH TRANSAKSI -->
+                            <div class="apriori-field">
+
+                                <label>Jumlah Transaksi</label>
+
+                                <div class="apriori-transaction-value">
+
+                                    <span class="transaction-placeholder">
+                                        Jumlah transaksi akan ditampilkan oleh sistem
+                                    </span>
+
+                                    <span class="transaction-2024">
+                                        149 Transaksi
+                                    </span>
+
+                                    <span class="transaction-2025">
+                                        201 Transaksi
+                                    </span>
+
+                                    <span class="transaction-2026">
+                                        0 Transaksi
+                                    </span>
+
+                                </div>
+
+                            </div>
+                            
+                            <!-- TOMBOL INFORMASI PARAMETER APRIORI -->
+                            <button type="button"
+                                    class="apriori-info-button"
+                                    id="open-apriori-info">
+                                <img src="../assets/icons/actions/info.svg"
+                                    alt=""
+                                    onerror="this.style.display='none'">
+                                Panduan Nilai Support & Confidence
                             </button>
+
+                            <!-- POPUP INFORMASI APRIORI -->
+                            <dialog id="apriori-info-dialog" class="apriori-info-dialog">
+                                <div class="apriori-info-header">
+                                    <div>
+                                        <h2>Panduan Parameter Apriori</h2>
+                                        <p>Rekomendasi berdasarkan 350 transaksi</p>
+                                    </div>
+                                    <button type="button"
+                                            class="apriori-info-close"
+                                            id="close-apriori-info"
+                                            aria-label="Tutup informasi">&times;</button>
+                                </div>
+
+                                <div class="apriori-info-content">
+                                    <p>
+                                        Panduan ini membantu menentukan batas minimum
+                                        support dan confidence sesuai tujuan analisis.
+                                    </p>
+
+                                    <h3>1. Klasifikasi Minimum Support</h3>
+                                    <p>Menentukan seberapa sering kombinasi produk muncul.</p>
+
+                                    <div class="apriori-info-table-wrap">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Kategori</th>
+                                                    <th>Support</th>
+                                                    <th>Minimal Muncul</th>
+                                                    <th>Penggunaan</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Sangat Rendah</td>
+                                                    <td>2%</td>
+                                                    <td>7 kali</td>
+                                                    <td>Mencari pola langka</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Rendah</td>
+                                                    <td>3–4%</td>
+                                                    <td>11–14 kali</td>
+                                                    <td>Eksplorasi awal</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sedang</td>
+                                                    <td>5–6%</td>
+                                                    <td>18–21 kali</td>
+                                                    <td>Analisis seimbang</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tinggi</td>
+                                                    <td>7–8%</td>
+                                                    <td>25–28 kali</td>
+                                                    <td>Produk populer</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sangat Tinggi</td>
+                                                    <td>9–10%</td>
+                                                    <td>32–35 kali</td>
+                                                    <td>Pola paling sering</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <h3>2. Klasifikasi Minimum Confidence</h3>
+                                    <p>Menentukan kekuatan hubungan antarproduk dalam aturan.</p>
+
+                                    <div class="apriori-info-table-wrap">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Kategori</th>
+                                                    <th>Confidence</th>
+                                                    <th>Penggunaan</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Longgar</td>
+                                                    <td>40–49%</td>
+                                                    <td>Melihat tren awal</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Moderat</td>
+                                                    <td>50–59%</td>
+                                                    <td>Pengujian pola umum</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kuat</td>
+                                                    <td>60–69%</td>
+                                                    <td>Penataan produk</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sangat Kuat</td>
+                                                    <td>70–79%</td>
+                                                    <td>Evaluasi paket bundling</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sangat Tinggi</td>
+                                                    <td>80–90%</td>
+                                                    <td>Penyaringan aturan lebih ketat</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <h3>3. Rekomendasi Kombinasi Parameter</h3>
+
+                                    <div class="apriori-recommendations">
+                                        <div class="apriori-recommendation">
+                                            <strong>Eksploratif</strong>
+                                            <span>Support 3% | Confidence 50%</span>
+                                            <p>
+                                                Untuk menemukan lebih banyak hubungan
+                                                antarproduk, termasuk pola yang jarang muncul.
+                                            </p>
+                                        </div>
+
+                                        <div class="apriori-recommendation recommended">
+                                            <strong>Konservatif — Pilihan Awal</strong>
+                                            <span>Support 5% | Confidence 65%</span>
+                                            <p>
+                                                Untuk memprioritaskan pola yang cukup sering
+                                                muncul dengan hubungan antarproduk lebih kuat.
+                                            </p>
+                                        </div>
+
+                                        <div class="apriori-recommendation">
+                                            <strong>Maksimisasi</strong>
+                                            <span>Support 7% | Confidence 70%</span>
+                                            <p>
+                                                Untuk menyaring aturan yang lebih selektif
+                                                dan berfokus pada kombinasi produk populer.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <p class="apriori-info-note">
+                                        Catatan: Semakin tinggi batas support dan confidence,
+                                        semakin sedikit aturan yang mungkin dihasilkan.
+                                        Kombinasi apa pun tidak menjamin munculnya aturan.
+                                        Confidence bukan jaminan akurasi prediksi.
+                                    </p>
+                                </div>
+
+                                <div class="apriori-info-footer">
+                                    <button type="button" id="done-apriori-info">
+                                        Mengerti
+                                    </button>
+                                </div>
+                            </dialog>
+
+                            <!-- TOMBOL -->
+                            <div class="apriori-action">
+
+                                <button type="submit"
+                                        class="apriori-run-button">
+
+                                    Jalankan Analisis
+
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                        <p class="apriori-info">
+                            Pilih parameter analisis dan periode transaksi
+                            sebelum menjalankan analisis asosiasi.
+                        </p>
+
+                    </section>
+
+
+                    <!-- =====================================
+                         HASIL ANALISIS
+                    ====================================== -->
+
+                    <section class="apriori-result-card"
+                             id="hasil-analisis">
+
+                        <div class="apriori-result-header">
+
+                            <h2>Hasil Analisis Asosiasi</h2>
+
+                            <span class="apriori-result-period">
+                                Tahun 2024
+                            </span>
+
                         </div>
 
-                    </form>
 
-                    <p class="apriori-info">
-                        Pilih parameter analisis dan periode transaksi sebelum menjalankan analisis asosiasi.
-                    </p>
-                </section>
+                        <!-- LEGENDA LIFT -->
+                        <div class="apriori-lift-legend">
+
+                            <span>Rentang Lift</span>
+
+                            <span class="lift-color lift-positive">
+                                &gt; 1
+                            </span>
+
+                            <span class="lift-color lift-neutral">
+                                = 1
+                            </span>
+
+                            <span class="lift-color lift-negative">
+                                &lt; 1
+                            </span>
+
+                        </div>
 
 
-                <!-- =====================================
-                     HASIL ANALISIS
-                ====================================== -->
-                <section class="apriori-result-card" id="hasil-analisis">
+                        <!-- RADIO PAGINATION -->
+                        <input type="radio"
+                               name="apriori-page"
+                               id="apriori-page-1"
+                               class="apriori-page-radio"
+                               checked>
 
-                    <div class="apriori-result-header">
-                        <h2>Hasil Analisis Asosiasi</h2>
-                        <span class="apriori-result-period">Tahun 2024</span>
-                    </div>
+                        <input type="radio"
+                               name="apriori-page"
+                               id="apriori-page-2"
+                               class="apriori-page-radio">
 
-                    <!-- LEGENDA -->
-                    <div class="apriori-lift-legend">
-                        <span>Rentang Lift</span>
-                        <span class="lift-color lift-positive">&gt; 1</span>
-                        <span class="lift-color lift-neutral">= 1</span>
-                        <span class="lift-color lift-negative">&lt; 1</span>
-                    </div>
 
-                    <!-- RADIO PAGINATION -->
-                    <input type="radio" name="apriori-page"
-                           id="apriori-page-1" class="apriori-page-radio" checked>
-                    <input type="radio" name="apriori-page"
-                           id="apriori-page-2" class="apriori-page-radio">
+                        <!-- =================================
+                             HALAMAN 1
+                        ================================== -->
 
-                    <!-- =================================
-                         HALAMAN 1
-                    ================================== -->
-                    <div class="apriori-page-content apriori-page-one">
+                        <div class="apriori-page-content apriori-page-one">
 
-                        <div class="apriori-table-wrapper">
-                            <table class="apriori-table">
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Aturan Asosiasi</th>
-                                        <th>Support</th>
-                                        <th>Confidence</th>
-                                        <th>Lift</th>
-                                        <th>Detail</th>
-                                    </tr>
-                                </thead>
+                            <div class="apriori-table-wrapper">
 
-                                <tbody>
+                                <table class="apriori-table apriori-rules-table">
 
-                                    <!-- ATURAN 1 -->
-                                    <tr class="apriori-rule-row">
-                                        <td>1</td>
-                                        <td>Beras + Kopi Sachet → Minyak Goreng + Telur</td>
-                                        <td>4,70%</td>
-                                        <td>63,64%</td>
-                                        <td><span class="lift-value lift-positive">4,99</span></td>
-                                        <td>
-                                            <input type="checkbox" id="expand-rule-1"
-                                                   class="apriori-expand-toggle">
-                                            <label for="expand-rule-1"
-                                                   class="apriori-expand-button"
-                                                   aria-label="Lihat detail aturan pertama">
-                                                <span class="apriori-expand-chevron"></span>
-                                            </label>
-                                        </td>
-                                    </tr>
+                                    <thead>
 
-                                    <!-- EXPAND ATURAN 1 -->
-                                    <tr class="apriori-detail-row">
-                                        <td colspan="6">
-                                            <div class="apriori-expand-content">
-                                                <div class="apriori-expand-grid">
+                                        <tr>
+                                            <th scope="col">No.</th>
+                                            <th scope="col">Aturan Asosiasi</th>
+                                            <th scope="col">Jenis Itemset</th>
+                                            <th scope="col">Support</th>
+                                            <th scope="col">Confidence</th>
+                                            <th scope="col">Lift</th>
+                                            <th scope="col">Detail</th>
+                                        </tr>
 
-                                                    <div class="apriori-detail-box">
-                                                        <h3>Informasi Aturan</h3>
+                                    </thead>
 
-                                                        <div class="apriori-detail-line">
-                                                            <span>Antecedent (A)</span>
-                                                            <strong>Beras + Kopi Sachet</strong>
-                                                        </div>
 
-                                                        <div class="apriori-detail-line">
-                                                            <span>Consequent (B)</span>
-                                                            <strong>Minyak Goreng + Telur</strong>
-                                                        </div>
+                                    <tbody>
 
-                                                        <div class="apriori-detail-line">
-                                                            <span>Interpretasi singkat</span>
-                                                            <strong>
-                                                                Pelanggan yang membeli Beras dan Kopi Sachet
-                                                                cenderung juga membeli Minyak Goreng dan Telur.
-                                                            </strong>
-                                                        </div>
+                                        <!-- ==================================
+                                             ATURAN 1
+                                        =================================== -->
+
+                                        <tr class="apriori-rule-row">
+
+                                            <td>1</td>
+
+                                            <td class="apriori-rule-name">
+                                                Beras + Kopi Sachet
+                                                →
+                                                Minyak Goreng + Telur
+                                            </td>
+
+                                            <td>
+                                                <span class="apriori-itemset-badge">
+                                                    4-itemset
+                                                </span>
+                                            </td>
+
+                                            <td>4,70%</td>
+
+                                            <td>63,64%</td>
+
+                                            <td>
+                                                <span class="lift-value lift-positive">
+                                                    4,99
+                                                </span>
+                                            </td>
+
+                                            <td>
+                                                <button
+                                                    type="button"
+                                                    id="detail-rule-1-button"
+                                                    class="artha-detail-button"
+                                                    aria-label="Buka detail aturan 1"
+                                                    aria-expanded="false"
+                                                    aria-controls="detail-rule-1">
+
+                                                    <span class="artha-detail-chevron"
+                                                          aria-hidden="true">
+                                                    </span>
+
+                                                </button>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <!-- ==================================
+                                             EXPAND ATURAN 1
+                                        =================================== -->
+
+                                        <tr id="detail-rule-1"
+                                            class="artha-rule-detail"
+                                            hidden>
+
+                                            <td colspan="7">
+
+                                                <div class="artha-expand">
+
+
+                                                    <!-- JUDUL DETAIL -->
+                                                    <div class="artha-expand-header">
+
+                                                        <h3>
+                                                            Rincian Aturan #01
+                                                        </h3>
+
+                                                        <span>
+                                                            4-itemset · 2 → 2
+                                                        </span>
+
                                                     </div>
 
-                                                    <div class="apriori-detail-box">
-                                                        <h3>Bukti Transaksi</h3>
 
-                                                        <div class="apriori-detail-line">
-                                                            <span>Total transaksi (N)</span>
-                                                            <strong>149</strong>
+                                                    <!-- JIKA DAN MAKA -->
+                                                    <div class="artha-expand-box">
+
+                                                        <div class="artha-rule-pair">
+
+                                                            <div>
+
+                                                                <span class="artha-detail-label">
+                                                                    JIKA — Antecedent (A)
+                                                                </span>
+
+                                                                <strong>
+                                                                    Beras + Kopi Sachet
+                                                                </strong>
+
+                                                            </div>
+
+                                                            <div>
+
+                                                                <span class="artha-detail-label">
+                                                                    MAKA — Consequent (B)
+                                                                </span>
+
+                                                                <strong>
+                                                                    Minyak Goreng + Telur
+                                                                </strong>
+
+                                                            </div>
+
                                                         </div>
 
-                                                        <div class="apriori-detail-line">
-                                                            <span>Transaksi mengandung A</span>
-                                                            <strong>11</strong>
-                                                        </div>
-
-                                                        <div class="apriori-detail-line">
-                                                            <span>Transaksi mengandung B</span>
-                                                            <strong>19</strong>
-                                                        </div>
-
-                                                        <div class="apriori-detail-line">
-                                                            <span>Transaksi mengandung A dan B</span>
-                                                            <strong>7</strong>
-                                                        </div>
                                                     </div>
 
-                                                    <div class="apriori-detail-box">
-                                                        <h3>Perhitungan</h3>
 
-                                                        <div class="apriori-detail-line">
-                                                            <span>Support</span>
-                                                            <strong>7 / 149 × 100% = 4,70%</strong>
+                                                    <!-- BUKTI TRANSAKSI -->
+                                                    <div class="artha-expand-box">
+
+                                                        <h4>Bukti Transaksi</h4>
+
+                                                        <div class="artha-evidence-grid">
+
+                                                            <div class="artha-evidence-item">
+                                                                <span>Total (N)</span>
+                                                                <strong>149</strong>
+                                                            </div>
+
+                                                            <div class="artha-evidence-item">
+                                                                <span>Mengandung A</span>
+                                                                <strong>11</strong>
+                                                            </div>
+
+                                                            <div class="artha-evidence-item">
+                                                                <span>Mengandung B</span>
+                                                                <strong>19</strong>
+                                                            </div>
+
+                                                            <div class="artha-evidence-item">
+                                                                <span>A dan B</span>
+                                                                <strong>7</strong>
+                                                            </div>
+
                                                         </div>
 
-                                                        <div class="apriori-detail-line">
-                                                            <span>Confidence</span>
-                                                            <strong>7 / 11 × 100% = 63,64%</strong>
-                                                        </div>
-
-                                                        <div class="apriori-detail-line">
-                                                            <span>Lift</span>
-                                                            <strong>63,64% / (19 / 149) = 4,99</strong>
-                                                        </div>
                                                     </div>
+
+
+                                                    <!-- PERHITUNGAN APRIORI -->
+                                                    <div class="artha-expand-box">
+
+                                                        <h4>Perhitungan Apriori</h4>
+
+                                                        <div class="artha-calculation">
+
+
+                                                            <div class="artha-calc-row">
+
+                                                                <span>Support</span>
+
+                                                                <p>
+                                                                    7 ÷ 149 × 100% =
+                                                                    <strong>4,70%</strong>
+                                                                </p>
+
+                                                            </div>
+
+
+                                                            <div class="artha-calc-row">
+
+                                                                <span>Confidence</span>
+
+                                                                <p>
+                                                                    7 ÷ 11 × 100% =
+                                                                    <strong>63,64%</strong>
+                                                                </p>
+
+                                                            </div>
+
+
+                                                            <div class="artha-calc-row">
+
+                                                                <span>Lift</span>
+
+                                                                <p>
+                                                                    (7 ÷ 11) ÷ (19 ÷ 149) =
+                                                                    <strong>4,99</strong>
+                                                                </p>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+
+                                                    <!-- INTERPRETASI -->
+                                                    <div class="artha-expand-box">
+
+                                                        <h4>Interpretasi</h4>
+
+                                                        <p class="artha-interpretation">
+                                                            Dari 11 transaksi yang mengandung
+                                                            Beras dan Kopi Sachet, terdapat
+                                                            7 transaksi yang juga mengandung
+                                                            Minyak Goreng dan Telur.
+
+                                                            Nilai lift 4,99 menunjukkan
+                                                            asosiasi pembelian positif yang kuat
+                                                            dibandingkan peluang kemunculan
+                                                            Minyak Goreng dan Telur
+                                                            pada seluruh transaksi.
+                                                        </p>
+
+                                                    </div>
+
 
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
 
-                                    <!-- ATURAN 2 -->
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Beras + Telur → Gula</td>
-                                        <td>3,36%</td>
-                                        <td>75,00%</td>
-                                        <td><span class="lift-value lift-positive">1,65</span></td>
-                                        <td>—</td>
-                                    </tr>
+                                            </td>
 
-                                    <!-- ATURAN 3 -->
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Beras → Minyak Goreng</td>
-                                        <td>7,38%</td>
-                                        <td>70,00%</td>
-                                        <td><span class="lift-value lift-positive">1,40</span></td>
-                                        <td>—</td>
-                                    </tr>
+                                        </tr>
 
-                                    <!-- ATURAN 4 -->
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Minyak Goreng → Telur</td>
-                                        <td>6,04%</td>
-                                        <td>66,67%</td>
-                                        <td><span class="lift-value lift-positive">1,35</span></td>
-                                        <td>—</td>
-                                    </tr>
 
-                                    <!-- ATURAN 5 -->
-                                    <tr>
-                                        <td>5</td>
-                                        <td>Gula → Kopi</td>
-                                        <td>5,37%</td>
-                                        <td>60,00%</td>
-                                        <td><span class="lift-value lift-neutral">1,00</span></td>
-                                        <td>—</td>
-                                    </tr>
+                                        <!-- ==================================
+                                             ATURAN 2
+                                        =================================== -->
 
-                                </tbody>
-                            </table>
+                                        <tr>
+
+                                            <td>2</td>
+
+                                            <td class="apriori-rule-name">
+                                                Beras + Telur → Gula
+                                            </td>
+
+                                            <td>
+                                                <span class="apriori-itemset-badge">
+                                                    3-itemset
+                                                </span>
+                                            </td>
+
+                                            <td>3,36%</td>
+                                            <td>75,00%</td>
+
+                                            <td>
+                                                <span class="lift-value lift-positive">
+                                                    1,65
+                                                </span>
+                                            </td>
+
+                                            <td>
+                                                <span class="artha-detail-unavailable">—</span>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <!-- ==================================
+                                             ATURAN 3
+                                        =================================== -->
+
+                                        <tr>
+
+                                            <td>3</td>
+
+                                            <td class="apriori-rule-name">
+                                                Beras → Minyak Goreng
+                                            </td>
+
+                                            <td>
+                                                <span class="apriori-itemset-badge">
+                                                    2-itemset
+                                                </span>
+                                            </td>
+
+                                            <td>7,38%</td>
+                                            <td>70,00%</td>
+
+                                            <td>
+                                                <span class="lift-value lift-positive">
+                                                    1,40
+                                                </span>
+                                            </td>
+
+                                            <td>
+                                                <span class="artha-detail-unavailable">—</span>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <!-- ==================================
+                                             ATURAN 4
+                                        =================================== -->
+
+                                        <tr>
+
+                                            <td>4</td>
+
+                                            <td class="apriori-rule-name">
+                                                Minyak Goreng → Telur
+                                            </td>
+
+                                            <td>
+                                                <span class="apriori-itemset-badge">
+                                                    2-itemset
+                                                </span>
+                                            </td>
+
+                                            <td>6,04%</td>
+                                            <td>66,67%</td>
+
+                                            <td>
+                                                <span class="lift-value lift-positive">
+                                                    1,35
+                                                </span>
+                                            </td>
+
+                                            <td>
+                                                <span class="artha-detail-unavailable">—</span>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <!-- ==================================
+                                             ATURAN 5
+                                        =================================== -->
+
+                                        <tr>
+
+                                            <td>5</td>
+
+                                            <td class="apriori-rule-name">
+                                                Gula → Kopi
+                                            </td>
+
+                                            <td>
+                                                <span class="apriori-itemset-badge">
+                                                    2-itemset
+                                                </span>
+                                            </td>
+
+                                            <td>5,37%</td>
+                                            <td>60,00%</td>
+
+                                            <td>
+                                                <span class="lift-value lift-neutral">
+                                                    1,00
+                                                </span>
+                                            </td>
+
+                                            <td>
+                                                <span class="artha-detail-unavailable">—</span>
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
                         </div>
-                    </div>
 
-                    <!-- =================================
-                         HALAMAN 2
-                    ================================== -->
-                    <div class="apriori-page-content apriori-page-two">
 
-                        <div class="apriori-table-wrapper">
-                            <table class="apriori-table">
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Aturan Asosiasi</th>
-                                        <th>Support</th>
-                                        <th>Confidence</th>
-                                        <th>Lift</th>
-                                        <th>Detail</th>
-                                    </tr>
-                                </thead>
+                        <!-- =================================
+                             HALAMAN 2
+                        ================================== -->
 
-                                <tbody>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>Gula + Kopi → Telur</td>
-                                        <td>4,70%</td>
-                                        <td>65,00%</td>
-                                        <td><span class="lift-value lift-neutral">1,00</span></td>
-                                        <td>—</td>
-                                    </tr>
+                        <div class="apriori-page-content apriori-page-two">
 
-                                    <tr>
-                                        <td>7</td>
-                                        <td>Minyak Goreng → Beras</td>
-                                        <td>4,03%</td>
-                                        <td>60,00%</td>
-                                        <td><span class="lift-value lift-neutral">1,00</span></td>
-                                        <td>—</td>
-                                    </tr>
+                            <div class="apriori-table-wrapper">
 
-                                    <tr>
-                                        <td>8</td>
-                                        <td>Telur → Minyak Goreng</td>
-                                        <td>5,37%</td>
-                                        <td>60,00%</td>
-                                        <td><span class="lift-value lift-negative">0,90</span></td>
-                                        <td>—</td>
-                                    </tr>
+                                <table class="apriori-table apriori-rules-table">
 
-                                    <tr>
-                                        <td>9</td>
-                                        <td>Telur → Beras</td>
-                                        <td>4,03%</td>
-                                        <td>60,00%</td>
-                                        <td><span class="lift-value lift-negative">0,85</span></td>
-                                        <td>—</td>
-                                    </tr>
+                                    <thead>
 
-                                    <tr>
-                                        <td>10</td>
-                                        <td>Kopi → Gula</td>
-                                        <td>3,36%</td>
-                                        <td>62,50%</td>
-                                        <td><span class="lift-value lift-negative">0,78</span></td>
-                                        <td>—</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                        <tr>
+                                            <th scope="col">No.</th>
+                                            <th scope="col">Aturan Asosiasi</th>
+                                            <th scope="col">Jenis Itemset</th>
+                                            <th scope="col">Support</th>
+                                            <th scope="col">Confidence</th>
+                                            <th scope="col">Lift</th>
+                                            <th scope="col">Detail</th>
+                                        </tr>
+
+                                    </thead>
+
+
+                                    <tbody>
+
+                                        <!-- ATURAN 6 -->
+                                        <tr>
+
+                                            <td>6</td>
+
+                                            <td class="apriori-rule-name">
+                                                Gula + Kopi → Telur
+                                            </td>
+
+                                            <td>
+                                                <span class="apriori-itemset-badge">
+                                                    3-itemset
+                                                </span>
+                                            </td>
+
+                                            <td>4,70%</td>
+                                            <td>65,00%</td>
+
+                                            <td>
+                                                <span class="lift-value lift-neutral">
+                                                    1,00
+                                                </span>
+                                            </td>
+
+                                            <td>
+                                                <span class="artha-detail-unavailable">—</span>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <!-- ATURAN 7 -->
+                                        <tr>
+
+                                            <td>7</td>
+
+                                            <td class="apriori-rule-name">
+                                                Minyak Goreng → Beras
+                                            </td>
+
+                                            <td>
+                                                <span class="apriori-itemset-badge">
+                                                    2-itemset
+                                                </span>
+                                            </td>
+
+                                            <td>4,03%</td>
+                                            <td>60,00%</td>
+
+                                            <td>
+                                                <span class="lift-value lift-neutral">
+                                                    1,00
+                                                </span>
+                                            </td>
+
+                                            <td>
+                                                <span class="artha-detail-unavailable">—</span>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <!-- ATURAN 8 -->
+                                        <tr>
+
+                                            <td>8</td>
+
+                                            <td class="apriori-rule-name">
+                                                Telur → Minyak Goreng
+                                            </td>
+
+                                            <td>
+                                                <span class="apriori-itemset-badge">
+                                                    2-itemset
+                                                </span>
+                                            </td>
+
+                                            <td>5,37%</td>
+                                            <td>60,00%</td>
+
+                                            <td>
+                                                <span class="lift-value lift-negative">
+                                                    0,90
+                                                </span>
+                                            </td>
+
+                                            <td>
+                                                <span class="artha-detail-unavailable">—</span>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <!-- ATURAN 9 -->
+                                        <tr>
+
+                                            <td>9</td>
+
+                                            <td class="apriori-rule-name">
+                                                Telur → Beras
+                                            </td>
+
+                                            <td>
+                                                <span class="apriori-itemset-badge">
+                                                    2-itemset
+                                                </span>
+                                            </td>
+
+                                            <td>4,03%</td>
+                                            <td>60,00%</td>
+
+                                            <td>
+                                                <span class="lift-value lift-negative">
+                                                    0,85
+                                                </span>
+                                            </td>
+
+                                            <td>
+                                                <span class="artha-detail-unavailable">—</span>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <!-- ATURAN 10 -->
+                                        <tr>
+
+                                            <td>10</td>
+
+                                            <td class="apriori-rule-name">
+                                                Kopi → Gula
+                                            </td>
+
+                                            <td>
+                                                <span class="apriori-itemset-badge">
+                                                    2-itemset
+                                                </span>
+                                            </td>
+
+                                            <td>3,36%</td>
+                                            <td>62,50%</td>
+
+                                            <td>
+                                                <span class="lift-value lift-negative">
+                                                    0,78
+                                                </span>
+                                            </td>
+
+                                            <td>
+                                                <span class="artha-detail-unavailable">—</span>
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
                         </div>
-                    </div>
 
-                    <!-- PAGINATION -->
-                    <div class="apriori-pagination">
 
-                        <label for="apriori-page-1"
-                               class="apriori-page-button page-prev">
-                            Sebelumnya
-                        </label>
+                        <!-- =================================
+                             PAGINATION
+                        ================================== -->
 
-                        <div class="apriori-page-numbers">
+                        <div class="apriori-pagination">
+
                             <label for="apriori-page-1"
-                                   class="apriori-page-number page-number-1">1</label>
+                                   class="apriori-page-button page-prev">
+                                Sebelumnya
+                            </label>
+
+                            <div class="apriori-page-numbers">
+
+                                <label for="apriori-page-1"
+                                       class="apriori-page-number page-number-1">
+                                    1
+                                </label>
+
+                                <label for="apriori-page-2"
+                                       class="apriori-page-number page-number-2">
+                                    2
+                                </label>
+
+                            </div>
+
                             <label for="apriori-page-2"
-                                   class="apriori-page-number page-number-2">2</label>
+                                   class="apriori-page-button page-next">
+                                Selanjutnya
+                            </label>
+
                         </div>
 
-                        <label for="apriori-page-2"
-                               class="apriori-page-button page-next">
-                            Selanjutnya
-                        </label>
 
-                    </div>
+                        <!-- INFO PAGINATION -->
+                        <div class="apriori-pagination-info">
 
-                    <div class="apriori-pagination-info">
-                        <span class="pagination-info-1">Menampilkan 1–5 dari 10 aturan</span>
-                        <span class="pagination-info-2">Menampilkan 6–10 dari 10 aturan</span>
-                    </div>
+                            <span class="pagination-info-1">
+                                Menampilkan 1–5 dari 10 aturan
+                            </span>
 
-                </section>
+                            <span class="pagination-info-2">
+                                Menampilkan 6–10 dari 10 aturan
+                            </span>
 
-            </main>
+                        </div>
+
+                    </section>
+
+                </main>
+
+            </div>
+
         </div>
-    </div>
-</div>
 
-<!-- POPUP TETAP DI FILE TERPISAH:
-     assets/popup/pemilik/apriori-success.html
-     Integrasikan melalui mekanisme include proyek.
--->
+    </div>
+
+
+    <!-- ==========================================
+         JAVASCRIPT EXPAND ATURAN PERTAMA
+    ========================================== -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const detailButton = document.getElementById(
+                "detail-rule-1-button"
+            );
+
+            const detailRow = document.getElementById(
+                "detail-rule-1"
+            );
+
+            if (!detailButton || !detailRow) {
+                return;
+            }
+
+            detailButton.addEventListener("click", function () {
+
+                const isExpanded =
+                    detailButton.getAttribute("aria-expanded") === "true";
+
+                const nextExpanded = !isExpanded;
+
+                detailButton.setAttribute(
+                    "aria-expanded",
+                    String(nextExpanded)
+                );
+
+                detailButton.setAttribute(
+                    "aria-label",
+                    nextExpanded
+                        ? "Tutup detail aturan 1"
+                        : "Buka detail aturan 1"
+                );
+
+                detailRow.hidden = !nextExpanded;
+
+            });
+
+        });
+    </script>
+
+
+    <!--
+        POPUP APRIORI TETAP DI FILE TERPISAH:
+        assets/popup/pemilik/apriori-success.html
+
+        Integrasikan melalui mekanisme include proyek.
+    -->
 
 </body>
 </html>

@@ -1,8 +1,11 @@
 
 /* ==========================================
    ARTHA - POPUP PROFIL WEB
+   PEMILIK DAN KASIR
+   COMPACT - TANPA OVERLAY GELAP
 ========================================== */
 
+/* KONTROL POPUP */
 .profile-popup-toggle,
 .password-expand-toggle {
     position: absolute;
@@ -18,55 +21,85 @@
     cursor: pointer;
 }
 
-/* OVERLAY */
+/* ==========================================
+   AREA POPUP
+========================================== */
+
 .profile-popup-overlay {
     display: none;
+
     position: fixed;
     inset: 0;
     z-index: 99999;
+
     align-items: flex-start;
     justify-content: flex-end;
-    padding: 76px 32px 24px;
+
+    padding: 60px 24px 0;
+
+    /* Area luar tidak menghalangi halaman */
+    pointer-events: none;
 }
 
 .profile-popup-toggle:checked ~ .profile-popup-overlay {
     display: flex;
 }
 
+/* BACKDROP TRANSPARAN */
 .profile-popup-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0, 15, 40, .35);
-    cursor: pointer;
+
+    background: transparent;
+
+    /* Klik luar popup untuk menutup */
+    pointer-events: auto;
+    cursor: default;
 }
 
-/* POPUP */
+/* ==========================================
+   KOTAK POPUP COMPACT
+========================================== */
+
 .profile-popup {
     position: relative;
     z-index: 2;
-    width: 410px;
-    max-width: 100%;
+
+    width: 320px;
+    max-width: calc(100vw - 32px);
     height: fit-content;
-    padding: 17px;
+
+    padding: 14px 15px;
+
     background: #FFFFFF;
     border: 1px solid #E1E6EF;
     border-radius: 10px;
-    box-shadow: 0 8px 28px rgba(0, 24, 63, .15);
+
+    box-shadow: 0 5px 20px rgba(16, 39, 88, .12);
+
     font-family: var(--font-primary);
+    box-sizing: border-box;
+
+    pointer-events: auto;
 }
 
-/* HEADER */
+/* ==========================================
+   HEADER POPUP
+========================================== */
+
 .profile-popup-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 17px;
+
+    margin-bottom: 12px;
 }
 
 .profile-popup-header h2 {
     margin: 0;
+
     color: var(--color-primary);
-    font-size: .9rem;
+    font-size: .82rem;
     font-weight: 700;
 }
 
@@ -74,94 +107,128 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+
+    width: 24px;
+    height: 24px;
+
     color: #7180A5;
-    font-size: 24px;
+    font-size: 21px;
     line-height: 1;
+
     cursor: pointer;
 }
 
-/* INFORMASI PENGGUNA */
+.profile-popup-close:hover {
+    color: #142F78;
+}
+
+/* ==========================================
+   INFORMASI PENGGUNA
+========================================== */
+
 .profile-user-info {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 11px;
 }
 
+/* AVATAR NAVY */
 .profile-avatar {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 61px;
-    height: 61px;
-    flex: 0 0 61px;
+
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+
     background: #142F78;
     border-radius: 50%;
 }
 
 .profile-avatar img {
-    width: 28px;
-    height: 28px;
+    width: 22px;
+    height: 22px;
+
     object-fit: contain;
     filter: brightness(0) invert(1);
 }
 
+/* DATA PENGGUNA */
 .profile-user-detail {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 4px;
+
+    gap: 2px;
     min-width: 0;
 }
 
 .profile-user-detail strong {
     color: var(--color-primary);
-    font-size: .83rem;
+    font-size: .73rem;
     font-weight: 700;
 }
 
 .profile-user-detail span {
     color: #7180A5;
-    font-size: .73rem;
+    font-size: .66rem;
 }
 
 .profile-role {
     width: fit-content;
+
     margin-top: 2px;
-    padding: 4px 11px;
+    padding: 3px 9px;
+
     color: #18366B;
     background: #E9EFFB;
+
     border-radius: 20px;
-    font-size: .65rem;
+
+    font-size: .6rem;
     font-weight: 600;
 }
 
-/* PEMISAH */
+/* ==========================================
+   GARIS PEMISAH
+========================================== */
+
 .profile-divider {
     height: 1px;
-    margin: 18px 0 9px;
+
+    margin: 12px 0 6px;
     background: #E5EAF1;
 }
 
-/* UBAH PASSWORD */
+/* ==========================================
+   UBAH PASSWORD
+========================================== */
+
 .password-expand-label {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 37px;
+
+    min-height: 32px;
+
     color: var(--color-primary);
-    font-size: .78rem;
+    font-size: .72rem;
     font-weight: 600;
+
     cursor: pointer;
 }
 
+/* PANAH EXPAND */
 .password-chevron {
     width: 8px;
     height: 8px;
+
     margin-right: 3px;
+
     border-right: 1.5px solid var(--color-primary);
     border-bottom: 1.5px solid var(--color-primary);
+
     transform: rotate(45deg);
     transition: transform .2s ease;
 }
@@ -171,10 +238,14 @@
     transform: rotate(225deg);
 }
 
-/* EXPAND FIELD */
+/* ==========================================
+   EXPAND FIELD PASSWORD
+========================================== */
+
 .password-expand-content {
     display: grid;
     grid-template-rows: 0fr;
+
     transition: grid-template-rows .22s ease;
 }
 
@@ -183,40 +254,54 @@
     grid-template-rows: 1fr;
 }
 
+/* FORM */
 .profile-password-form {
     display: flex;
     flex-direction: column;
-    gap: 9px;
+
+    gap: 7px;
     min-height: 0;
+
     overflow: hidden;
 }
 
 .profile-password-form > label {
-    margin-top: 5px;
+    margin-top: 4px;
+
     color: var(--color-primary);
-    font-size: .72rem;
+    font-size: .67rem;
     font-weight: 500;
 }
 
-/* INPUT PASSWORD DAN IKON MATA */
+/* ==========================================
+   INPUT PASSWORD + IKON MATA
+========================================== */
+
 .password-input-wrapper {
     position: relative;
     display: flex;
     align-items: center;
+
     width: 100%;
 }
 
 .password-input-wrapper input {
     box-sizing: border-box;
+
     width: 100%;
-    height: 47px;
-    padding: 0 43px 0 13px;
+    height: 38px;
+
+    padding: 0 38px 0 11px;
+
     color: var(--color-primary);
     background: #FFFFFF;
+
     border: 1px solid #AAB4C5;
-    border-radius: 7px;
+    border-radius: 6px;
+
     font-family: var(--font-primary);
-    font-size: .75rem;
+    font-size: .69rem;
+
     outline: none;
 }
 
@@ -228,46 +313,68 @@
     color: #91A0B8;
 }
 
+/* IKON MATA */
 .password-visibility-toggle {
     position: absolute;
-    right: 10px;
+    right: 8px;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 29px;
-    height: 29px;
+
+    width: 25px;
+    height: 25px;
     padding: 0;
+
     color: #7180A5;
     background: transparent;
     border: none;
+
     cursor: pointer;
 }
 
 .password-visibility-toggle svg {
-    width: 19px;
-    height: 19px;
+    width: 17px;
+    height: 17px;
 }
 
-/* SIMPAN */
+.password-visibility-toggle:hover {
+    color: #142F78;
+}
+
+/* ==========================================
+   TOMBOL SIMPAN
+========================================== */
+
 .profile-save-button {
     align-self: flex-end;
-    min-width: 113px;
-    height: 42px;
-    margin-top: 6px;
-    padding: 0 18px;
+
+    min-width: 88px;
+    height: 34px;
+
+    margin-top: 4px;
+    padding: 0 12px;
+
     color: #FFFFFF;
     background: #142F78;
+
     border: 1px solid #142F78;
-    border-radius: 7px;
+    border-radius: 6px;
+
     font-family: var(--font-primary);
-    font-size: .73rem;
+    font-size: .67rem;
     font-weight: 600;
+
     cursor: pointer;
 }
 
 .profile-save-button:hover {
     background: #0D245E;
 }
+
+/* ==========================================
+   FOCUS
+========================================== */
 
 .profile-save-button:focus-visible,
 .password-visibility-toggle:focus-visible,

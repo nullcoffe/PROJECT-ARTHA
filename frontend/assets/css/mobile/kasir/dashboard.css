@@ -666,3 +666,10 @@
     }
 
 }
+/* IKON LIHAT PASSWORD */
+.password-visibility-toggle img {
+    display: block;
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}

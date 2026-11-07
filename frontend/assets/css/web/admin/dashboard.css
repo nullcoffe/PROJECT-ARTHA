@@ -386,9 +386,7 @@
         color: var(--color-primary);
         background-color: var(--color-white);
 
-        background-image:
-            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%23142f7d' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-
+        background-image: url("../../../icons/actions/chevron-down.svg");
         background-repeat: no-repeat;
         background-position: right 10px center;
         background-size: 11px;
@@ -665,11 +663,14 @@
     background: rgba(0, 15, 42, 0.58);
 }
 
-/* Muncul ketika tahun 2026 dipilih */
-body:has(
-    .admin-year-select:focus
-    option[value="2026"]:checked
-) .admin-year-popup-overlay {
+/* MODIF(baru) */
+/* POPUP TERSEMBUNYI */
+.admin-year-popup-overlay[hidden] {
+    display: none !important;
+}
+
+/* POPUP AKTIF */
+.admin-year-popup-overlay:not([hidden]) {
     display: flex;
 }
 
@@ -691,7 +692,8 @@ body:has(
     text-align: center;
 }
 
-/* IKON PERINGATAN */
+/* MODIF */
+/* IKON PERINGATAN  */
 .admin-year-popup-icon {
     display: flex;
     align-items: center;
@@ -705,9 +707,14 @@ body:has(
     background: #FFF2BE;
     border: 2px solid #F5C000;
     border-radius: 50%;
-
-    font-size: 34px;
-    font-weight: 700;
+}
+/* MODIF */
+/* GAMBAR SVG IKON */
+.admin-year-popup-icon img {
+    display: block;
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
 }
 
 /* JUDUL */

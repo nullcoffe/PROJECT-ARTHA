@@ -118,3 +118,10 @@
     .receipt-paper { width:80mm; margin:0 auto; padding:8mm; border:0; box-shadow:none; }
 }
 
+/* IKON LIHAT PASSWORD */
+.password-visibility-toggle img {
+    display: block;
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
