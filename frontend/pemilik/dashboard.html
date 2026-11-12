@@ -11,6 +11,8 @@
     <!-- SHARED CSS -->
     <link rel="stylesheet" href="../assets/css/shared/variables.css">
     <link rel="stylesheet" href="../assets/css/shared/reset.css">
+    <link rel="stylesheet" href="../assets/css/shared/popup.css">
+    <link rel="stylesheet" href="../assets/css/shared/notificationPopup.css">   
 
     <!-- WEB CSS -->
     <link rel="stylesheet" href="../assets/css/web/layout.css">
@@ -25,41 +27,10 @@
     <link rel="stylesheet" href="../assets/css/mobile/header.css">
     <link rel="stylesheet" href="../assets/css/mobile/pemilik/dashboard.css">
     <link rel="stylesheet" href="../assets/css/mobile/popupProfil.css">
+    
 </head>
 
 <body>
-
-    <!-- ==========================================
-         POPUP DATA TAHUN 2026
-    ========================================== -->
-
-    <div class="year-unavailable-overlay">
-
-        <div class="year-unavailable-modal"
-             role="alertdialog"
-             aria-labelledby="year-unavailable-title"
-             aria-describedby="year-unavailable-desc">
-
-            <div class="year-unavailable-icon">!</div>
-
-            <h2 id="year-unavailable-title">
-                Data Tahun 2026 Belum Tersedia
-            </h2>
-
-            <p id="year-unavailable-desc">
-                Data penjualan untuk tahun 2026 belum tersedia.
-                Silakan pilih tahun 2024 atau 2025 untuk
-                melihat laporan penjualan.
-            </p>
-
-            <button type="button" class="year-unavailable-close">
-                Mengerti
-            </button>
-
-        </div>
-
-    </div>
-
 
     <!-- ==========================================
          KONTROL POPUP PROFIL
@@ -344,14 +315,10 @@
 
                 </a>
 
-
                 <a href="../index.html"
                    class="nav-item logout">
 
-                    <img src="../assets/icons/actions/logout.svg"
-                         alt=""
-                         class="nav-icon">
-
+                    <img src="../assets/icons/actions/logout.svg" class="nav-icon"  alt="">
                     <span>Keluar</span>
 
                 </a>
@@ -839,6 +806,10 @@
 
         });
     </script>
+    
+<script src="../assets/js/shared/popup.js" defer></script>
+<script src="../assets/js/pemilik/dashboard.js" defer></script>
+<script src="../assets/js/navigation.js" defer></script>
 
 </body>
 </html>

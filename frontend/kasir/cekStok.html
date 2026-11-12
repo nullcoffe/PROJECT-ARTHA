@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +19,9 @@
     <link rel="stylesheet" href="../assets/css/mobile/header.css">
     <link rel="stylesheet" href="../assets/css/web/kasir/cekStok.css">
     <link rel="stylesheet" href="../assets/css/mobile/kasir/cekStok.css">
+    <link rel="stylesheet" href="../assets/css/shared/notificationPopup.css">
 </head>
+
 <body class="cashier-page">
     <input class="sidebar-checkbox" type="checkbox" id="sidebar-toggle">
 
@@ -29,16 +32,9 @@
                     <img src="../assets/images/Logo.svg" class="brand-logo" alt="Logo ARTHA">
                     <span class="brand-title">ARTHA</span>
                 </a>
-                <label class="sidebar-close"
-                    for="sidebar-toggle"
-                    aria-label="Tutup menu">
+                <label class="sidebar-close" for="sidebar-toggle" aria-label="Tutup menu">
 
-                    <img
-                        src="../assets/icons/actions/cancel.svg"
-                        alt=""
-                        aria-hidden="true"
-                        class="sidebar-close-icon"
-                    >
+                    <img src="../assets/icons/actions/cancel.svg" alt="" aria-hidden="true" class="sidebar-close-icon">
 
                 </label>
             </div>
@@ -97,33 +93,47 @@
             <h1 class="mobile-page-title">Cek Ketersediaan Produk</h1>
 
             <div class="stock-toolbar">
+
                 <form class="stock-search" action="cekStok.html" method="get">
                     <img src="../assets/icons/actions/search.svg" alt="">
-                    <input type="search" name="q" placeholder="Cari nama produk, Kode Produk,Harga atau Stok" aria-label="Cari nama produk, kode produk, harga atau stok">
+
+                    <input type="search" id="stockSearch" name="q"
+                        placeholder="Cari nama produk, Kode Produk, Harga atau Stok"
+                        aria-label="Cari nama produk, kode produk, harga atau stok">
                 </form>
-                <select class="stock-filter" aria-label="Filter status">
-                    <option>Semua Status</option>
-                    <option>Aman</option>
-                    <option>Stok rendah</option>
-                    <option>Habis</option>
+
+                <select class="stock-filter" id="stockStatusFilter" aria-label="Filter status">
+                    <option value="all">Semua Status</option>
+                    <option value="safe">Aman</option>
+                    <option value="low">Stok rendah</option>
+                    <option value="empty">Habis</option>
                 </select>
+
             </div>
 
             <div class="table-wrap stock-table">
                 <table>
-                    <thead><tr><th>ID<br>produk</th><th>Nama Produk</th><th>Harga</th><th>Stok</th><th>Status</th></tr></thead>
-                    <tbody>
-                        <tr><td>P001</td><td>Beras 5 kg</td><td>Rp 75.000</td><td><strong>32</strong></td><td class="stock-safe">Aman</td></tr>
-                        <tr><td>P002</td><td>Minyak goreng 1 Lt</td><td>Rp 18.000</td><td><strong>15</strong></td><td class="stock-safe">Aman</td></tr>
-                        <tr><td>P003</td><td>Gula pasir 1 kg</td><td>Rp 17.000</td><td class="stock-low">9</td><td class="stock-low">Stok rendah</td></tr>
-                        <tr><td>P004</td><td>Susu UHT 1L</td><td>Rp 21.000</td><td><strong>24</strong></td><td class="stock-safe">Aman</td></tr>
-                        <tr><td>P005</td><td>Teh celup 25s</td><td>Rp 8.000</td><td class="stock-low">5</td><td class="stock-low">Stok rendah</td></tr>
-                        <tr><td>P006</td><td>Kopi bubuk 200 gr</td><td>Rp 25.000</td><td class="stock-empty">0</td><td class="stock-empty">Habis</td></tr>
+                    <thead>
+                        <tr>
+                            <th>ID<br>produk</th>
+                            <th>Nama Produk</th>
+                            <th>Harga</th>
+                            <th>Stok</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stockTableBody">
                     </tbody>
                 </table>
             </div>
         </main>
     </div>
 
+    <script src="../assets/js/config.js" defer></script>
+    <script src="../assets/js/shared/popup.js" defer></script>
+    <script src="../assets/js/navigation.js" defer></script>
+    <script src="../assets/js/kasir/cek-stok.js" defer></script>
+
 </body>
+
 </html>

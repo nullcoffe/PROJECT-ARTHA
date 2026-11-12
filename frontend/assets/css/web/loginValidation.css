@@ -1,0 +1,94 @@
+/* ARTHA - INLINE LOGIN VALIDATION */
+.login-input-wrap,
+.role-control {
+    transition:
+        border-color .2s ease,
+        background .2s ease;
+}
+
+/* WARNING USERNAME & PASSWORD */
+
+.login-input-wrap.is-invalid {
+    border: 1.5px solid #E8BE45 !important;
+    background: #FFFAEC !important;
+    box-shadow: none !important;
+}
+
+/* INPUT */
+
+.login-input-wrap.is-invalid input {
+    background: transparent !important;
+    border-color: transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
+    color: #A47A16 !important;
+}
+
+/* PLACEHOLDER MENJADI PESAN ERROR */
+
+.login-input-wrap.is-invalid input::placeholder {
+    color: #A47A16 !important;
+    opacity: 1;
+    font-weight: 500;
+}
+
+/* ICON WARNING COLOR */
+
+.login-input-wrap.is-invalid .login-field-icon {
+    filter: brightness(0) saturate(100%) invert(54%) sepia(62%) saturate(533%) hue-rotate(6deg) brightness(94%);
+}
+
+/* ROLE WARNING */
+
+.role-control.is-invalid {
+    border: 1.5px solid #E8BE45 !important;
+    background: #FFFAEC !important;
+    box-shadow: none !important;
+}
+
+.role-control.is-invalid {
+    border: 1.5px solid #E8BE45 !important;
+    background: #FFFAEC !important;
+    box-shadow: none !important;
+}
+
+.role-control.is-invalid #role-current-label {
+    color: #A47A16 !important;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.role-control.is-invalid #role-current-label {
+    color: #A47A16 !important;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.role-control.is-invalid .role-trigger-icon {
+    filter: brightness(0) saturate(100%) invert(54%) sepia(62%) saturate(533%) hue-rotate(6deg) brightness(94%);
+}
+
+/* FOCUS */
+
+.login-input-wrap.is-invalid:focus-within,
+.role-control.is-invalid:focus-within {
+    border-color: #D6A82E !important;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    .role-control.is-invalid #role-current-label {
+        font-size: 11px;
+    }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .login-input-wrap,
+    .role-control {
+        transition: none;
+    }
+}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,96 +17,199 @@
     <link rel="stylesheet" href="../assets/css/mobile/layout.css">
     <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
     <link rel="stylesheet" href="../assets/css/mobile/header.css">
+
     <link rel="stylesheet" href="../assets/css/web/kasir/cetakStruk.css">
     <link rel="stylesheet" href="../assets/css/mobile/kasir/cetakStruk.css">
+    <link rel="stylesheet" href="../assets/css/shared/notificationPopup.css">
 </head>
+
 <body class="cashier-page">
+
     <input class="sidebar-checkbox" type="checkbox" id="sidebar-toggle">
 
     <div class="dashboard-layout">
+
+        <!-- Sidebar navigasi -->
         <aside class="sidebar">
+
             <div class="sidebar-brand">
+
                 <a href="dashboard.html" class="brand-left">
                     <img src="../assets/images/Logo.svg" class="brand-logo" alt="Logo ARTHA">
                     <span class="brand-title">ARTHA</span>
                 </a>
-                <label class="sidebar-close" for="sidebar-toggle" aria-label="Tutup menu">&times;</label>
+
+                <label class="sidebar-close" for="sidebar-toggle" aria-label="Tutup menu">
+                    &times;
+                </label>
+
             </div>
 
             <nav class="sidebar-nav" aria-label="Navigasi kasir">
+
                 <a class="nav-item" href="dashboard.html">
                     <img class="nav-icon" src="../assets/icons/sidebar/dashboard.svg" alt="">
                     <span>Dashboard</span>
                 </a>
+
                 <a class="nav-item" href="transaksiPOS.html">
                     <img class="nav-icon" src="../assets/icons/sidebar/transaksiPos.svg" alt="">
                     <span>Transaksi POS</span>
                 </a>
+
                 <a class="nav-item" href="pembayaran.html">
                     <img class="nav-icon" src="../assets/icons/sidebar/pembayaran.svg" alt="">
                     <span>Pembayaran</span>
                 </a>
+
                 <a class="nav-item active" href="cetakStruk.html">
                     <img class="nav-icon" src="../assets/icons/sidebar/cetakStruk.svg" alt="">
                     <span>Cetak Struk</span>
                 </a>
+
                 <a class="nav-item" href="cekStok.html">
                     <img class="nav-icon" src="../assets/icons/sidebar/cekStok.svg" alt="">
                     <span>Cek Stok</span>
                 </a>
+
                 <a class="nav-item logout" href="../index.html">
                     <img class="nav-icon" src="../assets/icons/actions/logout.svg" alt="">
                     <span>Keluar</span>
                 </a>
+
             </nav>
+
         </aside>
 
         <label class="sidebar-overlay" for="sidebar-toggle" aria-label="Tutup menu"></label>
 
+        <!-- Konten utama -->
         <main class="main-content">
+
+            <!-- Header halaman -->
             <header class="dashboard-header">
+
                 <div class="header-left">
+
                     <label class="hamburger-btn" for="sidebar-toggle" aria-label="Buka menu">
                         <img src="../assets/icons/actions/hamburger.svg" alt="">
                     </label>
+
                     <h1>Struk Transaksi</h1>
+
                     <a class="mobile-brand" href="dashboard.html">
                         <img src="../assets/images/Logo.svg" alt="">
                         <span>ARTHA</span>
                     </a>
+
                 </div>
+
                 <div class="header-right">
+
                     <div class="user-profile">
+
                         <div class="profile-circle">
                             <img src="../assets/icons/header/profile.svg" alt="">
                         </div>
+
                         <span>Kasir</span>
+
                     </div>
+
                 </div>
+
             </header>
+
             <h1 class="mobile-page-title">Struk Transaksi</h1>
 
+            <!-- Area struk transaksi -->
             <section class="receipt-area">
+
                 <div class="receipt-paper">
+
                     <h2>TOKO ARTHA</h2>
-                    <p class="receipt-subtitle">Struk Penjualan</p>
+
+                    <p class="receipt-subtitle">
+                        Struk Penjualan
+                    </p>
+
                     <div class="receipt-dash"></div>
-                    <div class="receipt-line"><span>No Transaksi</span><span>TRX-0351</span></div>
-                    <div class="receipt-line"><span>Beras 5 kg x1</span><span>75.000</span></div>
-                    <div class="receipt-line"><span>Minyak Goreng 1L x2</span><span>36.000</span></div>
-                    <div class="receipt-line total"><span>TOTAL</span><span>111.000</span></div>
-                    <div class="receipt-line"><span>Tunai</span><span>150.000</span></div>
-                    <div class="receipt-line"><strong>Kembali</strong><strong>39.000</strong></div>
-                    <p class="receipt-thanks">Terima kasih Telah berbelanja</p>
+
+                    <div class="receipt-line">
+                        <span>No Transaksi</span>
+                        <span id="receipt-transaction-id">-</span>
+                    </div>
+
+                    <div class="receipt-line">
+                        <span>Tanggal</span>
+                        <span id="receipt-date">-</span>
+                    </div>
+
+                    <div class="receipt-dash"></div>
+
+                    <div id="receipt-items">
+                        <!-- Daftar produk dimuat melalui JavaScript -->
+                    </div>
+
+                    <div class="receipt-dash"></div>
+
+                    <div class="receipt-line total">
+                        <strong>TOTAL</strong>
+                        <strong id="receipt-total">Rp 0</strong>
+                    </div>
+
+                    <div class="receipt-line">
+                        <span>Metode Pembayaran</span>
+                        <span id="receipt-method">-</span>
+                    </div>
+
+                    <div class="receipt-line">
+                        <span>Uang Diterima</span>
+                        <span id="receipt-received">Rp 0</span>
+                    </div>
+
+                    <div class="receipt-line">
+                        <strong>Kembali</strong>
+                        <strong id="receipt-change">Rp 0</strong>
+                    </div>
+
+                    <p class="receipt-thanks">
+                        Terima kasih telah berbelanja
+                    </p>
+
                 </div>
+
+                <!-- Tombol tindakan struk -->
                 <div class="receipt-actions">
-                    <a class="button-primary" href="#cetak">Cetak Struk</a>
-                    <a class="button-light" href="#pdf">Simpan PDF</a>
-                    <a class="button-light" href="transaksiPOS.html">Transaksi Baru</a>
+
+                    <button type="button" class="button-primary" id="btn-print">
+                        Cetak Struk
+                    </button>
+
+                    <button type="button" class="button-light" id="btn-save-pdf">
+                        Simpan PDF
+                    </button>
+
+                    <a href="transaksiPOS.html" class="button-primary">
+                        Transaksi Baru
+                    </a>
+
                 </div>
+
             </section>
+
         </main>
+
     </div>
 
+    <script src="../assets/js/config.js" defer></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.3/html2pdf.bundle.min.js" defer></script>
+
+    <script src="../assets/js/shared/popup.js" defer></script>
+    <script src="../assets/js/navigation.js" defer></script>
+    <script src="../assets/js/kasir/cetakStruk.js" defer></script>
+
 </body>
+
 </html>

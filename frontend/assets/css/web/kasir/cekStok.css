@@ -119,6 +119,7 @@
 .stock-table th,.stock-table td { padding:14px 16px; font-size:12px; }
 .stock-table td:nth-child(4),.stock-table td:last-child { text-align:center; }
 .stock-safe { color:#16834A; font-weight:700; }.stock-low { color:#A34A0B; font-weight:700; }.stock-empty { color:#DC2626; font-weight:700; }
+.stock-table tbody td:nth-child(4) { color: #26334D; }
 
 @media (min-width:769px) and (max-width:1100px) {
     .pos-layout { grid-template-columns:minmax(0,1.3fr) minmax(225px,1fr); gap:12px; }
@@ -137,4 +138,3 @@
     .receipt-area { width:100%; margin:0 auto; }
     .receipt-paper { width:80mm; margin:0 auto; padding:8mm; border:0; box-shadow:none; }
 }
-

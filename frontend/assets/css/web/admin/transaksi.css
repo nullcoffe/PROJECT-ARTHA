@@ -472,3 +472,119 @@
     font-size: 1rem;
     font-weight: 700;
 }
+
+/* FIX LAYOUT TABEL TRANSAKSI ADMIN */
+.transaction-content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+}
+
+/* MEMBUAT DAFTAR TRANSAKSI MEMENUHI AREA KONTEN */
+.transaction-list-section {
+    display: block !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+
+    grid-column: 1 / -1 !important;
+    align-self: stretch !important;
+}
+
+/* MEMBUAT KARTU TABEL MEMANJANG */
+.transaction-table-card {
+    display: block !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+
+    box-sizing: border-box;
+}
+
+/* MEMASTIKAN TABEL MENGIKUTI LEBAR KARTU */
+.transaction-table-wrapper {
+    display: block !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+
+    overflow-x: auto;
+}
+
+/* UKURAN TABEL */
+.transaction-table {
+    width: 100% !important;
+    min-width: 700px;
+    table-layout: auto;
+    border-collapse: collapse;
+}
+
+/* RESPONSIVE TABEL */
+@media (max-width: 768px) {
+    .transaction-table-card {
+        width: 100%;
+    }
+
+    .transaction-table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .transaction-table {
+        min-width: 650px;
+    }
+}
+
+/* EMPTY STATE TRANSAKSI */
+.transaction-empty-state {
+    padding: 25px 18px !important;
+    color: #7180A5;
+    font-family: var(--font-primary);
+    font-size: .8rem;
+    text-align: center;
+}
+
+/* BULAN YANG TIDAK TERSEDIA */
+.month-popup-option[hidden] {
+    display: none !important;
+}
+
+.month-popup-option input:disabled {
+    cursor: not-allowed;
+}
+
+.transaction-month-trigger[aria-disabled="true"] {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+/* Menampilkan semua pilihan bulan */
+.month-popup-option[hidden] {
+    display: flex !important;
+}
+
+/* Menandai bulan yang tidak memiliki transaksi */
+.month-popup-option.month-unavailable {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: #F2F4F8;
+}
+
+/* Menonaktifkan interaksi bulan yang tidak tersedia */
+.month-popup-option.month-unavailable input {
+    cursor: not-allowed;
+}
+
+/* Memastikan grid bulan tetap tiga kolom */
+.month-popup-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 
@@ -6,45 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FFFDF0">
+    <title>Kasir / Pembayaran | ARTHA</title>
 
-    <title>Pembayaran | ARTHA</title>
-
-    <!-- SHARED CSS -->
     <link rel="stylesheet" href="../assets/css/shared/variables.css">
     <link rel="stylesheet" href="../assets/css/shared/reset.css">
+    <link rel="stylesheet" href="../assets/css/shared/notificationPopup.css">
 
-    <!-- WEB CSS -->
     <link rel="stylesheet" href="../assets/css/web/layout.css">
     <link rel="stylesheet" href="../assets/css/web/sidebar.css">
     <link rel="stylesheet" href="../assets/css/web/header.css">
 
-    <!-- MOBILE CSS -->
     <link rel="stylesheet" href="../assets/css/mobile/layout.css">
     <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
     <link rel="stylesheet" href="../assets/css/mobile/header.css">
+
     <link rel="stylesheet" href="../assets/css/web/kasir/pembayaran.css">
     <link rel="stylesheet" href="../assets/css/mobile/kasir/pembayaran.css">
-
-    <!-- KASIR CSS -->
-
-    <!-- PAYMENT CSS - LOAD LAST -->
-
+    <link rel="stylesheet" href="../assets/css/shared/notificationPopup.css">
 </head>
 
 <body class="cashier-page payment-page">
 
-    <!-- SIDEBAR CONTROL -->
-    <input
-        class="sidebar-checkbox"
-        type="checkbox"
-        id="sidebar-toggle"
-    >
+    <input class="sidebar-checkbox" type="checkbox" id="sidebar-toggle">
 
     <div class="dashboard-layout">
-
-        <!-- =====================================
-             SIDEBAR NAVIGATION
-        ====================================== -->
 
         <aside class="sidebar">
 
@@ -52,163 +36,88 @@
 
                 <a href="dashboard.html" class="brand-left">
 
-                    <img
-                        src="../assets/images/Logo.svg"
-                        class="brand-logo"
-                        alt="Logo ARTHA"
-                    >
+                    <img src="../assets/images/Logo.svg" class="brand-logo" alt="Logo ARTHA">
 
-                    <span class="brand-title">
-                        ARTHA
-                    </span>
+                    <span class="brand-title">ARTHA</span>
 
                 </a>
 
-                <label
-                    class="sidebar-close"
-                    for="sidebar-toggle"
-                    aria-label="Tutup menu"
-                >
+                <label class="sidebar-close" for="sidebar-toggle" aria-label="Tutup menu">
                     &times;
                 </label>
 
             </div>
 
-
-            <!-- SIDEBAR MENU -->
-
             <nav class="sidebar-nav" aria-label="Navigasi kasir">
 
                 <a class="nav-item" href="dashboard.html">
 
-                    <img
-                        class="nav-icon"
-                        src="../assets/icons/sidebar/dashboard.svg"
-                        alt=""
-                    >
+                    <img class="nav-icon" src="../assets/icons/sidebar/dashboard.svg" alt="">
 
                     <span>Dashboard</span>
 
                 </a>
 
-
                 <a class="nav-item" href="transaksiPOS.html">
 
-                    <img
-                        class="nav-icon"
-                        src="../assets/icons/sidebar/transaksiPos.svg"
-                        alt=""
-                    >
+                    <img class="nav-icon" src="../assets/icons/sidebar/transaksiPos.svg" alt="">
 
                     <span>Transaksi POS</span>
 
                 </a>
 
-
                 <a class="nav-item active" href="pembayaran.html">
 
-                    <img
-                        class="nav-icon"
-                        src="../assets/icons/sidebar/pembayaran.svg"
-                        alt=""
-                    >
+                    <img class="nav-icon" src="../assets/icons/sidebar/pembayaran.svg" alt="">
 
                     <span>Pembayaran</span>
 
                 </a>
 
-
                 <a class="nav-item" href="cetakStruk.html">
 
-                    <img
-                        class="nav-icon"
-                        src="../assets/icons/sidebar/cetakStruk.svg"
-                        alt=""
-                    >
+                    <img class="nav-icon" src="../assets/icons/sidebar/cetakStruk.svg" alt="">
 
                     <span>Cetak Struk</span>
 
                 </a>
 
-
                 <a class="nav-item" href="cekStok.html">
 
-                    <img
-                        class="nav-icon"
-                        src="../assets/icons/sidebar/cekStok.svg"
-                        alt=""
-                    >
+                    <img class="nav-icon" src="../assets/icons/sidebar/cekStok.svg" alt="">
 
                     <span>Cek Stok</span>
 
                 </a>
 
-
                 <a class="nav-item logout" href="../index.html">
-
-                    <img
-                        class="nav-icon"
-                        src="../assets/icons/actions/logout.svg"
-                        alt=""
-                    >
-
+                    <img class="nav-icon" src="../assets/icons/actions/logout.svg" alt="">
                     <span>Keluar</span>
-
                 </a>
 
             </nav>
 
         </aside>
 
-
-        <!-- SIDEBAR OVERLAY -->
-
-        <label
-            class="sidebar-overlay"
-            for="sidebar-toggle"
-            aria-label="Tutup menu"
-        ></label>
-
-
-        <!-- =====================================
-             MAIN CONTENT
-        ====================================== -->
+        <label class="sidebar-overlay" for="sidebar-toggle" aria-label="Tutup menu"></label>
 
         <main class="main-content">
-
-            <!-- HEADER -->
 
             <header class="dashboard-header">
 
                 <div class="header-left">
 
-                    <label
-                        class="hamburger-btn"
-                        for="sidebar-toggle"
-                        aria-label="Buka menu"
-                    >
+                    <label class="hamburger-btn" for="sidebar-toggle" aria-label="Buka menu">
 
-                        <img
-                            src="../assets/icons/actions/hamburger.svg"
-                            alt=""
-                        >
+                        <img src="../assets/icons/actions/hamburger.svg" alt="">
 
                     </label>
 
+                    <h1>Kasir / Pembayaran</h1>
 
-                    <!-- DESKTOP TITLE -->
+                    <a href="dashboard.html" class="mobile-brand">
 
-                    <h1>Pembayaran</h1>
-
-
-                    <!-- MOBILE BRAND -->
-
-                    <a class="mobile-brand" href="dashboard.html">
-
-                        <img
-                            src="../assets/images/Logo.svg"
-                            alt="Logo ARTHA"
-                        >
+                        <img src="../assets/images/Logo.svg" alt="">
 
                         <span>ARTHA</span>
 
@@ -216,19 +125,13 @@
 
                 </div>
 
-
-                <!-- USER PROFILE -->
-
                 <div class="header-right">
 
                     <div class="user-profile">
 
                         <div class="profile-circle">
 
-                            <img
-                                src="../assets/icons/header/profile.svg"
-                                alt="Profil"
-                            >
+                            <img src="../assets/icons/header/profile.svg" alt="">
 
                         </div>
 
@@ -240,133 +143,56 @@
 
             </header>
 
-
-            <!-- MOBILE PAGE TITLE -->
-
             <h1 class="mobile-page-title">
-                Pembayaran
+                Kasir / Pembayaran
             </h1>
-
-
-            <!-- =================================
-                 PAYMENT LAYOUT
-            ================================== -->
 
             <div class="payment-layout">
 
-
-                <!-- =================================
-                     TRANSACTION SUMMARY
-                ================================== -->
+                <!-- RINGKASAN TRANSAKSI -->
 
                 <section class="payment-summary">
 
                     <h2>Ringkasan Transaksi</h2>
 
-
-                    <div class="payment-table-wrap">
+                    <div class="payment-summary-table-wrap">
 
                         <table class="payment-table">
-
-                            <colgroup>
-                                <col class="col-id">
-                                <col class="col-product">
-                                <col class="col-price">
-                                <col class="col-qty">
-                                <col class="col-total">
-                            </colgroup>
-
 
                             <thead>
 
                                 <tr>
-
-                                    <th>ID<br>Produk</th>
-
-                                    <th>Nama<br>Produk</th>
-
+                                    <th>ID Produk</th>
+                                    <th>Nama Produk</th>
                                     <th>Harga</th>
-
                                     <th>Qty</th>
-
                                     <th>Jumlah</th>
-
                                 </tr>
 
                             </thead>
 
-
-                            <tbody>
-
-                                <tr>
-
-                                    <td>
-                                        <strong>P001</strong>
-                                    </td>
-
-                                    <td>
-                                        Beras 5 kg
-                                    </td>
-
-                                    <td>
-                                        Rp 75.000
-                                    </td>
-
-                                    <td>
-                                        1
-                                    </td>
-
-                                    <td>
-                                        Rp 75.000
-                                    </td>
-
-                                </tr>
-
-
-                                <tr>
-
-                                    <td>
-                                        <strong>P002</strong>
-                                    </td>
-
-                                    <td>
-                                        Minyak 1 L
-                                    </td>
-
-                                    <td>
-                                        Rp 18.000
-                                    </td>
-
-                                    <td>
-                                        2
-                                    </td>
-
-                                    <td>
-                                        Rp 36.000
-                                    </td>
-
-                                </tr>
-
+                            <tbody id="paymentTableBody">
                             </tbody>
 
                         </table>
 
                     </div>
 
+                    <div class="payment-summary-total">
+
+                        <strong>Total Transaksi</strong>
+
+                        <b id="paymentTotal">Rp 0</b>
+
+                    </div>
+
                 </section>
 
-
-
-                <!-- =================================
-                     PAYMENT CARD
-                ================================== -->
+                <!-- FORM PEMBAYARAN -->
 
                 <section class="payment-card">
 
                     <h2>Pembayaran</h2>
-
-
-                    <!-- PAYMENT METHOD -->
 
                     <div class="payment-field">
 
@@ -374,21 +200,9 @@
                             Metode Pembayaran
                         </label>
 
-
                         <div class="method-box">
 
-                            <input
-                                type="radio"
-                                name="payment-method"
-                                checked
-                                disabled
-                            >
-
-                            <img
-                                src="../assets/icons/actions/tunai.svg"
-                                class="money-icon"
-                                alt="Ikon Tunai"
-                            >
+                            <input type="radio" name="payment-method" checked disabled>
 
                             <strong>Tunai</strong>
 
@@ -396,120 +210,80 @@
 
                     </div>
 
-
-
-                    <!-- RECEIVED MONEY -->
+                    <!-- UANG DITERIMA -->
 
                     <div class="payment-field">
 
-                        <label
-                            class="form-label"
-                            for="uang-diterima"
-                        >
+                        <label class="form-label" for="uang-diterima">
                             Uang Diterima
                         </label>
-
 
                         <div class="received-box">
 
                             <span>Rp</span>
 
-                            <input
-                                id="uang-diterima"
-                                type="text"
-                                value="150.000"
-                                readonly
-                            >
+                            <input type="text" id="uang-diterima" value="0" inputmode="numeric" autocomplete="off"
+                                placeholder="Masukkan nominal">
 
                         </div>
 
                     </div>
 
-
-
-                    <!-- QUICK AMOUNTS -->
+                    <!-- PILIHAN NOMINAL UANG CEPAT -->
 
                     <div class="quick-amounts">
 
-                        <a href="#uang-diterima">
-                            Rp 20.000
-                        </a>
+                        <a href="#uang-diterima">Rp 1.000</a>
+                        <a href="#uang-diterima">Rp 2.000</a>
+                        <a href="#uang-diterima">Rp 5.000</a>
 
-                        <a href="#uang-diterima">
-                            Rp 50.000
-                        </a>
+                        <a href="#uang-diterima">Rp 10.000</a>
+                        <a href="#uang-diterima">Rp 20.000</a>
+                        <a href="#uang-diterima">Rp 50.000</a>
 
-                        <a href="#uang-diterima">
-                            Rp 100.000
-                        </a>
+                        <a href="#uang-diterima">Rp 75.000</a>
+                        <a href="#uang-diterima">Rp 100.000</a>
+                        <a href="#uang-diterima">Rp 150.000</a>
 
                     </div>
 
-
-
-                    <!-- CHANGE -->
+                    <!-- KEMBALIAN -->
 
                     <div class="change-box">
 
                         <strong>Kembalian</strong>
 
                         <strong class="change-value">
-                            Rp 39.000
+                            Rp 0
                         </strong>
 
                     </div>
 
+                    <!-- PERHITUNGAN -->
 
-
-                    <!-- PAYMENT EQUATION -->
-
-                    <div class="payment-equation">
-
-                        Rp 150.000 − Rp 111.000
-
+                    <div class="payment-equation" id="paymentEquation">
+                        Rp 0 − Rp 0
                     </div>
 
-
-
-                    <!-- =================================
-                         PAYMENT BUTTONS
-                    ================================== -->
+                    <!-- TOMBOL AKSI -->
 
                     <div class="payment-actions">
 
+                        <a href="transaksiPOS.html" class="button-outline">
 
-                            <a
-                                href="transaksiPOS.html"
-                                class="button-outline"
-                            >
-                            <img
-                                src="../assets/icons/actions/chevron-left.svg"
-                                alt=""
-                                class="action-arrow-icon"
-                                aria-hidden="true"
-                            >
+                            <img src="../assets/icons/actions/chevron-left.svg" alt="" class="action-arrow-icon">
 
                             Kembali
 
                         </a>
 
+                        <a href="cetakStruk.html" class="button-primary" id="finishTransaction">
 
-                        <a
-                            href="cetakStruk.html"
-                            class="button-primary"
-                        >
-
-                            <img
-                                src="../assets/icons/actions/check.svg"
-                                alt=""
-                                class="action-check-icon"
-                                aria-hidden="true"
-                            >
+                            <img src="../assets/icons/actions/check.svg" alt="" class="action-check-icon">
 
                             Selesai Transaksi
 
                         </a>
-
 
                     </div>
 
@@ -521,5 +295,11 @@
 
     </div>
 
+    <script src="../assets/js/config.js" defer></script>
+    <script src="../assets/js/shared/popup.js" defer></script>
+    <script src="../assets/js/navigation.js" defer></script>
+    <script src="../assets/js/kasir/pembayaran.js" defer></script>
+
 </body>
+
 </html>

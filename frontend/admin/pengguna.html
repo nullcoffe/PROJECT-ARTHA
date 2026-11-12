@@ -25,185 +25,9 @@
     <link rel="stylesheet" href="../assets/css/mobile/header.css">
     <link rel="stylesheet" href="../assets/css/mobile/admin/pengguna.css">
 
-    <!-- POPUP CSS -->
-    <style>
-        /* POPUP KONFIRMASI HAPUS */
-        .delete-user-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 99999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: rgba(0, 15, 42, 0.58);
+    <!-- CUSTOM NOTIFICATION POPUP ARTHA -->
+    <link rel="stylesheet" href="../assets/css/shared/notificationPopup.css">
 
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            transition: opacity 0.2s ease,
-                        visibility 0.2s ease;
-        }
-
-        .delete-user-overlay:target {
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
-        }
-
-        .delete-user-popup {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 420px;
-            padding: 30px 28px 26px;
-            background: #FFFFFF;
-            border-radius: 14px;
-            box-shadow: 0 12px 40px rgba(0,0,0,0.22);
-            font-family: var(--font-primary);
-            text-align: center;
-        }
-
-        .delete-popup-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 64px;
-            height: 64px;
-            margin-bottom: 18px;
-            background: #FDE8E8;
-            border-radius: 50%;
-        }
-
-        .delete-popup-icon img {
-            width: 30px;
-            height: 30px;
-            filter: brightness(0) saturate(100%)
-                    invert(26%) sepia(97%)
-                    saturate(5488%) hue-rotate(351deg)
-                    brightness(101%) contrast(111%);
-        }
-
-        .delete-user-popup h2 {
-            margin: 0 0 10px;
-            color: var(--color-primary);
-            font-size: 21px;
-            font-weight: 700;
-            line-height: 1.3;
-        }
-
-        .delete-user-popup p {
-            margin: 0 0 25px;
-            color: #7180A5;
-            font-size: 13px;
-            line-height: 1.7;
-        }
-
-        .delete-popup-actions {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            gap: 12px;
-        }
-
-        .delete-popup-cancel,
-        .delete-popup-confirm {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            flex: 1;
-            min-height: 43px;
-            padding: 10px 14px;
-            border-radius: 7px;
-            font-family: var(--font-primary);
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .delete-popup-cancel {
-            color: var(--color-primary);
-            background: #FFFFFF;
-            border: 1px solid var(--color-primary);
-        }
-
-        .delete-popup-cancel:hover {
-            background: #F2F5FA;
-        }
-
-        .delete-popup-confirm {
-            color: #FFFFFF;
-            background: #E53935;
-            border: 1px solid #E53935;
-        }
-
-        .delete-popup-confirm:hover {
-            background: #C62828;
-        }
-
-        /* SEMUA IKON SAMPAH MERAH */
-        .users-actions .delete-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .users-actions .delete-button img {
-            filter: brightness(0) saturate(100%)
-                    invert(26%) sepia(97%)
-                    saturate(5488%) hue-rotate(351deg)
-                    brightness(101%) contrast(111%) !important;
-            opacity: 1 !important;
-        }
-
-        @media (max-width: 768px) {
-            .delete-user-overlay {
-                padding: 18px;
-            }
-
-            .delete-user-popup {
-                max-width: 340px;
-                padding: 25px 20px 22px;
-                border-radius: 12px;
-            }
-
-            .delete-popup-icon {
-                width: 55px;
-                height: 55px;
-                margin-bottom: 15px;
-            }
-
-            .delete-popup-icon img {
-                width: 26px;
-                height: 26px;
-            }
-
-            .delete-user-popup h2 {
-                font-size: 18px;
-            }
-
-            .delete-user-popup p {
-                margin-bottom: 20px;
-                font-size: 12px;
-            }
-
-            .delete-popup-actions {
-                gap: 9px;
-            }
-
-            .delete-popup-cancel,
-            .delete-popup-confirm {
-                min-height: 40px;
-                padding: 9px 10px;
-                font-size: 12px;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -298,6 +122,7 @@
                 </a>
 
             </nav>
+
         </aside>
 
         <!-- MAIN CONTENT -->
@@ -344,7 +169,7 @@
 
             </header>
 
-            <!-- JUDUL KHUSUS MOBILE -->
+            <!-- JUDUL MOBILE -->
             <h1 class="mobile-page-title">
                 Manajemen Pengguna
             </h1>
@@ -386,57 +211,6 @@
 
                             <tbody>
 
-                                <!-- PENGGUNA 1: MUTHE -->
-                                <tr>
-                                    <td>Muthe</td>
-                                    <td>Muthe.Pemilik</td>
-
-                                    <td>
-                                        <span class="role-badge role-owner">
-                                            Pemilik
-                                        </span>
-                                    </td>
-
-                                    <td>
-                                        <span
-                                            class="password-hidden"
-                                            aria-label="Kata sandi disembunyikan"
-                                        >
-                                            ••••••••
-                                        </span>
-                                    </td>
-
-                                    <td>
-                                        <div class="users-actions">
-
-                                            <!-- EDIT MUTHE -->
-                                            <a
-                                                href="#userFormSection"
-                                                class="action-button edit-button"
-                                                aria-label="Ubah akun Muthe"
-                                            >
-                                                <img
-                                                    src="../assets/icons/actions/edit.svg"
-                                                    alt=""
-                                                >
-                                            </a>
-
-                                            <!-- HAPUS MUTHE -->
-                                            <a
-                                                href="#popup-delete-muthe"
-                                                class="action-button delete-button"
-                                                aria-label="Hapus akun Muthe"
-                                            >
-                                                <img
-                                                    src="../assets/icons/actions/delete.svg"
-                                                    alt=""
-                                                >
-                                            </a>
-
-                                        </div>
-                                    </td>
-                                </tr>
-
                                 <!-- PENGGUNA 2: LAUDYA -->
                                 <tr>
                                     <td>Laudya</td>
@@ -460,7 +234,6 @@
                                     <td>
                                         <div class="users-actions">
 
-                                            <!-- EDIT LAUDYA -->
                                             <a
                                                 href="#userFormSection"
                                                 class="action-button edit-button"
@@ -472,9 +245,8 @@
                                                 >
                                             </a>
 
-                                            <!-- HAPUS LAUDYA -->
                                             <a
-                                                href="#popup-delete-laudya"
+                                                href="#"
                                                 class="action-button delete-button"
                                                 aria-label="Hapus akun Laudya"
                                             >
@@ -511,7 +283,6 @@
                                     <td>
                                         <div class="users-actions">
 
-                                            <!-- EDIT ABIN -->
                                             <a
                                                 href="#userFormSection"
                                                 class="action-button edit-button"
@@ -523,9 +294,8 @@
                                                 >
                                             </a>
 
-                                            <!-- HAPUS ABIN -->
                                             <a
-                                                href="#popup-delete-abin"
+                                                href="#"
                                                 class="action-button delete-button"
                                                 aria-label="Hapus akun Abin"
                                             >
@@ -562,7 +332,6 @@
                                     <td>
                                         <div class="users-actions">
 
-                                            <!-- EDIT ALRA -->
                                             <a
                                                 href="#userFormSection"
                                                 class="action-button edit-button"
@@ -574,9 +343,8 @@
                                                 >
                                             </a>
 
-                                            <!-- HAPUS ALRA -->
                                             <a
-                                                href="#popup-delete-alra"
+                                                href="#"
                                                 class="action-button delete-button"
                                                 aria-label="Hapus akun Alra"
                                             >
@@ -730,217 +498,13 @@
 
     </div>
 
+    <!-- CUSTOM POPUP ARTHA -->
+    <script src="../assets/js/shared/popup.js"></script>
 
-    <!-- ==========================================
-         POPUP 1: HAPUS MUTHE
-    ========================================== -->
-    <div
-        id="popup-delete-muthe"
-        class="delete-user-overlay"
-    >
-        <section
-            class="delete-user-popup"
-            role="dialog"
-            aria-labelledby="delete-muthe-title"
-            aria-describedby="delete-muthe-desc"
-        >
+    <!-- CRUD MANAJEMEN PENGGUNA -->
+    <script src="../assets/js/admin/user.js"></script>
 
-            <div class="delete-popup-icon">
-                <img
-                    src="../assets/icons/actions/delete.svg"
-                    alt=""
-                >
-            </div>
-
-            <h2 id="delete-muthe-title">
-                Hapus Pengguna?
-            </h2>
-
-            <p id="delete-muthe-desc">
-                Apakah Anda yakin ingin menghapus pengguna
-                <strong>Muthe</strong>?
-                Tindakan ini tidak dapat dibatalkan.
-            </p>
-
-            <div class="delete-popup-actions">
-
-                <a
-                    href="#"
-                    class="delete-popup-cancel"
-                >
-                    Batal
-                </a>
-
-                <button
-                    type="button"
-                    class="delete-popup-confirm"
-                >
-                    Ya, Hapus
-                </button>
-
-            </div>
-
-        </section>
-    </div>
-
-
-    <!-- ==========================================
-         POPUP 2: HAPUS LAUDYA
-    ========================================== -->
-    <div
-        id="popup-delete-laudya"
-        class="delete-user-overlay"
-    >
-        <section
-            class="delete-user-popup"
-            role="dialog"
-            aria-labelledby="delete-laudya-title"
-            aria-describedby="delete-laudya-desc"
-        >
-
-            <div class="delete-popup-icon">
-                <img
-                    src="../assets/icons/actions/delete.svg"
-                    alt=""
-                >
-            </div>
-
-            <h2 id="delete-laudya-title">
-                Hapus Pengguna?
-            </h2>
-
-            <p id="delete-laudya-desc">
-                Apakah Anda yakin ingin menghapus pengguna
-                <strong>Laudya</strong>?
-                Tindakan ini tidak dapat dibatalkan.
-            </p>
-
-            <div class="delete-popup-actions">
-
-                <a
-                    href="#"
-                    class="delete-popup-cancel"
-                >
-                    Batal
-                </a>
-
-                <button
-                    type="button"
-                    class="delete-popup-confirm"
-                >
-                    Ya, Hapus
-                </button>
-
-            </div>
-
-        </section>
-    </div>
-
-
-    <!-- ==========================================
-         POPUP 3: HAPUS ABIN
-    ========================================== -->
-    <div
-        id="popup-delete-abin"
-        class="delete-user-overlay"
-    >
-        <section
-            class="delete-user-popup"
-            role="dialog"
-            aria-labelledby="delete-abin-title"
-            aria-describedby="delete-abin-desc"
-        >
-
-            <div class="delete-popup-icon">
-                <img
-                    src="../assets/icons/actions/delete.svg"
-                    alt=""
-                >
-            </div>
-
-            <h2 id="delete-abin-title">
-                Hapus Pengguna?
-            </h2>
-
-            <p id="delete-abin-desc">
-                Apakah Anda yakin ingin menghapus pengguna
-                <strong>Abin</strong>?
-                Tindakan ini tidak dapat dibatalkan.
-            </p>
-
-            <div class="delete-popup-actions">
-
-                <a
-                    href="#"
-                    class="delete-popup-cancel"
-                >
-                    Batal
-                </a>
-
-                <button
-                    type="button"
-                    class="delete-popup-confirm"
-                >
-                    Ya, Hapus
-                </button>
-
-            </div>
-
-        </section>
-    </div>
-
-
-    <!-- ==========================================
-         POPUP 4: HAPUS ALRA
-    ========================================== -->
-    <div
-        id="popup-delete-alra"
-        class="delete-user-overlay"
-    >
-        <section
-            class="delete-user-popup"
-            role="dialog"
-            aria-labelledby="delete-alra-title"
-            aria-describedby="delete-alra-desc"
-        >
-
-            <div class="delete-popup-icon">
-                <img
-                    src="../assets/icons/actions/delete.svg"
-                    alt=""
-                >
-            </div>
-
-            <h2 id="delete-alra-title">
-                Hapus Pengguna?
-            </h2>
-
-            <p id="delete-alra-desc">
-                Apakah Anda yakin ingin menghapus pengguna
-                <strong>Alra</strong>?
-                Tindakan ini tidak dapat dibatalkan.
-            </p>
-
-            <div class="delete-popup-actions">
-
-                <a
-                    href="#"
-                    class="delete-popup-cancel"
-                >
-                    Batal
-                </a>
-
-                <button
-                    type="button"
-                    class="delete-popup-confirm"
-                >
-                    Ya, Hapus
-                </button>
-
-            </div>
-
-        </section>
-    </div>
-
+    <!-- NAVIGASI -->
+    <script src="../assets/js/navigation.js"></script>
 </body>
 </html>

@@ -154,3 +154,64 @@
         font-size: .63rem;
     }
 }
+
+/* PERBAIKAN POSISI DAN BATAS KONTEN PAKET PROMOSI */
+
+.promo-list-card {
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.promo-section-heading,
+.promo-package-description,
+.promo-package-list {
+    width: 87% !important;
+    max-width: 87% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box;
+}
+
+.promo-section-heading {
+    margin-bottom: 20px !important;
+}
+
+.promo-package-description {
+    margin-top: 0 !important;
+    margin-bottom: 20px !important;
+    color: var(--color-primary);
+    font-family: var(--font-primary);
+    font-size: .8rem;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.promo-package-list {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+}
+
+.promo-item {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.promo-item h3,
+.promo-product,
+.promo-metric {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 768px) {
+    .promo-section-heading,
+    .promo-package-description,
+    .promo-package-list {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}

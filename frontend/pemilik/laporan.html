@@ -11,6 +11,7 @@
     <!-- SHARED CSS -->
     <link rel="stylesheet" href="../assets/css/shared/variables.css">
     <link rel="stylesheet" href="../assets/css/shared/reset.css">
+    <link rel="stylesheet" href="../assets/css/shared/notificationPopup.css">
 
     <!-- WEB SHARED -->
     <link rel="stylesheet" href="../assets/css/web/layout.css">
@@ -26,39 +27,6 @@
     <link rel="stylesheet" href="../assets/css/web/pemilik/laporan.css">
     <link rel="stylesheet" href="../assets/css/mobile/pemilik/laporan.css">
 </head>
-
-
-<!-- POPUP DATA TAHUN 2026 BELUM TERSEDIA -->
-<div class="year-unavailable-overlay">
-
-    <div class="year-unavailable-modal"
-         role="alertdialog"
-         aria-labelledby="year-unavailable-title"
-         aria-describedby="year-unavailable-desc">
-
-        <div class="year-unavailable-icon">
-            !
-        </div>
-
-        <h2 id="year-unavailable-title">
-            Data Tahun 2026 Belum Tersedia
-        </h2>
-
-        <p id="year-unavailable-desc">
-            Data penjualan untuk tahun 2026 belum tersedia.
-            Silakan pilih tahun 2024 atau 2025 untuk
-            melihat laporan penjualan.
-        </p>
-
-        <button type="button"
-                class="year-unavailable-close">
-            Mengerti
-        </button>
-
-    </div>
-
-</div>
-
 
 <body>
 
@@ -426,6 +394,10 @@
                aria-label="Tutup sidebar"></label>
 
     </div>
+
+<script src="../assets/js/shared/popup.js" defer></script>
+<script src="../assets/js/pemilik/laporan.js" defer></script>
+<script src="../assets/js/navigation.js" defer></script>
 
 </body>
 </html>

@@ -1,9 +1,12 @@
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FFFDF0">
+
     <title>Rekomendasi Paket Promosi | ARTHA</title>
 
     <!-- SHARED CSS -->
@@ -21,6 +24,8 @@
     <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
     <link rel="stylesheet" href="../assets/css/mobile/header.css">
     <link rel="stylesheet" href="../assets/css/mobile/pemilik/paketPromosi.css">
+    <link rel="stylesheet" href="../assets/css/shared/notificationPopup.css">
+
 </head>
 
 <body>
@@ -49,8 +54,10 @@
                 <label for="sidebar-toggle"
                        class="close-sidebar-btn"
                        aria-label="Tutup sidebar">
+
                     <img src="../assets/icons/actions/cancel.svg"
                          alt="">
+
                 </label>
 
             </div>
@@ -61,44 +68,58 @@
                 <!-- DASHBOARD -->
                 <a href="dashboard.html" class="nav-item">
                     <img src="../assets/icons/sidebar/dashboard.svg"
-                         alt="" class="nav-icon">
+                         alt=""
+                         class="nav-icon">
+
                     <span>Dashboard</span>
                 </a>
 
                 <!-- LAPORAN -->
                 <a href="laporan.html" class="nav-item">
                     <img src="../assets/icons/sidebar/laporan.svg"
-                         alt="" class="nav-icon">
+                         alt=""
+                         class="nav-icon">
+
                     <span>Laporan</span>
                 </a>
 
                 <!-- ANALISIS APRIORI -->
                 <a href="analisisApriori.html" class="nav-item">
                     <img src="../assets/icons/sidebar/analisisApriori.svg"
-                         alt="" class="nav-icon">
+                         alt=""
+                         class="nav-icon">
+
                     <span>Analisis Apriori</span>
                 </a>
 
-                <!-- PAKET PROMOSI AKTIF -->
+                <!-- PAKET PROMOSI -->
                 <a href="paketPromosi.html"
                    class="nav-item active"
                    aria-current="page">
+
                     <img src="../assets/icons/sidebar/paketPromosi.svg"
-                         alt="" class="nav-icon">
+                         alt=""
+                         class="nav-icon">
+
                     <span>Paket Promosi</span>
+
                 </a>
 
                 <!-- PRIORITAS STOK -->
                 <a href="prioritasStok.html" class="nav-item">
                     <img src="../assets/icons/sidebar/prioritasStok.svg"
-                         alt="" class="nav-icon">
+                         alt=""
+                         class="nav-icon">
+
                     <span>Prioritas Stok</span>
                 </a>
 
                 <!-- KELUAR -->
                 <a href="../index.html" class="nav-item logout">
                     <img src="../assets/icons/actions/logout.svg"
-                         alt="" class="nav-icon">
+                         alt=""
+                         class="nav-icon">
+
                     <span>Keluar</span>
                 </a>
 
@@ -110,14 +131,17 @@
         <label for="sidebar-toggle"
                class="hamburger-btn"
                aria-label="Buka sidebar">
+
             <img src="../assets/icons/actions/hamburger.svg"
                  alt="">
+
         </label>
 
         <!-- OVERLAY SIDEBAR -->
         <label for="sidebar-toggle"
                class="sidebar-overlay"
-               aria-label="Tutup sidebar"></label>
+               aria-label="Tutup sidebar">
+        </label>
 
         <!-- MAIN CONTENT -->
         <main class="main-content">
@@ -147,84 +171,61 @@
             <!-- CONTENT -->
             <div class="page-container">
 
-                <main class="owner-promo-content">
+                <div class="owner-promo-content">
 
-                    <!-- KANDIDAT PAKET -->
-                    <section class="promo-list-card">
+                    <!-- KANDIDAT PAKET PROMOSI -->
+                    <section class="promo-list-card promo-package-section">
 
-                        <div class="promo-section-heading">
+                        <!-- JUDUL -->
+                        <div class="promo-section-heading promo-package-header">
+
                             <h2>Kandidat Paket</h2>
-                            <p>Kombinasi Produk berdasarkan aturan asosiasi</p>
+
+                            <p>
+                                Kombinasi Produk berdasarkan aturan asosiasi
+                            </p>
+
                         </div>
 
-                        <div class="promo-list">
+                        <!-- INFORMASI KANDIDAT -->
+                        <p id="promo-package-description"
+                           class="promo-package-description"
+                           hidden>
 
-                            <!-- PAKET 1 -->
-                            <article class="promo-item">
-                                <h3>Nama Paket</h3>
-                                <p class="promo-product">
-                                    Beras 5Kg + Minyak Goreng 1L
-                                </p>
-                                <p class="promo-metric">
-                                    Confidence 18% | Lift 1.49
-                                </p>
-                            </article>
+                            Jalankan analisis Apriori untuk menghasilkan
+                            kandidat paket promosi.
 
-                            <!-- PAKET 2 -->
-                            <article class="promo-item">
-                                <h3>Nama Paket</h3>
-                                <p class="promo-product">
-                                    Beras 5Kg + Minyak Goreng 1L
-                                </p>
-                                <p class="promo-metric">
-                                    Confidence 18% | Lift 1.49
-                                </p>
-                            </article>
+                        </p>
 
-                            <!-- PAKET 3 -->
-                            <article class="promo-item">
-                                <h3>Nama Paket</h3>
-                                <p class="promo-product">
-                                    Beras 5Kg + Minyak Goreng 1L
-                                </p>
-                                <p class="promo-metric">
-                                    Confidence 18% | Lift 1.49
-                                </p>
-                            </article>
+                        <!-- DAFTAR PAKET DINAMIS -->
+                        <div id="promo-package-list"
+                             class="promo-list promo-package-list">
 
-                            <!-- PAKET 4 -->
-                            <article class="promo-item">
-                                <h3>Nama Paket</h3>
-                                <p class="promo-product">
-                                    Beras 5Kg + Minyak Goreng 1L
-                                </p>
-                                <p class="promo-metric">
-                                    Confidence 18% | Lift 1.49
-                                </p>
-                            </article>
+                            <div class="promo-package-empty">
 
-                            <!-- PAKET 5 -->
-                            <article class="promo-item">
-                                <h3>Nama Paket</h3>
-                                <p class="promo-product">
-                                    Beras 5Kg + Minyak Goreng 1L
-                                </p>
-                                <p class="promo-metric">
-                                    Confidence 18% | Lift 1.49
-                                </p>
-                            </article>
+                                Belum ada kandidat paket promosi.
+
+                                Silakan jalankan analisis Apriori terlebih dahulu.
+
+                            </div>
 
                         </div>
 
                     </section>
 
-                </main>
+                </div>
 
             </div>
 
         </main>
 
     </div>
+
+    <!-- JAVASCRIPT -->
+    <!-- POPUP ARTHA -->
+    <script src="../assets/js/shared/popup.js" defer></script>
+    <script src="../assets/js/pemilik/paket-promosi.js" defer></script>
+    <script src="../assets/js/navigation.js" defer></script>
 
 </body>
 </html>

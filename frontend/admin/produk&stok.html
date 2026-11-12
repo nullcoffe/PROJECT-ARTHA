@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
 <link rel="stylesheet" href="../assets/css/mobile/header.css">
 <link rel="stylesheet" href="../assets/css/mobile/admin/produk&stok.css">
+<link rel="stylesheet" href="../assets/css/shared/notificationPopup.css">
 </head>
 
 <body>
@@ -122,14 +123,16 @@
 <div class="product-table-wrapper">
 <table class="product-table">
 <thead>
-<tr>
-    <th>Kode</th>
-    <th>Nama produk</th>
-    <th>Harga</th>
-    <th>Stok</th>
-    <th>Status</th>
-</tr>
+    <tr>
+        <th>Kode</th>
+        <th>Nama produk</th>
+        <th>Harga</th>
+        <th>Stok</th>
+        <th>Status</th>
+        <th class="product-action-header">Aksi</th>
+    </tr>
 </thead>
+
 
 <tbody class="product-page-rows product-page-rows-1">
 <tr><td>PRD001</td><td>Beras</td><td>Rp15.000</td><td>161</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
@@ -396,31 +399,66 @@
             </select>
         </div>
 
+
         <div class="stock-number-grid">
+
             <div class="product-field">
-                <label for="currentStock">Stok saat ini</label>
+                <label for="currentStock">Stok Saat Ini</label>
                 <input type="number" id="currentStock" value="0" readonly>
             </div>
+
             <div class="product-field">
                 <label for="newStock">Stok Baru</label>
-                <input type="number" id="newStock" name="newStock"
-                       min="0" placeholder="Masukkan stok baru" required>
+                <input
+                    type="number"
+                    id="newStock"
+                    name="newStock"
+                    min="0"
+                    step="1"
+                    placeholder="Masukkan stok baru"
+                >
             </div>
+
+            <div class="product-field">
+                <label for="currentPrice">Harga Saat Ini</label>
+                <input
+                    type="number"
+                    id="currentPrice"
+                    value="0"
+                    readonly
+                >
+            </div>
+
+            <div class="product-field">
+                <label for="newPrice">Harga Baru</label>
+                <input
+                    type="number"
+                    id="newPrice"
+                    name="newPrice"
+                    min="0"
+                    step="1"
+                    placeholder="Masukkan harga baru"
+                >
+            </div>
+
         </div>
 
         <div class="product-field total-stock-field">
             <label for="totalStock">Total Stok</label>
             <input type="number" id="totalStock" value="0" readonly>
         </div>
-
+        
         <div class="stock-form-actions">
             <button type="submit" class="admin-primary-button">
-                <span class="button-symbol">✓</span> Simpan penyesuaian
+                <span class="button-symbol">✓</span> Simpan Penyesuaian
             </button>
+
             <button type="reset" class="admin-outline-button">
                 <span class="button-symbol">×</span> Batal
             </button>
         </div>
+
+
     </form>
 </article>
 
@@ -430,5 +468,11 @@
 
 <label for="sidebar-toggle" class="sidebar-overlay" aria-label="Tutup sidebar"></label>
 </div>
+
+<!— Pemanggilan javascript admin/produk—>
+<script src="../assets/js/admin/produk-stok.js"></script>
+<script src="../assets/js/navigation.js" defer></script>
+<script src="../assets/js/shared/popup.js"></script>
+
 </body>
 </html>

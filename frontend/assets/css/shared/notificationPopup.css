@@ -1,0 +1,269 @@
+
+/* OVERLAY POPUP */
+.notification-popup-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(10, 20, 40, 0.28);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 999999 !important;
+    box-sizing: border-box;
+}
+
+.notification-popup-overlay.is-visible {
+    display: flex !important;
+}
+
+/* KOTAK POPUP */
+.notification-popup {
+    position: relative;
+    width: 100%;
+    max-width: 665px;
+    padding: 34px 42px;
+    margin: auto;
+    background: #ffffff;
+    border: 1px solid #e5eaf2;
+    border-radius: 24px;
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    outline: none;
+    animation: arthaPopupShow 0.22s ease;
+}
+
+/* IKON DIHILANGKAN */
+.notification-popup-icon {
+    display: none !important;
+}
+
+/* KONTEN POPUP */
+.notification-popup-content {
+    width: 100%;
+    padding: 0 0 35px;
+}
+
+.notification-popup-content h2 {
+    margin: 0 0 25px;
+    color: #0b1d3b;
+    font-family: inherit;
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.notification-popup-content p {
+    margin: 0;
+    color: #334563;
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+/* TOMBOL POPUP */
+.notification-popup-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding-top: 20px;
+    border-top: 1px solid #dce4ef;
+}
+
+.notification-popup-btn {
+    min-width: 132px;
+    min-height: 54px;
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.notification-popup-btn--confirm {
+    color: #ffffff;
+    background: #0b1d3b;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15);
+}
+
+.notification-popup-btn--confirm:hover {
+    background: #17346b;
+}
+
+.notification-popup-btn--cancel {
+    color: #66758e;
+    background: #ffffff;
+    border-color: #dce4ef;
+}
+
+.notification-popup-btn--cancel:hover {
+    background: #f3f6fa;
+}
+
+.notification-popup-btn[hidden] {
+    display: none !important;
+}
+
+/* ANIMASI POPUP */
+@keyframes arthaPopupShow {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* RESPONSIVE POPUP */
+@media (max-width: 600px) {
+    .notification-popup {
+        max-width: 100%;
+        padding: 25px 22px;
+        border-radius: 18px;
+    }
+
+    .notification-popup-content {
+        padding-bottom: 25px;
+    }
+
+    .notification-popup-content h2 {
+        font-size: 21px;
+        margin-bottom: 18px;
+    }
+
+    .notification-popup-content p {
+        font-size: 14px;
+    }
+
+    .notification-popup-actions {
+        gap: 9px;
+        padding-top: 16px;
+    }
+
+    .notification-popup-btn {
+        min-width: 105px;
+        min-height: 46px;
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+}
+
+/* PENYESUAIAN TEMPLATE POPUP ARTHA */
+.notification-popup-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    display: none;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 16px !important;
+    background: rgba(10, 20, 40, 0.30) !important;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 999999 !important;
+}
+
+.notification-popup-overlay.is-visible {
+    display: flex !important;
+}
+
+.notification-popup {
+    width: min(100%, 420px) !important;
+    max-width: 420px !important;
+    height: auto !important;
+    min-height: unset !important;
+    margin: auto !important;
+    padding: 28px 30px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #fffdf6 !important;
+    border: 1px solid #e8e1d4 !important;
+    border-radius: 17px !important;
+    box-shadow: 0 8px 25px rgba(0,0,0,.15) !important;
+    box-sizing: border-box !important;
+}
+
+.notification-popup-icon {
+    display: none !important;
+}
+
+.notification-popup-content {
+    width: 100% !important;
+    padding: 0 !important;
+    text-align: center !important;
+}
+
+.notification-popup-content h2 {
+    margin: 0 0 13px !important;
+    color: #0b1d3b !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    line-height: 1.4 !important;
+}
+
+.notification-popup-content p {
+    margin: 0 auto !important;
+    color: #78849a !important;
+    font-size: 13px !important;
+    line-height: 1.65 !important;
+    text-align: center !important;
+}
+
+.notification-popup-actions {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin-top: 20px !important;
+    padding: 0 !important;
+    border: none !important;
+}
+
+.notification-popup-btn {
+    min-width: 115px !important;
+    min-height: 43px !important;
+    padding: 10px 20px !important;
+    border-radius: 7px !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+}
+
+.notification-popup-btn--confirm {
+    color: #fff !important;
+    background: #192f59 !important;
+    border: 1px solid #192f59 !important;
+}
+
+.notification-popup-btn--cancel {
+    color: #192f59 !important;
+    background: #fffdf6 !important;
+    border: 1px solid #ded7c9 !important;
+}
+
+.notification-popup-btn[hidden] {
+    display: none !important;
+}
+
+@media (max-width: 480px) {
+    .notification-popup {
+        width: 100% !important;
+        max-width: 360px !important;
+        padding: 25px 22px !important;
+    }
+}

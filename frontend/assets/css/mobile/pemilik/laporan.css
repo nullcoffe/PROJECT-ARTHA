@@ -412,3 +412,51 @@
         font-size: 13px;
     }
 }
+
+/* FIX HEADER DAN JUDUL LAPORAN MOBILE */
+@media (max-width: 768px) {
+
+    /* Sembunyikan judul desktop di dalam header */
+    .desktop-page-title {
+        display: none !important;
+    }
+
+    /* Rapikan area header */
+    .dashboard-header .header-left {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 12px !important;
+        min-width: 0 !important;
+    }
+
+    /* Tampilkan logo ARTHA mobile */
+    .dashboard-header .mobile-brand {
+        display: flex !important;
+        align-items: center !important;
+        gap: 9px !important;
+        flex-shrink: 0 !important;
+    }
+
+    /* Tampilkan judul halaman di bawah header */
+    
+    /* MENYAMAKAN FONT JUDUL MOBILE PEMILIK */
+    @media (max-width: 768px) {
+
+        .main-content > .mobile-page-title {
+            display: block !important;
+            width: 100% !important;
+            margin: 12px 0 18px !important;
+            padding: 0 !important;
+
+            color: var(--color-primary) !important;
+            font-family: var(--font-primary) !important;
+            font-size: clamp(1.4rem, 5vw, 1.7rem) !important;
+            font-weight: 700 !important;
+            line-height: 1.3 !important;
+            letter-spacing: normal !important;
+        }
+
+}
+
+}

@@ -1368,3 +1368,120 @@ td:nth-child(7) {
         font-size: 12px;
     }
 }
+
+/* Pagination Apriori */
+.apriori-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 16px 10px;
+    overflow: hidden;
+}
+
+.apriori-page-ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    color: #7180A5;
+    font-size: 14px;
+}
+
+.apriori-page-number,
+.apriori-page-button {
+    flex: 0 0 auto;
+    box-sizing: border-box;
+}
+
+/* Kandidat Paket Promosi */
+.promo-package-section {
+    width: 100%;
+    min-width: 0;
+    margin-top: 24px;
+}
+
+.promo-package-header h2 {
+    margin: 0 0 5px;
+    color: var(--color-primary);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.promo-package-header p {
+    margin: 0;
+    color: #7180A5;
+    font-size: 0.9rem;
+}
+
+.promo-package-description {
+    margin: 18px 0;
+    color: var(--color-primary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.promo-package-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    width: 100%;
+}
+
+.promo-package-card {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 22px 26px;
+    background: var(--color-white);
+    border: 1px solid #DCE3EF;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.promo-package-title {
+    margin-bottom: 9px;
+    color: var(--color-primary);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.promo-package-products {
+    margin-bottom: 10px;
+    color: #132341;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.promo-package-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    color: #7180A5;
+    font-size: 0.85rem;
+}
+
+.promo-package-empty {
+    padding: 25px 18px;
+    color: #7180A5;
+    text-align: center;
+    background: #F8FAFC;
+    border: 1px dashed #DCE3EF;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .promo-package-card {
+        padding: 18px;
+    }
+
+    .promo-package-metrics {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+

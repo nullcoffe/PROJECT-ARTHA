@@ -157,6 +157,7 @@
 
 .product-page-rows tr:last-child td { border-bottom:none; }
 
+
 /* STATUS */
 .stock-safe,
 .stock-status.safe {
@@ -175,6 +176,86 @@
     color:#DC2626;
     font-weight:700;
 }
+
+
+/* AKSI HAPUS */
+.product-table th.product-action-header,
+.product-table td.product-action-cell {
+    width:14%;
+    min-width:0;
+    padding:0 12px;
+    text-align:center;
+    vertical-align:middle;
+}
+
+.btn-delete-product {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:32px;
+    height:32px;
+    padding:0;
+    background:transparent;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    transition:transform .2s ease, opacity .2s ease;
+}
+
+.btn-delete-product img {
+    display:block;
+    width:20px;
+    height:20px;
+    object-fit:contain;
+}
+
+.btn-delete-product:hover {
+    background:transparent;
+    transform:scale(1.08);
+    opacity:.85;
+}
+
+.btn-delete-product:focus-visible {
+    outline:2px solid #1D4ED8;
+    outline-offset:2px;
+}
+
+
+.btn-delete-product {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:32px;
+    height:32px;
+    padding:0;
+    color:#DC2626;
+    background:transparent;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    transition:transform .2s ease, opacity .2s ease;
+}
+
+.btn-delete-product img {
+    display:block;
+    width:20px;
+    height:20px;
+    object-fit:contain;
+    filter:invert(18%) sepia(91%) saturate(5148%)
+            hue-rotate(354deg) brightness(94%) contrast(91%);
+}
+
+.btn-delete-product:hover {
+    background:transparent;
+    transform:scale(1.08);
+    opacity:.85;
+}
+
+.btn-delete-product:focus-visible {
+    outline:2px solid #1D4ED8;
+    outline-offset:2px;
+}
+
 
 /* PAGINATION RADIO */
 .product-page-radio {
@@ -379,10 +460,54 @@
 .stock-product-field { margin-bottom:13px; }
 .stock-product-field select { border-radius:7px; }
 
+
+/* Grid penyesuaian stok dan harga */
 .stock-number-grid {
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:10px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+}
+
+/* Tampilan tablet */
+@media (max-width: 768px) {
+    .stock-number-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Tampilan HP */
+@media (max-width: 480px) {
+    .stock-number-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Total stok memenuhi lebar form */
+.total-stock-field {
+    margin-top: 13px;
+}
+
+/* Input otomatis tidak dapat diedit */
+.stock-number-grid input[readonly],
+.total-stock-field input[readonly] {
+    background: #F7F9FC;
+    cursor: not-allowed;
+}
+
+
+/* TAMPILAN TABLET */
+@media (max-width: 768px) {
+    .stock-number-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* TAMPILAN HP */
+@media (max-width: 480px) {
+    .stock-number-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .total-stock-field { margin-top:13px; }
@@ -451,3 +576,66 @@
     border-color:var(--color-primary);
     box-shadow:0 0 0 1px var(--color-primary);
 }
+
+/* PAGINATION DINAMIS PRODUK */
+.product-pagination-controls,
+.product-page-numbers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+}
+
+.product-page-number,
+.product-prev,
+.product-next {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 9px;
+    color: var(--color-primary);
+    background: var(--color-white);
+    border: 1px solid #DCE3EF;
+    border-radius: 6px;
+    font-family: var(--font-primary);
+    font-size: .68rem;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.product-page-number:hover,
+.product-prev:hover,
+.product-next:hover {
+    background: #F0F4FA;
+}
+
+.product-page-number.active {
+    color: #FFFFFF;
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.product-prev:disabled,
+.product-next:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+.product-empty-state {
+    padding: 24px 12px !important;
+    text-align: center;
+}
+
+@media (max-width: 480px) {
+    .product-pagination {
+        flex-wrap: wrap;
+    }
+
+    .product-pagination-controls,
+    .product-page-numbers {
+        flex-wrap: wrap;
+    }
+}
+

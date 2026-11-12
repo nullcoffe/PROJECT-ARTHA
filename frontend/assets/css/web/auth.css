@@ -615,8 +615,7 @@
     opacity: .75;
 }
 
-/* Garis miring hanya muncul saat password terlihat */
-.login-password-toggle .eye-slash {
+/* .login-password-toggle .eye-slash {
     display: none;
 }
 
@@ -628,8 +627,7 @@
     outline: 2px solid var(--color-primary, #142F7D);
     outline-offset: 2px;
     border-radius: 4px;
-}
-
+} */
 
 /* =========================================
    LOGIN - LIHAT / SEMBUNYIKAN PASSWORD
@@ -671,15 +669,28 @@
     height: 20px;
 }
 
-/* Awalnya garis miring tidak terlihat */
+/* Kode awal */
+/* Awalnya garis miring tidak terlihat
 .login-eye-slash {
     display: none;
 }
 
-/* Garis miring muncul ketika password terlihat */
 .login-password-toggle[aria-pressed="true"] .login-eye-slash {
     display: block;
+}  */
+
+/* Diganti */
+/* PASSWORD TERSEMBUNYI: IKON MATA TERTUTUP */
+.login-password-toggle[aria-pressed="false"] .login-eye-slash {
+    display: block;
 }
+
+/* PASSWORD TERLIHAT: IKON MATA TERBUKA */
+.login-password-toggle[aria-pressed="true"] .login-eye-slash {
+    display: none;
+}
+
+/* ============================================= */
 
 .login-password-toggle:hover {
     opacity: .75;

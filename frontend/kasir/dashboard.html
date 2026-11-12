@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="../assets/css/mobile/header.css">
     <link rel="stylesheet" href="../assets/css/mobile/kasir/dashboard.css">
     <link rel="stylesheet" href="../assets/css/mobile/popupProfil.css">
+    <link rel="stylesheet" href="../assets/css/shared/notificationPopup.css">
 </head>
 
 <body class="cashier-page">
@@ -33,9 +34,7 @@
          KONTROL POPUP PROFIL
     ========================================== -->
 
-    <input type="checkbox"
-           id="profile-popup-toggle"
-           class="profile-popup-toggle">
+    <input type="checkbox" id="profile-popup-toggle" class="profile-popup-toggle">
 
 
     <!-- ==========================================
@@ -45,15 +44,10 @@
     <div class="profile-popup-overlay">
 
         <!-- OVERLAY UNTUK MENUTUP POPUP -->
-        <label for="profile-popup-toggle"
-               class="profile-popup-backdrop"
-               aria-label="Tutup popup profil">
+        <label for="profile-popup-toggle" class="profile-popup-backdrop" aria-label="Tutup popup profil">
         </label>
 
-        <section class="profile-popup"
-                 role="dialog"
-                 aria-modal="true"
-                 aria-labelledby="profile-popup-title">
+        <section class="profile-popup" role="dialog" aria-modal="true" aria-labelledby="profile-popup-title">
 
             <!-- HEADER POPUP -->
             <div class="profile-popup-header">
@@ -62,16 +56,9 @@
                     Profil Pengguna
                 </h2>
 
-                <label for="profile-popup-toggle"
-                    class="profile-popup-close"
-                    aria-label="Tutup popup">
+                <label for="profile-popup-toggle" class="profile-popup-close" aria-label="Tutup popup">
 
-                    <img
-                        src="../assets/icons/actions/cancel.svg"
-                        alt=""
-                        aria-hidden="true"
-                        class="popup-close-icon"
-                    >
+                    <img src="../assets/icons/actions/cancel.svg" alt="" aria-hidden="true" class="popup-close-icon">
 
                 </label>
 
@@ -84,8 +71,7 @@
                 <!-- IKON PROFIL -->
                 <div class="profile-avatar">
 
-                    <img src="../assets/icons/header/profile.svg"
-                         alt="Ikon pengguna">
+                    <img src="../assets/icons/header/profile.svg" alt="Ikon pengguna">
 
                 </div>
 
@@ -113,17 +99,13 @@
                  KONTROL UBAH PASSWORD
             =================================== -->
 
-            <input type="checkbox"
-                   id="password-expand"
-                   class="password-expand-toggle">
+            <input type="checkbox" id="password-expand" class="password-expand-toggle">
 
-            <label for="password-expand"
-                   class="password-expand-label">
+            <label for="password-expand" class="password-expand-label">
 
                 <span>Ubah Password</span>
 
-                <span class="password-chevron"
-                      aria-hidden="true"></span>
+                <span class="password-chevron" aria-hidden="true"></span>
 
             </label>
 
@@ -135,9 +117,7 @@
 
             <div class="password-expand-content">
 
-                <form class="profile-password-form"
-                      action="#"
-                      method="post">
+                <form class="profile-password-form" action="#" method="post">
 
                     <label for="new-password">
                         Password Baru
@@ -146,34 +126,19 @@
                     <!-- INPUT PASSWORD + IKON MATA -->
                     <div class="password-input-wrapper">
 
-                        <input type="password"
-                               id="new-password"
-                               name="new_password"
-                               placeholder="Masukkan password baru"
-                               autocomplete="new-password"
-                               required>
+                        <input type="password" id="new-password" name="new_password"
+                            placeholder="Masukkan password baru" autocomplete="new-password" required>
 
                         <!-- TOMBOL LIHAT PASSWORD -->
-                        <button type="button"
-                                class="password-visibility-toggle"
-                                id="toggle-password"
-                                aria-label="Lihat password"
-                                aria-pressed="false">
+                        <button type="button" class="password-visibility-toggle" id="toggle-password"
+                            aria-label="Lihat password" aria-pressed="false">
 
-                            <svg id="password-eye-icon"
-                                 viewBox="0 0 24 24"
-                                 fill="none"
-                                 stroke="currentColor"
-                                 stroke-width="1.8"
-                                 stroke-linecap="round"
-                                 stroke-linejoin="round"
-                                 aria-hidden="true">
+                            <svg id="password-eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 
-                                <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/>
+                                <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z" />
 
-                                <circle cx="12"
-                                        cy="12"
-                                        r="3"/>
+                                <circle cx="12" cy="12" r="3" />
 
                             </svg>
 
@@ -183,8 +148,7 @@
 
 
                     <!-- SIMPAN PASSWORD -->
-                    <button type="submit"
-                            class="profile-save-button">
+                    <button type="submit" class="profile-save-button">
 
                         Simpan
 
@@ -203,9 +167,7 @@
          KONTROL SIDEBAR
     ========================================== -->
 
-    <input class="sidebar-checkbox"
-           type="checkbox"
-           id="sidebar-toggle">
+    <input class="sidebar-checkbox" type="checkbox" id="sidebar-toggle">
 
 
     <!-- ==========================================
@@ -223,12 +185,9 @@
 
             <div class="sidebar-brand">
 
-                <a href="dashboard.html"
-                   class="brand-left">
+                <a href="dashboard.html" class="brand-left">
 
-                    <img src="../assets/images/Logo.svg"
-                         class="brand-logo"
-                         alt="Logo ARTHA">
+                    <img src="../assets/images/Logo.svg" class="brand-logo" alt="Logo ARTHA">
 
                     <span class="brand-title">
                         ARTHA
@@ -236,16 +195,9 @@
 
                 </a>
 
-                <label class="sidebar-close"
-                    for="sidebar-toggle"
-                    aria-label="Tutup menu">
+                <label class="sidebar-close" for="sidebar-toggle" aria-label="Tutup menu">
 
-                    <img
-                        src="../assets/icons/actions/cancel.svg"
-                        alt=""
-                        aria-hidden="true"
-                        class="sidebar-close-icon"
-                    >
+                    <img src="../assets/icons/actions/cancel.svg" alt="" aria-hidden="true" class="sidebar-close-icon">
 
                 </label>
 
@@ -253,17 +205,12 @@
 
 
             <!-- MENU KASIR -->
-            <nav class="sidebar-nav"
-                 aria-label="Navigasi kasir">
+            <nav class="sidebar-nav" aria-label="Navigasi kasir">
 
                 <!-- DASHBOARD -->
-                <a class="nav-item active"
-                   href="dashboard.html"
-                   aria-current="page">
+                <a class="nav-item active" href="dashboard.html" aria-current="page">
 
-                    <img class="nav-icon"
-                         src="../assets/icons/sidebar/dashboard.svg"
-                         alt="">
+                    <img class="nav-icon" src="../assets/icons/sidebar/dashboard.svg" alt="">
 
                     <span>Dashboard</span>
 
@@ -271,12 +218,9 @@
 
 
                 <!-- TRANSAKSI POS -->
-                <a class="nav-item"
-                   href="transaksiPOS.html">
+                <a class="nav-item" href="transaksiPOS.html">
 
-                    <img class="nav-icon"
-                         src="../assets/icons/sidebar/transaksiPos.svg"
-                         alt="">
+                    <img class="nav-icon" src="../assets/icons/sidebar/transaksiPos.svg" alt="">
 
                     <span>Transaksi POS</span>
 
@@ -284,12 +228,9 @@
 
 
                 <!-- PEMBAYARAN -->
-                <a class="nav-item"
-                   href="pembayaran.html">
+                <a class="nav-item" href="pembayaran.html">
 
-                    <img class="nav-icon"
-                         src="../assets/icons/sidebar/pembayaran.svg"
-                         alt="">
+                    <img class="nav-icon" src="../assets/icons/sidebar/pembayaran.svg" alt="">
 
                     <span>Pembayaran</span>
 
@@ -297,12 +238,9 @@
 
 
                 <!-- CETAK STRUK -->
-                <a class="nav-item"
-                   href="cetakStruk.html">
+                <a class="nav-item" href="cetakStruk.html">
 
-                    <img class="nav-icon"
-                         src="../assets/icons/sidebar/cetakStruk.svg"
-                         alt="">
+                    <img class="nav-icon" src="../assets/icons/sidebar/cetakStruk.svg" alt="">
 
                     <span>Cetak Struk</span>
 
@@ -310,12 +248,9 @@
 
 
                 <!-- CEK STOK -->
-                <a class="nav-item"
-                   href="cekStok.html">
+                <a class="nav-item" href="cekStok.html">
 
-                    <img class="nav-icon"
-                         src="../assets/icons/sidebar/cekStok.svg"
-                         alt="">
+                    <img class="nav-icon" src="../assets/icons/sidebar/cekStok.svg" alt="">
 
                     <span>Cek Stok</span>
 
@@ -323,15 +258,9 @@
 
 
                 <!-- KELUAR -->
-                <a class="nav-item logout"
-                   href="../index.html">
-
-                    <img class="nav-icon"
-                         src="../assets/icons/actions/logout.svg"
-                         alt="">
-
+                <a class="nav-item logout" href="../index.html">
+                    <img class="nav-icon" src="../assets/icons/actions/logout.svg" alt="">
                     <span>Keluar</span>
-
                 </a>
 
             </nav>
@@ -340,9 +269,7 @@
 
 
         <!-- OVERLAY SIDEBAR -->
-        <label class="sidebar-overlay"
-               for="sidebar-toggle"
-               aria-label="Tutup menu">
+        <label class="sidebar-overlay" for="sidebar-toggle" aria-label="Tutup menu">
         </label>
 
 
@@ -359,12 +286,9 @@
                 <div class="header-left">
 
                     <!-- HAMBURGER -->
-                    <label class="hamburger-btn"
-                           for="sidebar-toggle"
-                           aria-label="Buka menu">
+                    <label class="hamburger-btn" for="sidebar-toggle" aria-label="Buka menu">
 
-                        <img src="../assets/icons/actions/hamburger.svg"
-                             alt="">
+                        <img src="../assets/icons/actions/hamburger.svg" alt="">
 
                     </label>
 
@@ -373,11 +297,9 @@
 
 
                     <!-- BRAND MOBILE -->
-                    <a class="mobile-brand"
-                       href="dashboard.html">
+                    <a class="mobile-brand" href="dashboard.html">
 
-                        <img src="../assets/images/Logo.svg"
-                             alt="">
+                        <img src="../assets/images/Logo.svg" alt="">
 
                         <span>ARTHA</span>
 
@@ -390,14 +312,11 @@
                 <div class="header-right">
 
                     <!-- PEMANGGIL POPUP PROFIL -->
-                    <label for="profile-popup-toggle"
-                           class="user-profile"
-                           aria-label="Buka profil Kasir">
+                    <label for="profile-popup-toggle" class="user-profile" aria-label="Buka profil Kasir">
 
                         <div class="profile-circle">
 
-                            <img src="../assets/icons/header/profile.svg"
-                                 alt="">
+                            <img src="../assets/icons/header/profile.svg" alt="">
 
                         </div>
 
@@ -420,8 +339,7 @@
                  RINGKASAN KASIR
             ======================================= -->
 
-            <section class="summary-cards"
-                     aria-label="Ringkasan kasir">
+            <section class="summary-cards" aria-label="Ringkasan kasir">
 
 
                 <!-- PENJUALAN HARI INI -->
@@ -429,8 +347,7 @@
 
                     <div class="summary-icon">
 
-                        <img src="../assets/icons/cards/penjualanhariini.svg"
-                             alt="">
+                        <img src="../assets/icons/cards/penjualanhariini.svg" alt="">
 
                     </div>
 
@@ -450,8 +367,7 @@
 
                     <div class="summary-icon">
 
-                        <img src="../assets/icons/cards/transaksihariini.svg"
-                             alt="">
+                        <img src="../assets/icons/cards/transaksihariini.svg" alt="">
 
                     </div>
 
@@ -471,8 +387,7 @@
 
                     <div class="summary-icon">
 
-                        <img src="../assets/icons/cards/totalproduktersedia.svg"
-                             alt="">
+                        <img src="../assets/icons/cards/totalproduktersedia.svg" alt="">
 
                     </div>
 
@@ -495,25 +410,14 @@
             <!-- ======================================
                  TOMBOL TRANSAKSI BARU
             ======================================= -->
-            <a class="new-transaction"
-               href="transaksiPOS.html">
+            <a class="new-transaction" href="transaksiPOS.html">
 
-                <img
-                    src="../assets/icons/actions/tambah.svg"
-                    alt=""
-                    aria-hidden="true"
-                    class="button-icon"
-                >
+                <img src="../assets/icons/actions/tambah.svg" alt="" aria-hidden="true" class="button-icon">
 
-                Transaksi Baru
-
+                <span>Transaksi Baru</span>
             </a>
 
-
-            <!-- ======================================
-                 RIWAYAT TRANSAKSI
-            ======================================= -->
-
+            <!-- RIWAYAT TRANSAKSI -->
             <section class="history-section">
 
                 <div class="section-heading">
@@ -588,109 +492,12 @@
 
     </div>
 
-
-    <!-- ==========================================
-         INTERAKSI IKON MATA PASSWORD
-         KHUSUS TAMPILAN
-    ========================================== -->
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-
-            const passwordInput =
-                document.getElementById("new-password");
-
-            const toggleButton =
-                document.getElementById("toggle-password");
-
-            const eyeIcon =
-                document.getElementById("password-eye-icon");
-
-            const popupToggle =
-                document.getElementById("profile-popup-toggle");
-
-            const passwordExpand =
-                document.getElementById("password-expand");
-
-
-            if (!passwordInput || !toggleButton || !eyeIcon) {
-                return;
-            }
-
-
-            const eyeVisible = `
-                <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/>
-                <circle cx="12" cy="12" r="3"/>
-            `;
-
-            const eyeHidden = `
-                <path d="M3 3l18 18"/>
-                <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/>
-                <path d="M9.9 5.2A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a15.8 15.8 0 0 1-3.1 3.8"/>
-                <path d="M6.2 6.2C3.5 8 2 12 2 12s3.6 7 10 7c1.2 0 2.3-.2 3.3-.6"/>
-            `;
-
-
-            toggleButton.addEventListener("click", function () {
-
-                const showPassword =
-                    passwordInput.type === "password";
-
-                passwordInput.type =
-                    showPassword ? "text" : "password";
-
-                toggleButton.setAttribute(
-                    "aria-label",
-                    showPassword
-                        ? "Sembunyikan password"
-                        : "Lihat password"
-                );
-
-                toggleButton.setAttribute(
-                    "aria-pressed",
-                    String(showPassword)
-                );
-
-                eyeIcon.innerHTML =
-                    showPassword ? eyeHidden : eyeVisible;
-
-            });
-
-
-            // RESET SAAT POPUP DITUTUP
-            if (popupToggle) {
-
-                popupToggle.addEventListener("change", function () {
-
-                    if (!this.checked) {
-
-                        passwordInput.value = "";
-                        passwordInput.type = "password";
-
-                        if (passwordExpand) {
-                            passwordExpand.checked = false;
-                        }
-
-                        toggleButton.setAttribute(
-                            "aria-label",
-                            "Lihat password"
-                        );
-
-                        toggleButton.setAttribute(
-                            "aria-pressed",
-                            "false"
-                        );
-
-                        eyeIcon.innerHTML = eyeVisible;
-
-                    }
-
-                });
-
-            }
-
-        });
-    </script>
+    <script src="../assets/js/config.js" defer></script>
+    <script src="../assets/js/shared/popup.js" defer></script>
+    <script src="../assets/js/navigation.js" defer></script>
+    <script src="../assets/js/profile.js" defer></script>
+    <script src="../assets/js/kasir/dashboard.js" defer></script>
 
 </body>
+
 </html>
