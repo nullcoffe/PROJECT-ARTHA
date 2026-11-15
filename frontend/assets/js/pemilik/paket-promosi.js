@@ -1,9 +1,10 @@
-
 document.addEventListener("DOMContentLoaded", function () {
 
     // 1. Mengambil elemen HTML
     const promoList = document.getElementById("promo-package-list");
     const promoDescription = document.getElementById("promo-package-description");
+
+    const STORAGE_KEY = "artha_apriori_results";
 
     if (!promoList || !promoDescription) {
         console.error("Elemen Paket Promosi tidak ditemukan.");
@@ -63,9 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         try {
 
-            const savedResults = localStorage.getItem(
-                "artha_apriori_results"
-            );
+            const savedResults = localStorage.getItem(STORAGE_KEY);
 
             if (!savedResults) {
                 return null;
@@ -73,12 +72,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const results = JSON.parse(savedResults);
 
+            // Memeriksa kelengkapan data hasil analisis
             if (
                 !results ||
+                typeof results !== "object" ||
                 !Array.isArray(results.rules) ||
                 !results.year ||
-                !results.analyzedAt
+                !results.analyzedAt ||
+                !Number.isFinite(Number(results.minimumSupport)) ||
+                !Number.isFinite(Number(results.minimumConfidence)) ||
+                !Number.isFinite(Number(results.totalTransactions))
             ) {
+                console.error("Format hasil analisis Apriori tidak valid.");
                 return null;
             }
 
@@ -97,24 +102,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    // 6. Membentuk kandidat paket dari aturan asosiasi
+    // 6. Memvalidasi aturan asosiasi
+    function isValidRule(rule) {
+
+        return (
+            rule &&
+            Array.isArray(rule.antecedent) &&
+            Array.isArray(rule.consequent) &&
+            rule.antecedent.length > 0 &&
+            rule.consequent.length > 0 &&
+            rule.antecedent.every(function (item) {
+                return typeof item === "string" && item.trim() !== "";
+            }) &&
+            rule.consequent.every(function (item) {
+                return typeof item === "string" && item.trim() !== "";
+            }) &&
+            Number.isFinite(Number(rule.support)) &&
+            Number.isFinite(Number(rule.confidence)) &&
+            Number.isFinite(Number(rule.lift))
+        );
+
+    }
+
+    // 7. Membentuk kandidat paket dari aturan asosiasi
     function generatePackages(rules) {
 
         return rules
 
-            .filter(function (rule) {
-
-                return (
-                    rule &&
-                    Array.isArray(rule.antecedent) &&
-                    Array.isArray(rule.consequent) &&
-                    rule.antecedent.length > 0 &&
-                    rule.consequent.length > 0 &&
-                    Number.isFinite(Number(rule.confidence)) &&
-                    Number.isFinite(Number(rule.lift))
-                );
-
-            })
+            .filter(isValidRule)
 
             .map(function (rule) {
 
@@ -127,6 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 return {
                     products: products,
+                    support: Number(rule.support),
                     confidence: Number(rule.confidence),
                     lift: Number(rule.lift)
                 };
@@ -135,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    // 7. Menampilkan kandidat paket promosi
+    // 8. Menampilkan kandidat paket promosi
     function renderPromoPackages() {
 
         const results = getAnalysisResults();
@@ -147,6 +163,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Belum ada hasil analisis Apriori. Silakan jalankan analisis terlebih dahulu."
             );
 
+            console.log(
+                "Paket Promosi: Belum ada hasil analisis."
+            );
+
             return;
 
         }
@@ -154,22 +174,30 @@ document.addEventListener("DOMContentLoaded", function () {
         // Membentuk paket berdasarkan hasil analisis terakhir
         const packages = generatePackages(results.rules);
 
-        // Analisis berhasil tetapi tidak menghasilkan aturan
+        // Analisis berhasil tetapi tidak menghasilkan aturan valid
         if (packages.length === 0) {
 
             renderEmpty(
-                "Tidak ditemukan kandidat paket promosi yang memenuhi parameter analisis."
+                "Analisis Apriori sudah dilakukan, tetapi tidak ditemukan kandidat paket promosi yang memenuhi parameter analisis."
+            );
+
+            console.log(
+                "Paket Promosi: Tidak ditemukan kandidat paket."
             );
 
             return;
 
         }
 
-        // Menampilkan deskripsi hanya setelah analisis berhasil
+        // Menampilkan deskripsi setelah analisis berhasil
         promoDescription.hidden = false;
 
         promoDescription.textContent =
-            "Kandidat promosi disusun berdasarkan hasil analisis Apriori.";
+            "Kandidat promosi berdasarkan hasil analisis Apriori periode " +
+            results.year +
+            " dengan " +
+            results.totalTransactions +
+            " transaksi.";
 
         // Membentuk seluruh kartu paket
         let html = "";
@@ -194,7 +222,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     </p>
 
                     <p class="promo-metric">
-                        Confidence ${formatNumber(item.confidence)}%
+                        Support ${formatNumber(item.support)}%
+                        | Confidence ${formatNumber(item.confidence)}%
                         | Lift ${formatNumber(item.lift)}
                     </p>
 
@@ -203,30 +232,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
         });
 
-        // Menampilkan seluruh kandidat
+        // Memperbarui seluruh kandidat paket
         promoList.innerHTML = html;
 
         console.log("Kandidat Paket Promosi berhasil diperbarui:", {
             tahun: results.year,
+            totalTransaksi: results.totalTransactions,
+            minimumSupport: results.minimumSupport,
+            minimumConfidence: results.minimumConfidence,
             totalKandidat: packages.length,
             waktuAnalisis: results.analyzedAt
         });
 
     }
 
-    // 8. Menampilkan hasil ketika halaman dibuka
+    // 9. Menampilkan hasil ketika halaman pertama kali dibuka
     renderPromoPackages();
 
-    // 9. Memperbarui jika hasil analisis berubah dari tab lain
+    // 10. Memperbarui hasil jika penyimpanan berubah
     window.addEventListener("storage", function (event) {
 
-        if (event.key === "artha_apriori_results") {
+        if (event.key === STORAGE_KEY || event.key === null) {
             renderPromoPackages();
         }
 
     });
 
-    // 10. Memastikan hasil tetap tampil ketika kembali ke halaman
+    // 11. Memastikan hasil tetap tampil ketika kembali ke halaman
     window.addEventListener("pageshow", function () {
 
         renderPromoPackages();

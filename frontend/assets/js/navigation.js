@@ -122,6 +122,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             sessionStorage.removeItem("artha_payment_data");
 
+            // Menghapus hasil analisis Apriori saat logout
+            localStorage.removeItem("artha_apriori_results");
+
             // Menutup sidebar
             if (sidebarToggle) {
 

@@ -1,17 +1,9 @@
 
-/* =====================================================
-   ARTHA | PEMILIK - ANALISIS APRIORI
-   MOBILE CONTENT ONLY
-
-   Tabel 7 kolom + Expand Detail
-   Sidebar dan header shared tidak diubah
-===================================================== */
+/* Analisis Apriori - Mobile */
 
 @media (max-width: 768px) {
 
-    /* ==========================================
-       1. JUDUL HALAMAN
-    ========================================== */
+    /* Judul halaman */
 
     .apriori-page-header {
         width: 100%;
@@ -27,41 +19,31 @@
         line-height: 1.4;
     }
 
-
-    /* ==========================================
-       2. KARTU KONFIGURASI
-    ========================================== */
+    /* Kartu konfigurasi */
 
     .apriori-config-card {
         width: 100%;
         min-width: 0;
         padding: 14px 12px 13px;
-
         background: var(--color-white);
         border: 1px solid var(--color-border);
         border-radius: 11px;
-
         box-shadow: none;
     }
 
     .apriori-config-card > h2 {
         margin: 0 0 15px;
-
         color: var(--color-primary);
         font-size: .88rem;
         font-weight: 600;
         line-height: 1.4;
     }
 
-
-    /* ==========================================
-       3. FORM KONFIGURASI
-    ========================================== */
+    /* Form konfigurasi */
 
     .apriori-form {
         display: grid;
         grid-template-columns: minmax(0, 1fr);
-
         width: 100%;
         gap: 12px;
     }
@@ -81,10 +63,7 @@
         line-height: 1.4;
     }
 
-
-    /* ==========================================
-       4. DROPDOWN
-    ========================================== */
+    /* Dropdown */
 
     .apriori-select-wrap {
         position: relative;
@@ -94,27 +73,20 @@
 
     .apriori-select-wrap select {
         display: block;
-
         appearance: none;
         -webkit-appearance: none;
-
         width: 100%;
         height: 42px;
         padding: 0 36px 0 12px;
-
         color: var(--color-primary);
         background: var(--color-white);
-
         border: 1px solid var(--color-primary);
         border-radius: 6px;
-
         font-family: var(--font-primary);
         font-size: .72rem;
-
         outline: none;
         box-shadow: none;
         cursor: pointer;
-
         transition: background-color .2s ease;
     }
 
@@ -137,57 +109,41 @@
         position: absolute;
         top: 50%;
         right: 15px;
-
         width: 8px;
         height: 8px;
-
         border-right: 1.5px solid var(--color-primary);
         border-bottom: 1.5px solid var(--color-primary);
-
         transform: translateY(-70%) rotate(45deg);
         pointer-events: none;
     }
 
-
-    /* ==========================================
-       5. INPUT CUSTOM
-    ========================================== */
+    /* Input custom */
 
     .apriori-custom-input {
         width: 100%;
         height: 40px;
         margin-top: 6px;
         padding: 0 12px;
-
         border-radius: 6px;
         font-size: .7rem;
     }
 
-
-    /* ==========================================
-       6. JUMLAH TRANSAKSI
-    ========================================== */
+    /* Jumlah transaksi */
 
     .apriori-transaction-value {
         display: flex;
         align-items: center;
-
         width: 100%;
         min-width: 0;
         height: 42px;
         padding: 0 12px;
-
         color: var(--color-primary);
         background: var(--color-white);
-
         border: 1px solid var(--color-primary);
         border-radius: 6px;
-
         font-family: var(--font-primary);
         font-size: .72rem;
-
         box-sizing: border-box;
-
         transition: background-color .2s ease;
     }
 
@@ -205,7 +161,6 @@
         color: #8290AA;
     }
 
-    /* TAHUN 2024 */
     .apriori-form:has(
         #transaction-period option[value="2024"]:checked
     ) .transaction-placeholder {
@@ -218,7 +173,6 @@
         display: inline;
     }
 
-    /* TAHUN 2025 */
     .apriori-form:has(
         #transaction-period option[value="2025"]:checked
     ) .transaction-placeholder {
@@ -231,7 +185,6 @@
         display: inline;
     }
 
-    /* TAHUN 2026 */
     .apriori-form:has(
         #transaction-period option[value="2026"]:checked
     ) .transaction-placeholder {
@@ -244,18 +197,13 @@
         display: inline;
     }
 
-
-    /* ==========================================
-       7. TOMBOL JALANKAN ANALISIS
-    ========================================== */
+    /* Tombol jalankan analisis */
 
     .apriori-action {
         grid-column: 1;
-
         display: flex;
         justify-content: stretch;
         align-items: center;
-
         width: 100%;
         margin-top: 3px;
     }
@@ -264,24 +212,18 @@
         display: flex;
         align-items: center;
         justify-content: center;
-
         width: 100%;
         min-height: 42px;
         padding: 10px 14px;
-
         color: var(--color-primary);
         background: var(--color-white);
-
         border: 1px solid var(--color-primary);
         border-radius: 6px;
-
         font-family: var(--font-primary);
         font-size: .75rem;
         font-weight: 600;
-
         text-align: center;
         cursor: pointer;
-
         transition:
             background-color .2s ease,
             color .2s ease;
@@ -292,32 +234,23 @@
         background: var(--color-primary);
     }
 
-
-    /* ==========================================
-       8. INFORMASI FORM
-    ========================================== */
+    /* Informasi form */
 
     .apriori-info {
         margin: 10px 0 0;
-
         color: var(--owner-table-header);
         font-size: .59rem;
         line-height: 1.5;
     }
 
-
-    /* ==========================================
-       9. KARTU HASIL ANALISIS
-    ========================================== */
+    /* Kartu hasil analisis */
 
     .apriori-result-card {
         width: 100%;
         min-width: 0;
         min-height: 0;
-
         margin-top: 12px;
         padding: 13px 10px;
-
         background: var(--color-white);
         border-radius: 11px;
         box-shadow: none;
@@ -328,14 +261,12 @@
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
-
         gap: 4px;
         margin-bottom: 11px;
     }
 
     .apriori-result-header h2 {
         margin: 0;
-
         color: var(--color-primary);
         font-size: .83rem;
         font-weight: 600;
@@ -346,20 +277,15 @@
         font-size: .59rem;
     }
 
-
-    /* ==========================================
-       10. LEGENDA RENTANG LIFT
-    ========================================== */
+    /* Legenda lift */
 
     .apriori-lift-legend {
         display: flex;
         justify-content: flex-end;
         align-items: center;
         flex-wrap: wrap;
-
         gap: 6px;
         margin-bottom: 10px;
-
         font-size: .6rem;
     }
 
@@ -369,21 +295,14 @@
         font-size: .61rem;
     }
 
-
-    /* ==========================================
-       11. TABEL APRIORI MOBILE
-       7 KOLOM - SCROLL HORIZONTAL
-    ========================================== */
+    /* Tabel aturan asosiasi */
 
     .apriori-table-wrapper {
         display: block;
-
         width: 100%;
         max-width: 100%;
-
         overflow-x: auto;
         overflow-y: hidden;
-
         -webkit-overflow-scrolling: touch;
         overscroll-behavior-x: contain;
     }
@@ -392,10 +311,8 @@
     .apriori-rules-table {
         width: 850px;
         min-width: 850px;
-
         border-collapse: collapse;
         table-layout: fixed;
-
         color: var(--color-primary);
         font-family: var(--font-primary);
         font-size: .65rem;
@@ -417,57 +334,47 @@
         vertical-align: middle;
     }
 
-    /* NAMA ATURAN */
     .apriori-rule-name {
         line-height: 1.5;
         font-size: .65rem;
         overflow-wrap: break-word;
     }
 
-    /* ITEMSET */
     .apriori-itemset-badge {
         padding: 4px 8px;
         border-radius: 20px;
-
         font-size: .61rem;
         white-space: nowrap;
     }
 
-    /* BADGE LIFT */
     .lift-value {
         min-width: 42px;
         padding: 4px 8px;
         font-size: .64rem;
     }
 
-    /* TOMBOL DETAIL */
+    /* Tombol detail */
+
     .artha-detail-button {
-        width: 30px;
-        height: 30px;
-        border-radius: 6px;
+        width: 33px;
+        height: 33px;
+        border-radius: 7px;
     }
 
     .artha-detail-chevron {
-        width: 7px;
-        height: 7px;
+        width: 8px;
+        height: 8px;
     }
 
+    /* Panel detail aturan */
 
-    /* ==========================================
-       12. EXPAND DETAIL
-    ========================================== */
-
-    .apriori-rules-table tr.artha-rule-detail
-    > td {
+    .apriori-rules-table tr.artha-rule-detail > td {
         width: auto !important;
         min-width: 0 !important;
         max-width: none;
-
         padding: 0 !important;
-
         text-align: left !important;
         white-space: normal !important;
-
         background: #F5F7FC;
     }
 
@@ -475,54 +382,41 @@
         width: 100%;
         max-width: 100%;
         min-width: 0;
-
         padding: 12px;
-
         box-sizing: border-box;
         overflow: hidden;
     }
 
-    /* HEADER EXPAND */
     .artha-expand-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-
-        gap: 8px;
-        margin-bottom: 10px;
+        gap: 12px;
+        margin-bottom: 12px;
     }
 
     .artha-expand-header h3 {
         margin: 0;
-
         color: #142F78;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 700;
     }
 
     .artha-expand-header > span {
         color: #74829B;
-        font-size: 10px;
+        font-size: 12px;
         white-space: nowrap;
     }
-
-
-    /* ==========================================
-       13. KOTAK DETAIL
-    ========================================== */
 
     .artha-expand-box {
         width: 100%;
         max-width: 100%;
         min-width: 0;
-
-        margin-bottom: 8px;
+        margin-bottom: 10px;
         padding: 11px 12px;
-
         background: #FFFFFF;
         border: 1px solid #E2E8F2;
-        border-radius: 8px;
-
+        border-radius: 9px;
         box-sizing: border-box;
     }
 
@@ -531,124 +425,91 @@
     }
 
     .artha-expand-box h4 {
-        margin: 0 0 9px;
-
+        margin: 0 0 10px;
         color: #142F78;
-        font-size: 12px;
+        font-size: 13px;
         font-weight: 700;
     }
 
-
-    /* ==========================================
-       14. ANTECEDENT DAN CONSEQUENT
-    ========================================== */
+    /* Antecedent dan consequent */
 
     .artha-rule-pair {
         display: grid;
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
+        grid-template-columns: 1fr 1fr;
         width: 100%;
-        gap: 12px;
+        gap: 18px;
     }
 
     .artha-rule-pair > div {
         display: flex;
         flex-direction: column;
-
         gap: 5px;
         min-width: 0;
     }
 
     .artha-detail-label {
         color: #78869C;
-        font-size: 10px;
+        font-size: 11px;
     }
 
     .artha-rule-pair strong {
         color: #253C60;
-
-        font-size: 11px;
+        font-size: 13px;
         font-weight: 600;
         line-height: 1.5;
-
         white-space: normal;
         overflow-wrap: anywhere;
     }
 
-
-    /* ==========================================
-       15. BUKTI TRANSAKSI
-       TETAP 4 KOLOM DALAM SATU BARIS
-    ========================================== */
+    /* Bukti transaksi */
 
     .artha-evidence-grid {
         display: grid;
-
-        grid-template-columns:
-            repeat(4, minmax(0, 1fr));
-
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         width: 100%;
         max-width: 100%;
         min-width: 0;
-
-        gap: 10px;
+        gap: 14px;
     }
 
     .artha-evidence-item {
         display: flex;
         flex-direction: column;
-
         align-items: flex-start;
         gap: 5px;
-
         min-width: 0;
         max-width: 100%;
     }
 
     .artha-evidence-item span {
         color: #78869C;
-
-        font-size: 10px;
+        font-size: 11px;
         line-height: 1.5;
-
         white-space: normal;
         overflow-wrap: anywhere;
     }
 
     .artha-evidence-item strong {
         color: #142F78;
-
-        font-size: 15px;
+        font-size: 16px;
         font-weight: 700;
     }
 
-
-    /* ==========================================
-       16. PERHITUNGAN APRIORI
-       RUMUS KECIL DAN RAPI
-    ========================================== */
+    /* Perhitungan Apriori */
 
     .artha-calculation {
         display: flex;
         flex-direction: column;
-
         width: 100%;
         min-width: 0;
     }
 
     .artha-calc-row {
         display: grid;
-
-        grid-template-columns:
-            90px minmax(0, 1fr);
-
+        grid-template-columns: 100px minmax(0, 1fr);
         align-items: center;
-        gap: 8px;
-
+        gap: 10px;
         padding: 7px 0;
-
         border-bottom: 1px solid #EDF0F5;
     }
 
@@ -663,18 +524,15 @@
 
     .artha-calc-row > span {
         color: #263A5B;
-
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 600;
     }
 
     .artha-calc-row p {
         margin: 0;
-
         color: #586780;
-        font-size: 11px;
+        font-size: 12px;
         line-height: 1.6;
-
         white-space: normal;
     }
 
@@ -683,26 +541,18 @@
         font-weight: 700;
     }
 
-
-    /* ==========================================
-       17. INTERPRETASI
-    ========================================== */
+    /* Interpretasi */
 
     .artha-interpretation {
         margin: 0;
-
         color: #586780;
-        font-size: 11px;
-        line-height: 1.65;
-
+        font-size: 12px;
+        line-height: 1.7;
         white-space: normal;
         overflow-wrap: anywhere;
     }
 
-
-    /* ==========================================
-       18. PAGINATION
-    ========================================== */
+    /* Pagination */
 
     .apriori-pagination {
         gap: 8px;
@@ -718,7 +568,6 @@
         min-width: 30px;
         height: 30px;
         padding: 0 8px;
-
         font-size: .64rem;
         border-radius: 6px;
     }
@@ -728,10 +577,7 @@
         font-size: .59rem;
     }
 
-
-    /* ==========================================
-       19. POPUP APRIORI SUCCESS
-    ========================================== */
+    /* Modal Apriori */
 
     .apriori-modal {
         padding: 12px;
@@ -747,13 +593,9 @@
         top: 7px;
         right: 9px;
     }
-
 }
 
-
-/* =====================================================
-   20. HP KECIL
-===================================================== */
+/* Layar kecil */
 
 @media (max-width: 380px) {
 
@@ -774,23 +616,22 @@
     }
 
     .artha-expand {
-        padding: 10px;
+        padding: 12px;
     }
 
     .artha-expand-box {
-        padding: 10px;
+        padding: 11px 12px;
     }
 
     .artha-evidence-grid {
-        gap: 8px;
+        gap: 14px;
     }
 
     .artha-evidence-item span {
-        font-size: 10px;
+        font-size: 11px;
     }
 
     .artha-evidence-item strong {
-        font-size: 14px;
+        font-size: 16px;
     }
-
 }

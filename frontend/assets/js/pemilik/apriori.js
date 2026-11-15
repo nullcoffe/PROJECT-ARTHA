@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 3. Mengatur konfigurasi tampilan
     const ITEMS_PER_PAGE = 5;
+    const STORAGE_KEY = "artha_apriori_results";
     let currentPage = 1;
     let associationRules = [];
 
@@ -496,7 +497,7 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
     }
 
-    
+
     // Menampilkan kandidat paket promosi secara dinamis
     function renderPromoPackages() {
 
@@ -964,14 +965,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
         currentPage = 1;
 
-        localStorage.setItem("artha_apriori_results", JSON.stringify({
-            year: year,
-            totalTransactions: transactions.length,
-            minimumSupport: minimumSupport,
-            minimumConfidence: minimumConfidence,
-            rules: associationRules,
-            analyzedAt: new Date().toISOString()
-        }));
+        // Menyimpan hasil analisis terbaru untuk seluruh halaman Pemilik.
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({
+                year: year,
+                totalTransactions: transactions.length,
+                minimumSupport: minimumSupport,
+                minimumConfidence: minimumConfidence,
+                rules: associationRules,
+                analyzedAt: new Date().toISOString()
+            }));
+        } catch (error) {
+            console.error("Gagal menyimpan hasil analisis Apriori:", error);
+        }
 
         // 39. Memperbarui tabel hasil
         renderRules();
@@ -1010,21 +1016,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // 44. Memulihkan hasil analisis terakhir ketika halaman dibuka
-
     function restoreAnalysisResults() {
 
         try {
 
-            const savedResults = localStorage.getItem("artha_apriori_results");
+            const savedResults = localStorage.getItem(STORAGE_KEY);
 
-            // Jika belum pernah ada analisis yang tersimpan
+            // Jika belum pernah ada analisis, tampilkan kondisi awal.
             if (!savedResults) {
 
                 associationRules = [];
+                currentPage = 1;
+
+                form.reset();
+
+                supportCustom.value = "";
+                supportCustom.required = false;
+                supportCustom.style.display = "none";
+                supportCustom.setCustomValidity("");
+
+                confidenceCustom.value = "";
+                confidenceCustom.required = false;
+                confidenceCustom.style.display = "none";
+                confidenceCustom.setCustomValidity("");
 
                 renderEmptyResult(
                     "Jalankan analisis untuk menampilkan hasil."
                 );
+
+                if (resultPeriod) {
+                    resultPeriod.textContent = "Belum dianalisis";
+                }
+
+                if (transactionPlaceholder) {
+                    transactionPlaceholder.textContent =
+                        "Jumlah transaksi akan ditampilkan oleh sistem";
+                    transactionPlaceholder.style.display = "inline";
+                }
+
+                if (infoText) {
+                    infoText.textContent =
+                        "Pilih parameter analisis dan periode transaksi sebelum menjalankan analisis asosiasi.";
+                }
 
                 return;
             }
@@ -1036,7 +1069,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 !results ||
                 !Array.isArray(results.rules) ||
                 !results.year ||
-                !results.analyzedAt
+                !results.analyzedAt ||
+                !Number.isFinite(Number(results.minimumSupport)) ||
+                !Number.isFinite(Number(results.minimumConfidence)) ||
+                !Number.isFinite(Number(results.totalTransactions))
             ) {
 
                 associationRules = [];
@@ -1056,21 +1092,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
             renderTransactionCount(String(results.year));
 
-            // Memulihkan parameter analisis
-            if (supportSelect.querySelector(
+            // Memulihkan parameter minimum support.
+            const supportOption = supportSelect.querySelector(
                 'option[value="' + results.minimumSupport + '"]'
-            )) {
+            );
 
+            if (supportOption) {
                 supportSelect.value = String(results.minimumSupport);
-
+                supportCustom.value = "";
+                supportCustom.required = false;
+                supportCustom.style.display = "none";
+            } else {
+                supportSelect.value = "custom";
+                supportCustom.value = String(results.minimumSupport);
+                supportCustom.required = true;
+                supportCustom.style.display = "block";
             }
 
-            if (confidenceSelect.querySelector(
+            // Memulihkan parameter minimum confidence.
+            const confidenceOption = confidenceSelect.querySelector(
                 'option[value="' + results.minimumConfidence + '"]'
-            )) {
+            );
 
+            if (confidenceOption) {
                 confidenceSelect.value = String(results.minimumConfidence);
-
+                confidenceCustom.value = "";
+                confidenceCustom.required = false;
+                confidenceCustom.style.display = "none";
+            } else {
+                confidenceSelect.value = "custom";
+                confidenceCustom.value = String(results.minimumConfidence);
+                confidenceCustom.required = true;
+                confidenceCustom.style.display = "block";
             }
 
             // Memulihkan tabel hasil analisis
@@ -1079,15 +1132,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Memulihkan informasi periode
             if (resultPeriod) {
-
-                resultPeriod.textContent =
-                    "Tahun " + results.year;
-
+                resultPeriod.textContent = "Tahun " + results.year;
             }
 
             // Memulihkan informasi analisis
             if (infoText) {
-
                 infoText.textContent =
                     "Menampilkan hasil analisis terakhir menggunakan " +
                     results.totalTransactions +
@@ -1097,7 +1146,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     results.minimumConfidence +
                     "%. Jumlah aturan yang ditemukan: " +
                     results.rules.length + ".";
-
             }
 
             console.log(
@@ -1119,25 +1167,25 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
         }
-
     }
 
-    // Menginisialisasi tampilan awal
-    renderTransactionCount(periodSelect.value);
-
-    // Membaca hasil analisis terakhir
+    // Membaca hasil analisis terakhir saat halaman pertama kali dibuka.
     restoreAnalysisResults();
 
-    // Mempertahankan hasil ketika halaman kembali aktif
+    // Mempertahankan hasil ketika pengguna kembali ke halaman Apriori.
     window.addEventListener("pageshow", function () {
-
         restoreAnalysisResults();
+    });
 
+    // Memperbarui tampilan ketika hasil berubah dari tab browser lain.
+    window.addEventListener("storage", function (event) {
+        if (event.key === STORAGE_KEY) {
+            restoreAnalysisResults();
+        }
     });
 
     console.log(
         "Sistem Analisis Apriori berhasil dijalankan."
     );
-
 
 });
