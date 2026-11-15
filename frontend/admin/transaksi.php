@@ -1,4 +1,5 @@
 
+<?php // Halaman riwayat transaksi Admin ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -29,17 +30,11 @@
     <link rel="stylesheet" href="../assets/css/mobile/popup.css">
     <link rel="stylesheet" href="../assets/css/shared/popup.css">
     <link rel="stylesheet" href="../assets/css/shared/notificationPopup.css">
-
-
-
 </head>
 
 <body>
 
-    <!-- ==========================================
-         POPUP PILIH BULAN - ADMIN TRANSAKSI
-    ========================================== -->
-
+    <!-- Popup pemilihan bulan -->
     <div class="artha-popup-overlay" id="popup-select-month">
 
         <section class="artha-popup artha-popup--month"
@@ -48,7 +43,6 @@
                  aria-labelledby="month-popup-title"
                  tabindex="-1">
 
-            <!-- HEADER -->
             <div class="month-popup-header">
 
                 <h2 id="month-popup-title">
@@ -64,12 +58,11 @@
 
             </div>
 
-            <!-- PILIHAN BULAN -->
+            <!-- Pilihan bulan transaksi -->
             <div class="month-popup-options"
                  role="group"
                  aria-label="Bulan transaksi">
 
-                <!-- SEMUA BULAN -->
                 <label class="month-popup-option month-popup-all">
                     <input type="radio"
                            name="popup-selected-month"
@@ -78,7 +71,6 @@
                     <span>✓ Semua Bulan</span>
                 </label>
 
-                <!-- JANUARI - DESEMBER -->
                 <div class="month-popup-grid">
 
                     <label class="month-popup-option">
@@ -144,7 +136,7 @@
                 </div>
             </div>
 
-            <!-- FOOTER -->
+            <!-- Tombol popup -->
             <div class="month-popup-footer">
 
                 <a href="#"
@@ -162,10 +154,7 @@
         </section>
     </div>
 
-    <!-- ==========================================
-         KONTROL SIDEBAR
-    ========================================== -->
-
+    <!-- Kontrol sidebar -->
     <input type="checkbox"
            id="sidebar-toggle"
            class="sidebar-checkbox"
@@ -173,10 +162,7 @@
 
     <div class="dashboard-layout">
 
-        <!-- ==========================================
-             SIDEBAR ADMIN
-        ========================================== -->
-
+        <!-- Sidebar Admin -->
         <aside class="sidebar">
 
             <div class="sidebar-brand">
@@ -201,28 +187,28 @@
 
             </div>
 
-            <!-- MENU ADMIN -->
+            <!-- Menu navigasi Admin -->
             <nav class="sidebar-nav">
 
-                <a href="dashboard.html" class="nav-item">
+                <a href="dashboard.php" class="nav-item">
                     <img src="../assets/icons/sidebar/dashboard.svg"
                          alt="" class="nav-icon">
                     <span>Dashboard</span>
                 </a>
 
-                <a href="pengguna.html" class="nav-item">
+                <a href="pengguna.php" class="nav-item">
                     <img src="../assets/icons/sidebar/pengguna.svg"
                          alt="" class="nav-icon">
                     <span>Pengguna</span>
                 </a>
 
-                <a href="produk&amp;stok.html" class="nav-item">
+                <a href="produk&amp;stok.php" class="nav-item">
                     <img src="../assets/icons/sidebar/produk&amp;stok.svg"
                          alt="" class="nav-icon">
                     <span>Produk &amp; Stok</span>
                 </a>
 
-                <a href="transaksi.html"
+                <a href="transaksi.php"
                    class="nav-item active"
                    aria-current="page">
 
@@ -232,7 +218,7 @@
 
                 </a>
 
-                <a href="../index.html" class="nav-item logout">
+                <a href="../index.php" class="nav-item logout">
 
                     <img src="../assets/icons/actions/logout.svg"
                          alt="" class="nav-icon">
@@ -244,18 +230,14 @@
 
         </aside>
 
-        <!-- ==========================================
-             MAIN CONTENT
-        ========================================== -->
-
+        <!-- Konten utama -->
         <main class="main-content">
 
-            <!-- HEADER -->
+            <!-- Header -->
             <header class="dashboard-header">
 
                 <div class="header-left">
 
-                    <!-- HAMBURGER MOBILE -->
                     <label for="sidebar-toggle"
                            class="hamburger-btn"
                            aria-label="Buka sidebar">
@@ -288,21 +270,16 @@
 
             </header>
 
-            <!-- JUDUL MOBILE -->
             <h1 class="mobile-page-title">
                 Transaksi
             </h1>
 
-            <!-- ==========================================
-                 KONTEN TRANSAKSI
-            ========================================== -->
-
+            <!-- Konten transaksi -->
             <div class="page-container transaction-content">
 
-                <!-- STATISTIK -->
+                <!-- Statistik transaksi -->
                 <section class="transaction-summary">
 
-                    <!-- TOTAL TRANSAKSI -->
                     <article class="transaction-summary-card">
 
                         <div class="transaction-summary-icon">
@@ -317,7 +294,6 @@
 
                     </article>
 
-                    <!-- TOTAL PRODUK UNIK -->
                     <article class="transaction-summary-card">
 
                         <div class="transaction-summary-icon">
@@ -332,7 +308,6 @@
 
                     </article>
 
-                    <!-- TOTAL PELANGGAN -->
                     <article class="transaction-summary-card">
 
                         <div class="transaction-summary-icon">
@@ -349,14 +324,10 @@
 
                 </section>
 
-                <!-- ==========================================
-                     FILTER TRANSAKSI
-                ========================================== -->
-
+                <!-- Filter transaksi -->
                 <section class="transaction-filters"
                          aria-label="Filter transaksi">
 
-                    <!-- FILTER TAHUN -->
                     <div class="transaction-filter-field">
 
                         <label for="filterYear">Tahun</label>
@@ -379,7 +350,6 @@
 
                     </div>
 
-                    <!-- FILTER BULAN -->
                     <div class="transaction-filter-field">
 
                         <label for="monthTrigger">Bulan</label>
@@ -395,7 +365,7 @@
 
                     </div>
 
-                    <!-- INFORMASI PERIODE -->
+                    <!-- Informasi periode -->
                     <article class="all-period-card">
 
                         <div class="all-period-icon">
@@ -425,17 +395,13 @@
 
                 </section>
 
-                <!-- ==========================================
-                     DAFTAR TRANSAKSI
-                ========================================== -->
-
+                <!-- Daftar transaksi -->
                 <section class="transaction-list-section">
 
                     <div class="transaction-list-heading">
                         <h2>Daftar Transaksi</h2>
                     </div>
 
-                    <!-- TABEL TRANSAKSI -->
                     <div class="transaction-table-card">
 
                         <div class="transaction-table-wrapper">
@@ -453,7 +419,7 @@
 
                                 <tbody id="transactionTableBody">
 
-                                    <!-- DATA DUMMY TAHUN 2025 -->
+                                    <!-- Data transaksi sementara -->
 
                                     <tr data-year="2025"
                                         data-month="02"
@@ -505,7 +471,7 @@
 
                         </div>
 
-                        <!-- PAGINATION -->
+                        <!-- Pagination -->
                         <div class="transaction-pagination">
 
                             <button class="transaction-page-nav" disabled>
@@ -543,25 +509,21 @@
 
         </main>
 
-        <!-- OVERLAY MOBILE -->
+        <!-- Overlay sidebar mobile -->
         <label for="sidebar-toggle"
                class="sidebar-overlay"
                aria-label="Tutup sidebar"></label>
 
     </div>
 
-    <!-- ==========================================
-         JAVASCRIPT
-    ========================================== -->
+    <!-- JavaScript popup -->
+    <script src="../assets/js/shared/popup.js" defer></script>
 
-<!-- CUSTOM POPUP ARTHA -->
-<script src="../assets/js/shared/popup.js" defer></script>
+    <!-- JavaScript transaksi Admin -->
+    <script src="../assets/js/admin/transaksi.js" defer></script>
 
-<!-- JAVASCRIPT TRANSAKSI -->
-<script src="../assets/js/admin/transaksi.js" defer></script>
-
-<!-- NAVIGASI -->
-<script src="../assets/js/navigation.js" defer></script>
+    <!-- JavaScript navigasi -->
+    <script src="../assets/js/navigation.js" defer></script>
 
 </body>
 </html>

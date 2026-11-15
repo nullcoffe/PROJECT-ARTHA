@@ -29,12 +29,8 @@
 
     <link rel="stylesheet" href="../assets/css/shared/notificationPopup.css">
 
-    <!-- PENYESUAIAN TABEL & EXPAND APRIORI -->
+    <!-- PENYESUAIAN TABEL DAN EXPAND APRIORI -->
     <style>
-        /* ==========================================
-           TABEL ATURAN ASOSIASI
-        ========================================== */
-
         .apriori-table.apriori-rules-table {
             width: 100%;
             border-collapse: collapse;
@@ -80,10 +76,6 @@
             white-space: nowrap;
         }
 
-        /* ==========================================
-           TOMBOL EXPAND
-        ========================================== */
-
         .artha-detail-button {
             display: inline-flex;
             align-items: center;
@@ -126,10 +118,6 @@
             color: #9AA6BA;
         }
 
-        /* ==========================================
-           ROW DETAIL
-        ========================================== */
-
         .apriori-rules-table tr.artha-rule-detail[hidden] {
             display: none !important;
         }
@@ -151,7 +139,6 @@
             font-family: var(--font-primary);
         }
 
-        /* JUDUL RINCIAN */
         .artha-expand-header {
             display: flex;
             align-items: center;
@@ -172,7 +159,6 @@
             font-size: 12px;
         }
 
-        /* KOTAK DETAIL */
         .artha-expand-box {
             margin-bottom: 10px;
             padding: 12px 14px;
@@ -192,7 +178,6 @@
             font-weight: 700;
         }
 
-        /* JIKA DAN MAKA */
         .artha-rule-pair {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -218,7 +203,6 @@
             line-height: 1.5;
         }
 
-        /* BUKTI TRANSAKSI */
         .artha-evidence-grid {
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -242,7 +226,6 @@
             font-weight: 700;
         }
 
-        /* PERHITUNGAN RINGKAS */
         .artha-calculation {
             display: flex;
             flex-direction: column;
@@ -283,7 +266,6 @@
             color: #142F78;
         }
 
-        /* INTERPRETASI */
         .artha-interpretation {
             margin: 0;
             color: #586780;
@@ -291,12 +273,7 @@
             line-height: 1.7;
         }
 
-        /* ==========================================
-           RESPONSIVE
-        ========================================== */
-
         @media (max-width: 768px) {
-
             .apriori-table-wrapper {
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
@@ -317,8 +294,6 @@
     </style>
 </head>
 
-<!-- JAVA DISINI GAIS BUAT tambahan dari asisten -->
-
 <body>
 
     <!-- SIDEBAR CONTROL -->
@@ -328,10 +303,7 @@
 
     <div class="dashboard-layout">
 
-        <!-- ======================================
-             SIDEBAR ASLI ARTHA
-        ======================================= -->
-
+        <!-- SIDEBAR -->
         <aside class="sidebar">
 
             <div class="sidebar-brand">
@@ -354,21 +326,22 @@
 
             </div>
 
+            <!-- NAVIGASI PEMILIK -->
             <nav class="sidebar-nav">
 
-                <a href="dashboard.html" class="nav-item">
+                <a href="dashboard.php" class="nav-item">
                     <img src="../assets/icons/sidebar/dashboard.svg"
                          alt="" class="nav-icon">
                     <span>Dashboard</span>
                 </a>
 
-                <a href="laporan.html" class="nav-item">
+                <a href="laporan.php" class="nav-item">
                     <img src="../assets/icons/sidebar/laporan.svg"
                          alt="" class="nav-icon">
                     <span>Laporan</span>
                 </a>
 
-                <a href="analisisApriori.html"
+                <a href="analisisApriori.php"
                    class="nav-item active"
                    aria-current="page">
 
@@ -378,19 +351,19 @@
                     <span>Analisis Apriori</span>
                 </a>
 
-                <a href="paketPromosi.html" class="nav-item">
+                <a href="paketPromosi.php" class="nav-item">
                     <img src="../assets/icons/sidebar/paketPromosi.svg"
                          alt="" class="nav-icon">
                     <span>Paket Promosi</span>
                 </a>
 
-                <a href="prioritasStok.html" class="nav-item">
+                <a href="prioritasStok.php" class="nav-item">
                     <img src="../assets/icons/sidebar/prioritasStok.svg"
                          alt="" class="nav-icon">
                     <span>Prioritas Stok</span>
                 </a>
 
-                <a href="../index.html" class="nav-item logout">
+                <a href="../index.php" class="nav-item logout">
                     <img src="../assets/icons/actions/logout.svg"
                          alt="" class="nav-icon">
                     <span>Keluar</span>
@@ -400,22 +373,16 @@
 
         </aside>
 
-
         <!-- HAMBURGER -->
         <label for="sidebar-toggle" class="hamburger-btn">
-            <img src="../assets/icons/actions/hamburger.svg"
-                 alt="">
+            <img src="../assets/icons/actions/hamburger.svg" alt="">
         </label>
 
         <!-- OVERLAY SIDEBAR -->
         <label for="sidebar-toggle"
                class="sidebar-overlay"></label>
 
-
-        <!-- ======================================
-             MAIN CONTENT
-        ======================================= -->
-
+        <!-- MAIN CONTENT -->
         <div class="main-content">
 
             <!-- HEADER -->
@@ -440,17 +407,12 @@
 
             </header>
 
-
             <!-- PAGE CONTENT -->
             <div class="page-container">
 
                 <main class="owner-apriori">
 
-
-                    <!-- =====================================
-                         KONFIGURASI ANALISIS
-                    ====================================== -->
-
+                    <!-- KONFIGURASI ANALISIS -->
                     <section class="apriori-config-card">
 
                         <h2>Konfigurasi Analisis Apriori</h2>
@@ -498,7 +460,6 @@
 
                             </div>
 
-
                             <!-- CONFIDENCE -->
                             <div class="apriori-field">
 
@@ -538,7 +499,6 @@
 
                             </div>
 
-
                             <!-- PERIODE -->
                             <div class="apriori-field">
 
@@ -569,7 +529,6 @@
 
                             </div>
 
-
                             <!-- JUMLAH TRANSAKSI -->
                             <div class="apriori-field">
 
@@ -596,40 +555,55 @@
                                 </div>
 
                             </div>
-                            
+
                             <!-- TOMBOL INFORMASI PARAMETER APRIORI -->
                             <button type="button"
                                     class="apriori-info-button"
                                     id="open-apriori-info">
+
                                 <img src="../assets/icons/actions/info.svg"
-                                    alt=""
-                                    onerror="this.style.display='none'">
+                                     alt=""
+                                     onerror="this.style.display='none'">
+
                                 Panduan Nilai Support & Confidence
+
                             </button>
 
                             <!-- POPUP INFORMASI APRIORI -->
-                            <dialog id="apriori-info-dialog" class="apriori-info-dialog">
+                            <dialog id="apriori-info-dialog"
+                                    class="apriori-info-dialog">
+
                                 <div class="apriori-info-header">
+
                                     <div>
                                         <h2>Panduan Parameter Apriori</h2>
                                         <p>Rekomendasi berdasarkan 350 transaksi</p>
                                     </div>
+
                                     <button type="button"
                                             class="apriori-info-close"
                                             id="close-apriori-info"
-                                            aria-label="Tutup informasi">&times;</button>
+                                            aria-label="Tutup informasi">
+                                        &times;
+                                    </button>
+
                                 </div>
 
                                 <div class="apriori-info-content">
+
                                     <p>
                                         Panduan ini membantu menentukan batas minimum
                                         support dan confidence sesuai tujuan analisis.
                                     </p>
 
                                     <h3>1. Klasifikasi Minimum Support</h3>
-                                    <p>Menentukan seberapa sering kombinasi produk muncul.</p>
+
+                                    <p>
+                                        Menentukan seberapa sering kombinasi produk muncul.
+                                    </p>
 
                                     <div class="apriori-info-table-wrap">
+
                                         <table>
                                             <thead>
                                                 <tr>
@@ -639,6 +613,7 @@
                                                     <th>Penggunaan</th>
                                                 </tr>
                                             </thead>
+
                                             <tbody>
                                                 <tr>
                                                     <td>Sangat Rendah</td>
@@ -646,24 +621,28 @@
                                                     <td>7 kali</td>
                                                     <td>Mencari pola langka</td>
                                                 </tr>
+
                                                 <tr>
                                                     <td>Rendah</td>
                                                     <td>3–4%</td>
                                                     <td>11–14 kali</td>
                                                     <td>Eksplorasi awal</td>
                                                 </tr>
+
                                                 <tr>
                                                     <td>Sedang</td>
                                                     <td>5–6%</td>
                                                     <td>18–21 kali</td>
                                                     <td>Analisis seimbang</td>
                                                 </tr>
+
                                                 <tr>
                                                     <td>Tinggi</td>
                                                     <td>7–8%</td>
                                                     <td>25–28 kali</td>
                                                     <td>Produk populer</td>
                                                 </tr>
+
                                                 <tr>
                                                     <td>Sangat Tinggi</td>
                                                     <td>9–10%</td>
@@ -672,12 +651,17 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+
                                     </div>
 
                                     <h3>2. Klasifikasi Minimum Confidence</h3>
-                                    <p>Menentukan kekuatan hubungan antarproduk dalam aturan.</p>
+
+                                    <p>
+                                        Menentukan kekuatan hubungan antarproduk dalam aturan.
+                                    </p>
 
                                     <div class="apriori-info-table-wrap">
+
                                         <table>
                                             <thead>
                                                 <tr>
@@ -686,27 +670,32 @@
                                                     <th>Penggunaan</th>
                                                 </tr>
                                             </thead>
+
                                             <tbody>
                                                 <tr>
                                                     <td>Longgar</td>
                                                     <td>40–49%</td>
                                                     <td>Melihat tren awal</td>
                                                 </tr>
+
                                                 <tr>
                                                     <td>Moderat</td>
                                                     <td>50–59%</td>
                                                     <td>Pengujian pola umum</td>
                                                 </tr>
+
                                                 <tr>
                                                     <td>Kuat</td>
                                                     <td>60–69%</td>
                                                     <td>Penataan produk</td>
                                                 </tr>
+
                                                 <tr>
                                                     <td>Sangat Kuat</td>
                                                     <td>70–79%</td>
                                                     <td>Evaluasi paket bundling</td>
                                                 </tr>
+
                                                 <tr>
                                                     <td>Sangat Tinggi</td>
                                                     <td>80–90%</td>
@@ -714,37 +703,58 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+
                                     </div>
 
                                     <h3>3. Rekomendasi Kombinasi Parameter</h3>
 
                                     <div class="apriori-recommendations">
+
                                         <div class="apriori-recommendation">
+
                                             <strong>Eksploratif</strong>
-                                            <span>Support 3% | Confidence 50%</span>
+
+                                            <span>
+                                                Support 3% | Confidence 50%
+                                            </span>
+
                                             <p>
                                                 Untuk menemukan lebih banyak hubungan
                                                 antarproduk, termasuk pola yang jarang muncul.
                                             </p>
+
                                         </div>
 
                                         <div class="apriori-recommendation recommended">
+
                                             <strong>Konservatif — Pilihan Awal</strong>
-                                            <span>Support 5% | Confidence 65%</span>
+
+                                            <span>
+                                                Support 5% | Confidence 65%
+                                            </span>
+
                                             <p>
                                                 Untuk memprioritaskan pola yang cukup sering
                                                 muncul dengan hubungan antarproduk lebih kuat.
                                             </p>
+
                                         </div>
 
                                         <div class="apriori-recommendation">
+
                                             <strong>Maksimisasi</strong>
-                                            <span>Support 7% | Confidence 70%</span>
+
+                                            <span>
+                                                Support 7% | Confidence 70%
+                                            </span>
+
                                             <p>
                                                 Untuk menyaring aturan yang lebih selektif
                                                 dan berfokus pada kombinasi produk populer.
                                             </p>
+
                                         </div>
+
                                     </div>
 
                                     <p class="apriori-info-note">
@@ -753,23 +763,26 @@
                                         Kombinasi apa pun tidak menjamin munculnya aturan.
                                         Confidence bukan jaminan akurasi prediksi.
                                     </p>
+
                                 </div>
 
                                 <div class="apriori-info-footer">
-                                    <button type="button" id="done-apriori-info">
+
+                                    <button type="button"
+                                            id="done-apriori-info">
                                         Mengerti
                                     </button>
+
                                 </div>
+
                             </dialog>
 
-                            <!-- TOMBOL -->
+                            <!-- TOMBOL ANALISIS -->
                             <div class="apriori-action">
 
                                 <button type="submit"
                                         class="apriori-run-button">
-
                                     Jalankan Analisis
-
                                 </button>
 
                             </div>
@@ -783,11 +796,7 @@
 
                     </section>
 
-
-                    <!-- =====================================
-                         HASIL ANALISIS
-                    ====================================== -->
-
+                    <!-- HASIL ANALISIS -->
                     <section class="apriori-result-card"
                              id="hasil-analisis">
 
@@ -800,7 +809,6 @@
                             </span>
 
                         </div>
-
 
                         <!-- LEGENDA LIFT -->
                         <div class="apriori-lift-legend">
@@ -821,8 +829,7 @@
 
                         </div>
 
-
-                        <!-- TABEL HASIL ANALISIS DINAMIS -->
+                        <!-- TABEL HASIL ANALISIS -->
                         <div class="apriori-table-wrapper">
 
                             <table class="apriori-table apriori-rules-table">
@@ -840,25 +847,31 @@
                                 </thead>
 
                                 <tbody id="apriori-rules-body">
+
                                     <tr>
-                                        <td colspan="7" class="transaction-empty-state">
+                                        <td colspan="7"
+                                            class="transaction-empty-state">
                                             Jalankan analisis untuk menampilkan hasil.
                                         </td>
                                     </tr>
+
                                 </tbody>
 
                             </table>
 
                         </div>
 
-                        <!-- PAGINATION DINAMIS -->
-                        <div class="apriori-pagination" id="apriori-pagination"></div>
+                        <!-- PAGINATION -->
+                        <div class="apriori-pagination"
+                             id="apriori-pagination"></div>
 
                         <!-- INFORMASI PAGINATION -->
                         <div class="apriori-pagination-info">
+
                             <span id="apriori-pagination-info">
                                 Belum ada hasil analisis.
                             </span>
+
                         </div>
 
                     </section>
@@ -871,10 +884,10 @@
 
     </div>
 
-
     <!-- POPUP ARTHA -->
-    <script src="../assets/js/shared/popup.js" defer></script>  
+    <script src="../assets/js/shared/popup.js" defer></script>
     <script src="../assets/js/pemilik/apriori.js" defer></script>
+
     <!-- NAVIGASI DAN LOGOUT -->
     <script src="../assets/js/navigation.js" defer></script>
 

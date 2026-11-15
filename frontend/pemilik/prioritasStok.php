@@ -1,32 +1,35 @@
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Prioritas Penambahan Stok | ARTHA</title>
 
-    <!-- SHARED CSS -->
+    <!-- Shared CSS -->
     <link rel="stylesheet" href="../assets/css/shared/variables.css">
     <link rel="stylesheet" href="../assets/css/shared/reset.css">
 
-    <!-- WEB CSS -->
+    <!-- Web CSS -->
     <link rel="stylesheet" href="../assets/css/web/layout.css">
     <link rel="stylesheet" href="../assets/css/web/sidebar.css">
     <link rel="stylesheet" href="../assets/css/web/header.css">
     <link rel="stylesheet" href="../assets/css/web/pemilik/prioritasStok.css">
 
-    <!-- MOBILE CSS -->
+    <!-- Mobile CSS -->
     <link rel="stylesheet" href="../assets/css/mobile/layout.css">
     <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
     <link rel="stylesheet" href="../assets/css/mobile/header.css">
     <link rel="stylesheet" href="../assets/css/mobile/pemilik/prioritasStok.css">
     <link rel="stylesheet" href="../assets/css/shared/notificationPopup.css">
+
 </head>
 
 <body>
 
-    <!-- SIDEBAR CONTROL -->
+    <!-- Kontrol sidebar -->
     <input type="checkbox"
            id="sidebar-toggle"
            class="sidebar-checkbox"
@@ -34,18 +37,20 @@
 
     <div class="dashboard-layout">
 
-        <!-- SIDEBAR -->
+        <!-- Sidebar Pemilik -->
         <aside class="sidebar">
 
-            <!-- BRAND -->
+            <!-- Brand -->
             <div class="sidebar-brand">
 
                 <div class="brand-left">
+
                     <img src="../assets/images/Logo.svg"
                          alt="Logo ARTHA"
                          class="brand-logo">
 
                     <span class="brand-title">ARTHA</span>
+
                 </div>
 
                 <label for="sidebar-toggle"
@@ -54,127 +59,167 @@
 
                     <img src="../assets/icons/actions/cancel.svg"
                          alt="">
+
                 </label>
 
             </div>
 
-            <!-- MENU PEMILIK -->
+            <!-- Menu Pemilik -->
             <nav class="sidebar-nav">
 
-                <!-- DASHBOARD -->
-                <a href="dashboard.html" class="nav-item">
+                <!-- Dashboard -->
+                <a href="dashboard.php" class="nav-item">
+
                     <img src="../assets/icons/sidebar/dashboard.svg"
-                         alt="" class="nav-icon">
+                         alt=""
+                         class="nav-icon">
+
                     <span>Dashboard</span>
+
                 </a>
 
-                <!-- LAPORAN -->
-                <a href="laporan.html" class="nav-item">
+                <!-- Laporan -->
+                <a href="laporan.php" class="nav-item">
+
                     <img src="../assets/icons/sidebar/laporan.svg"
-                         alt="" class="nav-icon">
+                         alt=""
+                         class="nav-icon">
+
                     <span>Laporan</span>
+
                 </a>
 
-                <!-- ANALISIS APRIORI -->
-                <a href="analisisApriori.html" class="nav-item">
+                <!-- Analisis Apriori -->
+                <a href="analisisApriori.php" class="nav-item">
+
                     <img src="../assets/icons/sidebar/analisisApriori.svg"
-                         alt="" class="nav-icon">
+                         alt=""
+                         class="nav-icon">
+
                     <span>Analisis Apriori</span>
+
                 </a>
 
-                <!-- PAKET PROMOSI -->
-                <a href="paketPromosi.html" class="nav-item">
+                <!-- Paket Promosi -->
+                <a href="paketPromosi.php" class="nav-item">
+
                     <img src="../assets/icons/sidebar/paketPromosi.svg"
-                         alt="" class="nav-icon">
+                         alt=""
+                         class="nav-icon">
+
                     <span>Paket Promosi</span>
+
                 </a>
 
-                <!-- PRIORITAS STOK AKTIF -->
-                <a href="prioritasStok.html"
+                <!-- Prioritas Stok -->
+                <a href="prioritasStok.php"
                    class="nav-item active"
                    aria-current="page">
+
                     <img src="../assets/icons/sidebar/prioritasStok.svg"
-                         alt="" class="nav-icon">
+                         alt=""
+                         class="nav-icon">
+
                     <span>Prioritas Stok</span>
+
                 </a>
 
-                <!-- KELUAR -->
-                <a href="../index.html" class="nav-item logout">
+                <!-- Keluar -->
+                <a href="../index.php" class="nav-item logout">
+
                     <img src="../assets/icons/actions/logout.svg"
-                         alt="" class="nav-icon">
+                         alt=""
+                         class="nav-icon">
+
                     <span>Keluar</span>
+
                 </a>
 
             </nav>
 
         </aside>
 
-        <!-- HAMBURGER MOBILE -->
+        <!-- Hamburger Mobile -->
         <label for="sidebar-toggle"
                class="hamburger-btn"
                aria-label="Buka sidebar">
 
             <img src="../assets/icons/actions/hamburger.svg"
                  alt="">
+
         </label>
 
-        <!-- SIDEBAR OVERLAY -->
+        <!-- Overlay Sidebar -->
         <label for="sidebar-toggle"
                class="sidebar-overlay"
-               aria-label="Tutup sidebar"></label>
+               aria-label="Tutup sidebar">
+        </label>
 
-        <!-- MAIN CONTENT -->
+        <!-- Konten Utama -->
         <main class="main-content">
 
-            <!-- HEADER -->
+            <!-- Header -->
             <header class="dashboard-header">
 
                 <h1>Prioritas Penambahan Stok</h1>
 
                 <div class="header-right">
+
                     <div class="user-profile">
 
                         <div class="profile-circle">
+
                             <img src="../assets/icons/header/profile.svg"
                                  alt="">
+
                         </div>
 
                         <span>Pemilik</span>
 
                     </div>
+
                 </div>
 
             </header>
 
-            <!-- CONTENT -->
+            <!-- Konten Halaman -->
             <div class="page-container">
 
                 <main class="owner-stock-content">
 
-                    <!-- STATISTIK STOK -->
+                    <!-- Statistik Stok -->
                     <section class="stock-statistics">
 
-                        <!-- PRODUK PRIORITAS -->
+                        <!-- Produk Prioritas -->
                         <article class="stock-stat-card">
+
                             <p>Produk Prioritas</p>
+
                             <h2>7</h2>
+
                         </article>
 
-                        <!-- DI BAWAH MINIMUM -->
+                        <!-- Di Bawah Minimum -->
                         <article class="stock-stat-card">
+
                             <p>Dibawah minimum</p>
+
                             <h2>7</h2>
+
                         </article>
 
-                        <!-- ITEM DIPANTAU -->
+                        <!-- Item Dipantau -->
                         <article class="stock-stat-card">
+
                             <p>Item dipantau</p>
+
                             <h2>60</h2>
+
                         </article>
 
                     </section>
 
-                    <!-- TABEL PRIORITAS STOK -->
+                    <!-- Tabel Prioritas Stok -->
                     <section class="stock-table-card">
 
                         <div class="stock-table-wrapper">
@@ -182,91 +227,147 @@
                             <table class="stock-table">
 
                                 <thead>
+
                                     <tr>
+
                                         <th>Produk</th>
+
                                         <th>Stok</th>
+
                                         <th>Batas minimum</th>
+
                                         <th>Prioritas</th>
+
                                     </tr>
+
                                 </thead>
 
                                 <tbody>
 
                                     <tr>
+
                                         <td>Gula Pasir 1Kg</td>
+
                                         <td>9</td>
+
                                         <td>15</td>
+
                                         <td>
+
                                             <span class="stock-priority high">
                                                 Tinggi
                                             </span>
+
                                         </td>
+
                                     </tr>
 
                                     <tr>
+
                                         <td>Minyak Goreng</td>
+
                                         <td>15</td>
+
                                         <td>20</td>
+
                                         <td>
+
                                             <span class="stock-priority high">
                                                 Tinggi
                                             </span>
+
                                         </td>
+
                                     </tr>
 
                                     <tr>
+
                                         <td>Kopi</td>
+
                                         <td>12</td>
+
                                         <td>12</td>
+
                                         <td>
+
                                             <span class="stock-priority medium">
                                                 Sedang
                                             </span>
+
                                         </td>
+
                                     </tr>
 
                                     <tr>
+
                                         <td>Produk 4</td>
+
                                         <td>9</td>
+
                                         <td>15</td>
+
                                         <td>
+
                                             <span class="stock-priority high">
                                                 Tinggi
                                             </span>
+
                                         </td>
+
                                     </tr>
 
                                     <tr>
+
                                         <td>Produk 5</td>
+
                                         <td>9</td>
+
                                         <td>15</td>
+
                                         <td>
+
                                             <span class="stock-priority high">
                                                 Tinggi
                                             </span>
+
                                         </td>
+
                                     </tr>
 
                                     <tr>
+
                                         <td>Produk 6</td>
+
                                         <td>9</td>
+
                                         <td>15</td>
+
                                         <td>
+
                                             <span class="stock-priority high">
                                                 Tinggi
                                             </span>
+
                                         </td>
+
                                     </tr>
 
                                     <tr>
+
                                         <td>Produk 7</td>
+
                                         <td>9</td>
+
                                         <td>10</td>
+
                                         <td>
+
                                             <span class="stock-priority high">
                                                 Tinggi
                                             </span>
+
                                         </td>
+
                                     </tr>
 
                                 </tbody>
@@ -284,13 +385,15 @@
         </main>
 
     </div>
-<!-- POPUP ARTHA -->
-<script src="../assets/js/shared/popup.js" defer></script>
 
-<!-- JAVASCRIPT HALAMAN -->
-<script src="../assets/js/pemilik/prioritas-stok.js" defer></script>
+    <!-- Popup ARTHA -->
+    <script src="../assets/js/shared/popup.js" defer></script>
 
-<!-- NAVIGASI DAN LOGOUT -->
-<script src="../assets/js/navigation.js" defer></script>
+    <!-- JavaScript halaman -->
+    <script src="../assets/js/pemilik/prioritas-stok.js" defer></script>
+
+    <!-- Navigasi dan logout -->
+    <script src="../assets/js/navigation.js" defer></script>
+
 </body>
 </html>

@@ -1,4 +1,8 @@
 
+<?php
+// Halaman manajemen pengguna Admin
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -9,30 +13,30 @@
 
     <title>Manajemen Pengguna | ARTHA</title>
 
-    <!-- SHARED CSS -->
+    <!-- CSS utama -->
     <link rel="stylesheet" href="../assets/css/shared/variables.css">
     <link rel="stylesheet" href="../assets/css/shared/reset.css">
 
-    <!-- WEB CSS -->
+    <!-- CSS desktop -->
     <link rel="stylesheet" href="../assets/css/web/layout.css">
     <link rel="stylesheet" href="../assets/css/web/sidebar.css">
     <link rel="stylesheet" href="../assets/css/web/header.css">
     <link rel="stylesheet" href="../assets/css/web/admin/pengguna.css">
 
-    <!-- MOBILE CSS -->
+    <!-- CSS mobile -->
     <link rel="stylesheet" href="../assets/css/mobile/layout.css">
     <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
     <link rel="stylesheet" href="../assets/css/mobile/header.css">
     <link rel="stylesheet" href="../assets/css/mobile/admin/pengguna.css">
 
-    <!-- CUSTOM NOTIFICATION POPUP ARTHA -->
+    <!-- CSS notifikasi -->
     <link rel="stylesheet" href="../assets/css/shared/notificationPopup.css">
 
 </head>
 
 <body>
 
-    <!-- KONTROL SIDEBAR -->
+    <!-- Kontrol sidebar -->
     <input
         type="checkbox"
         id="sidebar-toggle"
@@ -42,18 +46,21 @@
 
     <div class="dashboard-layout">
 
-        <!-- SIDEBAR ADMIN -->
+        <!-- Sidebar Admin -->
         <aside class="sidebar">
 
             <div class="sidebar-brand">
 
                 <div class="brand-left">
+
                     <img
                         src="../assets/images/Logo.svg"
                         alt="Logo ARTHA"
                         class="brand-logo"
                     >
+
                     <span class="brand-title">ARTHA</span>
+
                 </div>
 
                 <label
@@ -61,74 +68,94 @@
                     class="close-sidebar-btn"
                     aria-label="Tutup sidebar"
                 >
+
                     <img
                         src="../assets/icons/actions/cancel.svg"
                         alt=""
                     >
+
                 </label>
 
             </div>
 
-            <!-- MENU ADMIN -->
+            <!-- Menu navigasi Admin -->
             <nav class="sidebar-nav">
 
-                <a href="dashboard.html" class="nav-item">
+                <a href="dashboard.php" class="nav-item">
+
                     <img
                         src="../assets/icons/sidebar/dashboard.svg"
                         class="nav-icon"
                         alt=""
                     >
+
                     <span>Dashboard</span>
+
                 </a>
 
                 <a
-                    href="pengguna.html"
+                    href="pengguna.php"
                     class="nav-item active"
                     aria-current="page"
                 >
+
                     <img
                         src="../assets/icons/sidebar/pengguna.svg"
                         class="nav-icon"
                         alt=""
                     >
+
                     <span>Pengguna</span>
+
                 </a>
 
-                <a href="produk&amp;stok.html" class="nav-item">
+                <!-- Navigasi menuju Produk dan Stok PHP -->
+                <a href="produk&amp;stok.php" class="nav-item">
+
                     <img
                         src="../assets/icons/sidebar/produk&amp;stok.svg"
                         class="nav-icon"
                         alt=""
                     >
+
                     <span>Produk &amp; Stok</span>
+
                 </a>
 
-                <a href="transaksi.html" class="nav-item">
+                <!-- Navigasi menuju Transaksi PHP -->
+                <a href="transaksi.php" class="nav-item">
+
                     <img
                         src="../assets/icons/sidebar/transaksi.svg"
                         class="nav-icon"
                         alt=""
                     >
+
                     <span>Transaksi</span>
+
                 </a>
 
-                <a href="../index.html" class="nav-item logout">
+                <!-- Keluar dari halaman Admin -->
+                <a href="../index.php" class="nav-item logout">
+
                     <img
                         src="../assets/icons/actions/logout.svg"
                         class="nav-icon"
                         alt=""
                     >
+
                     <span>Keluar</span>
+
                 </a>
 
             </nav>
 
         </aside>
 
-        <!-- MAIN CONTENT -->
+        <!-- Konten utama -->
         <main class="main-content">
 
-            <!-- HEADER -->
+            <!-- Header halaman -->
             <header class="dashboard-header">
 
                 <div class="header-left">
@@ -138,10 +165,12 @@
                         class="hamburger-btn"
                         aria-label="Buka sidebar"
                     >
+
                         <img
                             src="../assets/icons/actions/hamburger.svg"
                             alt=""
                         >
+
                     </label>
 
                     <h1 class="desktop-page-title">
@@ -155,10 +184,12 @@
                     <div class="admin-profile">
 
                         <div class="profile-circle">
+
                             <img
                                 src="../assets/icons/header/profile.svg"
                                 alt=""
                             >
+
                         </div>
 
                         <span>Admin</span>
@@ -169,15 +200,14 @@
 
             </header>
 
-            <!-- JUDUL MOBILE -->
             <h1 class="mobile-page-title">
                 Manajemen Pengguna
             </h1>
 
-            <!-- KONTEN -->
+            <!-- Konten manajemen pengguna -->
             <div class="page-container admin-users-content">
 
-                <!-- TOMBOL TAMBAH PENGGUNA -->
+                <!-- Tombol tambah pengguna -->
                 <div class="users-toolbar">
 
                     <a
@@ -189,7 +219,7 @@
 
                 </div>
 
-                <!-- TABEL PENGGUNA -->
+                <!-- Tabel daftar pengguna -->
                 <section
                     class="users-table-card"
                     aria-label="Daftar pengguna"
@@ -200,6 +230,7 @@
                         <table class="users-table">
 
                             <thead>
+
                                 <tr>
                                     <th>Nama</th>
                                     <th>Username</th>
@@ -207,13 +238,16 @@
                                     <th>Kata Sandi</th>
                                     <th>Aksi</th>
                                 </tr>
+
                             </thead>
 
                             <tbody>
 
-                                <!-- PENGGUNA 2: LAUDYA -->
+                                <!-- Data pengguna Laudya -->
                                 <tr>
+
                                     <td>Laudya</td>
+
                                     <td>Laudya.Pemilik</td>
 
                                     <td>
@@ -232,6 +266,7 @@
                                     </td>
 
                                     <td>
+
                                         <div class="users-actions">
 
                                             <a
@@ -239,10 +274,12 @@
                                                 class="action-button edit-button"
                                                 aria-label="Ubah akun Laudya"
                                             >
+
                                                 <img
                                                     src="../assets/icons/actions/edit.svg"
                                                     alt=""
                                                 >
+
                                             </a>
 
                                             <a
@@ -250,19 +287,25 @@
                                                 class="action-button delete-button"
                                                 aria-label="Hapus akun Laudya"
                                             >
+
                                                 <img
                                                     src="../assets/icons/actions/delete.svg"
                                                     alt=""
                                                 >
+
                                             </a>
 
                                         </div>
+
                                     </td>
+
                                 </tr>
 
-                                <!-- PENGGUNA 3: ABIN -->
+                                <!-- Data pengguna Abin -->
                                 <tr>
+
                                     <td>Abin</td>
+
                                     <td>Abin.Kasir</td>
 
                                     <td>
@@ -281,6 +324,7 @@
                                     </td>
 
                                     <td>
+
                                         <div class="users-actions">
 
                                             <a
@@ -288,10 +332,12 @@
                                                 class="action-button edit-button"
                                                 aria-label="Ubah akun Abin"
                                             >
+
                                                 <img
                                                     src="../assets/icons/actions/edit.svg"
                                                     alt=""
                                                 >
+
                                             </a>
 
                                             <a
@@ -299,19 +345,25 @@
                                                 class="action-button delete-button"
                                                 aria-label="Hapus akun Abin"
                                             >
+
                                                 <img
                                                     src="../assets/icons/actions/delete.svg"
                                                     alt=""
                                                 >
+
                                             </a>
 
                                         </div>
+
                                     </td>
+
                                 </tr>
 
-                                <!-- PENGGUNA 4: ALRA -->
+                                <!-- Data pengguna Alra -->
                                 <tr>
+
                                     <td>Alra</td>
+
                                     <td>Alra.Kasir</td>
 
                                     <td>
@@ -330,6 +382,7 @@
                                     </td>
 
                                     <td>
+
                                         <div class="users-actions">
 
                                             <a
@@ -337,10 +390,12 @@
                                                 class="action-button edit-button"
                                                 aria-label="Ubah akun Alra"
                                             >
+
                                                 <img
                                                     src="../assets/icons/actions/edit.svg"
                                                     alt=""
                                                 >
+
                                             </a>
 
                                             <a
@@ -348,14 +403,18 @@
                                                 class="action-button delete-button"
                                                 aria-label="Hapus akun Alra"
                                             >
+
                                                 <img
                                                     src="../assets/icons/actions/delete.svg"
                                                     alt=""
                                                 >
+
                                             </a>
 
                                         </div>
+
                                     </td>
+
                                 </tr>
 
                             </tbody>
@@ -366,7 +425,7 @@
 
                 </section>
 
-                <!-- FORM PENGGUNA -->
+                <!-- Form tambah dan ubah pengguna -->
                 <section
                     class="user-form-card"
                     id="userFormSection"
@@ -376,7 +435,7 @@
 
                     <form class="user-form" id="userForm">
 
-                        <!-- NAMA -->
+                        <!-- Input nama -->
                         <div class="form-field">
 
                             <label for="newName">
@@ -394,7 +453,7 @@
 
                         </div>
 
-                        <!-- USERNAME -->
+                        <!-- Input username -->
                         <div class="form-field">
 
                             <label for="newUsername">
@@ -412,7 +471,7 @@
 
                         </div>
 
-                        <!-- JENIS PENGGUNA -->
+                        <!-- Pilihan jenis pengguna -->
                         <div class="form-field">
 
                             <label for="newRole">
@@ -424,6 +483,7 @@
                                 name="role"
                                 required
                             >
+
                                 <option value="" selected disabled>
                                     Pilih Pengguna
                                 </option>
@@ -435,11 +495,12 @@
                                 <option value="kasir">
                                     Kasir
                                 </option>
+
                             </select>
 
                         </div>
 
-                        <!-- PASSWORD BARU -->
+                        <!-- Input password -->
                         <div class="form-field">
 
                             <label for="newPassword">
@@ -462,7 +523,7 @@
 
                         </div>
 
-                        <!-- TOMBOL FORM -->
+                        <!-- Tombol form -->
                         <div class="form-actions">
 
                             <button
@@ -489,7 +550,7 @@
 
         </main>
 
-        <!-- OVERLAY MOBILE -->
+        <!-- Overlay sidebar mobile -->
         <label
             for="sidebar-toggle"
             class="sidebar-overlay"
@@ -498,13 +559,15 @@
 
     </div>
 
-    <!-- CUSTOM POPUP ARTHA -->
+    <!-- JavaScript popup -->
     <script src="../assets/js/shared/popup.js"></script>
 
-    <!-- CRUD MANAJEMEN PENGGUNA -->
+    <!-- JavaScript manajemen pengguna -->
     <script src="../assets/js/admin/user.js"></script>
 
-    <!-- NAVIGASI -->
+    <!-- JavaScript navigasi -->
     <script src="../assets/js/navigation.js"></script>
+
 </body>
+
 </html>

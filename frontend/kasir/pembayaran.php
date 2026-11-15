@@ -1,3 +1,8 @@
+
+<?php
+// Halaman pembayaran transaksi oleh Kasir
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -5,23 +10,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FFFDF0">
+
     <title>Kasir / Pembayaran | ARTHA</title>
 
+    <!-- CSS utama -->
     <link rel="stylesheet" href="../assets/css/shared/variables.css">
     <link rel="stylesheet" href="../assets/css/shared/reset.css">
     <link rel="stylesheet" href="../assets/css/shared/notificationPopup.css">
 
+    <!-- CSS desktop -->
     <link rel="stylesheet" href="../assets/css/web/layout.css">
     <link rel="stylesheet" href="../assets/css/web/sidebar.css">
     <link rel="stylesheet" href="../assets/css/web/header.css">
 
+    <!-- CSS mobile -->
     <link rel="stylesheet" href="../assets/css/mobile/layout.css">
     <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
     <link rel="stylesheet" href="../assets/css/mobile/header.css">
 
+    <!-- CSS pembayaran -->
     <link rel="stylesheet" href="../assets/css/web/kasir/pembayaran.css">
     <link rel="stylesheet" href="../assets/css/mobile/kasir/pembayaran.css">
-    <link rel="stylesheet" href="../assets/css/shared/notificationPopup.css">
+
 </head>
 
 <body class="cashier-page payment-page">
@@ -30,11 +40,12 @@
 
     <div class="dashboard-layout">
 
+        <!-- Sidebar Kasir -->
         <aside class="sidebar">
 
             <div class="sidebar-brand">
 
-                <a href="dashboard.html" class="brand-left">
+                <a href="dashboard.php" class="brand-left">
 
                     <img src="../assets/images/Logo.svg" class="brand-logo" alt="Logo ARTHA">
 
@@ -48,9 +59,10 @@
 
             </div>
 
+            <!-- Menu navigasi Kasir -->
             <nav class="sidebar-nav" aria-label="Navigasi kasir">
 
-                <a class="nav-item" href="dashboard.html">
+                <a class="nav-item" href="dashboard.php">
 
                     <img class="nav-icon" src="../assets/icons/sidebar/dashboard.svg" alt="">
 
@@ -58,7 +70,7 @@
 
                 </a>
 
-                <a class="nav-item" href="transaksiPOS.html">
+                <a class="nav-item" href="transaksiPOS.php">
 
                     <img class="nav-icon" src="../assets/icons/sidebar/transaksiPos.svg" alt="">
 
@@ -66,7 +78,7 @@
 
                 </a>
 
-                <a class="nav-item active" href="pembayaran.html">
+                <a class="nav-item active" href="pembayaran.php">
 
                     <img class="nav-icon" src="../assets/icons/sidebar/pembayaran.svg" alt="">
 
@@ -74,7 +86,7 @@
 
                 </a>
 
-                <a class="nav-item" href="cetakStruk.html">
+                <a class="nav-item" href="cetakStruk.php">
 
                     <img class="nav-icon" src="../assets/icons/sidebar/cetakStruk.svg" alt="">
 
@@ -82,7 +94,7 @@
 
                 </a>
 
-                <a class="nav-item" href="cekStok.html">
+                <a class="nav-item" href="cekStok.php">
 
                     <img class="nav-icon" src="../assets/icons/sidebar/cekStok.svg" alt="">
 
@@ -90,9 +102,13 @@
 
                 </a>
 
-                <a class="nav-item logout" href="../index.html">
+                <!-- Keluar dari halaman Kasir -->
+                <a class="nav-item logout" href="../index.php">
+
                     <img class="nav-icon" src="../assets/icons/actions/logout.svg" alt="">
+
                     <span>Keluar</span>
+
                 </a>
 
             </nav>
@@ -101,6 +117,7 @@
 
         <label class="sidebar-overlay" for="sidebar-toggle" aria-label="Tutup menu"></label>
 
+        <!-- Konten utama pembayaran -->
         <main class="main-content">
 
             <header class="dashboard-header">
@@ -115,7 +132,7 @@
 
                     <h1>Kasir / Pembayaran</h1>
 
-                    <a href="dashboard.html" class="mobile-brand">
+                    <a href="dashboard.php" class="mobile-brand">
 
                         <img src="../assets/images/Logo.svg" alt="">
 
@@ -149,8 +166,7 @@
 
             <div class="payment-layout">
 
-                <!-- RINGKASAN TRANSAKSI -->
-
+                <!-- Ringkasan transaksi -->
                 <section class="payment-summary">
 
                     <h2>Ringkasan Transaksi</h2>
@@ -188,8 +204,7 @@
 
                 </section>
 
-                <!-- FORM PEMBAYARAN -->
-
+                <!-- Form pembayaran -->
                 <section class="payment-card">
 
                     <h2>Pembayaran</h2>
@@ -210,8 +225,7 @@
 
                     </div>
 
-                    <!-- UANG DITERIMA -->
-
+                    <!-- Input uang diterima -->
                     <div class="payment-field">
 
                         <label class="form-label" for="uang-diterima">
@@ -222,15 +236,20 @@
 
                             <span>Rp</span>
 
-                            <input type="text" id="uang-diterima" value="0" inputmode="numeric" autocomplete="off"
-                                placeholder="Masukkan nominal">
+                            <input
+                                type="text"
+                                id="uang-diterima"
+                                value="0"
+                                inputmode="numeric"
+                                autocomplete="off"
+                                placeholder="Masukkan nominal"
+                            >
 
                         </div>
 
                     </div>
 
-                    <!-- PILIHAN NOMINAL UANG CEPAT -->
-
+                    <!-- Pilihan nominal uang cepat -->
                     <div class="quick-amounts">
 
                         <a href="#uang-diterima">Rp 1.000</a>
@@ -247,8 +266,7 @@
 
                     </div>
 
-                    <!-- KEMBALIAN -->
-
+                    <!-- Tampilan uang kembalian -->
                     <div class="change-box">
 
                         <strong>Kembalian</strong>
@@ -259,27 +277,33 @@
 
                     </div>
 
-                    <!-- PERHITUNGAN -->
-
+                    <!-- Perhitungan pembayaran -->
                     <div class="payment-equation" id="paymentEquation">
                         Rp 0 − Rp 0
                     </div>
 
-                    <!-- TOMBOL AKSI -->
-
+                    <!-- Tombol aksi pembayaran -->
                     <div class="payment-actions">
 
-                        <a href="transaksiPOS.html" class="button-outline">
+                        <a href="transaksiPOS.php" class="button-outline">
 
-                            <img src="../assets/icons/actions/chevron-left.svg" alt="" class="action-arrow-icon">
+                            <img
+                                src="../assets/icons/actions/chevron-left.svg"
+                                alt=""
+                                class="action-arrow-icon"
+                            >
 
                             Kembali
 
                         </a>
 
-                        <a href="cetakStruk.html" class="button-primary" id="finishTransaction">
+                        <a href="cetakStruk.php" class="button-primary" id="finishTransaction">
 
-                            <img src="../assets/icons/actions/check.svg" alt="" class="action-check-icon">
+                            <img
+                                src="../assets/icons/actions/check.svg"
+                                alt=""
+                                class="action-check-icon"
+                            >
 
                             Selesai Transaksi
 
@@ -295,9 +319,16 @@
 
     </div>
 
+    <!-- JavaScript konfigurasi -->
     <script src="../assets/js/config.js" defer></script>
+
+    <!-- JavaScript popup -->
     <script src="../assets/js/shared/popup.js" defer></script>
+
+    <!-- JavaScript navigasi -->
     <script src="../assets/js/navigation.js" defer></script>
+
+    <!-- JavaScript pembayaran -->
     <script src="../assets/js/kasir/pembayaran.js" defer></script>
 
 </body>

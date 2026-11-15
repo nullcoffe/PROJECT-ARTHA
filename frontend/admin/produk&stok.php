@@ -1,4 +1,8 @@
 
+<?php
+// Halaman manajemen produk dan stok Admin
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -36,24 +40,29 @@
         </label>
     </div>
 
+    <!-- Menu navigasi Admin -->
     <nav class="sidebar-nav">
-        <a href="dashboard.html" class="nav-item">
+        <a href="dashboard.php" class="nav-item">
             <img src="../assets/icons/sidebar/dashboard.svg" class="nav-icon" alt="">
             <span>Dashboard</span>
         </a>
-        <a href="pengguna.html" class="nav-item">
+
+        <a href="pengguna.php" class="nav-item">
             <img src="../assets/icons/sidebar/pengguna.svg" class="nav-icon" alt="">
             <span>Pengguna</span>
         </a>
-        <a href="produk&amp;stok.html" class="nav-item active" aria-current="page">
+
+        <a href="produk&amp;stok.php" class="nav-item active" aria-current="page">
             <img src="../assets/icons/sidebar/produk&amp;stok.svg" class="nav-icon" alt="">
             <span>Produk &amp; Stok</span>
         </a>
-        <a href="transaksi.html" class="nav-item">
+
+        <a href="transaksi.php" class="nav-item">
             <img src="../assets/icons/sidebar/transaksi.svg" class="nav-icon" alt="">
             <span>Transaksi</span>
         </a>
-        <a href="../index.html" class="nav-item logout">
+
+        <a href="../index.php" class="nav-item logout">
             <img src="../assets/icons/actions/logout.svg" class="nav-icon" alt="">
             <span>Keluar</span>
         </a>
@@ -69,6 +78,7 @@
         </label>
         <h1 class="desktop-page-title">Produk &amp; Stok</h1>
     </div>
+
     <div class="header-right">
         <div class="admin-profile">
             <div class="profile-circle">
@@ -86,6 +96,7 @@
 <input type="radio" name="form-mode" id="mode-product" class="form-mode-radio" checked>
 <input type="radio" name="form-mode" id="mode-stock" class="form-mode-radio">
 
+<!-- Pencarian dan tombol produk -->
 <section class="product-toolbar">
     <label class="product-search">
         <img src="../assets/icons/actions/search.svg" alt="">
@@ -97,6 +108,7 @@
             <img src="../assets/icons/cards/stoktipis.svg" alt="">
             <span>Sesuaikan stok</span>
         </label>
+
         <label for="mode-product" class="add-product-trigger">
             <img src="../assets/icons/actions/tambah.svg" alt="">
             <span>Tambah produk</span>
@@ -104,9 +116,9 @@
     </div>
 </section>
 
+<!-- Tabel produk -->
 <section class="product-table-card">
 
-<!-- PAGINATION RADIO -->
 <input type="radio" name="product-page" id="product-page-1" class="product-page-radio" checked>
 <input type="radio" name="product-page" id="product-page-2" class="product-page-radio">
 <input type="radio" name="product-page" id="product-page-3" class="product-page-radio">
@@ -123,16 +135,15 @@
 <div class="product-table-wrapper">
 <table class="product-table">
 <thead>
-    <tr>
-        <th>Kode</th>
-        <th>Nama produk</th>
-        <th>Harga</th>
-        <th>Stok</th>
-        <th>Status</th>
-        <th class="product-action-header">Aksi</th>
-    </tr>
+<tr>
+    <th>Kode</th>
+    <th>Nama produk</th>
+    <th>Harga</th>
+    <th>Stok</th>
+    <th>Status</th>
+    <th class="product-action-header">Aksi</th>
+</tr>
 </thead>
-
 
 <tbody class="product-page-rows product-page-rows-1">
 <tr><td>PRD001</td><td>Beras</td><td>Rp15.000</td><td>161</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
@@ -229,10 +240,13 @@
 <tr><td>PRD059</td><td>Kertas Minyak</td><td>Rp5.000</td><td>16</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
 <tr><td>PRD060</td><td>Tepung Panir</td><td>Rp9.000</td><td>30</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
 </tbody>
+
 </table>
 </div>
 
+<!-- Navigasi halaman produk -->
 <div class="product-pagination">
+
     <div class="product-pagination-controls">
         <label for="product-page-1" class="product-prev prev-2">‹</label>
         <label for="product-page-2" class="product-next next-1">›</label>
@@ -280,48 +294,60 @@
 
 </section>
 
-<!-- FORM PRODUK DAN STOK -->
+<!-- Form tambah produk dan penyesuaian stok -->
 <section class="product-forms-grid">
 
 <article class="product-form-panel" id="productFormPanel">
-    <div class="product-panel-heading"><h2>Data Produk</h2></div>
+    <div class="product-panel-heading">
+        <h2>Data Produk</h2>
+    </div>
+
     <form id="productForm">
         <div class="product-fields-grid">
+
             <div class="product-field">
                 <label for="productName">Nama Produk</label>
                 <input type="text" id="productName" name="productName"
                        placeholder="Contoh gula pasir 5 KG" required>
             </div>
+
             <div class="product-field">
                 <label for="productCode">Kode Produk</label>
                 <input type="text" id="productCode" name="productCode"
                        placeholder="Contoh P001" required>
             </div>
+
             <div class="product-field">
                 <label for="productUnit">Satuan</label>
                 <input type="text" id="productUnit" name="productUnit"
                        placeholder="Kg" required>
             </div>
+
             <div class="product-field">
                 <label for="productPrice">Harga</label>
                 <input type="number" id="productPrice" name="productPrice"
                        min="0" placeholder="Rp 0" required>
             </div>
+
             <div class="product-field">
                 <label for="productInitialStock">Stok awal</label>
                 <input type="number" id="productInitialStock"
                        name="productInitialStock" min="0" placeholder="0" required>
             </div>
+
             <div class="product-field">
                 <label for="productMinimumStock">Batas Minimum</label>
                 <input type="number" id="productMinimumStock"
                        name="productMinimumStock" min="0" value="40" required>
             </div>
+
         </div>
+
         <div class="product-form-actions">
             <button type="submit" class="admin-primary-button">
                 <span class="button-symbol">▣</span> Simpan produk
             </button>
+
             <button type="reset" class="admin-outline-button">
                 <span class="button-symbol">×</span> Batal
             </button>
@@ -329,11 +355,17 @@
     </form>
 </article>
 
+<!-- Form penyesuaian stok -->
 <article class="stock-form-panel" id="stockFormPanel">
-    <div class="product-panel-heading"><h2>Penyesuaian Stok</h2></div>
+    <div class="product-panel-heading">
+        <h2>Penyesuaian Stok</h2>
+    </div>
+
     <form id="stockForm">
+
         <div class="product-field stock-product-field">
             <label for="stockProduct">Pilih Produk</label>
+
             <select id="stockProduct" name="stockProduct" required>
                 <option value="" selected disabled>Pilih</option>
                 <option value="PRD001">Beras</option>
@@ -399,7 +431,6 @@
             </select>
         </div>
 
-
         <div class="stock-number-grid">
 
             <div class="product-field">
@@ -447,7 +478,7 @@
             <label for="totalStock">Total Stok</label>
             <input type="number" id="totalStock" value="0" readonly>
         </div>
-        
+
         <div class="stock-form-actions">
             <button type="submit" class="admin-primary-button">
                 <span class="button-symbol">✓</span> Simpan Penyesuaian
@@ -457,7 +488,6 @@
                 <span class="button-symbol">×</span> Batal
             </button>
         </div>
-
 
     </form>
 </article>
@@ -469,7 +499,7 @@
 <label for="sidebar-toggle" class="sidebar-overlay" aria-label="Tutup sidebar"></label>
 </div>
 
-<!— Pemanggilan javascript admin/produk—>
+<!-- JavaScript produk dan stok -->
 <script src="../assets/js/admin/produk-stok.js"></script>
 <script src="../assets/js/navigation.js" defer></script>
 <script src="../assets/js/shared/popup.js"></script>

@@ -1,3 +1,8 @@
+
+<?php
+// Halaman dashboard Kasir ARTHA
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -8,18 +13,18 @@
 
     <title>Dashboard Kasir | ARTHA</title>
 
-    <!-- SHARED CSS -->
+    <!-- CSS utama -->
     <link rel="stylesheet" href="../assets/css/shared/variables.css">
     <link rel="stylesheet" href="../assets/css/shared/reset.css">
 
-    <!-- WEB CSS -->
+    <!-- CSS tampilan desktop -->
     <link rel="stylesheet" href="../assets/css/web/layout.css">
     <link rel="stylesheet" href="../assets/css/web/sidebar.css">
     <link rel="stylesheet" href="../assets/css/web/header.css">
     <link rel="stylesheet" href="../assets/css/web/kasir/dashboard.css">
     <link rel="stylesheet" href="../assets/css/web/popupProfil.css">
 
-    <!-- MOBILE CSS -->
+    <!-- CSS tampilan mobile -->
     <link rel="stylesheet" href="../assets/css/mobile/layout.css">
     <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
     <link rel="stylesheet" href="../assets/css/mobile/header.css">
@@ -30,52 +35,48 @@
 
 <body class="cashier-page">
 
-    <!-- ==========================================
-         KONTROL POPUP PROFIL
-    ========================================== -->
-
+    <!-- Kontrol popup profil -->
     <input type="checkbox" id="profile-popup-toggle" class="profile-popup-toggle">
 
-
-    <!-- ==========================================
-         POPUP PROFIL KASIR
-    ========================================== -->
-
+    <!-- Popup profil Kasir -->
     <div class="profile-popup-overlay">
 
-        <!-- OVERLAY UNTUK MENUTUP POPUP -->
-        <label for="profile-popup-toggle" class="profile-popup-backdrop" aria-label="Tutup popup profil">
+        <label for="profile-popup-toggle"
+            class="profile-popup-backdrop"
+            aria-label="Tutup popup profil">
         </label>
 
-        <section class="profile-popup" role="dialog" aria-modal="true" aria-labelledby="profile-popup-title">
+        <section class="profile-popup"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="profile-popup-title">
 
-            <!-- HEADER POPUP -->
             <div class="profile-popup-header">
 
                 <h2 id="profile-popup-title">
                     Profil Pengguna
                 </h2>
 
-                <label for="profile-popup-toggle" class="profile-popup-close" aria-label="Tutup popup">
+                <label for="profile-popup-toggle"
+                    class="profile-popup-close"
+                    aria-label="Tutup popup">
 
-                    <img src="../assets/icons/actions/cancel.svg" alt="" aria-hidden="true" class="popup-close-icon">
+                    <img src="../assets/icons/actions/cancel.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="popup-close-icon">
 
                 </label>
 
             </div>
 
-
-            <!-- INFORMASI PENGGUNA -->
+            <!-- Informasi akun Kasir -->
             <div class="profile-user-info">
 
-                <!-- IKON PROFIL -->
                 <div class="profile-avatar">
-
                     <img src="../assets/icons/header/profile.svg" alt="Ikon pengguna">
-
                 </div>
 
-                <!-- DATA AKUN -->
                 <div class="profile-user-detail">
 
                     <strong>Nama Pengguna</strong>
@@ -90,16 +91,12 @@
 
             </div>
 
-
-            <!-- GARIS PEMISAH -->
             <div class="profile-divider"></div>
 
-
-            <!-- ==================================
-                 KONTROL UBAH PASSWORD
-            =================================== -->
-
-            <input type="checkbox" id="password-expand" class="password-expand-toggle">
+            <!-- Kontrol ubah password -->
+            <input type="checkbox"
+                id="password-expand"
+                class="password-expand-toggle">
 
             <label for="password-expand" class="password-expand-label">
 
@@ -109,12 +106,7 @@
 
             </label>
 
-
-            <!-- ==================================
-                 FORM PASSWORD
-                 AWALNYA TERSEMBUNYI
-            =================================== -->
-
+            <!-- Form password -->
             <div class="password-expand-content">
 
                 <form class="profile-password-form" action="#" method="post">
@@ -123,18 +115,33 @@
                         Password Baru
                     </label>
 
-                    <!-- INPUT PASSWORD + IKON MATA -->
                     <div class="password-input-wrapper">
 
-                        <input type="password" id="new-password" name="new_password"
-                            placeholder="Masukkan password baru" autocomplete="new-password" required>
+                        <input
+                            type="password"
+                            id="new-password"
+                            name="new_password"
+                            placeholder="Masukkan password baru"
+                            autocomplete="new-password"
+                            required
+                        >
 
-                        <!-- TOMBOL LIHAT PASSWORD -->
-                        <button type="button" class="password-visibility-toggle" id="toggle-password"
-                            aria-label="Lihat password" aria-pressed="false">
+                        <button
+                            type="button"
+                            class="password-visibility-toggle"
+                            id="toggle-password"
+                            aria-label="Lihat password"
+                            aria-pressed="false">
 
-                            <svg id="password-eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <svg
+                                id="password-eye-icon"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true">
 
                                 <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z" />
 
@@ -146,12 +153,8 @@
 
                     </div>
 
-
-                    <!-- SIMPAN PASSWORD -->
                     <button type="submit" class="profile-save-button">
-
                         Simpan
-
                     </button>
 
                 </form>
@@ -162,32 +165,21 @@
 
     </div>
 
-
-    <!-- ==========================================
-         KONTROL SIDEBAR
-    ========================================== -->
-
+    <!-- Kontrol sidebar -->
     <input class="sidebar-checkbox" type="checkbox" id="sidebar-toggle">
-
-
-    <!-- ==========================================
-         MAIN LAYOUT
-    ========================================== -->
 
     <div class="dashboard-layout">
 
-
-        <!-- ======================================
-             SIDEBAR KASIR
-        ======================================= -->
-
+        <!-- Sidebar Kasir -->
         <aside class="sidebar">
 
             <div class="sidebar-brand">
 
-                <a href="dashboard.html" class="brand-left">
+                <a href="dashboard.php" class="brand-left">
 
-                    <img src="../assets/images/Logo.svg" class="brand-logo" alt="Logo ARTHA">
+                    <img src="../assets/images/Logo.svg"
+                        class="brand-logo"
+                        alt="Logo ARTHA">
 
                     <span class="brand-title">
                         ARTHA
@@ -195,109 +187,114 @@
 
                 </a>
 
-                <label class="sidebar-close" for="sidebar-toggle" aria-label="Tutup menu">
+                <label class="sidebar-close"
+                    for="sidebar-toggle"
+                    aria-label="Tutup menu">
 
-                    <img src="../assets/icons/actions/cancel.svg" alt="" aria-hidden="true" class="sidebar-close-icon">
+                    <img src="../assets/icons/actions/cancel.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="sidebar-close-icon">
 
                 </label>
 
             </div>
 
-
-            <!-- MENU KASIR -->
+            <!-- Menu navigasi Kasir -->
             <nav class="sidebar-nav" aria-label="Navigasi kasir">
 
-                <!-- DASHBOARD -->
-                <a class="nav-item active" href="dashboard.html" aria-current="page">
+                <a class="nav-item active"
+                    href="dashboard.php"
+                    aria-current="page">
 
-                    <img class="nav-icon" src="../assets/icons/sidebar/dashboard.svg" alt="">
+                    <img class="nav-icon"
+                        src="../assets/icons/sidebar/dashboard.svg"
+                        alt="">
 
                     <span>Dashboard</span>
 
                 </a>
 
+                <a class="nav-item" href="transaksiPOS.php">
 
-                <!-- TRANSAKSI POS -->
-                <a class="nav-item" href="transaksiPOS.html">
-
-                    <img class="nav-icon" src="../assets/icons/sidebar/transaksiPos.svg" alt="">
+                    <img class="nav-icon"
+                        src="../assets/icons/sidebar/transaksiPos.svg"
+                        alt="">
 
                     <span>Transaksi POS</span>
 
                 </a>
 
+                <a class="nav-item" href="pembayaran.php">
 
-                <!-- PEMBAYARAN -->
-                <a class="nav-item" href="pembayaran.html">
-
-                    <img class="nav-icon" src="../assets/icons/sidebar/pembayaran.svg" alt="">
+                    <img class="nav-icon"
+                        src="../assets/icons/sidebar/pembayaran.svg"
+                        alt="">
 
                     <span>Pembayaran</span>
 
                 </a>
 
+                <a class="nav-item" href="cetakStruk.php">
 
-                <!-- CETAK STRUK -->
-                <a class="nav-item" href="cetakStruk.html">
-
-                    <img class="nav-icon" src="../assets/icons/sidebar/cetakStruk.svg" alt="">
+                    <img class="nav-icon"
+                        src="../assets/icons/sidebar/cetakStruk.svg"
+                        alt="">
 
                     <span>Cetak Struk</span>
 
                 </a>
 
+                <a class="nav-item" href="cekStok.php">
 
-                <!-- CEK STOK -->
-                <a class="nav-item" href="cekStok.html">
-
-                    <img class="nav-icon" src="../assets/icons/sidebar/cekStok.svg" alt="">
+                    <img class="nav-icon"
+                        src="../assets/icons/sidebar/cekStok.svg"
+                        alt="">
 
                     <span>Cek Stok</span>
 
                 </a>
 
+                <!-- Keluar dari halaman Kasir -->
+                <a class="nav-item logout" href="../index.php">
 
-                <!-- KELUAR -->
-                <a class="nav-item logout" href="../index.html">
-                    <img class="nav-icon" src="../assets/icons/actions/logout.svg" alt="">
+                    <img class="nav-icon"
+                        src="../assets/icons/actions/logout.svg"
+                        alt="">
+
                     <span>Keluar</span>
+
                 </a>
 
             </nav>
 
         </aside>
 
-
-        <!-- OVERLAY SIDEBAR -->
-        <label class="sidebar-overlay" for="sidebar-toggle" aria-label="Tutup menu">
+        <!-- Overlay sidebar -->
+        <label class="sidebar-overlay"
+            for="sidebar-toggle"
+            aria-label="Tutup menu">
         </label>
 
-
-        <!-- ======================================
-             MAIN CONTENT KASIR
-        ======================================= -->
-
+        <!-- Konten utama Kasir -->
         <main class="main-content">
 
-
-            <!-- HEADER -->
+            <!-- Header dashboard -->
             <header class="dashboard-header">
 
                 <div class="header-left">
 
-                    <!-- HAMBURGER -->
-                    <label class="hamburger-btn" for="sidebar-toggle" aria-label="Buka menu">
+                    <label class="hamburger-btn"
+                        for="sidebar-toggle"
+                        aria-label="Buka menu">
 
                         <img src="../assets/icons/actions/hamburger.svg" alt="">
 
                     </label>
 
-
                     <h1>Dashboard Kasir</h1>
 
-
-                    <!-- BRAND MOBILE -->
-                    <a class="mobile-brand" href="dashboard.html">
+                    <a class="mobile-brand" href="dashboard.php">
 
                         <img src="../assets/images/Logo.svg" alt="">
 
@@ -307,12 +304,12 @@
 
                 </div>
 
-
-                <!-- PROFIL KASIR -->
+                <!-- Profil Kasir -->
                 <div class="header-right">
 
-                    <!-- PEMANGGIL POPUP PROFIL -->
-                    <label for="profile-popup-toggle" class="user-profile" aria-label="Buka profil Kasir">
+                    <label for="profile-popup-toggle"
+                        class="user-profile"
+                        aria-label="Buka profil Kasir">
 
                         <div class="profile-circle">
 
@@ -328,21 +325,13 @@
 
             </header>
 
-
-            <!-- JUDUL MOBILE -->
             <h1 class="mobile-page-title">
                 Dashboard Kasir
             </h1>
 
-
-            <!-- ======================================
-                 RINGKASAN KASIR
-            ======================================= -->
-
+            <!-- Ringkasan data Kasir -->
             <section class="summary-cards" aria-label="Ringkasan kasir">
 
-
-                <!-- PENJUALAN HARI INI -->
                 <article class="summary-card">
 
                     <div class="summary-icon">
@@ -361,8 +350,6 @@
 
                 </article>
 
-
-                <!-- TRANSAKSI HARI INI -->
                 <article class="summary-card">
 
                     <div class="summary-icon">
@@ -381,8 +368,6 @@
 
                 </article>
 
-
-                <!-- PRODUK TERSEDIA -->
                 <article class="summary-card">
 
                     <div class="summary-icon">
@@ -406,18 +391,20 @@
 
             </section>
 
+            <!-- Tombol transaksi baru -->
+            <a class="new-transaction" href="transaksiPOS.php">
 
-            <!-- ======================================
-                 TOMBOL TRANSAKSI BARU
-            ======================================= -->
-            <a class="new-transaction" href="transaksiPOS.html">
-
-                <img src="../assets/icons/actions/tambah.svg" alt="" aria-hidden="true" class="button-icon">
+                <img
+                    src="../assets/icons/actions/tambah.svg"
+                    alt=""
+                    aria-hidden="true"
+                    class="button-icon">
 
                 <span>Transaksi Baru</span>
+
             </a>
 
-            <!-- RIWAYAT TRANSAKSI -->
+            <!-- Riwayat transaksi -->
             <section class="history-section">
 
                 <div class="section-heading">
@@ -428,20 +415,20 @@
 
                 </div>
 
-
                 <div class="table-wrap">
 
                     <table class="history-table">
 
                         <thead>
+
                             <tr>
                                 <th>ID Transaksi</th>
                                 <th>Waktu</th>
                                 <th>Total</th>
                                 <th>Status</th>
                             </tr>
-                        </thead>
 
+                        </thead>
 
                         <tbody>
 
@@ -492,12 +479,16 @@
 
     </div>
 
+    <!-- JavaScript konfigurasi dan popup -->
     <script src="../assets/js/config.js" defer></script>
     <script src="../assets/js/shared/popup.js" defer></script>
+
+    <!-- JavaScript navigasi dan profil -->
     <script src="../assets/js/navigation.js" defer></script>
     <script src="../assets/js/profile.js" defer></script>
+
+    <!-- JavaScript dashboard Kasir -->
     <script src="../assets/js/kasir/dashboard.js" defer></script>
 
 </body>
-
 </html>

@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,29 +9,29 @@
 
     <title>Laporan Penjualan | ARTHA</title>
 
-    <!-- SHARED CSS -->
+    <!-- CSS bersama -->
     <link rel="stylesheet" href="../assets/css/shared/variables.css">
     <link rel="stylesheet" href="../assets/css/shared/reset.css">
     <link rel="stylesheet" href="../assets/css/shared/notificationPopup.css">
 
-    <!-- WEB SHARED -->
+    <!-- CSS web -->
     <link rel="stylesheet" href="../assets/css/web/layout.css">
     <link rel="stylesheet" href="../assets/css/web/sidebar.css">
     <link rel="stylesheet" href="../assets/css/web/header.css">
 
-    <!-- MOBILE SHARED -->
+    <!-- CSS mobile -->
     <link rel="stylesheet" href="../assets/css/mobile/layout.css">
     <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
     <link rel="stylesheet" href="../assets/css/mobile/header.css">
 
-    <!-- KHUSUS HALAMAN LAPORAN -->
+    <!-- CSS khusus laporan -->
     <link rel="stylesheet" href="../assets/css/web/pemilik/laporan.css">
     <link rel="stylesheet" href="../assets/css/mobile/pemilik/laporan.css">
 </head>
 
 <body>
 
-    <!-- SIDEBAR CONTROL -->
+    <!-- Kontrol sidebar -->
     <input type="checkbox"
            id="sidebar-toggle"
            class="sidebar-checkbox"
@@ -38,7 +39,7 @@
 
     <div class="dashboard-layout">
 
-        <!-- SIDEBAR PEMILIK -->
+        <!-- Sidebar Pemilik -->
         <aside class="sidebar">
 
             <div class="sidebar-brand">
@@ -57,18 +58,16 @@
                 </label>
             </div>
 
-            <!-- MENU PEMILIK -->
+            <!-- Navigasi Pemilik -->
             <nav class="sidebar-nav">
 
-                <!-- DASHBOARD -->
-                <a href="dashboard.html" class="nav-item">
+                <a href="dashboard.php" class="nav-item">
                     <img src="../assets/icons/sidebar/dashboard.svg"
                          class="nav-icon" alt="">
                     <span>Dashboard</span>
                 </a>
 
-                <!-- LAPORAN -->
-                <a href="laporan.html"
+                <a href="laporan.php"
                    class="nav-item active"
                    aria-current="page">
                     <img src="../assets/icons/sidebar/laporan.svg"
@@ -76,29 +75,25 @@
                     <span>Laporan</span>
                 </a>
 
-                <!-- ANALISIS APRIORI -->
-                <a href="analisisApriori.html" class="nav-item">
+                <a href="analisisApriori.php" class="nav-item">
                     <img src="../assets/icons/sidebar/analisisApriori.svg"
                          class="nav-icon" alt="">
                     <span>Analisis Apriori</span>
                 </a>
 
-                <!-- PAKET PROMOSI -->
-                <a href="paketPromosi.html" class="nav-item">
+                <a href="paketPromosi.php" class="nav-item">
                     <img src="../assets/icons/sidebar/paketPromosi.svg"
                          class="nav-icon" alt="">
                     <span>Paket Promosi</span>
                 </a>
 
-                <!-- PRIORITAS STOK -->
-                <a href="prioritasStok.html" class="nav-item">
+                <a href="prioritasStok.php" class="nav-item">
                     <img src="../assets/icons/sidebar/prioritasStok.svg"
                          class="nav-icon" alt="">
                     <span>Prioritas Stok</span>
                 </a>
 
-                <!-- KELUAR -->
-                <a href="../index.html" class="nav-item logout">
+                <a href="../index.php" class="nav-item logout">
                     <img src="../assets/icons/actions/logout.svg"
                          class="nav-icon" alt="">
                     <span>Keluar</span>
@@ -107,10 +102,10 @@
             </nav>
         </aside>
 
-        <!-- MAIN CONTENT -->
+        <!-- Konten utama -->
         <main class="main-content">
 
-            <!-- HEADER -->
+            <!-- Header -->
             <header class="dashboard-header">
 
                 <div class="header-left">
@@ -122,7 +117,7 @@
                              alt="">
                     </label>
 
-                    <a href="dashboard.html"
+                    <a href="dashboard.php"
                        class="mobile-brand"
                        aria-label="ARTHA">
                         <img src="../assets/images/Logo.svg" alt="">
@@ -147,15 +142,15 @@
 
             </header>
 
-            <!-- JUDUL MOBILE -->
+            <!-- Judul mobile -->
             <h1 class="mobile-page-title">
                 Laporan Penjualan
             </h1>
 
-            <!-- CONTENT LAPORAN -->
+            <!-- Konten laporan -->
             <div class="report-content">
 
-                <!-- STATISTIK -->
+                <!-- Statistik -->
                 <section class="report-statistics">
 
                     <article class="report-stat-card">
@@ -175,7 +170,7 @@
 
                 </section>
 
-                <!-- GRAFIK PENJUALAN -->
+                <!-- Grafik penjualan -->
                 <section class="report-chart-card">
 
                     <div class="report-chart-header">
@@ -195,7 +190,7 @@
 
                     <div class="report-chart-content">
 
-                        <!-- SUMBU Y -->
+                        <!-- Sumbu Y -->
                         <div class="report-y-axis">
                             <span>Rp12 jt</span>
                             <span>Rp9 jt</span>
@@ -204,10 +199,9 @@
                             <span>0</span>
                         </div>
 
-                        <!-- BATANG GRAFIK -->
+                        <!-- Batang grafik -->
                         <div class="report-chart-bars">
 
-                            <!-- JANUARI -->
                             <div class="report-bar-group">
                                 <div class="report-bar-area">
                                     <div class="report-bar blue"
@@ -216,7 +210,6 @@
                                 <span>Jan</span>
                             </div>
 
-                            <!-- FEBRUARI -->
                             <div class="report-bar-group">
                                 <div class="report-bar-area">
                                     <div class="report-bar blue"
@@ -225,7 +218,6 @@
                                 <span>Feb</span>
                             </div>
 
-                            <!-- MARET -->
                             <div class="report-bar-group">
                                 <div class="report-bar-area">
                                     <div class="report-bar yellow"
@@ -234,7 +226,6 @@
                                 <span>Mar</span>
                             </div>
 
-                            <!-- APRIL -->
                             <div class="report-bar-group">
                                 <div class="report-bar-area">
                                     <div class="report-bar blue"
@@ -243,7 +234,6 @@
                                 <span>Apr</span>
                             </div>
 
-                            <!-- MEI -->
                             <div class="report-bar-group">
                                 <div class="report-bar-area">
                                     <div class="report-bar blue"
@@ -252,7 +242,6 @@
                                 <span>Mei</span>
                             </div>
 
-                            <!-- JUNI -->
                             <div class="report-bar-group">
                                 <div class="report-bar-area">
                                     <div class="report-bar yellow"
@@ -261,7 +250,6 @@
                                 <span>Jun</span>
                             </div>
 
-                            <!-- JULI -->
                             <div class="report-bar-group">
                                 <div class="report-bar-area">
                                     <div class="report-bar blue"
@@ -270,7 +258,6 @@
                                 <span>Jul</span>
                             </div>
 
-                            <!-- AGUSTUS -->
                             <div class="report-bar-group">
                                 <div class="report-bar-area">
                                     <div class="report-bar blue"
@@ -279,7 +266,6 @@
                                 <span>Agu</span>
                             </div>
 
-                            <!-- SEPTEMBER -->
                             <div class="report-bar-group">
                                 <div class="report-bar-area">
                                     <div class="report-bar yellow"
@@ -288,7 +274,6 @@
                                 <span>Sep</span>
                             </div>
 
-                            <!-- OKTOBER -->
                             <div class="report-bar-group">
                                 <div class="report-bar-area">
                                     <div class="report-bar blue"
@@ -297,7 +282,6 @@
                                 <span>Okt</span>
                             </div>
 
-                            <!-- NOVEMBER -->
                             <div class="report-bar-group">
                                 <div class="report-bar-area">
                                     <div class="report-bar blue"
@@ -306,7 +290,6 @@
                                 <span>Nov</span>
                             </div>
 
-                            <!-- DESEMBER -->
                             <div class="report-bar-group">
                                 <div class="report-bar-area">
                                     <div class="report-bar yellow"
@@ -320,7 +303,7 @@
 
                 </section>
 
-                <!-- TABEL LAPORAN PRODUK-->
+                <!-- Tabel laporan produk -->
                 <section class="report-table-card">
 
                     <h2>Tabel Laporan Produk</h2>
@@ -329,7 +312,6 @@
 
                         <table class="report-table">
 
-                            <!-- HEADER TABEL -->
                             <thead>
                                 <tr>
                                     <th scope="col">Produk</th>
@@ -338,38 +320,32 @@
                                 </tr>
                             </thead>
 
-                            <!-- ISI TABEL -->
                             <tbody>
 
-                                <!-- PRODUK 1 -->
                                 <tr>
                                     <td>Beras 5 kg</td>
                                     <td>84 pcs</td>
                                     <td>18,5%</td>
                                 </tr>
 
-                                <!-- PRODUK 2 -->
                                 <tr>
                                     <td>Minyak Goreng 1 L</td>
                                     <td>76 pcs</td>
                                     <td>14,2%</td>
                                 </tr>
 
-                                <!-- PRODUK 3 -->
                                 <tr>
                                     <td>Gula Pasir 1 kg</td>
                                     <td>65 pcs</td>
                                     <td>11,8%</td>
                                 </tr>
 
-                                <!-- PRODUK 4 -->
                                 <tr>
                                     <td>Telur Ayam 1 kg</td>
                                     <td>58 pcs</td>
                                     <td>9,6%</td>
                                 </tr>
 
-                                <!-- PRODUK 5 -->
                                 <tr>
                                     <td>Mie Instan Goreng</td>
                                     <td>53 pcs</td>
@@ -388,16 +364,17 @@
 
         </main>
 
-        <!-- MOBILE OVERLAY -->
+        <!-- Overlay mobile -->
         <label for="sidebar-toggle"
                class="sidebar-overlay"
                aria-label="Tutup sidebar"></label>
 
     </div>
 
-<script src="../assets/js/shared/popup.js" defer></script>
-<script src="../assets/js/pemilik/laporan.js" defer></script>
-<script src="../assets/js/navigation.js" defer></script>
+    <!-- JavaScript -->
+    <script src="../assets/js/shared/popup.js" defer></script>
+    <script src="../assets/js/pemilik/laporan.js" defer></script>
+    <script src="../assets/js/navigation.js" defer></script>
 
 </body>
 </html>

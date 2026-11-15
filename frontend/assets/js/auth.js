@@ -1,6 +1,7 @@
+
 document.addEventListener("DOMContentLoaded", function () {
 
-    // 1. MENGAMBIL ELEMEN HTML
+    // 1. Mengambil elemen HTML
     const loginForm = document.querySelector(".login-form");
 
     const usernameInput = document.getElementById("username");
@@ -21,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "role-current-label"
     );
 
-    // 2. VALIDASI ELEMEN
+    // 2. Memvalidasi elemen login
     if (
         !loginForm ||
         !usernameInput ||
@@ -34,21 +35,21 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    // 3. PLACEHOLDER ASLI
+    // 3. Menyimpan placeholder asli
     const originalUsernamePlaceholder =
         usernameInput.placeholder;
 
     const originalPasswordPlaceholder =
         passwordInput.placeholder;
 
-    // 4. MENGAMBIL ROLE TERPILIH
+    // 4. Mengambil role yang dipilih
     function getSelectedRole() {
         return document.querySelector(
             'input[name="jenis_pengguna"]:checked'
         );
     }
 
-    // 5. ERROR INPUT
+    // 5. Menampilkan error input
     function showInputError(input, message) {
 
         const wrapper = input.closest(".login-input-wrap");
@@ -62,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
         input.setAttribute("aria-invalid", "true");
     }
 
-    // 6. CLEAR ERROR INPUT
+    // 6. Menghapus error input
     function clearInputError(input, originalPlaceholder) {
 
         const wrapper = input.closest(".login-input-wrap");
@@ -76,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
         input.removeAttribute("aria-invalid");
     }
 
-    // 7. ERROR ROLE
+    // 7. Menampilkan error pemilihan role
     function showRoleError(message) {
 
         roleControl.classList.add("is-invalid");
@@ -86,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
         roleControl.setAttribute("aria-invalid", "true");
     }
 
-    // 8. CLEAR ERROR ROLE
+    // 8. Menghapus error pemilihan role
     function clearRoleError() {
 
         roleControl.classList.remove("is-invalid");
@@ -107,11 +108,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 roleCurrentLabel.textContent =
                     selectedLabel.textContent.trim();
             }
-
         }
     }
 
-    // 9. VALIDASI USERNAME
+    // 9. Memvalidasi username
     function validateUsername() {
 
         const username = usernameInput.value.trim();
@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return true;
     }
 
-    // 10. VALIDASI PASSWORD
+    // 10. Memvalidasi password
     function validatePassword() {
 
         const password = passwordInput.value;
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return true;
     }
 
-    // 11. VALIDASI ROLE
+    // 11. Memvalidasi pemilihan role
     function validateRole() {
 
         const selectedRole = getSelectedRole();
@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return true;
     }
 
-    // 12. PASSWORD TOGGLE
+    // 12. Menampilkan dan menyembunyikan password
     if (togglePassword) {
 
         togglePassword.type = "button";
@@ -201,12 +201,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     ? "Tampilkan kata sandi"
                     : "Sembunyikan kata sandi"
             );
-
         });
-
     }
 
-    // 13. EVENT USERNAME
+    // 13. Memvalidasi perubahan username
     usernameInput.addEventListener("input", function () {
 
         if (this.value.trim() !== "") {
@@ -215,12 +213,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 usernameInput,
                 originalUsernamePlaceholder
             );
-
         }
-
     });
 
-    // 14. EVENT PASSWORD
+    // 14. Memvalidasi perubahan password
     passwordInput.addEventListener("input", function () {
 
         if (this.value.trim() !== "") {
@@ -229,12 +225,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 passwordInput,
                 originalPasswordPlaceholder
             );
-
         }
-
     });
 
-    // 15. EVENT PILIH ROLE
+    // 15. Memproses pemilihan role
     roleOptions.forEach(function (option) {
 
         option.addEventListener("change", function () {
@@ -251,7 +245,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 roleCurrentLabel.textContent =
                     selectedLabel.textContent.trim();
-
             }
 
             rolePicker.open = false;
@@ -259,28 +252,24 @@ document.addEventListener("DOMContentLoaded", function () {
             clearRoleError();
 
             console.log("Role dipilih:", this.value);
-
         });
-
     });
 
-    // 16. VALIDASI FORM LOGIN
+    // 16. Memvalidasi form login
     loginForm.noValidate = true;
 
     loginForm.addEventListener("submit", function (event) {
 
         event.preventDefault();
 
-        // Validasi seluruh field secara bersamaan
-
+        // Memvalidasi seluruh input
         const usernameValid = validateUsername();
 
         const passwordValid = validatePassword();
 
         const roleValid = validateRole();
 
-        // Fokus pada field pertama yang tidak valid
-
+        // Memfokuskan input pertama yang tidak valid
         if (!usernameValid) {
 
             usernameInput.focus();
@@ -302,18 +291,19 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // 17. NAVIGASI BERDASARKAN ROLE
+        // 17. Mengambil role yang dipilih
         const selectedRole = getSelectedRole();
 
         const role = selectedRole.value;
 
+        // 18. Menentukan halaman dashboard berdasarkan role
         const dashboardRoutes = {
 
-            admin: "admin/dashboard.html",
+            admin: "admin/dashboard.php",
 
-            pemilik: "pemilik/dashboard.html",
+            pemilik: "pemilik/dashboard.php",
 
-            kasir: "kasir/dashboard.html"
+            kasir: "kasir/dashboard.php"
 
         };
 
@@ -330,12 +320,12 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // 18. INFORMASI PENGUJIAN
+        // 19. Menampilkan informasi pengujian
         console.log("Login ARTHA");
         console.log("Role:", role);
         console.log("Tujuan:", destination);
 
-        // 19. NAVIGASI DASHBOARD
+        // 20. Mengarahkan pengguna ke dashboard
         window.location.assign(
             new URL(destination, document.baseURI).href
         );

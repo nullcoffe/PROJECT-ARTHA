@@ -9,17 +9,17 @@
 
     <title>Rekomendasi Paket Promosi | ARTHA</title>
 
-    <!-- SHARED CSS -->
+    <!-- Shared CSS -->
     <link rel="stylesheet" href="../assets/css/shared/variables.css">
     <link rel="stylesheet" href="../assets/css/shared/reset.css">
 
-    <!-- WEB CSS -->
+    <!-- Web CSS -->
     <link rel="stylesheet" href="../assets/css/web/layout.css">
     <link rel="stylesheet" href="../assets/css/web/sidebar.css">
     <link rel="stylesheet" href="../assets/css/web/header.css">
     <link rel="stylesheet" href="../assets/css/web/pemilik/paketPromosi.css">
 
-    <!-- MOBILE CSS -->
+    <!-- Mobile CSS -->
     <link rel="stylesheet" href="../assets/css/mobile/layout.css">
     <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
     <link rel="stylesheet" href="../assets/css/mobile/header.css">
@@ -30,7 +30,7 @@
 
 <body>
 
-    <!-- SIDEBAR CONTROL -->
+    <!-- Kontrol sidebar -->
     <input type="checkbox"
            id="sidebar-toggle"
            class="sidebar-checkbox"
@@ -38,7 +38,7 @@
 
     <div class="dashboard-layout">
 
-        <!-- SIDEBAR -->
+        <!-- Sidebar pemilik -->
         <aside class="sidebar">
 
             <div class="sidebar-brand">
@@ -62,11 +62,11 @@
 
             </div>
 
-            <!-- MENU PEMILIK -->
+            <!-- Navigasi pemilik -->
             <nav class="sidebar-nav">
 
-                <!-- DASHBOARD -->
-                <a href="dashboard.html" class="nav-item">
+                <!-- Dashboard -->
+                <a href="dashboard.php" class="nav-item">
                     <img src="../assets/icons/sidebar/dashboard.svg"
                          alt=""
                          class="nav-icon">
@@ -74,8 +74,8 @@
                     <span>Dashboard</span>
                 </a>
 
-                <!-- LAPORAN -->
-                <a href="laporan.html" class="nav-item">
+                <!-- Laporan -->
+                <a href="laporan.php" class="nav-item">
                     <img src="../assets/icons/sidebar/laporan.svg"
                          alt=""
                          class="nav-icon">
@@ -83,8 +83,8 @@
                     <span>Laporan</span>
                 </a>
 
-                <!-- ANALISIS APRIORI -->
-                <a href="analisisApriori.html" class="nav-item">
+                <!-- Analisis Apriori -->
+                <a href="analisisApriori.php" class="nav-item">
                     <img src="../assets/icons/sidebar/analisisApriori.svg"
                          alt=""
                          class="nav-icon">
@@ -92,8 +92,8 @@
                     <span>Analisis Apriori</span>
                 </a>
 
-                <!-- PAKET PROMOSI -->
-                <a href="paketPromosi.html"
+                <!-- Paket Promosi -->
+                <a href="paketPromosi.php"
                    class="nav-item active"
                    aria-current="page">
 
@@ -105,8 +105,8 @@
 
                 </a>
 
-                <!-- PRIORITAS STOK -->
-                <a href="prioritasStok.html" class="nav-item">
+                <!-- Prioritas Stok -->
+                <a href="prioritasStok.php" class="nav-item">
                     <img src="../assets/icons/sidebar/prioritasStok.svg"
                          alt=""
                          class="nav-icon">
@@ -114,8 +114,8 @@
                     <span>Prioritas Stok</span>
                 </a>
 
-                <!-- KELUAR -->
-                <a href="../index.html" class="nav-item logout">
+                <!-- Keluar -->
+                <a href="../index.php" class="nav-item logout">
                     <img src="../assets/icons/actions/logout.svg"
                          alt=""
                          class="nav-icon">
@@ -127,7 +127,7 @@
 
         </aside>
 
-        <!-- HAMBURGER MOBILE -->
+        <!-- Tombol sidebar mobile -->
         <label for="sidebar-toggle"
                class="hamburger-btn"
                aria-label="Buka sidebar">
@@ -137,16 +137,16 @@
 
         </label>
 
-        <!-- OVERLAY SIDEBAR -->
+        <!-- Overlay sidebar -->
         <label for="sidebar-toggle"
                class="sidebar-overlay"
                aria-label="Tutup sidebar">
         </label>
 
-        <!-- MAIN CONTENT -->
+        <!-- Konten utama -->
         <main class="main-content">
 
-            <!-- HEADER -->
+            <!-- Header -->
             <header class="dashboard-header">
 
                 <h1>Rekomendasi Paket Promosi</h1>
@@ -168,15 +168,15 @@
 
             </header>
 
-            <!-- CONTENT -->
+            <!-- Konten halaman -->
             <div class="page-container">
 
                 <div class="owner-promo-content">
 
-                    <!-- KANDIDAT PAKET PROMOSI -->
+                    <!-- Kandidat paket promosi -->
                     <section class="promo-list-card promo-package-section">
 
-                        <!-- JUDUL -->
+                        <!-- Judul bagian -->
                         <div class="promo-section-heading promo-package-header">
 
                             <h2>Kandidat Paket</h2>
@@ -187,7 +187,7 @@
 
                         </div>
 
-                        <!-- INFORMASI KANDIDAT -->
+                        <!-- Informasi kandidat -->
                         <p id="promo-package-description"
                            class="promo-package-description"
                            hidden>
@@ -197,7 +197,7 @@
 
                         </p>
 
-                        <!-- DAFTAR PAKET DINAMIS -->
+                        <!-- Daftar paket dinamis -->
                         <div id="promo-package-list"
                              class="promo-list promo-package-list">
 
@@ -221,8 +221,7 @@
 
     </div>
 
-    <!-- JAVASCRIPT -->
-    <!-- POPUP ARTHA -->
+    <!-- JavaScript -->
     <script src="../assets/js/shared/popup.js" defer></script>
     <script src="../assets/js/pemilik/paket-promosi.js" defer></script>
     <script src="../assets/js/navigation.js" defer></script>
