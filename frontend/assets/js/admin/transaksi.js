@@ -74,7 +74,6 @@ document.addEventListener("DOMContentLoaded", function () {
         {
             id: "TRX-2024-001",
             date: "15/01/24",
-            customer: "Andi",
             total: 85000,
             year: "2024",
             month: "01",
@@ -83,7 +82,6 @@ document.addEventListener("DOMContentLoaded", function () {
         {
             id: "TRX-2024-002",
             date: "20/06/24",
-            customer: "Dina",
             total: 120000,
             year: "2024",
             month: "06",
@@ -92,7 +90,6 @@ document.addEventListener("DOMContentLoaded", function () {
         {
             id: "TRX-2024-003",
             date: "12/12/24",
-            customer: "Budi",
             total: 175000,
             year: "2024",
             month: "12",
@@ -101,7 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
         {
             id: "TRX-2024-004",
             date: "08/03/24",
-            customer: "Rina",
             total: 95000,
             year: "2024",
             month: "03",
@@ -110,7 +106,6 @@ document.addEventListener("DOMContentLoaded", function () {
         {
             id: "TRX-2024-005",
             date: "17/03/24",
-            customer: "Alya",
             total: 145000,
             year: "2024",
             month: "03",
@@ -119,7 +114,6 @@ document.addEventListener("DOMContentLoaded", function () {
         {
             id: "TRX-2024-006",
             date: "22/08/24",
-            customer: "Syifa",
             total: 75000,
             year: "2024",
             month: "08",
@@ -128,7 +122,6 @@ document.addEventListener("DOMContentLoaded", function () {
         {
             id: "TRX-2024-007",
             date: "10/10/24",
-            customer: "Indah",
             total: 110000,
             year: "2024",
             month: "10",
@@ -144,18 +137,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Memvalidasi data transaksi
+ 
     function validateTransaction(transaction) {
         if (!transaction || typeof transaction !== "object") {
             return false;
         }
 
         const id = String(transaction.id || "").trim();
-        const customer = String(transaction.customer || "").trim();
         const year = String(transaction.year || "");
         const month = String(transaction.month || "");
         const total = Number(transaction.total);
 
-        if (!id || !customer) return false;
+        if (!id) return false;
 
         if (!["2024", "2025"].includes(year)) {
             return false;
@@ -194,38 +187,47 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Membaca transaksi tahun 2025 dari HTML
+
+    // Membaca transaksi dari HTML
     function loadHTMLTransactions() {
+
         return Array.from(
             tableBody.querySelectorAll("tr")
         ).map(function (row) {
 
             const cells = row.querySelectorAll("td");
 
-            if (cells.length < 4) return null;
+            if (cells.length !== 3) return null;
 
             const date = cells[1].textContent.trim();
             const dateParts = date.split("/");
 
             const transaction = {
+
                 id: cells[0].textContent.trim(),
+
                 date: date,
-                customer: cells[2].textContent.trim(),
+
                 total: Number(
-                    cells[3].textContent.replace(/[^\d]/g, "")
+                    cells[2].textContent.replace(/[^\d]/g, "")
                 ),
+
                 year: String(
                     row.dataset.year ||
                     (dateParts[2] === "25" ? "2025" : "")
                 ),
+
                 month: String(
                     row.dataset.month || dateParts[1] || ""
                 ).padStart(2, "0"),
+
                 products: (row.dataset.products || "")
                     .split("|")
                     .map(function (product) {
                         return product.trim();
                     })
                     .filter(Boolean)
+
             };
 
             return validateTransaction(transaction)
@@ -233,6 +235,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 : null;
 
         }).filter(Boolean);
+
     }
 
     // Membaca transaksi dari localStorage
@@ -488,8 +491,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const row = document.createElement("tr");
             const cell = document.createElement("td");
 
-            cell.colSpan = 4;
+            cell.colSpan = 3;
             cell.className = "transaction-empty-state";
+
             cell.textContent =
                 "Tidak ada transaksi pada periode ini.";
 
@@ -504,27 +508,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 row.dataset.year = transaction.year;
                 row.dataset.month = transaction.month;
+
                 row.dataset.products =
                     transaction.products.join("|");
 
+                // Kolom 1: ID Transaksi
                 const idCell = document.createElement("td");
                 idCell.textContent = transaction.id;
 
+                // Kolom 2: Tanggal
                 const dateCell = document.createElement("td");
                 dateCell.textContent = transaction.date;
 
-                const customerCell = document.createElement("td");
-                customerCell.textContent = transaction.customer;
-
+                // Kolom 3: Total
                 const totalCell = document.createElement("td");
+
                 totalCell.textContent = formatRupiah(
                     transaction.total
                 );
 
+                // Memasukkan tepat tiga kolom
                 row.append(
                     idCell,
                     dateCell,
-                    customerCell,
                     totalCell
                 );
 
@@ -532,23 +538,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
             });
 
-        }
-
-        renderStatistics();
-        renderPagination(totalPages);
-
     }
 
+    renderStatistics();
+    renderPagination(totalPages);
+
+}
     // Memperbarui statistik transaksi
     function renderStatistics() {
 
-        if (summaryCards.length < 3) return;
+        if (summaryCards.length < 2) return;
 
         const totalTransactions =
             filteredTransactions.length;
 
         const uniqueProducts = new Set();
-        const uniqueCustomers = new Set();
 
         filteredTransactions.forEach(function (transaction) {
 
@@ -562,10 +566,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             );
 
-            uniqueCustomers.add(
-                transaction.customer.trim().toLowerCase()
-            );
-
         });
 
         const totalElement =
@@ -574,19 +574,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const productElement =
             summaryCards[1].querySelector("h2");
 
-        const customerElement =
-            summaryCards[2].querySelector("h2");
-
         if (totalElement) {
             totalElement.textContent = totalTransactions;
         }
 
         if (productElement) {
             productElement.textContent = uniqueProducts.size;
-        }
-
-        if (customerElement) {
-            customerElement.textContent = uniqueCustomers.size;
         }
 
     }

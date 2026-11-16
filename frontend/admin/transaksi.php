@@ -284,12 +284,12 @@
 
                         <div class="transaction-summary-icon">
                             <img src="../assets/icons/cards/totaljumlahtransaksi.svg"
-                                 alt="">
+                                alt="">
                         </div>
 
                         <div class="transaction-summary-info">
                             <p>Total Transaksi</p>
-                            <h2>350</h2>
+                            <h2>0</h2>
                         </div>
 
                     </article>
@@ -298,26 +298,12 @@
 
                         <div class="transaction-summary-icon">
                             <img src="../assets/icons/cards/jumlahproduk.svg"
-                                 alt="">
+                                alt="">
                         </div>
 
                         <div class="transaction-summary-info">
                             <p>Total Produk Unik</p>
-                            <h2>60</h2>
-                        </div>
-
-                    </article>
-
-                    <article class="transaction-summary-card">
-
-                        <div class="transaction-summary-icon">
-                            <img src="../assets/icons/cards/multiuser.svg"
-                                 alt="">
-                        </div>
-
-                        <div class="transaction-summary-info">
-                            <p>Total Pelanggan</p>
-                            <h2>25</h2>
+                            <h2>0</h2>
                         </div>
 
                     </article>
@@ -412,7 +398,6 @@
                                     <tr>
                                         <th>ID Transaksi</th>
                                         <th>Tanggal</th>
-                                        <th>Pelanggan</th>
                                         <th>Total</th>
                                     </tr>
                                 </thead>
@@ -427,7 +412,6 @@
 
                                         <td>TRX-0350</td>
                                         <td>26/02/25</td>
-                                        <td>Rina</td>
                                         <td>Rp.120.000</td>
 
                                     </tr>
@@ -438,7 +422,6 @@
 
                                         <td>TRX-0359</td>
                                         <td>17/02/25</td>
-                                        <td>Alya</td>
                                         <td>Rp.130.000</td>
 
                                     </tr>
@@ -449,7 +432,6 @@
 
                                         <td>TRX-0220</td>
                                         <td>08/08/25</td>
-                                        <td>Syifa</td>
                                         <td>Rp.100.000</td>
 
                                     </tr>
@@ -460,7 +442,6 @@
 
                                         <td>TRX-0110</td>
                                         <td>10/11/25</td>
-                                        <td>Indah</td>
                                         <td>Rp.50.000</td>
 
                                     </tr>
