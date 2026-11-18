@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    // 1. Mengambil elemen HTML
+    // =====================================================
+    // 1. MENGAMBIL ELEMEN HTML
+    // =====================================================
+
     const statCards = document.querySelectorAll(".stock-stat-card");
     const table = document.querySelector(".stock-table");
     const tableBody = table?.querySelector("tbody");
@@ -10,64 +13,125 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    // 2. Konfigurasi penyimpanan hasil Apriori
-    const STORAGE_KEY = "artha_apriori_results";
+    const API_BASE = "/artha/backend/api/";
 
-    // 3. Mengambil elemen statistik
+    let productsData = [];
+    let isLoading = false;
+
     const statPriority = statCards[0].querySelector("h2");
     const statBelowMinimum = statCards[1].querySelector("h2");
     const statMonitored = statCards[2].querySelector("h2");
 
     if (!statPriority || !statBelowMinimum || !statMonitored) {
-        console.error("Elemen statistik Prioritas Stok tidak lengkap.");
+        console.error("Elemen statistik tidak lengkap.");
         return;
     }
 
-    // 4. Menyimpan referensi baris produk awal
-    const productRows = Array.from(
-        tableBody.querySelectorAll("tr")
-    ).filter(function (row) {
-        return row.querySelectorAll("td").length >= 4;
-    });
+    // =====================================================
+    // 2. FUNGSI REQUEST API
+    // =====================================================
 
-    // 5. Format angka
-    function formatNumber(value) {
-        return Number(value).toLocaleString("id-ID", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
+    async function apiRequest(endpoint) {
+
+        const response = await fetch(
+            API_BASE + String(endpoint).replace(/^\/+/, ""),
+            {
+                method: "GET",
+                credentials: "same-origin",
+                headers: {
+                    Accept: "application/json"
+                }
+            }
+        );
+
+        let result;
+
+        try {
+            result = await response.json();
+        } catch (error) {
+            throw new Error(
+                `Respons server tidak valid. HTTP ${response.status}`
+            );
+        }
+
+        if (!response.ok || result.success === false) {
+            throw new Error(
+                result.message ||
+                `Permintaan gagal. HTTP ${response.status}`
+            );
+        }
+
+        console.log("HTTP STATUS PRIORITAS STOK:", response.status);
+
+        return result;
+    }
+
+    function getResponseData(result) {
+
+        if (!result || typeof result !== "object") {
+            return null;
+        }
+
+        return result.data ?? result.payload ?? null;
+    }
+
+    // =====================================================
+    // 3. FORMAT DAN NORMALISASI DATA
+    // =====================================================
+
+    function formatNumber(value, digits = 0) {
+
+        const number = Number(value);
+
+        if (!Number.isFinite(number)) {
+            return "0";
+        }
+
+        return number.toLocaleString("id-ID", {
+            minimumFractionDigits: digits,
+            maximumFractionDigits: digits
         });
     }
 
-    // 6. Mengatur statistik kondisi awal
+    function normalizeProduct(data) {
+
+        return {
+            id: Number(data.id_produk),
+            code: String(data.kode_produk ?? ""),
+            name: String(data.nama_produk ?? ""),
+            unit: String(data.satuan ?? ""),
+            stock: Number(data.stok),
+            minimum: Number(data.stok_minimum)
+        };
+    }
+
+    function normalizeName(name) {
+
+        return String(name)
+            .toLowerCase()
+            .replace(/[^a-z0-9]/g, "");
+    }
+
+    // =====================================================
+    // 4. STATISTIK DAN KONDISI KOSONG
+    // =====================================================
+
     function resetStatistics() {
+
         statPriority.textContent = "0";
         statBelowMinimum.textContent = "0";
         statMonitored.textContent = "0";
     }
 
-    // 7. Menampilkan pesan kondisi kosong
     function renderEmptyState(message) {
 
-        productRows.forEach(function (row) {
-            row.hidden = true;
-
-            const priorityCell = row.querySelector("td:last-child");
-
-            if (priorityCell) {
-                priorityCell.innerHTML = "";
-            }
-        });
-
-        const oldMessage = tableBody.querySelector(".no-apriori-result");
-
-        if (oldMessage) {
-            oldMessage.remove();
-        }
+        tableBody.replaceChildren();
 
         const row = document.createElement("tr");
         row.className = "no-apriori-result";
 
         const cell = document.createElement("td");
+
         cell.colSpan = 4;
         cell.textContent = message;
         cell.style.textAlign = "center";
@@ -76,101 +140,129 @@ document.addEventListener("DOMContentLoaded", function () {
         row.appendChild(cell);
         tableBody.appendChild(row);
 
-        resetStatistics();
     }
 
-    // 8. Mengambil hasil analisis Apriori
-    function getAprioriResults() {
+    // =====================================================
+    // 5. MENGAMBIL HASIL ANALISIS APRIORI DARI DATABASE
+    // =====================================================
+
+    async function getAprioriResults() {
 
         try {
 
-            const saved = localStorage.getItem(STORAGE_KEY);
+            const response = await apiRequest(
+                "pemilik/apriori/latest"
+            );
 
-            if (!saved) {
-                return null;
-            }
-
-            const results = JSON.parse(saved);
+            const data = getResponseData(response);
 
             if (
-                !results ||
-                typeof results !== "object" ||
-                !Array.isArray(results.rules) ||
-                !results.year ||
-                !results.analyzedAt ||
-                !Number.isFinite(Number(results.minimumSupport)) ||
-                !Number.isFinite(Number(results.minimumConfidence)) ||
-                !Number.isFinite(Number(results.totalTransactions))
+                !data ||
+                !Array.isArray(data.aturan)
             ) {
-                console.error("Format hasil analisis Apriori tidak valid.");
-                return null;
+                console.warn(
+                    "Belum ada hasil analisis Apriori yang tersedia."
+                );
+
+                return {
+                    rules: [],
+                    year: null,
+                    totalTransactions: 0
+                };
             }
+
+            const rules = data.aturan.map(function (rule) {
+
+                return {
+                    antecedent: Array.isArray(rule.antecedent)
+                        ? rule.antecedent
+                        : [],
+
+                    consequent: Array.isArray(rule.consequent)
+                        ? rule.consequent
+                        : [],
+
+                    support: Number(rule.support) || 0,
+                    confidence: Number(rule.confidence) || 0,
+                    lift: Number(rule.lift) || 0
+                };
+
+            });
+
+            const results = {
+                rules: rules,
+                year: Number(data.tahun),
+                analyzedAt: data.tanggal_analisis,
+                minimumSupport: Number(data.minimum_support),
+                minimumConfidence: Number(data.minimum_confidence),
+                totalTransactions: Number(data.jumlah_transaksi)
+            };
+
+            console.log(
+                "Hasil Apriori berhasil diambil dari database:",
+                results
+            );
 
             return results;
 
         } catch (error) {
 
             console.error(
-                "Gagal membaca hasil Apriori:",
+                "Gagal mengambil hasil Apriori:",
                 error
             );
 
-            return null;
+            // Prioritas stok tetap dapat dihitung
+            // berdasarkan kondisi stok aktual.
+            return {
+                rules: [],
+                year: null,
+                totalTransactions: 0
+            };
 
         }
     }
 
-    // 9. Menormalisasi nama produk
-    function normalizeName(name) {
-        return String(name)
-            .toLowerCase()
-            .replace(/[^a-z0-9]/g, "");
-    }
+    // =====================================================
+    // 6. MEMBENTUK BARIS PRODUK
+    // =====================================================
 
-    // 10. Mengambil data produk dan stok dari tabel
     function getAllProducts() {
 
-        return productRows.map(function (row) {
+        tableBody.replaceChildren();
 
-            const cells = row.querySelectorAll("td");
+        return productsData.map(function (product) {
 
-            if (cells.length < 4) {
-                return null;
-            }
+            const row = document.createElement("tr");
 
-            const name = cells[0].textContent.trim();
+            const nameCell = document.createElement("td");
+            const stockCell = document.createElement("td");
+            const minimumCell = document.createElement("td");
+            const priorityCell = document.createElement("td");
 
-            const stock = Number(
-                cells[1].textContent.trim().replace(",", ".")
-            );
+            nameCell.textContent = product.name;
+            stockCell.textContent = formatNumber(product.stock);
+            minimumCell.textContent = formatNumber(product.minimum);
 
-            const minimum = Number(
-                cells[2].textContent.trim().replace(",", ".")
-            );
-
-            if (
-                !name ||
-                !Number.isFinite(stock) ||
-                !Number.isFinite(minimum) ||
-                stock < 0 ||
-                minimum < 0
-            ) {
-                return null;
-            }
+            row.appendChild(nameCell);
+            row.appendChild(stockCell);
+            row.appendChild(minimumCell);
+            row.appendChild(priorityCell);
 
             return {
-                name: name,
-                normalizedName: normalizeName(name),
-                stock: stock,
-                minimum: minimum,
+                ...product,
+                normalizedName: normalizeName(product.name),
                 row: row
             };
 
-        }).filter(Boolean);
+        });
 
     }
 
-    // 11. Mencocokkan nama produk dengan hasil Apriori
+    // =====================================================
+    // 7. MENCOCOKKAN PRODUK DENGAN ATURAN APRIORI
+    // =====================================================
+
     function isSameProduct(aprioriName, stockProduct) {
 
         const apriori = normalizeName(aprioriName);
@@ -195,7 +287,10 @@ document.addEventListener("DOMContentLoaded", function () {
         return false;
     }
 
-    // 12. Menghitung kekuatan aturan berdasarkan Support, Confidence, dan Lift
+    // =====================================================
+    // 8. MENGHITUNG KEKUATAN ATURAN APRIORI
+    // =====================================================
+
     function calculateRuleStrength(rule) {
 
         const support = Number(rule.support) || 0;
@@ -216,7 +311,10 @@ document.addEventListener("DOMContentLoaded", function () {
         return Math.min(Math.max(score, 0), 1);
     }
 
-    // 13. Menghitung skor permintaan produk berdasarkan aturan Apriori
+    // =====================================================
+    // 9. MENGHITUNG PERMINTAAN PRODUK BERDASARKAN APRIORI
+    // =====================================================
+
     function calculateAprioriDemand(product, rules) {
 
         if (!rules || rules.length === 0) {
@@ -236,7 +334,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             const matched = rule.consequent.some(function (item) {
+
                 return isSameProduct(item, product);
+
             });
 
             if (!matched) {
@@ -261,7 +361,6 @@ document.addEventListener("DOMContentLoaded", function () {
             : totalScore / totalWeight;
     }
 
-    // 14. Memeriksa apakah produk termasuk rekomendasi Apriori
     function hasAprioriRecommendation(product, rules) {
 
         return rules.some(function (rule) {
@@ -271,7 +370,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             const matched = rule.consequent.some(function (item) {
+
                 return isSameProduct(item, product);
+
             });
 
             return matched && calculateRuleStrength(rule) > 0;
@@ -280,7 +381,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    // 15. Menghitung tingkat urgensi berdasarkan kondisi stok
+    // =====================================================
+    // 10. MENGHITUNG URGENSI STOK
+    // =====================================================
+
     function calculateStockUrgency(product) {
 
         if (product.minimum === 0) {
@@ -300,10 +404,17 @@ document.addEventListener("DOMContentLoaded", function () {
         return 0;
     }
 
-    // 16. Menghitung skor akhir prioritas stok
+    // =====================================================
+    // 11. MENGHITUNG SKOR PRIORITAS
+    // =====================================================
+
     function calculatePriorityScore(product, aprioriScore) {
 
-        const stockUrgency = calculateStockUrgency(product);
+        let stockUrgency = calculateStockUrgency(product);
+
+        if (product.stock < product.minimum) {
+            stockUrgency = Math.max(stockUrgency, 0.35);
+        }
 
         if (aprioriScore === 0) {
             return stockUrgency * 100;
@@ -316,23 +427,30 @@ document.addEventListener("DOMContentLoaded", function () {
         return finalScore * 100;
     }
 
-    // 17. Menentukan kategori prioritas berdasarkan skor
+    // =====================================================
+    // 12. MENENTUKAN KATEGORI PRIORITAS
+    // =====================================================
+
     function determinePriority(product) {
 
         if (product.score >= 60) {
+
             return {
                 level: "high",
                 label: "Tinggi",
                 rank: 1
             };
+
         }
 
         if (product.score >= 30) {
+
             return {
                 level: "medium",
                 label: "Sedang",
                 rank: 2
             };
+
         }
 
         return {
@@ -343,7 +461,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    // 18. Menganalisis produk berdasarkan hasil Apriori dan kondisi stok
+    // =====================================================
+    // 13. ANALISIS SELURUH PRODUK
+    // =====================================================
+
     function analyzeProducts(products, aprioriResults) {
 
         const rules = aprioriResults?.rules || [];
@@ -382,7 +503,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    // 19. Menampilkan kategori prioritas pada tabel produk
+    // =====================================================
+    // 14. MENAMPILKAN BADGE PRIORITAS
+    // =====================================================
+
     function renderPriority(products) {
 
         products.forEach(function (product) {
@@ -393,7 +517,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            priorityCell.innerHTML = "";
+            priorityCell.replaceChildren();
 
             const badge = document.createElement("span");
 
@@ -419,15 +543,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    // 20. Memperbarui statistik prioritas stok
+    // =====================================================
+    // 15. MEMPERBARUI STATISTIK
+    // =====================================================
+
     function renderStatistics(products, priorityProducts) {
 
         const highPriority = priorityProducts.filter(function (product) {
+
             return product.priority.level === "high";
+
         }).length;
 
         const belowMinimum = products.filter(function (product) {
+
             return product.stock < product.minimum;
+
         }).length;
 
         statPriority.textContent = priorityProducts.length;
@@ -442,7 +573,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    // 21. Mengurutkan produk berdasarkan skor prioritas tertinggi
+    // =====================================================
+    // 16. MENGURUTKAN PRODUK PRIORITAS
+    // =====================================================
+
     function sortProducts(products) {
 
         const sorted = [...products].sort(function (a, b) {
@@ -456,173 +590,184 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         sorted.forEach(function (product) {
+
             tableBody.appendChild(product.row);
+
         });
 
     }
 
-    // 22. Menampilkan hasil analisis prioritas stok
-    function initializeStockPriority() {
+    // =====================================================
+    // 17. PROSES UTAMA PRIORITAS STOK
+    // =====================================================
 
-        // Mengambil hasil Apriori terakhir
-        const aprioriResults = getAprioriResults();
+    async function initializeStockPriority() {
 
-        // Jika belum pernah melakukan analisis
-        if (!aprioriResults) {
-
-            renderEmptyState(
-                "Belum ada hasil analisis Apriori. Jalankan analisis terlebih dahulu untuk menampilkan prioritas stok."
-            );
-
-            console.log(
-                "Prioritas Stok: Menunggu hasil analisis Apriori."
-            );
-
+        if (isLoading) {
             return;
         }
 
-        // Mengambil seluruh produk
-        const products = getAllProducts();
+        isLoading = true;
 
-        if (products.length === 0) {
+        try {
 
-            renderEmptyState(
-                "Data produk dan stok belum tersedia."
+            // Mengambil data Apriori dari database.
+            const aprioriResults = await getAprioriResults();
+
+            // Mengambil data produk dari database.
+            const result = await apiRequest(
+                "pemilik/stock/priority"
             );
 
-            console.warn(
-                "Data produk tidak ditemukan."
-            );
+            const data = getResponseData(result);
 
-            return;
-        }
+            if (!Array.isArray(data)) {
 
-        // Menghitung hasil analisis
-        const analyzedProducts = analyzeProducts(
-            products,
-            aprioriResults
-        );
-
-        // Memilih produk yang direkomendasikan Apriori
-        // dan memiliki stok di bawah batas minimum
-        const priorityProducts = analyzedProducts.filter(
-            function (product) {
-
-                return (
-                    product.aprioriMatched &&
-                    product.stock < product.minimum
+                throw new Error(
+                    "Format data produk dari API tidak valid."
                 );
 
             }
-        );
 
-        // Menghapus pesan kosong sebelumnya
-        const oldMessage = tableBody.querySelector(".no-apriori-result");
-
-        if (oldMessage) {
-            oldMessage.remove();
-        }
-
-        // Menyembunyikan semua baris sebelum menampilkan hasil terbaru
-        products.forEach(function (product) {
-            product.row.hidden = true;
-        });
-
-        // Jika analisis sudah dilakukan tetapi tidak ada rekomendasi
-        if (priorityProducts.length === 0) {
-
-            renderEmptyState(
-                "Analisis Apriori sudah dilakukan, tetapi tidak ditemukan produk yang memenuhi kriteria prioritas penambahan stok."
-            );
-
-            // Memperbarui jumlah item yang dipantau dan stok di bawah minimum
-            const belowMinimum = products.filter(function (product) {
-                return product.stock < product.minimum;
-            }).length;
-
-            statPriority.textContent = "0";
-            statBelowMinimum.textContent = belowMinimum;
-            statMonitored.textContent = products.length;
+            productsData = data.map(normalizeProduct);
 
             console.log(
-                "Analisis selesai. Tidak ada produk yang memenuhi kriteria prioritas stok."
+                "Data produk berhasil dimuat:",
+                productsData
             );
 
-            return;
+            // Membentuk data produk beserta baris tabel.
+            const products = getAllProducts();
+
+            if (products.length === 0) {
+
+                renderEmptyState(
+                    "Belum terdapat produk aktif dalam database."
+                );
+
+                resetStatistics();
+
+                return;
+
+            }
+
+            // Menganalisis stok dan aturan Apriori.
+            const analyzedProducts = analyzeProducts(
+                products,
+                aprioriResults
+            );
+
+            // PENTING:
+            // Semua produk di bawah stok minimum ditampilkan.
+            // Kecocokan Apriori hanya memengaruhi skor,
+            // bukan menjadi syarat wajib untuk ditampilkan.
+
+            const priorityProducts = analyzedProducts.filter(
+                function (product) {
+
+                    return product.stock < product.minimum;
+
+                }
+            );
+
+            // Jika tidak ada produk di bawah minimum.
+            if (priorityProducts.length === 0) {
+
+                renderEmptyState(
+                    "Tidak ada produk yang stoknya berada di bawah batas minimum."
+                );
+
+                statPriority.textContent = "0";
+                statBelowMinimum.textContent = "0";
+                statMonitored.textContent = products.length;
+
+                console.log(
+                    "Semua stok produk masih berada dalam batas aman."
+                );
+
+                return;
+
+            }
+
+            // Menampilkan badge prioritas.
+            renderPriority(priorityProducts);
+
+            // Mengurutkan produk berdasarkan skor.
+            sortProducts(priorityProducts);
+
+            // Memperbarui statistik dashboard.
+            const statistics = renderStatistics(
+                products,
+                priorityProducts
+            );
+
+            // Mencatat hasil analisis.
+            console.log("Analisis Prioritas Stok berhasil:", {
+
+                tahun: aprioriResults.year,
+
+                totalTransaksi: aprioriResults.totalTransactions,
+
+                totalProduk: statistics.totalProducts,
+
+                produkPrioritas: priorityProducts.length,
+
+                produkDiBawahMinimum: statistics.belowMinimum,
+
+                prioritasTinggi: statistics.highPriority,
+
+                produk: priorityProducts.map(function (product) {
+
+                    return {
+
+                        idProduk: product.id,
+
+                        nama: product.name,
+
+                        stok: product.stock,
+
+                        minimum: product.minimum,
+
+                        cocokApriori: product.aprioriMatched,
+
+                        skorApriori: product.demandScore,
+
+                        skorPrioritas: product.score.toFixed(2),
+
+                        prioritas: product.priority.label
+
+                    };
+
+                })
+
+            });
+
+        } catch (error) {
+
+            console.error(
+                "Gagal memuat Prioritas Stok:",
+                error
+            );
+
+            renderEmptyState(
+                "Gagal mengambil data prioritas stok. Silakan muat ulang halaman."
+            );
+
+            resetStatistics();
+
+        } finally {
+
+            isLoading = false;
+
         }
-
-        // Menampilkan hanya baris produk yang direkomendasikan
-        priorityProducts.forEach(function (product) {
-            product.row.hidden = false;
-        });
-
-        // Menampilkan badge prioritas
-        renderPriority(priorityProducts);
-
-        // Mengurutkan produk berdasarkan skor prioritas
-        sortProducts(priorityProducts);
-
-        // Memperbarui statistik
-        const statistics = renderStatistics(
-            products,
-            priorityProducts
-        );
-
-        // Mencatat hasil analisis
-        console.log("Analisis Prioritas Stok:", {
-
-            tahun: aprioriResults.year,
-
-            totalTransaksi: aprioriResults.totalTransactions,
-
-            minimumSupport: aprioriResults.minimumSupport,
-
-            minimumConfidence: aprioriResults.minimumConfidence,
-
-            totalProduk: statistics.totalProducts,
-
-            produkRekomendasiApriori: priorityProducts.length,
-
-            prioritasTinggi: statistics.highPriority,
-
-            produk: priorityProducts.map(function (product) {
-
-                return {
-                    nama: product.name,
-                    stok: product.stock,
-                    minimum: product.minimum,
-                    skorApriori: product.demandScore,
-                    skorPrioritas: product.score.toFixed(2),
-                    prioritas: product.priority.label
-                };
-
-            })
-
-        });
 
     }
 
-    // 23. Memperbarui hasil ketika localStorage berubah
-    window.addEventListener("storage", function (event) {
+    // =====================================================
+    // 18. MEMPERBARUI DATA SAAT HALAMAN DIBUKA KEMBALI
+    // =====================================================
 
-        if (
-            event.key === STORAGE_KEY ||
-            event.key === null
-        ) {
-            initializeStockPriority();
-        }
-
-    });
-
-    // 24. Memperbarui hasil ketika pengguna kembali ke halaman
     window.addEventListener("pageshow", function () {
-
-        initializeStockPriority();
-
-    });
-
-    // 25. Memperbarui hasil ketika tab browser kembali aktif
-    window.addEventListener("focus", function () {
 
         initializeStockPriority();
 
@@ -636,7 +781,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-    // 26. Menjalankan inisialisasi pertama halaman
+    // =====================================================
+    // 19. MENJALANKAN PROGRAM
+    // =====================================================
+
     initializeStockPriority();
 
     console.log(

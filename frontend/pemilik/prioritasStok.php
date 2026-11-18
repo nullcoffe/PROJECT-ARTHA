@@ -195,7 +195,7 @@
 
                             <p>Produk Prioritas</p>
 
-                            <h2>7</h2>
+                            <h2>0</h2>
 
                         </article>
 
@@ -204,7 +204,7 @@
 
                             <p>Dibawah minimum</p>
 
-                            <h2>7</h2>
+                            <h2></h2>
 
                         </article>
 
@@ -213,7 +213,7 @@
 
                             <p>Item dipantau</p>
 
-                            <h2>60</h2>
+                            <h2>0</h2>
 
                         </article>
 
@@ -245,129 +245,9 @@
                                 <tbody>
 
                                     <tr>
-
-                                        <td>Gula Pasir 1Kg</td>
-
-                                        <td>9</td>
-
-                                        <td>15</td>
-
-                                        <td>
-
-                                            <span class="stock-priority high">
-                                                Tinggi
-                                            </span>
-
+                                        <td colspan="4" style="text-align:center; padding:25px;">
+                                            Memuat data prioritas stok...
                                         </td>
-
-                                    </tr>
-
-                                    <tr>
-
-                                        <td>Minyak Goreng</td>
-
-                                        <td>15</td>
-
-                                        <td>20</td>
-
-                                        <td>
-
-                                            <span class="stock-priority high">
-                                                Tinggi
-                                            </span>
-
-                                        </td>
-
-                                    </tr>
-
-                                    <tr>
-
-                                        <td>Kopi</td>
-
-                                        <td>12</td>
-
-                                        <td>12</td>
-
-                                        <td>
-
-                                            <span class="stock-priority medium">
-                                                Sedang
-                                            </span>
-
-                                        </td>
-
-                                    </tr>
-
-                                    <tr>
-
-                                        <td>Produk 4</td>
-
-                                        <td>9</td>
-
-                                        <td>15</td>
-
-                                        <td>
-
-                                            <span class="stock-priority high">
-                                                Tinggi
-                                            </span>
-
-                                        </td>
-
-                                    </tr>
-
-                                    <tr>
-
-                                        <td>Produk 5</td>
-
-                                        <td>9</td>
-
-                                        <td>15</td>
-
-                                        <td>
-
-                                            <span class="stock-priority high">
-                                                Tinggi
-                                            </span>
-
-                                        </td>
-
-                                    </tr>
-
-                                    <tr>
-
-                                        <td>Produk 6</td>
-
-                                        <td>9</td>
-
-                                        <td>15</td>
-
-                                        <td>
-
-                                            <span class="stock-priority high">
-                                                Tinggi
-                                            </span>
-
-                                        </td>
-
-                                    </tr>
-
-                                    <tr>
-
-                                        <td>Produk 7</td>
-
-                                        <td>9</td>
-
-                                        <td>10</td>
-
-                                        <td>
-
-                                            <span class="stock-priority high">
-                                                Tinggi
-                                            </span>
-
-                                        </td>
-
                                     </tr>
 
                                 </tbody>

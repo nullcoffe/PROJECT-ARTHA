@@ -256,4 +256,32 @@ class Stockmovement
             throw $error;
         }
     }
+
+    /**
+     * Mengambil produk aktif untuk analisis prioritas stok Pemilik.
+     */
+    public function getPriorityProducts(): array
+    {
+        $sql = "SELECT
+                    id_produk,
+                    kode_produk,
+                    nama_produk,
+                    satuan,
+                    stok,
+                    stok_minimum
+                FROM produk
+                WHERE status_produk = 'aktif'
+                ORDER BY nama_produk ASC";
+
+        $result = $this->conn->query($sql);
+
+        if (!$result) {
+            throw new RuntimeException(
+                'Gagal mengambil data prioritas stok.'
+            );
+        }
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
 }

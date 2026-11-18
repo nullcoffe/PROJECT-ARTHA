@@ -251,7 +251,7 @@ header('Expires: 0');
                             <p>Total Jumlah Produk</p>
 
                             <h2 id="adminTotalProduk" aria-live="polite">
-                                60
+                                
                             </h2>
 
                         </div>
@@ -274,7 +274,7 @@ header('Expires: 0');
                             <p>Total Jumlah<br>Pengguna</p>
 
                             <h2 id="adminTotalPengguna" aria-live="polite">
-                                8
+
                             </h2>
 
                         </div>
@@ -297,7 +297,7 @@ header('Expires: 0');
                             <p>Total Stok Menipis</p>
 
                             <h2 id="adminStokMenipis" aria-live="polite">
-                                6
+                                
                             </h2>
 
                         </div>

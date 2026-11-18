@@ -1,124 +1,206 @@
+document.addEventListener("DOMContentLoaded", async function () {
+    "use strict";
 
-document.addEventListener("DOMContentLoaded", function () {
-
-    // 1. Mengambil elemen HTML
     const yearSelect = document.querySelector(".owner-year-select");
     const chartBars = document.querySelector(".owner-chart-bars");
     const barGroups = document.querySelectorAll(".owner-bar-group");
+    const yAxis = document.querySelector(".owner-chart-y-axis");
 
-    // 2. Memeriksa elemen utama
-    if (!yearSelect || !chartBars || barGroups.length !== 12) {
-        console.error("Elemen Dashboard Pemilik tidak ditemukan atau struktur grafik tidak sesuai.");
-        return;
-    }
+    const omzetElement = document.getElementById("ownerTotalOmzet");
+    const transaksiElement = document.getElementById("ownerTotalTransaksi");
+    const rekomendasiElement = document.getElementById("ownerTotalRekomendasi");
 
-    // 3. Memeriksa Custom Popup ARTHA
-    if (!window.arthaPopup || typeof window.arthaPopup.info !== "function") {
-        console.error("Custom Popup ARTHA belum dimuat. Periksa urutan script popup.js.");
-        return;
-    }
-
-    // 4. Data penjualan simulasi tahun 2024 dan 2025
-    const salesData = {
-        "2024": {
-            values: [28, 42, 36, 50, 45, 60, 48, 65, 55, 72, 68, 80]
-        },
-        "2025": {
-            values: [35, 55, 43, 63, 56, 76, 54, 74, 62, 88, 80, 94]
-        }
-    };
-
-    // 5. Nama bulan
     const months = [
         "Januari", "Februari", "Maret", "April",
         "Mei", "Juni", "Juli", "Agustus",
         "September", "Oktober", "November", "Desember"
     ];
 
-    // 6. Format Rupiah
-    function formatRupiah(value) {
-        return "Rp" + new Intl.NumberFormat("id-ID", {
-            maximumFractionDigits: 0
-        }).format(value);
+    if (
+        !yearSelect ||
+        !chartBars ||
+        barGroups.length !== 12 ||
+        !yAxis ||
+        !omzetElement ||
+        !transaksiElement ||
+        !rekomendasiElement
+    ) {
+        console.error("[ARTHA] Elemen Dashboard Pemilik tidak lengkap.");
+        return;
     }
 
-    // 7. Menampilkan grafik sesuai tahun
-    function renderChart(year) {
-        const selectedData = salesData[year];
-
-        if (!selectedData) return;
-
-        barGroups.forEach(function (group, index) {
-            const bar = group.querySelector(".owner-bar");
-            const value = selectedData.values[index];
-
-            if (!bar) return;
-
-            bar.style.height = value + "%";
-            bar.dataset.value = value;
-            bar.title = `${months[index]} ${year}: ${formatRupiah(value * 120000)}`;
-
-            bar.setAttribute(
-                "aria-label",
-                `${months[index]} ${year}, omzet simulasi ${formatRupiah(value * 120000)}`
-            );
-
-            bar.classList.remove("yellow", "blue");
-            bar.classList.add(value >= 75 ? "yellow" : "blue");
+    function formatNumber(value) {
+        return Number(value || 0).toLocaleString("id-ID", {
+            maximumFractionDigits: 0
         });
     }
 
-    // 8. Status popup
-    let unavailablePopupShown = false;
+    function formatRupiah(value) {
+        return "Rp" + formatNumber(value);
+    }
 
-    // 9. Menampilkan Custom Popup ketika tahun 2026 dipilih
-    async function showUnavailablePopup() {
+    function formatCompactRupiah(value) {
+        const amount = Number(value) || 0;
 
-        if (unavailablePopupShown) return;
+        if (amount >= 1000000000) {
+            return "Rp" + (amount / 1000000000).toLocaleString("id-ID", {
+                maximumFractionDigits: 1
+            }) + " M";
+        }
 
-        unavailablePopupShown = true;
+        if (amount >= 1000000) {
+            return "Rp" + (amount / 1000000).toLocaleString("id-ID", {
+                maximumFractionDigits: 1
+            }) + " jt";
+        }
+
+        if (amount >= 1000) {
+            return "Rp" + (amount / 1000).toLocaleString("id-ID", {
+                maximumFractionDigits: 0
+            }) + " rb";
+        }
+
+        return formatRupiah(amount);
+    }
+
+    function getNiceMaximum(values) {
+        const highest = Math.max(...values.map(Number), 0);
+
+        if (highest <= 0) return 4;
+
+        const roughStep = highest / 4;
+        const magnitude = Math.pow(10, Math.floor(Math.log10(roughStep)));
+        const normalized = roughStep / magnitude;
+
+        let step;
+
+        if (normalized <= 1) {
+            step = 1;
+        } else if (normalized <= 2) {
+            step = 2;
+        } else if (normalized <= 5) {
+            step = 5;
+        } else {
+            step = 10;
+        }
+
+        return step * magnitude * 4;
+    }
+
+    function renderChart(values, year) {
+        const maximum = getNiceMaximum(values);
+        const axisLabels = yAxis.querySelectorAll("span");
+
+        axisLabels.forEach(function (label, index) {
+            const value = maximum * (4 - index) / 4;
+
+            label.textContent = index === 4
+                ? "0"
+                : formatCompactRupiah(value);
+        });
+
+        barGroups.forEach(function (group, index) {
+            const bar = group.querySelector(".owner-bar");
+            const value = Number(values[index]) || 0;
+
+            if (!bar) return;
+
+            const height = maximum > 0
+                ? (value / maximum) * 100
+                : 0;
+
+            bar.style.height = height + "%";
+            bar.dataset.value = String(value);
+
+            bar.title =
+                months[index] + " " + year + ": " + formatRupiah(value);
+
+            bar.setAttribute(
+                "aria-label",
+                months[index] + " " + year + ": " + formatRupiah(value)
+            );
+
+            bar.classList.remove("yellow", "blue");
+            bar.classList.add(index % 3 === 2 ? "yellow" : "blue");
+        });
+    }
+
+    async function loadDashboard(year) {
+        omzetElement.textContent = "...";
+        transaksiElement.textContent = "...";
+        rekomendasiElement.textContent = "...";
 
         try {
-            await window.arthaPopup.info(
-                "Data penjualan untuk tahun 2026 belum tersedia. Silakan pilih tahun 2024 atau 2025 untuk melihat laporan penjualan.",
-                {
-                    title: "Data Tahun 2026 Belum Tersedia",
-                    confirmText: "Mengerti"
-                }
+            if (
+                !window.ARTHA_API ||
+                typeof window.ARTHA_API.get !== "function"
+            ) {
+                throw new Error(
+                    "ARTHA API belum tersedia. Periksa urutan pemuatan api.js."
+                );
+            }
+
+            const response = await window.ARTHA_API.get(
+                "pemilik/dashboard?year=" + encodeURIComponent(year)
+            );
+
+            const data = response.data;
+
+            if (
+                !data ||
+                !Array.isArray(data.penjualan_bulanan) ||
+                data.penjualan_bulanan.length !== 12
+            ) {
+                throw new Error(
+                    "Format data Dashboard Pemilik tidak sesuai."
+                );
+            }
+
+            omzetElement.textContent =
+                formatCompactRupiah(data.total_omzet);
+
+            transaksiElement.textContent =
+                formatNumber(data.jumlah_transaksi);
+
+            rekomendasiElement.textContent =
+                formatNumber(data.total_rekomendasi);
+
+            renderChart(data.penjualan_bulanan, data.tahun);
+
+            console.info(
+                "[ARTHA] Dashboard Pemilik berhasil dimuat dari MySQL.",
+                data
             );
 
         } catch (error) {
-            console.error("Gagal menampilkan popup:", error);
+            console.error(
+                "[ARTHA] Gagal memuat Dashboard Pemilik:",
+                error
+            );
 
-        } finally {
-            unavailablePopupShown = false;
-            yearSelect.value = "2025";
-            renderChart("2025");
+            omzetElement.textContent = "—";
+            transaksiElement.textContent = "—";
+            rekomendasiElement.textContent = "—";
+
+            if (
+                window.arthaPopup &&
+                typeof window.arthaPopup.error === "function"
+            ) {
+                await window.arthaPopup.error(
+                    error.message,
+                    {
+                        title: "Gagal Memuat Dashboard"
+                    }
+                );
+            }
         }
     }
 
-    // 10. Menangani perubahan tahun
     yearSelect.addEventListener("change", function () {
-
-        const selectedYear = yearSelect.value;
-
-        if (selectedYear === "2026") {
-            showUnavailablePopup();
-            return;
-        }
-
-        if (salesData[selectedYear]) {
-            renderChart(selectedYear);
-        }
+        loadDashboard(Number(yearSelect.value));
     });
 
-    // 11. Menangani jika halaman pertama kali dibuka pada tahun 2026
-    if (yearSelect.value === "2026") {
-        showUnavailablePopup();
-    } else {
-        renderChart(yearSelect.value);
-    }
+    await loadDashboard(Number(yearSelect.value));
 
-    console.log("Dashboard Pemilik berhasil dijalankan.");
-
+    console.log("[ARTHA] Dashboard Pemilik siap digunakan.");
 });

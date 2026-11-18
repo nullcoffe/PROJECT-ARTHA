@@ -372,6 +372,7 @@
     </div>
 
     <!-- JavaScript -->
+    <script src="../assets/js/api.js" defer></script>
     <script src="../assets/js/shared/popup.js" defer></script>
     <script src="../assets/js/pemilik/laporan.js" defer></script>
     <script src="../assets/js/navigation.js" defer></script>

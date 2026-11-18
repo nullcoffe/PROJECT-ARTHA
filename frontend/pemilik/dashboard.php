@@ -355,7 +355,7 @@ header('Expires: 0');
 
                             <p>Omzet Penjualan</p>
 
-                            <h2>Rp28,4 jt</h2>
+                            <h2 id="ownerTotalOmzet" aria-live="polite">--</h2>
 
                         </div>
 
@@ -375,7 +375,7 @@ header('Expires: 0');
 
                             <p>Jumlah Transaksi</p>
 
-                            <h2>350</h2>
+                            <h2 id="ownerTotalTransaksi" aria-live="polite">--</h2>
 
                         </div>
 
@@ -395,7 +395,7 @@ header('Expires: 0');
 
                             <p>Rekomendasi Paket</p>
 
-                            <h2>6</h2>
+                            <h2 id="ownerTotalRekomendasi" aria-live="polite">--</h2>
 
                         </div>
 
@@ -422,7 +422,7 @@ header('Expires: 0');
                                 2025
                             </option>
 
-                            <option value="2026">
+                            <option value="2026" selected>
                                 2026
                             </option>
 

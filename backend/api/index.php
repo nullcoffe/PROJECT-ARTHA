@@ -17,6 +17,9 @@ require_once __DIR__ . '/controllers/StockController.php';
 require_once __DIR__ . '/models/Transaction.php';
 require_once __DIR__ . '/controllers/TransactionController.php';
 
+require_once __DIR__ . '/services/AprioriService.php';
+require_once __DIR__ . '/controllers/AprioriController.php';
+
 $transactionModel = new Transaction($conn);
 
 $transactionController = new TransactionController(
@@ -94,6 +97,13 @@ try {
 
     $stockController = new StockController(
         $stockModel
+    );
+
+    // Inisialisasi service dan controller Apriori.
+    $aprioriService = new AprioriService($conn);
+
+    $aprioriController = new AprioriController(
+        $aprioriService
     );
 
     // Endpoint utama API.
@@ -287,6 +297,479 @@ try {
         );
     }
 
+    // Mengambil ringkasan Dashboard Admin dari MySQL.
+    if (
+        $route === '/admin/dashboard' &&
+        $method === 'GET'
+    ) {
+        artha_require_role(['admin']);
+
+        $year = isset($_GET['year'])
+            ? (int) $_GET['year']
+            : (int) date('Y');
+
+        if ($year < 2000 || $year > 2100) {
+            errorResponse(
+                'Tahun laporan tidak valid.',
+                422
+            );
+        }
+
+        // Menghitung jumlah seluruh pengguna.
+        $userResult = $conn->query(
+            "SELECT COUNT(*) AS total
+             FROM pengguna"
+        );
+
+        if (!$userResult) {
+            throw new RuntimeException(
+                'Gagal mengambil jumlah pengguna.'
+            );
+        }
+
+        $totalPengguna = (int) $userResult
+            ->fetch_assoc()['total'];
+
+        // Menghitung jumlah produk aktif.
+        $productResult = $conn->query(
+            "SELECT COUNT(*) AS total
+             FROM produk
+             WHERE status_produk = 'aktif'"
+        );
+
+        if (!$productResult) {
+            throw new RuntimeException(
+                'Gagal mengambil jumlah produk.'
+            );
+        }
+
+        $totalProduk = (int) $productResult
+            ->fetch_assoc()['total'];
+
+        // Menghitung jumlah produk dengan stok menipis.
+        $stockResult = $conn->query(
+            "SELECT COUNT(*) AS total
+             FROM produk
+             WHERE status_produk = 'aktif'
+             AND stok <= stok_minimum"
+        );
+
+        if (!$stockResult) {
+            throw new RuntimeException(
+                'Gagal mengambil jumlah stok menipis.'
+            );
+        }
+
+        $stokMenipis = (int) $stockResult
+            ->fetch_assoc()['total'];
+
+        // Menentukan rentang tanggal berdasarkan tahun.
+        $startDate = sprintf(
+            '%04d-01-01 00:00:00',
+            $year
+        );
+
+        $endDate = sprintf(
+            '%04d-01-01 00:00:00',
+            $year + 1
+        );
+
+        // Mengambil total penjualan setiap bulan.
+        $stmt = $conn->prepare(
+            "SELECT
+                MONTH(tanggal_transaksi) AS bulan,
+                COALESCE(SUM(total_bayar), 0) AS total_penjualan
+             FROM transaksi
+             WHERE tanggal_transaksi >= ?
+             AND tanggal_transaksi < ?
+             GROUP BY MONTH(tanggal_transaksi)
+             ORDER BY MONTH(tanggal_transaksi)"
+        );
+
+        if (!$stmt) {
+            throw new RuntimeException(
+                'Gagal menyiapkan grafik penjualan.'
+            );
+        }
+
+        $stmt->bind_param(
+            'ss',
+            $startDate,
+            $endDate
+        );
+
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        // Menyediakan 12 bulan, termasuk bulan tanpa transaksi.
+        $penjualanBulanan = array_fill(0, 12, 0);
+
+        while ($row = $result->fetch_assoc()) {
+            $monthIndex = (int) $row['bulan'] - 1;
+
+            if ($monthIndex >= 0 && $monthIndex < 12) {
+                $penjualanBulanan[$monthIndex] =
+                    (float) $row['total_penjualan'];
+            }
+        }
+
+        $stmt->close();
+
+        successResponse(
+            'Dashboard Admin berhasil dimuat dari database.',
+            [
+                'total_pengguna' => $totalPengguna,
+                'total_produk' => $totalProduk,
+                'stok_menipis' => $stokMenipis,
+                'tahun' => $year,
+                'penjualan_bulanan' => $penjualanBulanan
+            ]
+        );
+    }
+
+    // Mengambil ringkasan Dashboard Pemilik dari database.
+    if (
+        $route === '/pemilik/dashboard' &&
+        $method === 'GET'
+    ) {
+        artha_require_role(['pemilik']);
+
+        $year = isset($_GET['year'])
+            ? (int) $_GET['year']
+            : (int) date('Y');
+
+        if ($year < 2000 || $year > 2100) {
+            errorResponse(
+                'Tahun laporan tidak valid.',
+                422
+            );
+        }
+
+        // Mengambil omzet dan jumlah seluruh transaksi.
+        $summaryResult = $conn->query(
+            "SELECT
+                COALESCE(SUM(total_bayar), 0) AS total_omzet,
+                COUNT(*) AS jumlah_transaksi
+             FROM transaksi"
+        );
+
+        if (!$summaryResult) {
+            throw new RuntimeException(
+                'Gagal mengambil ringkasan penjualan.'
+            );
+        }
+
+        $summary = $summaryResult->fetch_assoc();
+
+        // Mengambil jumlah aturan asosiasi pada analisis terakhir.
+        // Jika tabel atau data Apriori belum tersedia,
+        // dashboard tetap dapat menampilkan ringkasan penjualan.
+        $totalRekomendasi = 0;
+
+        try {
+            $recommendationResult = $conn->query(
+                "SELECT COUNT(aa.id_aturan_asosiasi) AS total_rekomendasi
+                 FROM analisis_apriori ap
+                 LEFT JOIN aturan_asosiasi aa
+                    ON aa.id_analisis_apriori = ap.id_analisis_apriori
+                 WHERE ap.id_analisis_apriori = (
+                    SELECT id_analisis_apriori
+                    FROM analisis_apriori
+                    ORDER BY tanggal_analisis DESC,
+                             id_analisis_apriori DESC
+                    LIMIT 1
+                 )"
+            );
+
+            if ($recommendationResult) {
+                $recommendationRow =
+                    $recommendationResult->fetch_assoc();
+
+                $totalRekomendasi = (int) (
+                    $recommendationRow['total_rekomendasi'] ?? 0
+                );
+            }
+        } catch (Throwable $error) {
+            error_log(
+                '[ARTHA] Data rekomendasi Apriori belum tersedia: ' .
+                $error->getMessage()
+            );
+
+            $totalRekomendasi = 0;
+        }
+
+        // Menentukan periode grafik berdasarkan tahun.
+        $startDate = sprintf(
+            '%04d-01-01 00:00:00',
+            $year
+        );
+
+        $endDate = sprintf(
+            '%04d-01-01 00:00:00',
+            $year + 1
+        );
+
+        // Mengambil total penjualan setiap bulan.
+        $salesStmt = $conn->prepare(
+            "SELECT
+                MONTH(tanggal_transaksi) AS bulan,
+                COALESCE(SUM(total_bayar), 0) AS total_penjualan
+             FROM transaksi
+             WHERE tanggal_transaksi >= ?
+             AND tanggal_transaksi < ?
+             GROUP BY MONTH(tanggal_transaksi)
+             ORDER BY MONTH(tanggal_transaksi)"
+        );
+
+        if (!$salesStmt) {
+            throw new RuntimeException(
+                'Gagal menyiapkan grafik penjualan Pemilik.'
+            );
+        }
+
+        $salesStmt->bind_param(
+            'ss',
+            $startDate,
+            $endDate
+        );
+
+        $salesStmt->execute();
+
+        $salesResult = $salesStmt->get_result();
+
+        // Menyediakan 12 bulan, termasuk bulan tanpa transaksi.
+        $monthlySales = array_fill(0, 12, 0);
+
+        while ($row = $salesResult->fetch_assoc()) {
+            $monthIndex = (int) $row['bulan'] - 1;
+
+            if ($monthIndex >= 0 && $monthIndex < 12) {
+                $monthlySales[$monthIndex] =
+                    (float) $row['total_penjualan'];
+            }
+        }
+
+        $salesStmt->close();
+
+        successResponse(
+            'Dashboard Pemilik berhasil dimuat dari database.',
+            [
+                'total_omzet' => (float) $summary['total_omzet'],
+                'jumlah_transaksi' => (int) $summary['jumlah_transaksi'],
+                'total_rekomendasi' => $totalRekomendasi,
+                'tahun' => $year,
+                'penjualan_bulanan' => $monthlySales
+            ]
+        );
+    }
+    
+        // Mengambil laporan penjualan untuk Pemilik.
+        if (
+            $route === '/pemilik/laporan' &&
+            $method === 'GET'
+        ) {
+            artha_require_role(['pemilik']);
+
+            $year = isset($_GET['year'])
+                ? (int) $_GET['year']
+                : (int) date('Y');
+
+            if ($year < 2000 || $year > 2100) {
+                errorResponse(
+                    'Tahun laporan tidak valid.',
+                    422
+                );
+            }
+
+            $startDate = sprintf(
+                '%04d-01-01 00:00:00',
+                $year
+            );
+
+            $endDate = sprintf(
+                '%04d-01-01 00:00:00',
+                $year + 1
+            );
+
+            // Mengambil ringkasan transaksi dan produk unik.
+            $summaryStmt = $conn->prepare(
+                "SELECT
+                    COUNT(DISTINCT t.id_transaksi) AS total_transaksi,
+                    COUNT(DISTINCT dt.id_produk) AS produk_unik
+                FROM transaksi t
+                LEFT JOIN detail_transaksi dt
+                    ON dt.id_transaksi = t.id_transaksi
+                WHERE t.tanggal_transaksi >= ?
+                AND t.tanggal_transaksi < ?"
+            );
+
+            if (!$summaryStmt) {
+                throw new RuntimeException(
+                    'Gagal menyiapkan ringkasan laporan.'
+                );
+            }
+
+            $summaryStmt->bind_param(
+                'ss',
+                $startDate,
+                $endDate
+            );
+
+            $summaryStmt->execute();
+
+            $summary = $summaryStmt
+                ->get_result()
+                ->fetch_assoc();
+
+            $summaryStmt->close();
+
+            // Mengambil penjualan setiap bulan.
+            $salesStmt = $conn->prepare(
+                "SELECT
+                    MONTH(tanggal_transaksi) AS bulan,
+                    COALESCE(SUM(total_bayar), 0) AS total_penjualan
+                FROM transaksi
+                WHERE tanggal_transaksi >= ?
+                AND tanggal_transaksi < ?
+                GROUP BY MONTH(tanggal_transaksi)
+                ORDER BY MONTH(tanggal_transaksi)"
+            );
+
+            if (!$salesStmt) {
+                throw new RuntimeException(
+                    'Gagal menyiapkan grafik penjualan.'
+                );
+            }
+
+            $salesStmt->bind_param(
+                'ss',
+                $startDate,
+                $endDate
+            );
+
+            $salesStmt->execute();
+
+            $salesResult = $salesStmt->get_result();
+
+            $monthlySales = array_fill(0, 12, 0);
+
+            while ($row = $salesResult->fetch_assoc()) {
+                $monthIndex = (int) $row['bulan'] - 1;
+
+                if ($monthIndex >= 0 && $monthIndex < 12) {
+                    $monthlySales[$monthIndex] =
+                        (float) $row['total_penjualan'];
+                }
+            }
+
+            $salesStmt->close();
+
+            // Menghitung seluruh kuantitas produk yang terjual.
+            $quantityStmt = $conn->prepare(
+                "SELECT
+                    COALESCE(SUM(dt.jumlah), 0) AS total_qty
+                FROM transaksi t
+                INNER JOIN detail_transaksi dt
+                    ON dt.id_transaksi = t.id_transaksi
+                WHERE t.tanggal_transaksi >= ?
+                AND t.tanggal_transaksi < ?"
+            );
+
+            if (!$quantityStmt) {
+                throw new RuntimeException(
+                    'Gagal menghitung jumlah produk terjual.'
+                );
+            }
+
+            $quantityStmt->bind_param(
+                'ss',
+                $startDate,
+                $endDate
+            );
+
+            $quantityStmt->execute();
+
+            $totalQuantity = (float) $quantityStmt
+                ->get_result()
+                ->fetch_assoc()['total_qty'];
+
+            $quantityStmt->close();
+
+            // Mengambil lima produk dengan jumlah penjualan tertinggi.
+            $productStmt = $conn->prepare(
+                "SELECT
+                    p.id_produk,
+                    p.kode_produk,
+                    p.nama_produk,
+                    p.satuan,
+                    COALESCE(SUM(dt.jumlah), 0) AS jumlah_terjual
+                FROM transaksi t
+                INNER JOIN detail_transaksi dt
+                    ON dt.id_transaksi = t.id_transaksi
+                INNER JOIN produk p
+                    ON p.id_produk = dt.id_produk
+                WHERE t.tanggal_transaksi >= ?
+                AND t.tanggal_transaksi < ?
+                GROUP BY
+                    p.id_produk,
+                    p.kode_produk,
+                    p.nama_produk,
+                    p.satuan
+                ORDER BY jumlah_terjual DESC, p.nama_produk ASC
+                LIMIT 5"
+            );
+
+            if (!$productStmt) {
+                throw new RuntimeException(
+                    'Gagal mengambil laporan produk.'
+                );
+            }
+
+            $productStmt->bind_param(
+                'ss',
+                $startDate,
+                $endDate
+            );
+
+            $productStmt->execute();
+
+            $productResult = $productStmt->get_result();
+
+            $topProducts = [];
+
+            while ($row = $productResult->fetch_assoc()) {
+                $quantity = (float) $row['jumlah_terjual'];
+
+                $contribution = $totalQuantity > 0
+                    ? ($quantity / $totalQuantity) * 100
+                    : 0;
+
+                $topProducts[] = [
+                    'id_produk' => (int) $row['id_produk'],
+                    'kode_produk' => $row['kode_produk'],
+                    'nama_produk' => $row['nama_produk'],
+                    'satuan' => $row['satuan'],
+                    'jumlah_terjual' => $quantity,
+                    'kontribusi' => round($contribution, 2)
+                ];
+            }
+
+            $productStmt->close();
+
+            successResponse(
+                'Laporan penjualan berhasil dimuat dari database.',
+                [
+                    'tahun' => $year,
+                    'total_transaksi' => (int) $summary['total_transaksi'],
+                    'produk_unik' => (int) $summary['produk_unik'],
+                    'total_qty_terjual' => $totalQuantity,
+                    'penjualan_bulanan' => $monthlySales,
+                    'produk_terlaris' => $topProducts
+                ]
+            );
+        }
+
     // Mengambil katalog produk aktif untuk Kasir.
     if (
         $route === '/kasir/products' &&
@@ -343,7 +826,6 @@ try {
             $currentUser
         );
     }
-
 
     // Mengambil struk transaksi milik Kasir yang sedang login.
     if (
@@ -766,6 +1248,53 @@ try {
         }
 
         $stockController->adjust($input);
+    }
+
+        // Menjalankan analisis Apriori untuk Pemilik.
+    if (
+        $route === '/pemilik/apriori/analyze' &&
+        $method === 'POST'
+    ) {
+        $currentUser = artha_require_role(['pemilik']);
+
+        $input = json_decode(
+            file_get_contents('php://input'),
+            true
+        );
+
+        if (!is_array($input)) {
+            errorResponse(
+                'Format parameter analisis tidak valid.',
+                400
+            );
+        }
+
+        $aprioriController->analyze(
+            $input,
+            $currentUser
+        );
+    }
+
+    // Mengambil hasil analisis Apriori terakhir untuk Paket Promosi.
+    if (
+        $route === '/pemilik/apriori/latest' &&
+        $method === 'GET'
+    ) {
+        $currentUser = artha_require_role(['pemilik']);
+
+        $aprioriController->latest($currentUser);
+    }
+
+    /**
+     * Mengambil seluruh produk untuk analisis Prioritas Stok Pemilik.
+     */
+    if (
+        $route === '/pemilik/stock/priority' &&
+        $method === 'GET'
+    ) {
+        artha_require_role(['pemilik']);
+
+        $stockController->priority();
     }
 
     // Mengembalikan respons jika endpoint tidak ditemukan.

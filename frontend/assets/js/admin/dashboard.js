@@ -1,38 +1,106 @@
 
 document.addEventListener("DOMContentLoaded", async function () {
+    "use strict";
 
-    // 1. Mengambil elemen HTML
+    // Mengambil elemen dashboard.
     const yearSelect = document.getElementById("adminYearSelect");
     const chart = document.getElementById("adminSalesChart");
     const chartBars = document.getElementById("adminChartBars");
+    const chartYAxis = document.getElementById("adminChartYAxis");
 
-    if (!yearSelect || !chart || !chartBars) {
-        console.error("Elemen dashboard Admin tidak ditemukan.");
-        return;
-    }
+    const totalProduk = document.getElementById("adminTotalProduk");
+    const totalPengguna = document.getElementById("adminTotalPengguna");
+    const stokMenipis = document.getElementById("adminStokMenipis");
 
-    // 2. Menyiapkan data simulasi penjualan tahun 2024 dan 2025
-    const salesData = {
-        2024: [35, 42, 50, 38, 55, 62, 48, 70, 58, 76, 65, 85],
-        2025: [28.33, 45.83, 33.33, 53.33, 47.5, 66.67, 45, 64.17, 52.5, 78.33, 68.33, 81.67]
-    };
-
-    // 3. Menentukan nama bulan
     const months = [
         "Jan", "Feb", "Mar", "Apr",
         "Mei", "Jun", "Jul", "Agu",
         "Sep", "Okt", "Nov", "Des"
     ];
 
-    // 4. Menyimpan tahun terakhir yang memiliki data
-    let lastValidYear = ["2024", "2025"].includes(yearSelect.value)
-        ? yearSelect.value
-        : "2025";
+    // Memastikan seluruh elemen tersedia.
+    if (
+        !yearSelect ||
+        !chart ||
+        !chartBars ||
+        !chartYAxis ||
+        !totalProduk ||
+        !totalPengguna ||
+        !stokMenipis
+    ) {
+        console.error(
+            "[ARTHA] Elemen Dashboard Admin tidak lengkap."
+        );
+        return;
+    }
 
-    let popupActive = false;
+    // Format angka.
+    function formatNumber(value) {
+        return Number(value || 0).toLocaleString("id-ID");
+    }
 
-    // 5. Membuat batang grafik
-    function createBar(height, index) {
+    // Format nilai sumbu grafik.
+    function formatRupiahAxis(value) {
+        if (value >= 1000000000) {
+            return "Rp" + (value / 1000000000)
+                .toLocaleString("id-ID", {
+                    maximumFractionDigits: 1
+                }) + " M";
+        }
+
+        if (value >= 1000000) {
+            return "Rp" + (value / 1000000)
+                .toLocaleString("id-ID", {
+                    maximumFractionDigits: 1
+                }) + " jt";
+        }
+
+        if (value >= 1000) {
+            return "Rp" + (value / 1000)
+                .toLocaleString("id-ID", {
+                    maximumFractionDigits: 1
+                }) + " rb";
+        }
+
+        return "Rp" + formatNumber(value);
+    }
+
+    // Menentukan skala grafik secara otomatis.
+    function getChartMaximum(values) {
+        const maximumValue = Math.max(
+            ...values.map(Number),
+            0
+        );
+
+        if (maximumValue === 0) {
+            return 4;
+        }
+
+        const roughStep = maximumValue / 4;
+        const magnitude = Math.pow(
+            10,
+            Math.floor(Math.log10(roughStep))
+        );
+
+        const normalized = roughStep / magnitude;
+
+        let niceStep;
+
+        if (normalized <= 1) {
+            niceStep = 1;
+        } else if (normalized <= 2) {
+            niceStep = 2;
+        } else if (normalized <= 5) {
+            niceStep = 5;
+        } else {
+            niceStep = 10;
+        }
+
+        return niceStep * magnitude * 4;
+    }
+
+    // Membuat batang grafik.
+    function createBar(value, index, maximum) {
         const group = document.createElement("div");
         group.className = "admin-bar-group";
 
@@ -40,107 +108,203 @@ document.addEventListener("DOMContentLoaded", async function () {
         barArea.className = "admin-bar-area";
 
         const bar = document.createElement("div");
-        const color = index % 3 === 2 ? "yellow" : "blue";
 
-        bar.className = `admin-bar ${color}`;
-        bar.style.setProperty("--bar-height", `${height}%`);
+        const color = index % 3 === 2
+            ? "yellow"
+            : "blue";
+
+        bar.className = "admin-bar " + color;
+
+        const numericValue = Number(value) || 0;
+
+        const height = maximum > 0
+            ? (numericValue / maximum) * 100
+            : 0;
+
+        bar.style.setProperty(
+            "--bar-height",
+            height + "%"
+        );
+
+        if (numericValue <= 0) {
+            bar.style.minHeight = "0";
+        }
+
+        bar.title =
+            months[index] + ": Rp " + formatNumber(numericValue);
 
         bar.setAttribute(
             "aria-label",
-            `Penjualan ${months[index]}: ${height}% dari skala grafik`
+            "Penjualan " + months[index] +
+            ": Rp " + formatNumber(numericValue)
         );
 
         const monthLabel = document.createElement("span");
         monthLabel.textContent = months[index];
 
         barArea.appendChild(bar);
+
         group.appendChild(barArea);
         group.appendChild(monthLabel);
 
         return group;
     }
 
-    // 6. Menampilkan grafik berdasarkan tahun
-    function renderChart(year) {
-        const data = salesData[year];
-
-        if (!data || data.length !== 12) {
-            console.error("Data grafik tahun " + year + " tidak tersedia.");
-            return;
-        }
+    // Menampilkan grafik dari hasil database.
+    function renderChart(values, year) {
+        const maximum = getChartMaximum(values);
 
         chartBars.replaceChildren();
+        chartYAxis.replaceChildren();
 
-        data.forEach(function (value, index) {
-            chartBars.appendChild(createBar(value, index));
+        // Membuat lima label sumbu Y.
+        for (let index = 4; index >= 0; index--) {
+            const label = document.createElement("span");
+
+            const value = maximum * index / 4;
+
+            label.textContent = index === 0
+                ? "0"
+                : formatRupiahAxis(value);
+
+            chartYAxis.appendChild(label);
+        }
+
+        // Membuat 12 batang berdasarkan data penjualan.
+        values.forEach(function (value, index) {
+            chartBars.appendChild(
+                createBar(value, index, maximum)
+            );
         });
 
         chart.setAttribute(
             "aria-label",
-            `Grafik simulasi penjualan bulanan tahun ${year}`
+            "Grafik penjualan bulanan tahun " + year
         );
 
-        console.log(`Grafik simulasi tahun ${year} berhasil ditampilkan.`);
+        console.info(
+            "[ARTHA] Grafik penjualan tahun " +
+            year + " berhasil ditampilkan."
+        );
     }
 
-    // 7. Menampilkan Custom Popup ARTHA untuk tahun yang belum tersedia
-    async function showYearPopup(year) {
+    // Mengambil data dashboard dari MySQL.
+    async function loadDashboard(year) {
+        totalProduk.textContent = "...";
+        totalPengguna.textContent = "...";
+        stokMenipis.textContent = "...";
 
-        if (popupActive) return;
+        chartBars.replaceChildren();
 
-        if (
-            !window.arthaPopup ||
-            typeof window.arthaPopup.info !== "function"
-        ) {
-            console.error("Custom Popup ARTHA belum dimuat.");
-            yearSelect.value = lastValidYear;
-            return;
-        }
+        const loading = document.createElement("p");
+        loading.textContent = "Memuat data penjualan...";
+        loading.style.gridColumn = "1 / -1";
+        loading.style.textAlign = "center";
 
-        popupActive = true;
+        chartBars.appendChild(loading);
 
         try {
-            await window.arthaPopup.info(
-                `Data penjualan untuk tahun ${year} belum tersedia. Silakan pilih tahun 2024 atau 2025 untuk melihat laporan penjualan.`,
-                {
-                    title: `Data Tahun ${year} Belum Tersedia`,
-                    confirmText: "Mengerti"
-                }
+            if (
+                !window.ARTHA_API ||
+                typeof window.ARTHA_API.get !== "function"
+            ) {
+                throw new Error(
+                    "ARTHA API belum berhasil dimuat."
+                );
+            }
+
+            const response = await window.ARTHA_API.get(
+                "admin/dashboard?year=" +
+                encodeURIComponent(year)
             );
+
+            const data = response.data;
+
+            if (
+                !data ||
+                !Array.isArray(data.penjualan_bulanan) ||
+                data.penjualan_bulanan.length !== 12
+            ) {
+                throw new Error(
+                    "Format data dashboard dari server tidak sesuai."
+                );
+            }
+
+            // Memperbarui kartu statistik.
+            totalProduk.textContent = formatNumber(
+                data.total_produk
+            );
+
+            totalPengguna.textContent = formatNumber(
+                data.total_pengguna
+            );
+
+            stokMenipis.textContent = formatNumber(
+                data.stok_menipis
+            );
+
+            // Memperbarui grafik penjualan.
+            renderChart(
+                data.penjualan_bulanan,
+                data.tahun
+            );
+
+            console.info(
+                "[ARTHA] Dashboard Admin berhasil dimuat dari MySQL.",
+                data
+            );
+
         } catch (error) {
-            console.error("Gagal menampilkan popup:", error);
-        } finally {
-            yearSelect.value = lastValidYear;
-            popupActive = false;
+            console.error(
+                "[ARTHA] Gagal memuat Dashboard Admin:",
+                error
+            );
+
+            totalProduk.textContent = "—";
+            totalPengguna.textContent = "—";
+            stokMenipis.textContent = "—";
+
+            chartBars.replaceChildren();
+
+            const errorMessage = document.createElement("p");
+
+            errorMessage.textContent =
+                "Gagal memuat data penjualan. " +
+                error.message;
+
+            errorMessage.style.gridColumn = "1 / -1";
+            errorMessage.style.textAlign = "center";
+            errorMessage.style.color = "#D93025";
+
+            chartBars.appendChild(errorMessage);
+
+            if (
+                window.arthaPopup &&
+                typeof window.arthaPopup.error === "function"
+            ) {
+                await window.arthaPopup.error(
+                    error.message,
+                    {
+                        title: "Gagal Memuat Dashboard"
+                    }
+                );
+            }
         }
     }
 
-    // 8. Menangani perubahan pilihan tahun
-    yearSelect.addEventListener("change", async function () {
+    // Memuat ulang dashboard ketika tahun diganti.
+    yearSelect.addEventListener("change", function () {
+        const selectedYear = Number(yearSelect.value);
 
-        const selectedYear = yearSelect.value;
-
-        if (Object.hasOwn(salesData, selectedYear)) {
-            lastValidYear = selectedYear;
-            renderChart(selectedYear);
-        } else {
-            await showYearPopup(selectedYear);
-        }
-
+        loadDashboard(selectedYear);
     });
 
-    // 9. Menginisialisasi dashboard berdasarkan tahun awal
-    const initialYear = yearSelect.value;
+    // Memuat dashboard pertama kali.
+    await loadDashboard(
+        Number(yearSelect.value)
+    );
 
-    if (Object.hasOwn(salesData, initialYear)) {
-        lastValidYear = initialYear;
-        renderChart(initialYear);
-    } else {
-        yearSelect.value = lastValidYear;
-        renderChart(lastValidYear);
-        await showYearPopup(initialYear);
-    }
-
-    console.log("Dashboard Admin berhasil dijalankan.");
-
+    console.log(
+        "[ARTHA] Dashboard Admin siap digunakan."
+    );
 });

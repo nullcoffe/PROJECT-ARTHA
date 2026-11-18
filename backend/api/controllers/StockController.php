@@ -131,6 +131,21 @@ class StockController
             $result
         );
     }
+
+    /**
+     * GET /pemilik/stock/priority
+     * Mengambil produk untuk analisis prioritas stok.
+     */
+    public function priority(): void
+    {
+        $products = $this->stockModel->getPriorityProducts();
+
+        successResponse(
+            'Data prioritas stok berhasil diambil dari database.',
+            $products
+        );
+    }
+
 }
 
 ?>

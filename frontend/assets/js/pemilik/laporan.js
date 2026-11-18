@@ -1,86 +1,153 @@
-
 document.addEventListener("DOMContentLoaded", function () {
+    "use strict";
 
-    // 1. Mengambil elemen HTML
     const yearSelect = document.querySelector(".report-year-select");
     const chartBars = document.querySelector(".report-chart-bars");
     const summaryCards = document.querySelectorAll(".report-stat-card");
     const chart = document.querySelector(".report-chart-card");
+    const yAxis = document.querySelector(".report-y-axis");
     const tableBody = document.querySelector(".report-table tbody");
     const tableTitle = document.querySelector(".report-table-card h2");
 
-    // 2. Memeriksa elemen halaman
-    if (!yearSelect || !chartBars || !chart || summaryCards.length < 3 || !tableBody) {
-        console.error("Elemen halaman Laporan Penjualan tidak ditemukan.");
-        return;
-    }
-
-    // 3. Menentukan jumlah transaksi berdasarkan tahun
-    const transactionCounts = {
-        "2024": 149,
-        "2025": 201,
-        "2026": 0
-    };
-
-    // 4. Menentukan data grafik penjualan
-    const salesData = {
-        "2024": [35, 42, 50, 38, 55, 62, 48, 70, 58, 76, 65, 85],
-        "2025": [35, 55, 43, 63, 56, 76, 54, 74, 62, 88, 80, 94]
-    };
-
-    // 5. Menentukan data laporan produk per tahun
-    const productData = {
-        "2024": [
-            { name: "Beras 5 kg", quantity: 72, contribution: "16,8%" },
-            { name: "Minyak Goreng 1 L", quantity: 68, contribution: "14,5%" },
-            { name: "Gula Pasir 1 kg", quantity: 59, contribution: "12,1%" },
-            { name: "Telur Ayam 1 kg", quantity: 51, contribution: "10,2%" },
-            { name: "Mie Instan Goreng", quantity: 45, contribution: "8,4%" }
-        ],
-
-        "2025": [
-            { name: "Beras 5 kg", quantity: 84, contribution: "18,5%" },
-            { name: "Minyak Goreng 1 L", quantity: 76, contribution: "14,2%" },
-            { name: "Gula Pasir 1 kg", quantity: 65, contribution: "11,8%" },
-            { name: "Telur Ayam 1 kg", quantity: 58, contribution: "9,6%" },
-            { name: "Mie Instan Goreng", quantity: 53, contribution: "7,4%" }
-        ]
-    };
-
-    // 6. Menentukan nama bulan
     const months = [
         "Jan", "Feb", "Mar", "Apr",
         "Mei", "Jun", "Jul", "Agu",
         "Sep", "Okt", "Nov", "Des"
     ];
 
-    // 7. Menyimpan tahun terakhir yang valid
-    let previousValidYear = ["2024", "2025"].includes(yearSelect.value)
-        ? yearSelect.value
-        : "2025";
-
-    let isPopupActive = false;
-
-    // 8. Mengatur warna batang grafik
-    function getBarColor(index) {
-        return index % 3 === 2 ? "yellow" : "blue";
+    if (
+        !yearSelect ||
+        !chartBars ||
+        summaryCards.length < 3 ||
+        !tableBody ||
+        !window.ARTHA_API
+    ) {
+        console.error("Komponen laporan atau ARTHA API tidak ditemukan.");
+        return;
     }
 
-    // 9. Memperbarui grafik penjualan
-    function renderChart(year) {
-        const data = salesData[year];
+    const barGroups = chartBars.querySelectorAll(".report-bar-group");
 
-        if (!data || data.length !== 12) {
-            console.error("Data grafik tahun " + year + " tidak tersedia.");
-            return;
+    if (barGroups.length !== 12) {
+        console.error("Grafik laporan harus memiliki 12 batang.");
+        return;
+    }
+
+    let currentRequest = 0;
+
+    function formatNumber(value) {
+        return new Intl.NumberFormat("id-ID", {
+            maximumFractionDigits: 2
+        }).format(Number(value) || 0);
+    }
+
+    function formatRupiah(value) {
+        return "Rp " + new Intl.NumberFormat("id-ID", {
+            maximumFractionDigits: 0
+        }).format(Number(value) || 0);
+    }
+
+    function formatCompact(value) {
+        const amount = Number(value) || 0;
+
+        if (amount >= 1000000000) {
+            return "Rp" + (amount / 1000000000).toFixed(1) + " M";
         }
 
-        const barGroups = chartBars.querySelectorAll(".report-bar-group");
-
-        if (barGroups.length !== 12) {
-            console.error("Struktur grafik harus memiliki 12 batang.");
-            return;
+        if (amount >= 1000000) {
+            return "Rp" + (amount / 1000000).toFixed(1) + " jt";
         }
+
+        if (amount >= 1000) {
+            return "Rp" + (amount / 1000).toFixed(0) + " rb";
+        }
+
+        return formatRupiah(amount);
+    }
+
+    function showLoading() {
+        summaryCards.forEach(function (card) {
+            const value = card.querySelector("h2");
+
+            if (value) {
+                value.textContent = "Memuat...";
+            }
+        });
+
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="3">Memuat data laporan...</td>
+            </tr>
+        `;
+    }
+
+    function showError(message) {
+        if (
+            window.arthaPopup &&
+            typeof window.arthaPopup.error === "function"
+        ) {
+            window.arthaPopup.error(message, {
+                title: "Gagal Memuat Laporan",
+                confirmText: "Mengerti"
+            });
+        } else if (
+            window.arthaPopup &&
+            typeof window.arthaPopup.info === "function"
+        ) {
+            window.arthaPopup.info(message, {
+                title: "Gagal Memuat Laporan",
+                confirmText: "Mengerti"
+            });
+        } else {
+            alert(message);
+        }
+    }
+
+    function renderStatistics(data) {
+        const totalTransactions =
+            summaryCards[0].querySelector("h2");
+
+        const totalProducts =
+            summaryCards[1].querySelector("h2");
+
+        const reportPeriod =
+            summaryCards[2].querySelector("h2");
+
+        if (totalTransactions) {
+            totalTransactions.textContent =
+                formatNumber(data.total_transaksi);
+        }
+
+        if (totalProducts) {
+            totalProducts.textContent =
+                formatNumber(data.produk_unik);
+        }
+
+        if (reportPeriod) {
+            reportPeriod.textContent = data.tahun;
+        }
+    }
+
+    function renderChart(monthlySales, year) {
+        const values = Array.isArray(monthlySales)
+            ? monthlySales
+            : [];
+
+        const normalizedValues = Array.from(
+            { length: 12 },
+            function (_, index) {
+                return Number(values[index]) || 0;
+            }
+        );
+
+        const maximum = Math.max(
+            ...normalizedValues,
+            0
+        );
+
+        const scaleMaximum = maximum > 0
+            ? Math.ceil(maximum / 4) * 4
+            : 4;
 
         barGroups.forEach(function (group, index) {
             const bar = group.querySelector(".report-bar");
@@ -88,17 +155,56 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (!bar || !label) return;
 
-            bar.style.setProperty("--bar-height", data[index] + "%");
+            const value = normalizedValues[index];
+
+            const height = maximum > 0
+                ? (value / scaleMaximum) * 100
+                : 0;
+
+            bar.style.setProperty(
+                "--bar-height",
+                Math.max(height, value > 0 ? 2 : 0) + "%"
+            );
+
             bar.classList.remove("blue", "yellow");
-            bar.classList.add(getBarColor(index));
+
+            bar.classList.add(
+                value === maximum && maximum > 0
+                    ? "yellow"
+                    : "blue"
+            );
+
+            bar.title =
+                months[index] + " " + year + ": " +
+                formatRupiah(value);
 
             bar.setAttribute(
                 "aria-label",
-                "Penjualan " + months[index] + ": " + data[index] + "% dari skala grafik"
+                "Penjualan " + months[index] + " " +
+                year + ": " + formatRupiah(value)
             );
 
             label.textContent = months[index];
         });
+
+        if (yAxis) {
+            const axisValues = [
+                scaleMaximum,
+                scaleMaximum * 0.75,
+                scaleMaximum * 0.5,
+                scaleMaximum * 0.25,
+                0
+            ];
+
+            const labels = yAxis.querySelectorAll("span");
+
+            labels.forEach(function (label, index) {
+                if (axisValues[index] !== undefined) {
+                    label.textContent =
+                        formatCompact(axisValues[index]);
+                }
+            });
+        }
 
         chart.setAttribute(
             "aria-label",
@@ -106,50 +212,45 @@ document.addEventListener("DOMContentLoaded", function () {
         );
     }
 
-    // 10. Memperbarui statistik laporan
-    function renderStatistics(year) {
-        const totalTransactions = summaryCards[0].querySelector("h2");
-        const totalProducts = summaryCards[1].querySelector("h2");
-        const reportPeriod = summaryCards[2].querySelector("h2");
+    function renderProductTable(products, year) {
+        tableBody.replaceChildren();
 
-        if (totalTransactions) {
-            totalTransactions.textContent = transactionCounts[year];
+        if (tableTitle) {
+            tableTitle.textContent =
+                "Tabel Laporan Produk - " + year;
         }
 
-        if (totalProducts) {
-            totalProducts.textContent = "60";
-        }
+        if (!Array.isArray(products) || products.length === 0) {
+            const row = document.createElement("tr");
+            const cell = document.createElement("td");
 
-        if (reportPeriod) {
-            reportPeriod.textContent = year;
-        }
-    }
+            cell.colSpan = 3;
+            cell.textContent =
+                "Belum ada penjualan produk pada tahun ini.";
 
-    // 11. Memperbarui tabel laporan produk
-    function renderProductTable(year) {
-        const products = productData[year];
+            row.appendChild(cell);
+            tableBody.appendChild(row);
 
-        if (!products) {
-            console.error("Data produk tahun " + year + " tidak tersedia.");
             return;
         }
 
-        tableBody.replaceChildren();
-
-        const sortedProducts = [...products].sort(function (a, b) {
-            return b.quantity - a.quantity;
-        });
-
-        sortedProducts.forEach(function (product) {
+        products.forEach(function (product) {
             const row = document.createElement("tr");
 
             const nameCell = document.createElement("td");
             const quantityCell = document.createElement("td");
             const contributionCell = document.createElement("td");
 
-            nameCell.textContent = product.name;
-            quantityCell.textContent = product.quantity + " pcs";
-            contributionCell.textContent = product.contribution;
+            nameCell.textContent =
+                product.nama_produk || "-";
+
+            quantityCell.textContent =
+                formatNumber(product.jumlah_terjual) +
+                " " +
+                (product.satuan || "");
+
+            contributionCell.textContent =
+                formatNumber(product.kontribusi) + "%";
 
             row.append(
                 nameCell,
@@ -159,78 +260,90 @@ document.addEventListener("DOMContentLoaded", function () {
 
             tableBody.appendChild(row);
         });
-
-        if (tableTitle) {
-            tableTitle.textContent = "Tabel Laporan Produk - " + year;
-        }
-
-        console.log("Tabel produk tahun " + year + " berhasil diperbarui.");
     }
 
-    // 12. Memperbarui seluruh laporan
-    function updateReport(year) {
-        renderChart(year);
-        renderStatistics(year);
-        renderProductTable(year);
-    }
+    async function loadReport(year) {
+        const requestId = ++currentRequest;
 
-    // 13. Menampilkan popup tahun yang belum tersedia
-    async function showUnavailablePopup() {
-        if (isPopupActive) return;
-
-        if (
-            !window.arthaPopup ||
-            typeof window.arthaPopup.info !== "function"
-        ) {
-            console.error("Custom Popup ARTHA belum dimuat.");
-            return;
-        }
-
-        isPopupActive = true;
+        showLoading();
 
         try {
-            await window.arthaPopup.info(
-                "Data penjualan untuk tahun 2026 belum tersedia. Silakan pilih tahun 2024 atau 2025 untuk melihat laporan penjualan.",
-                {
-                    title: "Data Tahun 2026 Belum Tersedia",
-                    confirmText: "Mengerti"
-                }
+            const response = await window.ARTHA_API.get(
+                "pemilik/laporan?year=" +
+                encodeURIComponent(year)
             );
+
+            if (requestId !== currentRequest) {
+                return;
+            }
+
+            const data = response.data;
+
+            if (
+                !data ||
+                !Array.isArray(data.penjualan_bulanan) ||
+                !Array.isArray(data.produk_terlaris)
+            ) {
+                throw new Error(
+                    "Format data laporan dari server tidak sesuai."
+                );
+            }
+
+            renderStatistics(data);
+
+            renderChart(
+                data.penjualan_bulanan,
+                data.tahun
+            );
+
+            renderProductTable(
+                data.produk_terlaris,
+                data.tahun
+            );
+
+            console.log(
+                "Laporan Pemilik berhasil dimuat:",
+                data
+            );
+
         } catch (error) {
-            console.error("Gagal menampilkan popup laporan:", error);
-        } finally {
-            isPopupActive = false;
+            if (requestId !== currentRequest) {
+                return;
+            }
+
+            console.error(
+                "Gagal mengambil laporan penjualan:",
+                error
+            );
+
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="3">
+                        Gagal memuat data laporan.
+                    </td>
+                </tr>
+            `;
+
+            showError(
+                error.message ||
+                "Terjadi kesalahan ketika mengambil laporan penjualan."
+            );
         }
     }
 
-    // 14. Menangani perubahan dropdown tahun
-    yearSelect.addEventListener("change", async function () {
+    yearSelect.addEventListener("change", function () {
         const selectedYear = yearSelect.value;
 
-        if (!Object.prototype.hasOwnProperty.call(salesData, selectedYear)) {
-            yearSelect.value = previousValidYear;
-            await showUnavailablePopup();
+        if (!/^\d{4}$/.test(selectedYear)) {
             return;
         }
 
-        previousValidYear = selectedYear;
-
-        updateReport(selectedYear);
-
-        console.log(
-            "Seluruh laporan tahun " + selectedYear + " berhasil diperbarui."
-        );
+        loadReport(selectedYear);
     });
 
-    // 15. Menginisialisasi laporan berdasarkan tahun awal
-    if (!Object.prototype.hasOwnProperty.call(salesData, yearSelect.value)) {
-        yearSelect.value = "2025";
-    }
+    loadReport(yearSelect.value);
 
-    previousValidYear = yearSelect.value;
-
-    updateReport(previousValidYear);
-
-    console.log("JavaScript Laporan Penjualan berhasil dijalankan.");
-
+    console.log(
+        "JavaScript Laporan Penjualan ARTHA berhasil dijalankan."
+    );
 });
