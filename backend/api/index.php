@@ -8,6 +8,23 @@ require_once __DIR__ . '/models/User.php';
 require_once __DIR__ . '/controllers/AuthController.php';
 require_once __DIR__ . '/middleware/auth.php';
 
+// Product Module
+require_once __DIR__ . '/models/Product.php';
+require_once __DIR__ . '/controllers/ProductController.php';
+
+// Stock Module
+require_once __DIR__ . '/models/Stockmovement.php';
+require_once __DIR__ . '/controllers/StockController.php';
+
+require_once __DIR__ . '/models/Transaction.php';
+require_once __DIR__ . '/controllers/TransactionController.php';
+
+$transactionModel = new Transaction($conn);
+
+$transactionController = new TransactionController(
+    $transactionModel
+);
+
 $method =
     $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
@@ -114,6 +131,30 @@ try {
             $userModel
         );
 
+    $productModel = new Product($conn);
+
+    $productController = new ProductController(
+        $productModel
+    );
+
+    /*
+    |--------------------------------------------------------------------------
+    | PRODUCT & STOCK MODEL
+    |--------------------------------------------------------------------------
+    */
+
+    $productModel = new Product($conn);
+
+    $productController = new ProductController(
+        $productModel
+    );
+
+    $stockModel = new Stockmovement($conn);
+
+    $stockController = new StockController(
+        $stockModel
+    );
+    
     /*
     |--------------------------------------------------------------------------
     | GET /
@@ -449,6 +490,16 @@ try {
         );
     }
 
+    // GET /admin/transactions
+    if (
+        $route === '/admin/transactions' &&
+        $method === 'GET'
+    ) {
+        artha_require_role(['admin']);
+
+        $transactionController->index();
+    }
+
     /*
     |--------------------------------------------------------------------------
     | ADMIN - TAMBAH PENGGUNA
@@ -735,6 +786,156 @@ try {
 
     /*
     |--------------------------------------------------------------------------
+    | ADMIN - MANAJEMEN PRODUK
+    |--------------------------------------------------------------------------
+    */
+
+    // GET /admin/products
+    if (
+        $route === '/admin/products' &&
+        $method === 'GET'
+    ) {
+        artha_require_role(['admin']);
+        $productController->index();
+    }
+
+    // GET /admin/products/{id}
+    if (
+        preg_match('#^/admin/products/([0-9]+)$#', $route, $matches) &&
+        $method === 'GET'
+    ) {
+        artha_require_role(['admin']);
+        $productController->show((int) $matches[1]);
+    }
+
+    // GET /admin/products/inactive
+    if (
+        $route === '/admin/products/inactive' &&
+        $method === 'GET'
+    ) {
+        artha_require_role(['admin']);
+
+        $productController->inactive();
+    }
+
+    // POST /admin/products/{id}/activate
+    if (
+        preg_match(
+            '#^/admin/products/([0-9]+)/activate$#',
+            $route,
+            $matches
+        ) &&
+        $method === 'POST'
+    ) {
+        artha_require_role(['admin']);
+
+        $productController->activate(
+            (int) $matches[1]
+        );
+    }
+
+    // POST /admin/products
+    if (
+        $route === '/admin/products' &&
+        $method === 'POST'
+    ) {
+        artha_require_role(['admin']);
+
+        $input = json_decode(
+            file_get_contents('php://input'),
+            true
+        );
+
+        if (!is_array($input)) {
+            errorResponse('Format data produk tidak valid.', 400);
+        }
+
+        $productController->store($input);
+    }
+
+    // PUT /admin/products/{id}
+    if (
+        preg_match('#^/admin/products/([0-9]+)$#', $route, $matches) &&
+        $method === 'PUT'
+    ) {
+        artha_require_role(['admin']);
+
+        $input = json_decode(
+            file_get_contents('php://input'),
+            true
+        );
+
+        if (!is_array($input)) {
+            errorResponse('Format perubahan produk tidak valid.', 400);
+        }
+
+        $productController->update(
+            (int) $matches[1],
+            $input
+        );
+    }
+
+    // DELETE /admin/products/{id}
+    if (
+        preg_match('#^/admin/products/([0-9]+)$#', $route, $matches) &&
+        $method === 'DELETE'
+    ) {
+        artha_require_role(['admin']);
+
+        $productController->destroy(
+            (int) $matches[1]
+        );
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | ADMIN - MANAJEMEN STOK
+    |--------------------------------------------------------------------------
+    */
+
+    // GET /admin/stock/history
+    if (
+        $route === '/admin/stock/history' &&
+        $method === 'GET'
+    ) {
+        artha_require_role(['admin']);
+        $stockController->index();
+    }
+
+    // GET /admin/stock/history/{id}
+    if (
+        preg_match('#^/admin/stock/history/([0-9]+)$#', $route, $matches) &&
+        $method === 'GET'
+    ) {
+        artha_require_role(['admin']);
+
+        $stockController->show(
+            (int) $matches[1]
+        );
+    }
+
+    // POST /admin/stock/adjust
+    if (
+        $route === '/admin/stock/adjust' &&
+        $method === 'POST'
+    ) {
+        artha_require_role(['admin']);
+
+        $input = json_decode(
+            file_get_contents('php://input'),
+            true
+        );
+
+        if (!is_array($input)) {
+            errorResponse('Format penyesuaian stok tidak valid.', 400);
+        }
+
+        $stockController->adjust($input);
+    }
+
+        /*
+    |--------------------------------------------------------------------------
     | ENDPOINT TIDAK DITEMUKAN
     |--------------------------------------------------------------------------
     */
@@ -751,8 +952,14 @@ try {
         $error->getMessage()
     );
 
+    $statusCode = (int) $error->getCode();
+
+    if (!in_array($statusCode, [401, 403, 404, 422], true)) {
+        $statusCode = 500;
+    }
+
     errorResponse(
         $error->getMessage(),
-        500
+        $statusCode
     );
 }

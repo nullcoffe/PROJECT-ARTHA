@@ -116,21 +116,32 @@
     </div>
 </section>
 
+
+<!-- TAB PRODUK AKTIF DAN NONAKTIF -->
+<section class="product-status-tabs">
+    <button
+        type="button"
+        class="product-tab active"
+        data-product-tab="active"
+        aria-selected="true"
+    >
+        Produk Aktif
+        <span class="tab-count" id="activeProductCount">0</span>
+    </button>
+
+    <button
+        type="button"
+        class="product-tab"
+        data-product-tab="inactive"
+        aria-selected="false"
+    >
+        Produk Nonaktif
+        <span class="tab-count" id="inactiveProductCount">0</span>
+    </button>
+</section>
+
 <!-- Tabel produk -->
 <section class="product-table-card">
-
-<input type="radio" name="product-page" id="product-page-1" class="product-page-radio" checked>
-<input type="radio" name="product-page" id="product-page-2" class="product-page-radio">
-<input type="radio" name="product-page" id="product-page-3" class="product-page-radio">
-<input type="radio" name="product-page" id="product-page-4" class="product-page-radio">
-<input type="radio" name="product-page" id="product-page-5" class="product-page-radio">
-<input type="radio" name="product-page" id="product-page-6" class="product-page-radio">
-<input type="radio" name="product-page" id="product-page-7" class="product-page-radio">
-<input type="radio" name="product-page" id="product-page-8" class="product-page-radio">
-<input type="radio" name="product-page" id="product-page-9" class="product-page-radio">
-<input type="radio" name="product-page" id="product-page-10" class="product-page-radio">
-<input type="radio" name="product-page" id="product-page-11" class="product-page-radio">
-<input type="radio" name="product-page" id="product-page-12" class="product-page-radio">
 
 <div class="product-table-wrapper">
 <table class="product-table">
@@ -145,100 +156,41 @@
 </tr>
 </thead>
 
-<tbody class="product-page-rows product-page-rows-1">
-<tr><td>PRD001</td><td>Beras</td><td>Rp15.000</td><td>161</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD002</td><td>Minyak Goreng</td><td>Rp18.000</td><td>172</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD003</td><td>Gula Pasir</td><td>Rp17.000</td><td>99</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD004</td><td>Telur</td><td>Rp29.000</td><td>173</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD005</td><td>Mi Instan</td><td>Rp3.500</td><td>88</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
+
+<tbody id="productTableBody" class="product-page-rows product-page-rows-1">
 </tbody>
 
 <tbody class="product-page-rows product-page-rows-2">
-<tr><td>PRD006</td><td>Kopi Sachet</td><td>Rp1.500</td><td>110</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD007</td><td>Teh Celup</td><td>Rp8.000</td><td>72</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD008</td><td>Susu UHT</td><td>Rp7.000</td><td>31</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD009</td><td>Susu Bubuk</td><td>Rp28.000</td><td>66</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD010</td><td>Biskuit</td><td>Rp10.000</td><td>106</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
 </tbody>
 
 <tbody class="product-page-rows product-page-rows-3">
-<tr><td>PRD011</td><td>Wafer</td><td>Rp8.000</td><td>28</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD012</td><td>Keripik Singkong</td><td>Rp10.000</td><td>57</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD013</td><td>Kacang Tanah</td><td>Rp12.000</td><td>18</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD014</td><td>Air Mineral</td><td>Rp4.000</td><td>54</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD015</td><td>Sirup</td><td>Rp22.000</td><td>33</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
 </tbody>
 
 <tbody class="product-page-rows product-page-rows-4">
-<tr><td>PRD016</td><td>Minuman Serbuk</td><td>Rp1.500</td><td>18</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD017</td><td>Sereal</td><td>Rp18.000</td><td>41</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD018</td><td>Oatmeal</td><td>Rp22.000</td><td>50</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD019</td><td>Roti Tawar</td><td>Rp16.000</td><td>37</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD020</td><td>Selai Cokelat</td><td>Rp18.000</td><td>36</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
 </tbody>
 
 <tbody class="product-page-rows product-page-rows-5">
-<tr><td>PRD021</td><td>Selai Stroberi</td><td>Rp16.000</td><td>39</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD022</td><td>Cokelat Batang</td><td>Rp6.000</td><td>22</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD023</td><td>Permen</td><td>Rp5.000</td><td>21</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD024</td><td>Madu</td><td>Rp30.000</td><td>11</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD025</td><td>Sarden Kaleng</td><td>Rp16.000</td><td>20</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
 </tbody>
 
 <tbody class="product-page-rows product-page-rows-6">
-<tr><td>PRD026</td><td>Kornet Sapi</td><td>Rp18.000</td><td>64</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD027</td><td>Tepung Terigu</td><td>Rp12.000</td><td>59</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD028</td><td>Tepung Maizena</td><td>Rp8.000</td><td>60</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD029</td><td>Baking Powder</td><td>Rp3.000</td><td>24</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD030</td><td>Vanili</td><td>Rp1.500</td><td>35</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
 </tbody>
 
 <tbody class="product-page-rows product-page-rows-7">
-<tr><td>PRD031</td><td>Cokelat Bubuk</td><td>Rp7.000</td><td>59</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD032</td><td>Santan Instan</td><td>Rp5.000</td><td>41</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD033</td><td>Kaldu Bubuk</td><td>Rp1.000</td><td>19</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD034</td><td>Merica Bubuk</td><td>Rp2.000</td><td>57</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD035</td><td>Ketumbar Bubuk</td><td>Rp2.000</td><td>37</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
 </tbody>
 
 <tbody class="product-page-rows product-page-rows-8">
-<tr><td>PRD036</td><td>Kunyit Bubuk</td><td>Rp2.000</td><td>30</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD037</td><td>Kecap Manis</td><td>Rp14.000</td><td>52</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD038</td><td>Saus Sambal</td><td>Rp9.000</td><td>26</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD039</td><td>Kecap Asin</td><td>Rp13.000</td><td>55</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD040</td><td>Garam</td><td>Rp4.000</td><td>120</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
 </tbody>
 
 <tbody class="product-page-rows product-page-rows-9">
-<tr><td>PRD041</td><td>Margarin</td><td>Rp7.000</td><td>17</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD042</td><td>Pasta Gigi</td><td>Rp12.000</td><td>27</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD043</td><td>Sikat Gigi</td><td>Rp8.000</td><td>31</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD044</td><td>Sabun Mandi</td><td>Rp5.000</td><td>68</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD045</td><td>Sampo Sachet</td><td>Rp1.000</td><td>39</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
 </tbody>
 
 <tbody class="product-page-rows product-page-rows-10">
-<tr><td>PRD046</td><td>Deterjen</td><td>Rp18.000</td><td>40</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD047</td><td>Pelembut Pakaian</td><td>Rp12.000</td><td>21</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD048</td><td>Sabun Cuci Piring</td><td>Rp10.000</td><td>50</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD049</td><td>Pembersih Lantai</td><td>Rp15.000</td><td>43</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD050</td><td>Tisu</td><td>Rp10.000</td><td>44</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
 </tbody>
 
 <tbody class="product-page-rows product-page-rows-11">
-<tr><td>PRD051</td><td>Pembalut</td><td>Rp12.000</td><td>39</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD052</td><td>Popok Bayi</td><td>Rp35.000</td><td>57</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD053</td><td>Kantong Sampah</td><td>Rp10.000</td><td>14</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD054</td><td>Baterai AA</td><td>Rp12.000</td><td>39</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD055</td><td>Lilin</td><td>Rp3.000</td><td>34</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
 </tbody>
 
 <tbody class="product-page-rows product-page-rows-12">
-<tr><td>PRD056</td><td>Korek Api</td><td>Rp2.000</td><td>65</td><td><span class="stock-status safe">Stok Aman</span></td></tr>
-<tr><td>PRD057</td><td>Plastik Kemasan</td><td>Rp8.000</td><td>39</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD058</td><td>Aluminium Foil</td><td>Rp15.000</td><td>20</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD059</td><td>Kertas Minyak</td><td>Rp5.000</td><td>16</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
-<tr><td>PRD060</td><td>Tepung Panir</td><td>Rp9.000</td><td>30</td><td><span class="stock-status low">Stok Rendah</span></td></tr>
 </tbody>
 
 </table>
@@ -248,43 +200,9 @@
 <div class="product-pagination">
 
     <div class="product-pagination-controls">
-        <label for="product-page-1" class="product-prev prev-2">‹</label>
-        <label for="product-page-2" class="product-next next-1">›</label>
-        <label for="product-page-2" class="product-prev prev-3">‹</label>
-        <label for="product-page-3" class="product-next next-2">›</label>
-        <label for="product-page-3" class="product-prev prev-4">‹</label>
-        <label for="product-page-4" class="product-next next-3">›</label>
-        <label for="product-page-4" class="product-prev prev-5">‹</label>
-        <label for="product-page-5" class="product-next next-4">›</label>
-        <label for="product-page-5" class="product-prev prev-6">‹</label>
-        <label for="product-page-6" class="product-next next-5">›</label>
-        <label for="product-page-6" class="product-prev prev-7">‹</label>
-        <label for="product-page-7" class="product-next next-6">›</label>
-        <label for="product-page-7" class="product-prev prev-8">‹</label>
-        <label for="product-page-8" class="product-next next-7">›</label>
-        <label for="product-page-8" class="product-prev prev-9">‹</label>
-        <label for="product-page-9" class="product-next next-8">›</label>
-        <label for="product-page-9" class="product-prev prev-10">‹</label>
-        <label for="product-page-10" class="product-next next-9">›</label>
-        <label for="product-page-10" class="product-prev prev-11">‹</label>
-        <label for="product-page-11" class="product-next next-10">›</label>
-        <label for="product-page-11" class="product-prev prev-12">‹</label>
-        <label for="product-page-12" class="product-next next-11">›</label>
     </div>
 
     <div class="product-page-numbers">
-        <label for="product-page-1" class="product-page-number page-number-1">1</label>
-        <label for="product-page-2" class="product-page-number page-number-2">2</label>
-        <label for="product-page-3" class="product-page-number page-number-3">3</label>
-        <label for="product-page-4" class="product-page-number page-number-4">4</label>
-        <label for="product-page-5" class="product-page-number page-number-5">5</label>
-        <label for="product-page-6" class="product-page-number page-number-6">6</label>
-        <label for="product-page-7" class="product-page-number page-number-7">7</label>
-        <label for="product-page-8" class="product-page-number page-number-8">8</label>
-        <label for="product-page-9" class="product-page-number page-number-9">9</label>
-        <label for="product-page-10" class="product-page-number page-number-10">10</label>
-        <label for="product-page-11" class="product-page-number page-number-11">11</label>
-        <label for="product-page-12" class="product-page-number page-number-12">12</label>
     </div>
 </div>
 
@@ -367,67 +285,9 @@
             <label for="stockProduct">Pilih Produk</label>
 
             <select id="stockProduct" name="stockProduct" required>
-                <option value="" selected disabled>Pilih</option>
-                <option value="PRD001">Beras</option>
-                <option value="PRD002">Minyak Goreng</option>
-                <option value="PRD003">Gula Pasir</option>
-                <option value="PRD004">Telur</option>
-                <option value="PRD005">Mi Instan</option>
-                <option value="PRD006">Kopi Sachet</option>
-                <option value="PRD007">Teh Celup</option>
-                <option value="PRD008">Susu UHT</option>
-                <option value="PRD009">Susu Bubuk</option>
-                <option value="PRD010">Biskuit</option>
-                <option value="PRD011">Wafer</option>
-                <option value="PRD012">Keripik Singkong</option>
-                <option value="PRD013">Kacang Tanah</option>
-                <option value="PRD014">Air Mineral</option>
-                <option value="PRD015">Sirup</option>
-                <option value="PRD016">Minuman Serbuk</option>
-                <option value="PRD017">Sereal</option>
-                <option value="PRD018">Oatmeal</option>
-                <option value="PRD019">Roti Tawar</option>
-                <option value="PRD020">Selai Cokelat</option>
-                <option value="PRD021">Selai Stroberi</option>
-                <option value="PRD022">Cokelat Batang</option>
-                <option value="PRD023">Permen</option>
-                <option value="PRD024">Madu</option>
-                <option value="PRD025">Sarden Kaleng</option>
-                <option value="PRD026">Kornet Sapi</option>
-                <option value="PRD027">Tepung Terigu</option>
-                <option value="PRD028">Tepung Maizena</option>
-                <option value="PRD029">Baking Powder</option>
-                <option value="PRD030">Vanili</option>
-                <option value="PRD031">Cokelat Bubuk</option>
-                <option value="PRD032">Santan Instan</option>
-                <option value="PRD033">Kaldu Bubuk</option>
-                <option value="PRD034">Merica Bubuk</option>
-                <option value="PRD035">Ketumbar Bubuk</option>
-                <option value="PRD036">Kunyit Bubuk</option>
-                <option value="PRD037">Kecap Manis</option>
-                <option value="PRD038">Saus Sambal</option>
-                <option value="PRD039">Kecap Asin</option>
-                <option value="PRD040">Garam</option>
-                <option value="PRD041">Margarin</option>
-                <option value="PRD042">Pasta Gigi</option>
-                <option value="PRD043">Sikat Gigi</option>
-                <option value="PRD044">Sabun Mandi</option>
-                <option value="PRD045">Sampo Sachet</option>
-                <option value="PRD046">Deterjen</option>
-                <option value="PRD047">Pelembut Pakaian</option>
-                <option value="PRD048">Sabun Cuci Piring</option>
-                <option value="PRD049">Pembersih Lantai</option>
-                <option value="PRD050">Tisu</option>
-                <option value="PRD051">Pembalut</option>
-                <option value="PRD052">Popok Bayi</option>
-                <option value="PRD053">Kantong Sampah</option>
-                <option value="PRD054">Baterai AA</option>
-                <option value="PRD055">Lilin</option>
-                <option value="PRD056">Korek Api</option>
-                <option value="PRD057">Plastik Kemasan</option>
-                <option value="PRD058">Aluminium Foil</option>
-                <option value="PRD059">Kertas Minyak</option>
-                <option value="PRD060">Tepung Panir</option>
+                    <option value="" selected disabled>
+                         Memuat produk...
+                    </option>
             </select>
         </div>
 

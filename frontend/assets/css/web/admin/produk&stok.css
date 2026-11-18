@@ -639,3 +639,71 @@
     }
 }
 
+/* =========================================
+   PRODUCT STATUS TABS
+========================================= */
+
+.product-status-tabs {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.product-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 12px 18px;
+    border: none;
+    border-bottom: 3px solid transparent;
+    background: transparent;
+    color: #64748B;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.product-tab:hover {
+    color: #142F7D;
+}
+
+.product-tab.active {
+    color: #142F7D;
+    border-bottom-color: #142F7D;
+}
+
+.product-tab .tab-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 23px;
+    height: 23px;
+    padding: 0 6px;
+    border-radius: 20px;
+    background: #EEF2FF;
+    color: #142F7D;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.product-tab[data-product-tab="inactive"] .tab-count {
+    background: #F1F5F9;
+    color: #64748B;
+}
+
+@media (max-width: 600px) {
+    .product-status-tabs {
+        gap: 4px;
+    }
+
+    .product-tab {
+        flex: 1;
+        justify-content: center;
+        padding: 11px 8px;
+        font-size: 12px;
+    }
+}
