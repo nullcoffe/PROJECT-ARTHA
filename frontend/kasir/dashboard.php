@@ -256,8 +256,7 @@
                 </a>
 
                 <!-- Keluar dari halaman Kasir -->
-                <a class="nav-item logout" href="../index.php">
-
+                <a class="nav-item logout" href="../logout.php">
                     <img class="nav-icon"
                         src="../assets/icons/actions/logout.svg"
                         alt="">
@@ -479,8 +478,11 @@
 
     </div>
 
-    <!-- JavaScript konfigurasi dan popup -->
+    <!-- JavaScript konfigurasi -->
     <script src="../assets/js/config.js" defer></script>
+    <script src="../assets/js/api.js" defer></script>
+
+    <!-- JavaScript popup -->
     <script src="../assets/js/shared/popup.js" defer></script>
 
     <!-- JavaScript navigasi dan profil -->

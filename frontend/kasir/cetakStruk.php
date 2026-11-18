@@ -105,7 +105,7 @@
                 </a>
 
                 <!-- Keluar dari halaman Kasir -->
-                <a class="nav-item logout" href="../index.php">
+                <a class="nav-item logout" href="../logout.php">
 
                     <img class="nav-icon" src="../assets/icons/actions/logout.svg" alt="">
 

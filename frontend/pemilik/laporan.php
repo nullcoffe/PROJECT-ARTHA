@@ -93,7 +93,7 @@
                     <span>Prioritas Stok</span>
                 </a>
 
-                <a href="../index.php" class="nav-item logout">
+                <a href="../logout.php" class="nav-item logout">
                     <img src="../assets/icons/actions/logout.svg"
                          class="nav-icon" alt="">
                     <span>Keluar</span>

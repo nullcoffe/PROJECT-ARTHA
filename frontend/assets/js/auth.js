@@ -1,337 +1,653 @@
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
-document.addEventListener("DOMContentLoaded", function () {
+        "use strict";
 
-    // 1. Mengambil elemen HTML
-    const loginForm = document.querySelector(".login-form");
+        /*
+        |--------------------------------------------------------------------------
+        | Elemen Login
+        |--------------------------------------------------------------------------
+        */
 
-    const usernameInput = document.getElementById("username");
-    const passwordInput = document.getElementById("password");
+        const loginForm =
+            document.querySelector(".login-form");
 
-    const togglePassword = document.querySelector(
-        ".login-password-toggle"
-    );
+        const usernameInput =
+            document.getElementById("username");
 
-    const roleControl = document.getElementById("role-control");
-    const rolePicker = document.querySelector(".role-picker");
+        const passwordInput =
+            document.getElementById("password");
 
-    const roleOptions = document.querySelectorAll(
-        'input[name="jenis_pengguna"]'
-    );
+        const togglePassword =
+            document.querySelector(
+                ".login-password-toggle"
+            );
 
-    const roleCurrentLabel = document.getElementById(
-        "role-current-label"
-    );
+        const roleControl =
+            document.getElementById(
+                "role-control"
+            );
 
-    // 2. Memvalidasi elemen login
-    if (
-        !loginForm ||
-        !usernameInput ||
-        !passwordInput ||
-        !roleControl ||
-        !rolePicker ||
-        !roleCurrentLabel
-    ) {
-        console.error("Elemen login tidak lengkap.");
-        return;
-    }
+        const rolePicker =
+            document.querySelector(
+                ".role-picker"
+            );
 
-    // 3. Menyimpan placeholder asli
-    const originalUsernamePlaceholder =
-        usernameInput.placeholder;
+        const roleOptions =
+            document.querySelectorAll(
+                'input[name="jenis_pengguna"]'
+            );
 
-    const originalPasswordPlaceholder =
-        passwordInput.placeholder;
+        const roleCurrentLabel =
+            document.getElementById(
+                "role-current-label"
+            );
 
-    // 4. Mengambil role yang dipilih
-    function getSelectedRole() {
-        return document.querySelector(
-            'input[name="jenis_pengguna"]:checked'
-        );
-    }
+        const roleError =
+            document.getElementById(
+                "role-error"
+            );
 
-    // 5. Menampilkan error input
-    function showInputError(input, message) {
+        const roleErrorText =
+            roleError?.querySelector(
+                ".login-validation-text"
+            );
 
-        const wrapper = input.closest(".login-input-wrap");
+        const loginButton =
+            loginForm?.querySelector(
+                'button[type="submit"]'
+            );
 
-        if (!wrapper) return;
+        /*
+        |--------------------------------------------------------------------------
+        | Validasi Elemen
+        |--------------------------------------------------------------------------
+        */
 
-        wrapper.classList.add("is-invalid");
+        if (
+            !loginForm ||
+            !usernameInput ||
+            !passwordInput ||
+            !roleControl ||
+            !rolePicker ||
+            !roleCurrentLabel ||
+            !loginButton
+        ) {
 
-        input.placeholder = message;
+            console.error(
+                "Elemen login ARTHA tidak lengkap."
+            );
 
-        input.setAttribute("aria-invalid", "true");
-    }
+            return;
+        }
 
-    // 6. Menghapus error input
-    function clearInputError(input, originalPlaceholder) {
+        /*
+        |--------------------------------------------------------------------------
+        | Placeholder
+        |--------------------------------------------------------------------------
+        */
 
-        const wrapper = input.closest(".login-input-wrap");
+        const originalUsernamePlaceholder =
+            usernameInput.placeholder;
 
-        if (!wrapper) return;
+        const originalPasswordPlaceholder =
+            passwordInput.placeholder;
 
-        wrapper.classList.remove("is-invalid");
+        const originalButtonHTML =
+            loginButton.innerHTML;
 
-        input.placeholder = originalPlaceholder;
+        /*
+        |--------------------------------------------------------------------------
+        | Ambil Role
+        |--------------------------------------------------------------------------
+        */
 
-        input.removeAttribute("aria-invalid");
-    }
+        function getSelectedRole() {
 
-    // 7. Menampilkan error pemilihan role
-    function showRoleError(message) {
+            return document.querySelector(
+                'input[name="jenis_pengguna"]:checked'
+            );
+        }
 
-        roleControl.classList.add("is-invalid");
+        /*
+        |--------------------------------------------------------------------------
+        | Error Role
+        |--------------------------------------------------------------------------
+        */
 
-        roleCurrentLabel.textContent = message;
+        function showRoleError(message) {
 
-        roleControl.setAttribute("aria-invalid", "true");
-    }
+            roleControl.classList.add(
+                "is-invalid"
+            );
 
-    // 8. Menghapus error pemilihan role
-    function clearRoleError() {
+            roleControl.setAttribute(
+                "aria-invalid",
+                "true"
+            );
 
-        roleControl.classList.remove("is-invalid");
+            if (roleErrorText) {
 
-        roleControl.removeAttribute("aria-invalid");
+                roleErrorText.textContent =
+                    message;
+            }
 
-        const selectedRole = getSelectedRole();
+            if (roleError) {
 
-        if (selectedRole) {
-
-            const selectedOption =
-                selectedRole.closest(".role-option");
-
-            const selectedLabel =
-                selectedOption?.querySelector("span");
-
-            if (selectedLabel) {
-                roleCurrentLabel.textContent =
-                    selectedLabel.textContent.trim();
+                roleError.hidden = false;
             }
         }
-    }
 
-    // 9. Memvalidasi username
-    function validateUsername() {
+        function clearRoleError() {
 
-        const username = usernameInput.value.trim();
-
-        if (!username) {
-
-            showInputError(
-                usernameInput,
-                "Username wajib diisi."
+            roleControl.classList.remove(
+                "is-invalid"
             );
 
-            return false;
+            roleControl.removeAttribute(
+                "aria-invalid"
+            );
+
+            if (roleError) {
+
+                roleError.hidden = true;
+            }
         }
 
-        clearInputError(
-            usernameInput,
-            originalUsernamePlaceholder
-        );
+        /*
+        |--------------------------------------------------------------------------
+        | Error Input
+        |--------------------------------------------------------------------------
+        */
 
-        return true;
-    }
+        function showInputError(
+            input,
+            message
+        ) {
 
-    // 10. Memvalidasi password
-    function validatePassword() {
+            const wrapper =
+                input.closest(
+                    ".login-input-wrap"
+                );
 
-        const password = passwordInput.value;
+            if (wrapper) {
 
-        if (!password.trim()) {
+                wrapper.classList.add(
+                    "is-invalid"
+                );
+            }
 
-            showInputError(
-                passwordInput,
-                "Kata sandi wajib diisi."
+            input.placeholder =
+                message;
+
+            input.setAttribute(
+                "aria-invalid",
+                "true"
             );
-
-            return false;
         }
 
-        clearInputError(
-            passwordInput,
-            originalPasswordPlaceholder
-        );
+        function clearInputError(
+            input,
+            originalPlaceholder
+        ) {
 
-        return true;
-    }
+            const wrapper =
+                input.closest(
+                    ".login-input-wrap"
+                );
 
-    // 11. Memvalidasi pemilihan role
-    function validateRole() {
+            if (wrapper) {
 
-        const selectedRole = getSelectedRole();
+                wrapper.classList.remove(
+                    "is-invalid"
+                );
+            }
 
-        if (!selectedRole) {
+            input.placeholder =
+                originalPlaceholder;
 
-            showRoleError(
-                "Silakan pilih jenis pengguna."
+            input.removeAttribute(
+                "aria-invalid"
             );
-
-            return false;
         }
 
-        clearRoleError();
+        /*
+        |--------------------------------------------------------------------------
+        | Validasi Username
+        |--------------------------------------------------------------------------
+        */
 
-        return true;
-    }
+        function validateUsername() {
 
-    // 12. Menampilkan dan menyembunyikan password
-    if (togglePassword) {
+            const username =
+                usernameInput.value.trim();
 
-        togglePassword.type = "button";
+            if (!username) {
 
-        togglePassword.addEventListener("click", function () {
+                showInputError(
+                    usernameInput,
+                    "Username wajib diisi."
+                );
 
-            const isVisible =
-                passwordInput.type === "text";
-
-            passwordInput.type = isVisible
-                ? "password"
-                : "text";
-
-            this.setAttribute(
-                "aria-pressed",
-                String(!isVisible)
-            );
-
-            this.setAttribute(
-                "aria-label",
-                isVisible
-                    ? "Tampilkan kata sandi"
-                    : "Sembunyikan kata sandi"
-            );
-        });
-    }
-
-    // 13. Memvalidasi perubahan username
-    usernameInput.addEventListener("input", function () {
-
-        if (this.value.trim() !== "") {
+                return false;
+            }
 
             clearInputError(
                 usernameInput,
                 originalUsernamePlaceholder
             );
+
+            return true;
         }
-    });
 
-    // 14. Memvalidasi perubahan password
-    passwordInput.addEventListener("input", function () {
+        /*
+        |--------------------------------------------------------------------------
+        | Validasi Password
+        |--------------------------------------------------------------------------
+        */
 
-        if (this.value.trim() !== "") {
+        function validatePassword() {
+
+            const password =
+                passwordInput.value;
+
+            if (!password) {
+
+                showInputError(
+                    passwordInput,
+                    "Kata sandi wajib diisi."
+                );
+
+                return false;
+            }
 
             clearInputError(
                 passwordInput,
                 originalPasswordPlaceholder
             );
+
+            return true;
         }
-    });
 
-    // 15. Memproses pemilihan role
-    roleOptions.forEach(function (option) {
+        /*
+        |--------------------------------------------------------------------------
+        | Validasi Role
+        |--------------------------------------------------------------------------
+        */
 
-        option.addEventListener("change", function () {
+        function validateRole() {
 
-            if (!this.checked) return;
+            const selectedRole =
+                getSelectedRole();
 
-            const selectedOption =
-                this.closest(".role-option");
+            if (!selectedRole) {
 
-            const selectedLabel =
-                selectedOption?.querySelector("span");
+                showRoleError(
+                    "Silakan pilih jenis pengguna."
+                );
 
-            if (selectedLabel) {
-
-                roleCurrentLabel.textContent =
-                    selectedLabel.textContent.trim();
+                return false;
             }
-
-            rolePicker.open = false;
 
             clearRoleError();
 
-            console.log("Role dipilih:", this.value);
-        });
-    });
-
-    // 16. Memvalidasi form login
-    loginForm.noValidate = true;
-
-    loginForm.addEventListener("submit", function (event) {
-
-        event.preventDefault();
-
-        // Memvalidasi seluruh input
-        const usernameValid = validateUsername();
-
-        const passwordValid = validatePassword();
-
-        const roleValid = validateRole();
-
-        // Memfokuskan input pertama yang tidak valid
-        if (!usernameValid) {
-
-            usernameInput.focus();
-
-            return;
+            return true;
         }
 
-        if (!passwordValid) {
+        /*
+        |--------------------------------------------------------------------------
+        | Toggle Password
+        |--------------------------------------------------------------------------
+        */
 
-            passwordInput.focus();
+        if (togglePassword) {
 
-            return;
-        }
+            togglePassword.type =
+                "button";
 
-        if (!roleValid) {
+            togglePassword.addEventListener(
+                "click",
+                function () {
 
-            roleControl.focus();
+                    const isVisible =
+                        passwordInput.type ===
+                        "text";
 
-            return;
-        }
+                    passwordInput.type =
+                        isVisible
+                            ? "password"
+                            : "text";
 
-        // 17. Mengambil role yang dipilih
-        const selectedRole = getSelectedRole();
+                    this.setAttribute(
+                        "aria-pressed",
+                        String(!isVisible)
+                    );
 
-        const role = selectedRole.value;
-
-        // 18. Menentukan halaman dashboard berdasarkan role
-        const dashboardRoutes = {
-
-            admin: "admin/dashboard.php",
-
-            pemilik: "pemilik/dashboard.php",
-
-            kasir: "kasir/dashboard.php"
-
-        };
-
-        const destination = dashboardRoutes[role];
-
-        if (!destination) {
-
-            showRoleError(
-                "Jenis pengguna tidak dikenali."
+                    this.setAttribute(
+                        "aria-label",
+                        isVisible
+                            ? "Tampilkan kata sandi"
+                            : "Sembunyikan kata sandi"
+                    );
+                }
             );
-
-            roleControl.focus();
-
-            return;
         }
 
-        // 19. Menampilkan informasi pengujian
-        console.log("Login ARTHA");
-        console.log("Role:", role);
-        console.log("Tujuan:", destination);
+        /*
+        |--------------------------------------------------------------------------
+        | Input Username
+        |--------------------------------------------------------------------------
+        */
 
-        // 20. Mengarahkan pengguna ke dashboard
-        window.location.assign(
-            new URL(destination, document.baseURI).href
+        usernameInput.addEventListener(
+            "input",
+            function () {
+
+                if (
+                    this.value.trim() !== ""
+                ) {
+
+                    clearInputError(
+                        usernameInput,
+                        originalUsernamePlaceholder
+                    );
+                }
+            }
         );
 
-    });
+        /*
+        |--------------------------------------------------------------------------
+        | Input Password
+        |--------------------------------------------------------------------------
+        */
 
-    console.log("Auth ARTHA berhasil dimuat.");
+        passwordInput.addEventListener(
+            "input",
+            function () {
 
-});
+                if (
+                    this.value !== ""
+                ) {
+
+                    clearInputError(
+                        passwordInput,
+                        originalPasswordPlaceholder
+                    );
+                }
+            }
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Pilihan Role
+        |--------------------------------------------------------------------------
+        */
+
+        roleOptions.forEach(
+            function (option) {
+
+                option.addEventListener(
+                    "change",
+                    function () {
+
+                        if (!this.checked) {
+                            return;
+                        }
+
+                        const selectedOption =
+                            this.closest(
+                                ".role-option"
+                            );
+
+                        const selectedLabel =
+                            selectedOption?.querySelector(
+                                "span"
+                            );
+
+                        if (selectedLabel) {
+
+                            roleCurrentLabel.textContent =
+                                selectedLabel.textContent.trim();
+                        }
+
+                        rolePicker.open =
+                            false;
+
+                        clearRoleError();
+
+                        console.log(
+                            "Role dipilih:",
+                            this.value
+                        );
+                    }
+                );
+            }
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Submit Login
+        |--------------------------------------------------------------------------
+        */
+
+        loginForm.noValidate =
+            true;
+
+        loginForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+                /*
+                | Validasi input
+                */
+
+                if (!validateUsername()) {
+
+                    usernameInput.focus();
+
+                    return;
+                }
+
+                if (!validatePassword()) {
+
+                    passwordInput.focus();
+
+                    return;
+                }
+
+                if (!validateRole()) {
+
+                    roleControl.focus();
+
+                    return;
+                }
+
+                /*
+                | Pastikan API tersedia
+                */
+
+                if (
+                    !window.ARTHA_API ||
+                    typeof window.ARTHA_API.post !==
+                    "function"
+                ) {
+
+                    showRoleError(
+                        "API ARTHA tidak tersedia. Silakan muat ulang halaman."
+                    );
+
+                    console.error(
+                        "window.ARTHA_API tidak ditemukan."
+                    );
+
+                    return;
+                }
+
+                const selectedRole =
+                    getSelectedRole();
+
+                const username =
+                    usernameInput.value.trim();
+
+                const password =
+                    passwordInput.value;
+
+                const role =
+                    selectedRole.value;
+
+                /*
+                | Loading
+                */
+
+                loginButton.disabled =
+                    true;
+
+                loginButton.innerHTML =
+                    "<span>Memeriksa...</span>";
+
+                clearRoleError();
+
+                try {
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Kirim Login ke Backend
+                    |--------------------------------------------------------------------------
+                    */
+
+                    const response =
+                        await window.ARTHA_API.post(
+                            "login",
+                            {
+                                username,
+                                password,
+                                role
+                            }
+                        );
+
+                    console.log(
+                        "Respons login:",
+                        response
+                    );
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Validasi Response
+                    |--------------------------------------------------------------------------
+                    */
+
+                    if (
+                        !response ||
+                        response.success !== true ||
+                        !response.data ||
+                        !response.data.user
+                    ) {
+
+                        throw new Error(
+                            response?.message ||
+                            "Login gagal."
+                        );
+                    }
+
+                    const user =
+                        response.data.user;
+
+                    const actualRole =
+                        String(
+                            user.peran || ""
+                        ).toLowerCase();
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Pastikan Role Sesuai
+                    |--------------------------------------------------------------------------
+                    */
+
+                    if (
+                        actualRole !== role
+                    ) {
+
+                        throw new Error(
+                            "Role akun tidak sesuai."
+                        );
+                    }
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Ambil Redirect dari Backend
+                    |--------------------------------------------------------------------------
+                    */
+
+                    const destination =
+                        response.data.redirect;
+
+                    if (!destination) {
+
+                        throw new Error(
+                            "Tujuan dashboard tidak tersedia."
+                        );
+                    }
+
+                    console.log(
+                        "Login berhasil."
+                    );
+
+                    console.log(
+                        "User:",
+                        user.nama_pengguna
+                    );
+
+                    console.log(
+                        "Role:",
+                        actualRole
+                    );
+
+                    console.log(
+                        "Redirect:",
+                        destination
+                    );
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Redirect
+                    |--------------------------------------------------------------------------
+                    */
+
+                    window.location.href =
+                        new URL(
+                            destination,
+                            document.baseURI
+                        ).href;
+
+                } catch (error) {
+
+                    console.error(
+                        "Login ARTHA gagal:",
+                        error
+                    );
+
+                    showRoleError(
+                        error.message ||
+                        "Username atau password salah."
+                    );
+
+                    loginButton.disabled =
+                        false;
+
+                    loginButton.innerHTML =
+                        originalButtonHTML;
+
+                }
+
+            }
+        );
+
+        console.log(
+            "Auth ARTHA berhasil dimuat."
+        );
+
+    }
+);

@@ -115,7 +115,7 @@
                 </a>
 
                 <!-- Keluar -->
-                <a href="../index.php" class="nav-item logout">
+                <a href="../logout.php" class="nav-item logout">
                     <img src="../assets/icons/actions/logout.svg"
                          alt=""
                          class="nav-icon">

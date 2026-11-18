@@ -264,8 +264,7 @@
 
                 </a>
 
-                <a href="../index.php"
-                   class="nav-item logout">
+                <a href="../logout.php" class="nav-item logout">
 
                     <img src="../assets/icons/actions/logout.svg"
                          class="nav-icon"
@@ -627,6 +626,8 @@
     <script src="../assets/js/shared/popup.js" defer></script>
     <script src="../assets/js/pemilik/dashboard.js" defer></script>
     <script src="../assets/js/navigation.js" defer></script>
+    <script src="../assets/js/api.js" defer></script>
+    <script src="../assets/js/config.js" defer></script>
 
 </body>
 </html>

@@ -293,6 +293,9 @@
     <!-- JavaScript konfigurasi -->
     <script src="assets/js/config.js" defer></script>
 
+    <!-- JavaScript API -->
+    <script src="assets/js/api.js" defer></script>
+
     <!-- JavaScript popup -->
     <script src="assets/js/shared/popup.js" defer></script>
 
@@ -300,5 +303,4 @@
     <script src="assets/js/auth.js" defer></script>
 
 </body>
-
 </html>
