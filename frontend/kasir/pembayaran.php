@@ -319,17 +319,15 @@
 
     </div>
 
-    <!-- JavaScript konfigurasi -->
     <script src="../assets/js/config.js" defer></script>
-
-    <!-- JavaScript popup -->
+    <script src="../assets/js/api.js" defer></script>
     <script src="../assets/js/shared/popup.js" defer></script>
-
-    <!-- JavaScript navigasi -->
     <script src="../assets/js/navigation.js" defer></script>
-
-    <!-- JavaScript pembayaran -->
     <script src="../assets/js/kasir/pembayaran.js" defer></script>
+
+</body>
+</html>
+
 
 </body>
 

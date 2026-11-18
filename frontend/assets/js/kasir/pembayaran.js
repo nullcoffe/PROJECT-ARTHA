@@ -1,15 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
+    "use strict";
 
-    // 1. MENGAMBIL ELEMEN HTML
+    // Mengambil elemen halaman pembayaran.
     const tableBody = document.getElementById("paymentTableBody");
     const totalElement = document.getElementById("paymentTotal");
     const receivedInput = document.getElementById("uang-diterima");
     const changeValue = document.querySelector(".change-value");
     const paymentEquation = document.getElementById("paymentEquation");
+
     const quickAmounts = document.querySelectorAll(".quick-amounts a");
-    const finishButton = document.querySelector(
-        ".payment-actions .button-primary"
-    );
+
+    const finishButton = document.getElementById("finishTransaction");
 
     if (
         !tableBody ||
@@ -19,36 +20,45 @@ document.addEventListener("DOMContentLoaded", function () {
         !paymentEquation ||
         !finishButton
     ) {
-
-        console.error("Elemen pembayaran tidak ditemukan.");
-
+        console.error("[ARTHA] Elemen pembayaran tidak lengkap.");
         return;
-
     }
 
-    // 2. FUNGSI POPUP CUSTOM ARTHA
-    function showPaymentPopup(type, message, options = {}) {
+    // Menampilkan popup ARTHA.
+    async function showPaymentPopup(type, message, options = {}) {
         if (
             window.arthaPopup &&
             typeof window.arthaPopup[type] === "function"
         ) {
             return window.arthaPopup[type](message, options);
         }
-        console.error(
-            "ARTHA Custom Popup belum tersedia. Periksa popup.js."
-        );
-        return Promise.resolve(false);
+
+        window.alert(message);
+        return false;
     }
 
-    // 3. MEMBACA DATA TRANSAKSI
+    // Format nominal Rupiah.
+    function formatRupiah(amount) {
+        return "Rp " + Number(amount || 0).toLocaleString("id-ID");
+    }
+
+    // Mengambil angka dari input Rupiah.
+    function parseRupiah(value) {
+        return Number(String(value).replace(/\D/g, "")) || 0;
+    }
+
+    // Mengambil data keranjang dari sessionStorage.
     let transactionData;
 
     try {
         const savedData = sessionStorage.getItem("artha_pos_cart");
+
         if (!savedData) {
-            throw new Error("Data transaksi tidak ditemukan.");
+            throw new Error("Data keranjang tidak ditemukan.");
         }
+
         transactionData = JSON.parse(savedData);
+
         if (
             !transactionData ||
             !Array.isArray(transactionData.items) ||
@@ -56,54 +66,47 @@ document.addEventListener("DOMContentLoaded", function () {
         ) {
             throw new Error("Data keranjang tidak valid.");
         }
+
     } catch (error) {
-        console.error("Gagal membaca transaksi:", error);
+        console.error("[ARTHA] Gagal membaca keranjang:", error);
+
         tableBody.replaceChildren();
+
         const row = document.createElement("tr");
         const cell = document.createElement("td");
+
         cell.colSpan = 5;
         cell.textContent = "Data transaksi tidak ditemukan.";
+
         row.appendChild(cell);
         tableBody.appendChild(row);
-        totalElement.textContent = "Rp 0";
+
+        totalElement.textContent = formatRupiah(0);
+
         finishButton.addEventListener("click", function (event) {
             event.preventDefault();
-            event.stopPropagation();
+
             showPaymentPopup(
                 "warning",
-                "Uang yang diterima masih kurang " +
-                formatRupiah(kekurangan) +
-                ". Silakan masukkan nominal pembayaran yang mencukupi.",
+                "Silakan kembali ke halaman POS dan pilih produk terlebih dahulu.",
                 {
-                    title: "Uang Tidak Cukup",
-                    confirmText: "Mengerti"
+                    title: "Keranjang Kosong"
                 }
             );
-
         });
 
         return;
-
     }
 
-    // 4. FORMAT RUPIAH
-    function formatRupiah(amount) {
-        return "Rp " + Number(amount).toLocaleString("id-ID");
-    }
-
-    function parseRupiah(value) {
-        return Number(
-            String(value).replace(/\D/g, "")
-        ) || 0;
-    }
-
-    // 5. VALIDASI DATA PRODUK
+    // Memvalidasi seluruh data produk.
     const validItems = transactionData.items.filter(function (item) {
+        const productId = Number(item.id_produk ?? item.id);
         const price = Number(item.price);
         const quantity = Number(item.quantity);
+
         return (
-            item.id !== undefined &&
-            item.id !== null &&
+            Number.isInteger(productId) &&
+            productId > 0 &&
             item.name &&
             Number.isFinite(price) &&
             price >= 0 &&
@@ -116,44 +119,39 @@ document.addEventListener("DOMContentLoaded", function () {
         validItems.length !== transactionData.items.length ||
         validItems.length === 0
     ) {
-
-        console.error("Terdapat data produk yang tidak valid.");
-
-        tableBody.replaceChildren();
+        finishButton.addEventListener("click", function (event) {
+            event.preventDefault();
+        });
 
         showPaymentPopup(
-            "warning",
-            "Data produk tidak valid. Periksa kembali keranjang.",
+            "error",
+            "Terdapat data produk yang tidak valid. Silakan kembali ke POS.",
             {
-                title: "Data Transaksi Tidak Valid",
-                confirmText: "Mengerti"
+                title: "Data Transaksi Tidak Valid"
             }
         );
 
-
-        finishButton.addEventListener("click", function (event) {
-
-            event.preventDefault();
-
-            event.stopPropagation();
-
-        });
-
         return;
-
     }
 
-    // 6. MENAMPILKAN RINGKASAN TRANSAKSI
-    let calculatedTotal = 0;
+    // Menampilkan ringkasan transaksi.
+    let total = 0;
+
     tableBody.replaceChildren();
+
     validItems.forEach(function (item) {
+        const productId = Number(item.id_produk ?? item.id);
         const price = Number(item.price);
         const quantity = Number(item.quantity);
+
         const subtotal = price * quantity;
-        calculatedTotal += subtotal;
+
+        total += subtotal;
+
         const row = document.createElement("tr");
+
         const values = [
-            item.id,
+            item.code || ("PRD" + String(productId).padStart(3, "0")),
             item.name,
             formatRupiah(price),
             quantity,
@@ -162,6 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         values.forEach(function (value, index) {
             const cell = document.createElement("td");
+
             if (index === 0) {
                 const strong = document.createElement("strong");
                 strong.textContent = value;
@@ -169,20 +168,22 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 cell.textContent = value;
             }
+
             row.appendChild(cell);
         });
 
         tableBody.appendChild(row);
     });
 
-    const total = calculatedTotal;
     totalElement.textContent = formatRupiah(total);
 
-    // 7. MENGHITUNG UANG DITERIMA DAN KEMBALIAN
+    // Mengatur nominal pembayaran.
     let receivedAmount = 0;
+    let isProcessing = false;
 
     function updatePayment(formatInput = false) {
         const change = receivedAmount - total;
+
         if (formatInput) {
             receivedInput.value =
                 receivedAmount.toLocaleString("id-ID");
@@ -194,6 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             changeValue.textContent =
                 "Kurang " + formatRupiah(Math.abs(change));
+
             changeValue.style.color = "#E05252";
         }
 
@@ -205,7 +207,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     updatePayment(true);
 
-    // 8. INPUT UANG DITERIMA
+    // Mengatur input uang diterima.
     receivedInput.addEventListener("focus", function () {
         if (receivedAmount === 0) {
             this.value = "";
@@ -213,26 +215,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     receivedInput.addEventListener("input", function () {
-        // Posisi kursor sebelum format berubah
-        const cursorPosition = this.selectionStart;
-        // Jumlah angka sebelum posisi kursor
+        const cursorPosition = this.selectionStart || 0;
+
         const digitsBeforeCursor = this.value
             .slice(0, cursorPosition)
             .replace(/\D/g, "")
             .length;
 
-        // Mengambil angka saja
         const rawValue = this.value.replace(/\D/g, "");
-        // Menghitung uang diterima
+
         receivedAmount = Number(rawValue) || 0;
-        // Format Rupiah
+
         const formattedValue = rawValue
             ? Number(rawValue).toLocaleString("id-ID")
             : "";
 
         this.value = formattedValue;
 
-        // Mengembalikan posisi kursor
         let newCursorPosition = 0;
         let digitCount = 0;
 
@@ -243,6 +242,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (/\d/.test(formattedValue[newCursorPosition])) {
                 digitCount++;
             }
+
             newCursorPosition++;
         }
 
@@ -251,22 +251,22 @@ document.addEventListener("DOMContentLoaded", function () {
             newCursorPosition
         );
 
-        // Memperbarui perhitungan
         updatePayment(false);
     });
 
-    // 9. MENGEMBALIKAN NILAI KETIKA INPUT KOSONG
     receivedInput.addEventListener("blur", function () {
         if (this.value === "") {
             receivedAmount = 0;
         }
+
         updatePayment(true);
     });
 
-    // 10. TOMBOL NOMINAL UANG CEPAT
+    // Tombol nominal pembayaran cepat.
     quickAmounts.forEach(function (button) {
         button.addEventListener("click", function (event) {
             event.preventDefault();
+
             const amount = parseRupiah(
                 button.dataset.amount || button.textContent
             );
@@ -278,19 +278,21 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // 11. MENYELESAIKAN TRANSAKSI
-    finishButton.addEventListener("click", function (event) {
+    // Memproses pembayaran ke database.
+    finishButton.addEventListener("click", async function (event) {
+        event.preventDefault();
 
-        // VALIDASI UANG TIDAK CUKUP
+        if (isProcessing) {
+            return;
+        }
+
         if (receivedAmount < total) {
-            event.preventDefault();
-            event.stopPropagation();
-            const kekurangan = total - receivedAmount;
+            const shortage = total - receivedAmount;
 
-            showPaymentPopup(
+            await showPaymentPopup(
                 "warning",
                 "Uang yang diterima masih kurang " +
-                formatRupiah(kekurangan) +
+                formatRupiah(shortage) +
                 ". Silakan masukkan nominal pembayaran yang mencukupi.",
                 {
                     title: "Uang Tidak Cukup",
@@ -301,117 +303,173 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // MEMBUAT DATA PEMBAYARAN
-        const paymentData = {
-            transactionId: "TRX-" + Date.now(),
-            items: validItems,
-            total: total,
-            paymentMethod: "Tunai",
-            receivedAmount: receivedAmount,
-            change: receivedAmount - total,
-            completedAt: new Date().toISOString()
+        if (
+            !window.ARTHA_API ||
+            typeof window.ARTHA_API.post !== "function"
+        ) {
+            await showPaymentPopup(
+                "error",
+                "ARTHA API belum tersedia. Periksa pemuatan api.js.",
+                {
+                    title: "Koneksi API Bermasalah"
+                }
+            );
+
+            return;
+        }
+
+        // Membentuk payload yang dibutuhkan backend.
+        const payload = {
+            uang_diterima: receivedAmount,
+            items: validItems.map(function (item) {
+                return {
+                    id_produk: Number(item.id_produk ?? item.id),
+                    jumlah: Number(item.quantity)
+                };
+            })
         };
 
-        // MENYIMPAN DATA PEMBAYARAN
+        isProcessing = true;
+
+        finishButton.style.pointerEvents = "none";
+        finishButton.style.opacity = "0.6";
+
+        const originalButtonText = finishButton.textContent;
+
+        finishButton.textContent = "Memproses Pembayaran...";
+
         try {
+            // Mengirim transaksi ke backend.
+            const response = await window.ARTHA_API.post(
+                "kasir/transactions",
+                payload
+            );
+
+            const result = response.data;
+
+            if (
+                !result ||
+                !result.nomor_transaksi ||
+                !Array.isArray(result.items)
+            ) {
+                throw new Error(
+                    "Respons penyimpanan transaksi tidak lengkap."
+                );
+            }
+
+            // Mengubah hasil backend menjadi format data struk.
+            const paymentData = {
+                transactionId: result.nomor_transaksi,
+
+                databaseId: result.id_transaksi,
+
+                items: result.items.map(function (item) {
+                    return {
+                        id: item.kode_produk,
+                        id_produk: item.id_produk,
+                        code: item.kode_produk,
+                        name: item.nama_produk,
+                        unit: item.satuan,
+                        price: Number(item.harga_satuan),
+                        quantity: Number(item.jumlah),
+                        subtotal: Number(item.subtotal)
+                    };
+                }),
+
+                total: Number(result.total_bayar),
+
+                paymentMethod: "Tunai",
+
+                receivedAmount: Number(result.uang_diterima),
+
+                change: Number(result.uang_kembalian),
+
+                completedAt: result.tanggal_transaksi
+                    ? result.tanggal_transaksi.replace(" ", "T")
+                    : new Date().toISOString()
+            };
+
+            // Memastikan nominal yang dikembalikan backend sesuai.
+            if (
+                !Number.isFinite(paymentData.total) ||
+                !Number.isFinite(paymentData.receivedAmount) ||
+                !Number.isFinite(paymentData.change) ||
+                paymentData.receivedAmount < paymentData.total ||
+                Math.abs(
+                    paymentData.receivedAmount -
+                    paymentData.total -
+                    paymentData.change
+                ) > 0.01
+            ) {
+                throw new Error(
+                    "Data pembayaran dari server tidak konsisten."
+                );
+            }
+
+            // Menyimpan data untuk halaman cetak struk.
             sessionStorage.setItem(
                 "artha_payment_data",
                 JSON.stringify(paymentData)
             );
 
-            // MENGHAPUS KERANJANG AKTIF
-
-            // Data pembayaran sudah disimpan.
-            // Data ini tetap tersedia untuk cetak struk.
+            // Menghapus keranjang setelah transaksi berhasil disimpan.
             sessionStorage.removeItem("artha_pos_cart");
-            
-            // MENGOSONGKAN RINGKASAN TRANSAKSI
-            tableBody.replaceChildren();
-            totalElement.textContent = formatRupiah(0);
 
-            // RESET PEMBAYARAN
-            receivedAmount = 0;
-
-            receivedInput.value = "0";
-
-            changeValue.textContent = formatRupiah(0);
-
-            changeValue.style.color = "#269B68";
-
-
-            paymentEquation.textContent =
-
-                formatRupiah(0) +
-                " − " +
-                formatRupiah(0);
-
-
-            console.log(
-
-                "Transaksi ARTHA berhasil disimpan:",
-
+            console.info(
+                "[ARTHA] Transaksi berhasil disimpan ke MySQL.",
                 paymentData
-
             );
 
+            await showPaymentPopup(
+                "success",
+                "Transaksi " +
+                paymentData.transactionId +
+                " berhasil disimpan. Stok produk telah diperbarui.",
+                {
+                    title: "Pembayaran Berhasil",
+                    confirmText: "Cetak Struk"
+                }
+            );
 
-            // Navigasi menuju cetak struk dilakukan
-            // secara otomatis oleh href tombol Selesai Transaksi.
-
+            // Membuka halaman cetak struk.
+            window.location.href = "cetakStruk.php?nomor_transaksi=" + encodeURIComponent(paymentData.transactionId);
 
         } catch (error) {
-
-            event.preventDefault();
-
-            event.stopPropagation();
-
             console.error(
-
-                "Gagal menyimpan pembayaran:",
-
+                "[ARTHA] Gagal menyimpan transaksi:",
                 error
-
             );
 
-
-            showPaymentPopup(
-
+            await showPaymentPopup(
                 "error",
-                "Data pembayaran gagal disimpan. Silakan coba kembali.",
+                error.message ||
+                "Transaksi gagal disimpan. Silakan coba kembali.",
                 {
                     title: "Pembayaran Gagal",
                     confirmText: "Mengerti"
                 }
             );
+
+        } finally {
+            isProcessing = false;
+
+            finishButton.style.pointerEvents = "";
+            finishButton.style.opacity = "";
+            finishButton.textContent = originalButtonText;
         }
     });
 
-    // 12. AUTO CLEAR KETIKA KELUAR PEMBAYARAN
-    window.addEventListener("pagehide", function () {
-        sessionStorage.removeItem("artha_pos_cart");
-        console.log("Keranjang transaksi aktif telah dibersihkan.");
-    });
-
-    // 13. RESET TAMPILAN KETIKA KEMBALI
+    // Memastikan tampilan tidak memuat transaksi lama dari cache.
     window.addEventListener("pageshow", function (event) {
         if (
             event.persisted &&
             !sessionStorage.getItem("artha_pos_cart")
         ) {
-            tableBody.replaceChildren();
-            totalElement.textContent = formatRupiah(0);
-            receivedAmount = 0;
-            receivedInput.value = "0";
-            changeValue.textContent = formatRupiah(0);
-            changeValue.style.color = "#269B68";
-            paymentEquation.textContent =
-                formatRupiah(0) + " − " + formatRupiah(0);
+            window.location.reload();
         }
     });
 
-    // 14. LOG STATUS
-    console.log("Pembayaran ARTHA berhasil dimuat.");
-    console.log("Jumlah produk:", validItems.length);
-    console.log("Total pembayaran:", formatRupiah(total));
-
+    console.info("[ARTHA] Modul pembayaran berhasil dimuat.");
+    console.info("[ARTHA] Jumlah produk:", validItems.length);
+    console.info("[ARTHA] Total pembayaran:", formatRupiah(total));
 });

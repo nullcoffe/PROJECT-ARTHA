@@ -1,4 +1,3 @@
-
 <?php
 // Halaman cetak struk transaksi Kasir
 ?>
@@ -272,6 +271,7 @@
     <!-- JavaScript popup dan navigasi -->
     <script src="../assets/js/shared/popup.js" defer></script>
     <script src="../assets/js/navigation.js" defer></script>
+    <script src="../assets/js/api.js" defer></script>
 
     <!-- JavaScript cetak struk -->
     <script src="../assets/js/kasir/cetakStruk.js" defer></script>

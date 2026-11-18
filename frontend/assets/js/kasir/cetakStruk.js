@@ -1,7 +1,7 @@
+document.addEventListener("DOMContentLoaded", function () {
+    "use strict";
 
-document.addEventListener("DOMContentLoaded", async function () {
-
-    // Mengambil elemen struk
+    // Mengambil elemen struk.
     const transactionId = document.getElementById("receipt-transaction-id");
     const receiptDate = document.getElementById("receipt-date");
     const receiptItems = document.getElementById("receipt-items");
@@ -11,45 +11,24 @@ document.addEventListener("DOMContentLoaded", async function () {
     const receiptChange = document.getElementById("receipt-change");
 
     const receiptPaper = document.querySelector(".receipt-paper");
-
     const printButton = document.getElementById("btn-print");
     const pdfButton = document.getElementById("btn-save-pdf");
 
-    // Membersihkan data struk
-    function clearReceiptData() {
-        sessionStorage.removeItem("artha_payment_data");
-    }
+    let paymentData = null;
 
-    // Reset data ketika memulai transaksi baru
-    const newTransactionButton = Array.from(
-        document.querySelectorAll(".receipt-actions a")
-    ).find(function (link) {
-        return new URL(link.href).pathname.endsWith("/transaksiPOS.php");
-    });
-
-    if (newTransactionButton) {
-        newTransactionButton.addEventListener("click", function () {
-            clearReceiptData();
-            sessionStorage.removeItem("artha_pos_cart");
-        });
-    }
-
-    // Membersihkan struk saat meninggalkan halaman
-    window.addEventListener("pagehide", function () {
-        clearReceiptData();
-    });
-
-    // Mencegah struk lama muncul dari cache browser
-    window.addEventListener("pageshow", function (event) {
+    // Menampilkan popup ARTHA.
+    async function showPopup(type, message, options = {}) {
         if (
-            event.persisted &&
-            !sessionStorage.getItem("artha_payment_data")
+            window.arthaPopup &&
+            typeof window.arthaPopup[type] === "function"
         ) {
-            window.location.reload();
+            return window.arthaPopup[type](message, options);
         }
-    });
 
-    // Validasi elemen HTML
+        window.alert(message);
+    }
+
+    // Memastikan elemen HTML tersedia.
     if (
         !transactionId ||
         !receiptDate ||
@@ -60,372 +39,385 @@ document.addEventListener("DOMContentLoaded", async function () {
         !receiptChange ||
         !receiptPaper
     ) {
-        console.error("Elemen struk tidak ditemukan.");
+        console.error("[ARTHA] Elemen struk tidak lengkap.");
         return;
     }
 
-    // Format mata uang Rupiah
+    // Format nominal Rupiah.
     function formatRupiah(amount) {
-        return "Rp " + Number(amount).toLocaleString("id-ID");
+        return "Rp " + Number(amount || 0).toLocaleString("id-ID");
     }
 
-    // Membaca data pembayaran
-    let paymentData;
+    // Menampilkan pesan kegagalan pada area struk.
+    function showReceiptError(message) {
+        receiptItems.replaceChildren();
 
-    try {
-        const savedData = sessionStorage.getItem("artha_payment_data");
+        const errorMessage = document.createElement("p");
+        errorMessage.textContent = message;
+        errorMessage.style.textAlign = "center";
 
-        if (!savedData) {
-            throw new Error("Data pembayaran tidak ditemukan.");
-        }
-
-        paymentData = JSON.parse(savedData);
-
-        if (
-            !paymentData ||
-            !Array.isArray(paymentData.items) ||
-            paymentData.items.length === 0
-        ) {
-            throw new Error("Data transaksi tidak valid.");
-        }
-
-    } catch (error) {
-        console.error("Gagal membaca data struk:", error);
-
-        receiptItems.textContent = "Data transaksi tidak ditemukan.";
+        receiptItems.appendChild(errorMessage);
 
         if (printButton) printButton.disabled = true;
         if (pdfButton) pdfButton.disabled = true;
-
-        return;
     }
 
-    // Validasi data transaksi
-    let calculatedTotal = 0;
-
-    for (const item of paymentData.items) {
-        const price = Number(item.price);
-        const quantity = Number(item.quantity);
-
+    // Mengubah data database menjadi format tampilan struk.
+    function normalizeReceipt(data) {
         if (
-            !item.id ||
-            !item.name ||
-            !Number.isFinite(price) ||
-            price < 0 ||
-            !Number.isInteger(quantity) ||
-            quantity <= 0
+            !data ||
+            !data.nomor_transaksi ||
+            !Array.isArray(data.items) ||
+            data.items.length === 0
         ) {
-            console.error("Produk tidak valid:", item);
-
-            receiptItems.textContent =
-                "Terdapat data produk yang tidak valid.";
-
-            if (printButton) printButton.disabled = true;
-            if (pdfButton) pdfButton.disabled = true;
-
-            return;
+            throw new Error(
+                "Data struk tidak lengkap atau tidak memiliki detail produk."
+            );
         }
 
-        calculatedTotal += price * quantity;
-    }
+        const items = data.items.map(function (item) {
+            const price = Number(item.harga_satuan);
+            const quantity = Number(item.jumlah);
+            const subtotal = Number(item.subtotal);
 
-    const total = Number(paymentData.total);
-    const received = Number(paymentData.receivedAmount);
-    const change = Number(paymentData.change);
+            if (
+                !item.nama_produk ||
+                !Number.isFinite(price) ||
+                price < 0 ||
+                !Number.isFinite(quantity) ||
+                quantity <= 0 ||
+                !Number.isFinite(subtotal) ||
+                subtotal < 0
+            ) {
+                throw new Error(
+                    "Terdapat detail produk yang tidak valid pada transaksi."
+                );
+            }
 
-    if (
-        !Number.isFinite(total) ||
-        !Number.isFinite(received) ||
-        !Number.isFinite(change) ||
-        total !== calculatedTotal ||
-        received < total ||
-        change !== received - total ||
-        !paymentData.completedAt ||
-        !Number.isFinite(Date.parse(paymentData.completedAt))
-    ) {
-        console.error("Validasi pembayaran gagal:", paymentData);
+            if (Math.abs(subtotal - price * quantity) > 0.01) {
+                throw new Error(
+                    "Subtotal produk tidak sesuai dengan data transaksi."
+                );
+            }
 
-        receiptItems.textContent =
-            "Data pembayaran tidak konsisten. Silakan periksa transaksi.";
+            return {
+                id_produk: Number(item.id_produk),
+                code: item.kode_produk || "-",
+                name: item.nama_produk,
+                unit: item.satuan || "",
+                price: price,
+                quantity: quantity,
+                subtotal: subtotal
+            };
+        });
 
-        if (printButton) printButton.disabled = true;
-        if (pdfButton) pdfButton.disabled = true;
+        const total = Number(data.total_bayar);
+        const received = Number(data.uang_diterima);
+        const change = Number(data.uang_kembalian);
 
-        return;
-    }
-
-    // Menampilkan identitas transaksi
-    const completedDate = new Date(paymentData.completedAt);
-
-    const generatedId = "TRX-" + completedDate.getTime();
-
-    transactionId.textContent =
-        paymentData.transactionId || generatedId;
-
-    receiptDate.textContent = completedDate.toLocaleString("id-ID", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit"
-    });
-
-    // Menampilkan daftar produk
-    receiptItems.replaceChildren();
-
-    paymentData.items.forEach(function (item) {
-        const row = document.createElement("div");
-        row.className = "receipt-line";
-
-        const productName = document.createElement("span");
-        productName.textContent = item.name + " x" + item.quantity;
-
-        const subtotal = document.createElement("span");
-        subtotal.textContent = formatRupiah(
-            Number(item.price) * Number(item.quantity)
+        const calculatedTotal = items.reduce(
+            function (sum, item) {
+                return sum + item.subtotal;
+            },
+            0
         );
 
-        row.appendChild(productName);
-        row.appendChild(subtotal);
+        if (
+            !Number.isFinite(total) ||
+            !Number.isFinite(received) ||
+            !Number.isFinite(change) ||
+            Math.abs(total - calculatedTotal) > 0.01 ||
+            received < total ||
+            Math.abs(change - (received - total)) > 0.01
+        ) {
+            throw new Error(
+                "Data pembayaran pada database tidak konsisten."
+            );
+        }
 
-        receiptItems.appendChild(row);
-    });
+        return {
+            transactionId: data.nomor_transaksi,
+            completedAt: data.tanggal_transaksi,
+            items: items,
+            total: total,
+            paymentMethod: data.metode_pembayaran || "Tunai",
+            receivedAmount: received,
+            change: change
+        };
+    }
 
-    // Menampilkan ringkasan pembayaran
-    receiptTotal.textContent = formatRupiah(total);
-    receiptMethod.textContent = paymentData.paymentMethod || "-";
-    receiptReceived.textContent = formatRupiah(received);
-    receiptChange.textContent = formatRupiah(change);
+    // Mengambil struk langsung dari database melalui API.
+    async function loadReceipt() {
+        try {
+            if (
+                !window.ARTHA_API ||
+                typeof window.ARTHA_API.get !== "function"
+            ) {
+                throw new Error(
+                    "ARTHA API belum tersedia. Pastikan api.js sudah dimuat."
+                );
+            }
 
-    // Fungsi cetak struk
+            const params = new URLSearchParams(
+                window.location.search
+            );
+
+            // Jika nomor tidak diberikan, tampilkan transaksi terakhir milik Kasir.
+            const number = params.get("nomor_transaksi") || "latest";
+
+            const response = await window.ARTHA_API.get(
+                "kasir/transactions/" + encodeURIComponent(number)
+            );
+
+            paymentData = normalizeReceipt(response.data);
+
+            renderReceipt();
+
+            console.info(
+                "[ARTHA] Struk berhasil dimuat dari MySQL:",
+                paymentData.transactionId
+            );
+
+        } catch (error) {
+            console.error(
+                "[ARTHA] Gagal memuat struk dari database:",
+                error
+            );
+
+            showReceiptError(
+                error.message || "Gagal memuat data struk."
+            );
+
+            await showPopup(
+                "error",
+                error.message || "Data struk tidak dapat dimuat.",
+                {
+                    title: "Gagal Memuat Struk",
+                    confirmText: "Mengerti"
+                }
+            );
+        }
+    }
+
+    // Menampilkan data transaksi pada kertas struk.
+    function renderReceipt() {
+        transactionId.textContent = paymentData.transactionId;
+
+        const dateValue = new Date(
+            String(paymentData.completedAt).replace(" ", "T")
+        );
+
+        receiptDate.textContent = Number.isNaN(dateValue.getTime())
+            ? paymentData.completedAt
+            : dateValue.toLocaleString("id-ID", {
+                day: "2-digit",
+                month: "long",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit"
+            });
+
+        receiptItems.replaceChildren();
+
+        paymentData.items.forEach(function (item) {
+            const row = document.createElement("div");
+            row.className = "receipt-line";
+
+            const productName = document.createElement("span");
+            productName.textContent =
+                item.name +
+                " x" +
+                item.quantity +
+                (item.unit ? " " + item.unit : "");
+
+            const subtotal = document.createElement("span");
+            subtotal.textContent = formatRupiah(item.subtotal);
+
+            row.append(productName, subtotal);
+            receiptItems.appendChild(row);
+        });
+
+        receiptTotal.textContent = formatRupiah(paymentData.total);
+        receiptMethod.textContent = paymentData.paymentMethod;
+        receiptReceived.textContent = formatRupiah(
+            paymentData.receivedAmount
+        );
+        receiptChange.textContent = formatRupiah(paymentData.change);
+
+        if (printButton) printButton.disabled = false;
+        if (pdfButton) pdfButton.disabled = false;
+    }
+
+    // Mencetak struk menggunakan dialog cetak browser.
     if (printButton) {
         printButton.addEventListener("click", function () {
+            if (!paymentData) return;
             window.print();
         });
     }
 
-    // Download PDF dinamis
+    // Menyimpan struk sebagai PDF.
     if (pdfButton) {
         pdfButton.addEventListener("click", async function (event) {
-
             event.preventDefault();
 
-            // Memastikan library PDF tersedia
+            if (!paymentData) return;
+
             if (typeof html2pdf === "undefined") {
-                console.error("Library html2pdf tidak tersedia.");
-
-                if (window.arthaPopup) {
-                    window.arthaPopup.error(
-                        "Library PDF belum berhasil dimuat."
-                    );
-                }
-
+                await showPopup(
+                    "error",
+                    "Library PDF belum berhasil dimuat. Periksa koneksi internet.",
+                    {
+                        title: "PDF Tidak Tersedia"
+                    }
+                );
                 return;
             }
 
-            let measureContainer = null;
-
             const originalButtonHTML = pdfButton.innerHTML;
+            let temporaryContainer = null;
 
             try {
-                // Mengubah status tombol
                 pdfButton.disabled = true;
                 pdfButton.textContent = "Menyiapkan PDF...";
 
-                const paperWidthMM = 80;
-                const paddingMM = 8;
-                const pxToMM = 25.4 / 96;
-
-                // Menunggu font selesai dimuat
                 if (document.fonts && document.fonts.ready) {
                     await document.fonts.ready;
                 }
 
-                // Membuat salinan struk untuk PDF
                 const pdfReceipt = receiptPaper.cloneNode(true);
 
                 pdfReceipt.classList.add("receipt-pdf-export");
 
-                // Mengatur ukuran dan tampilan salinan
-                const pdfStyles = {
-                    width: paperWidthMM + "mm",
-                    "min-width": "0",
-                    "max-width": "none",
+                Object.assign(pdfReceipt.style, {
+                    width: "80mm",
+                    minWidth: "0",
+                    maxWidth: "80mm",
                     height: "auto",
-                    "min-height": "0",
-                    "max-height": "none",
-                    padding: paddingMM + "mm",
+                    minHeight: "0",
+                    maxHeight: "none",
+                    padding: "8mm",
                     margin: "0",
-                    "box-sizing": "border-box",
+                    boxSizing: "border-box",
                     position: "static",
                     overflow: "visible",
                     border: "none",
-                    "border-radius": "0",
-                    "box-shadow": "none",
+                    borderRadius: "0",
+                    boxShadow: "none",
                     background: "#FFFFFF"
-                };
-
-                Object.entries(pdfStyles).forEach(function ([property, value]) {
-                    pdfReceipt.style.setProperty(
-                        property,
-                        value,
-                        "important"
-                    );
                 });
 
-                // Mengatur baris produk
-                const pdfRows = pdfReceipt.querySelectorAll(".receipt-line");
+                temporaryContainer = document.createElement("div");
 
-                pdfRows.forEach(function (row) {
-                    row.style.display = "flex";
-                    row.style.alignItems = "flex-start";
-                    row.style.justifyContent = "space-between";
-                    row.style.gap = "10px";
-                    row.style.width = "100%";
-                    row.style.boxSizing = "border-box";
-
-                    const spans = row.querySelectorAll("span");
-
-                    if (spans.length >= 2) {
-                        spans[0].style.flex = "1";
-                        spans[0].style.minWidth = "0";
-                        spans[0].style.overflowWrap = "anywhere";
-
-                        spans[1].style.flexShrink = "0";
-                        spans[1].style.textAlign = "right";
-                        spans[1].style.whiteSpace = "nowrap";
-                    }
+                Object.assign(temporaryContainer.style, {
+                    position: "fixed",
+                    left: "-10000px",
+                    top: "0",
+                    width: "80mm",
+                    background: "#FFFFFF",
+                    overflow: "visible"
                 });
 
-                // Membuat wadah pengukuran PDF
-                measureContainer = document.createElement("div");
+                temporaryContainer.appendChild(pdfReceipt);
+                document.body.appendChild(temporaryContainer);
 
-                measureContainer.style.position = "fixed";
-                measureContainer.style.left = "-10000px";
-                measureContainer.style.top = "0";
-                measureContainer.style.width = paperWidthMM + "mm";
-                measureContainer.style.height = "auto";
-                measureContainer.style.margin = "0";
-                measureContainer.style.padding = "0";
-                measureContainer.style.background = "#FFFFFF";
-                measureContainer.style.overflow = "visible";
-                measureContainer.style.zIndex = "-1";
-
-                measureContainer.appendChild(pdfReceipt);
-                document.body.appendChild(measureContainer);
-
-                // Menunggu layout selesai
                 await new Promise(function (resolve) {
                     requestAnimationFrame(resolve);
                 });
 
-                // Menghitung tinggi struk
-                const receiptHeightPX = Math.max(
+                const heightPX = Math.max(
                     pdfReceipt.scrollHeight,
                     pdfReceipt.getBoundingClientRect().height
                 );
 
-                const contentHeightMM = receiptHeightPX * pxToMM;
+                const heightMM = Math.ceil(
+                    heightPX * 25.4 / 96
+                ) + 18;
 
-                const paperHeightMM =
-                    Math.ceil(contentHeightMM * 10) / 10 + 2;
-
-                // Membatasi ukuran PDF
-                if (paperHeightMM > 5000) {
+                if (heightMM > 5000) {
                     throw new Error(
-                        "Struk terlalu panjang untuk satu halaman PDF."
+                        "Ukuran struk terlalu panjang."
                     );
                 }
 
-                // Konfigurasi PDF
-                const options = {
-                    margin: 0,
+                const fileName =
+                    "Struk-" +
+                    paymentData.transactionId +
+                    ".pdf";
 
-                    filename:
-                        "Struk-" +
-                        (paymentData.transactionId || generatedId) +
-                        ".pdf",
-
-                    image: {
-                        type: "jpeg",
-                        quality: 0.98
-                    },
-
-                    html2canvas: {
-                        scale: 2,
-                        useCORS: true,
-                        backgroundColor: "#FFFFFF",
-                        scrollX: 0,
-                        scrollY: 0
-                    },
-
-                    jsPDF: {
-                        unit: "mm",
-                        format: [
-                            paperWidthMM,
-                            paperHeightMM
-                        ],
-                        orientation: "portrait"
-                    },
-
-                    pagebreak: {
-                        mode: []
-                    }
-                };
-
-                // Membuat dan mengunduh PDF
                 await html2pdf()
-                    .set(options)
+                    .set({
+                        margin: 0,
+                        filename: fileName,
+                        image: {
+                            type: "jpeg",
+                            quality: 0.98
+                        },
+                        html2canvas: {
+                            scale: 2,
+                            useCORS: true,
+                            backgroundColor: "#FFFFFF",
+                            scrollX: 0,
+                            scrollY: 0
+                        },
+                        jsPDF: {
+                            unit: "mm",
+                            format: [80, heightMM],
+                            orientation: "portrait"
+                        },
+                        pagebreak: {
+                            mode: []
+                        }
+                    })
                     .from(pdfReceipt)
                     .save();
 
-                console.log("PDF struk berhasil diunduh.");
-
-                console.log(
-                    "Ukuran PDF:",
-                    paperWidthMM + "mm x " +
-                    paperHeightMM.toFixed(1) + "mm"
+                await showPopup(
+                    "success",
+                    "Struk berhasil disimpan sebagai PDF.",
+                    {
+                        title: "PDF Berhasil"
+                    }
                 );
 
             } catch (error) {
-                console.error("Gagal membuat PDF:", error);
+                console.error(
+                    "[ARTHA] Gagal membuat PDF:",
+                    error
+                );
 
-                if (window.arthaPopup) {
-                    window.arthaPopup.error(
-                        "PDF gagal dibuat. Silakan coba kembali."
-                    );
-                }
+                await showPopup(
+                    "error",
+                    error.message ||
+                    "Gagal membuat PDF. Silakan coba kembali.",
+                    {
+                        title: "Gagal Menyimpan PDF"
+                    }
+                );
 
             } finally {
-
-                // Menghapus salinan struk sementara
-                if (measureContainer) {
-                    measureContainer.remove();
+                if (temporaryContainer) {
+                    temporaryContainer.remove();
                 }
 
-                // Mengembalikan tombol PDF
                 pdfButton.disabled = false;
                 pdfButton.innerHTML = originalButtonHTML;
             }
         });
     }
 
-    // Informasi status
-    console.log("Cetak Struk ARTHA berhasil dimuat.");
-
-    console.log(
-        "Nomor transaksi:",
-        transactionId.textContent
+    // Membersihkan data keranjang saat Kasir memulai transaksi baru.
+    const newTransactionButton = document.querySelector(
+        '.receipt-actions a[href="transaksiPOS.php"]'
     );
 
-    console.log(
-        "Jumlah produk:",
-        paymentData.items.length
-    );
+    if (newTransactionButton) {
+        newTransactionButton.addEventListener("click", function () {
+            sessionStorage.removeItem("artha_payment_data");
+            sessionStorage.removeItem("artha_pos_cart");
+        });
+    }
 
-    console.log(
-        "Total transaksi:",
-        formatRupiah(total)
-    );
-
+    // Memulai pengambilan data struk.
+    loadReceipt();
 });

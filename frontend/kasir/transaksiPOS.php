@@ -1,4 +1,3 @@
-
 <?php
 // Halaman transaksi penjualan oleh Kasir
 ?>
@@ -246,8 +245,12 @@
 
     </div>
 
+
     <!-- JavaScript konfigurasi -->
     <script src="../assets/js/config.js" defer></script>
+
+    <!-- JavaScript API -->
+    <script src="../assets/js/api.js" defer></script>
 
     <!-- JavaScript popup -->
     <script src="../assets/js/shared/popup.js" defer></script>

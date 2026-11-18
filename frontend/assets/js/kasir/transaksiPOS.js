@@ -1,104 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
+    "use strict";
 
-    // 1. DATA PRODUK DARI DATASET EXCEL
-
-    const productData = [
-
-        ["PRD001", "Beras", "Bahan Pokok", "kg", 15000, 5, 37, "Tersedia"],
-        ["PRD002", "Minyak Goreng", "Bahan Pokok", "liter", 18000, 172, 39, "Tersedia"],
-        ["PRD003", "Gula Pasir", "Bahan Pokok", "kg", 17000, 99, 29, "Tersedia"],
-        ["PRD004", "Telur", "Bahan Pokok", "kg", 29000, 173, 47, "Tersedia"],
-        ["PRD005", "Mi Instan", "Makanan Instan", "bungkus", 3500, 88, 39, "Tersedia"],
-        ["PRD006", "Kopi Sachet", "Minuman", "sachet", 1500, 110, 23, "Tersedia"],
-        ["PRD007", "Teh Celup", "Minuman", "kotak", 8000, 72, 27, "Tersedia"],
-        ["PRD008", "Susu UHT", "Susu", "kotak", 7000, 31, 16, "Tersedia"],
-        ["PRD009", "Susu Bubuk", "Susu", "kotak", 28000, 66, 18, "Tersedia"],
-        ["PRD010", "Biskuit", "Makanan Ringan", "bungkus", 10000, 106, 15, "Tersedia"],
-
-        ["PRD011", "Wafer", "Makanan Ringan", "bungkus", 8000, 28, 11, "Tersedia"],
-        ["PRD012", "Keripik Singkong", "Makanan Ringan", "bungkus", 10000, 57, 8, "Tersedia"],
-        ["PRD013", "Kacang Tanah", "Makanan Ringan", "bungkus", 12000, 18, 13, "Tersedia"],
-        ["PRD014", "Air Mineral", "Minuman", "botol", 4000, 54, 29, "Tersedia"],
-        ["PRD015", "Sirup", "Minuman", "botol", 22000, 33, 6, "Tersedia"],
-        ["PRD016", "Minuman Serbuk", "Minuman", "sachet", 1500, 18, 19, "Stok Rendah"],
-        ["PRD017", "Sereal", "Sarapan", "kotak", 18000, 41, 5, "Tersedia"],
-        ["PRD018", "Oatmeal", "Sarapan", "bungkus", 22000, 50, 15, "Tersedia"],
-        ["PRD019", "Roti Tawar", "Makanan", "bungkus", 16000, 37, 17, "Tersedia"],
-        ["PRD020", "Selai Cokelat", "Olesan", "botol", 18000, 36, 17, "Tersedia"],
-
-        ["PRD021", "Selai Stroberi", "Olesan", "botol", 16000, 39, 14, "Tersedia"],
-        ["PRD022", "Cokelat Batang", "Makanan Ringan", "batang", 6000, 22, 6, "Tersedia"],
-        ["PRD023", "Permen", "Makanan Ringan", "bungkus", 5000, 21, 14, "Tersedia"],
-        ["PRD024", "Madu", "Bahan Pangan", "botol", 30000, 11, 7, "Tersedia"],
-        ["PRD025", "Sarden Kaleng", "Makanan Kaleng", "kaleng", 16000, 20, 9, "Tersedia"],
-        ["PRD026", "Kornet Sapi", "Makanan Kaleng", "kaleng", 18000, 64, 17, "Tersedia"],
-        ["PRD027", "Tepung Terigu", "Bahan Kue", "kg", 12000, 59, 16, "Tersedia"],
-        ["PRD028", "Tepung Maizena", "Bahan Kue", "bungkus", 8000, 60, 14, "Tersedia"],
-        ["PRD029", "Baking Powder", "Bahan Kue", "sachet", 3000, 24, 16, "Tersedia"],
-        ["PRD030", "Vanili", "Bahan Kue", "sachet", 1500, 35, 20, "Tersedia"],
-
-        ["PRD031", "Cokelat Bubuk", "Bahan Kue", "sachet", 7000, 59, 10, "Tersedia"],
-        ["PRD032", "Santan Instan", "Bahan Masakan", "sachet", 5000, 41, 10, "Tersedia"],
-        ["PRD033", "Kaldu Bubuk", "Bumbu Kemasan", "sachet", 1000, 19, 16, "Tersedia"],
-        ["PRD034", "Merica Bubuk", "Bumbu Kemasan", "sachet", 2000, 57, 8, "Tersedia"],
-        ["PRD035", "Ketumbar Bubuk", "Bumbu Kemasan", "sachet", 2000, 37, 8, "Tersedia"],
-        ["PRD036", "Kunyit Bubuk", "Bumbu Kemasan", "sachet", 2000, 30, 16, "Tersedia"],
-        ["PRD037", "Kecap Manis", "Bumbu Kemasan", "botol", 14000, 52, 16, "Tersedia"],
-        ["PRD038", "Saus Sambal", "Bumbu Kemasan", "botol", 9000, 26, 5, "Tersedia"],
-        ["PRD039", "Kecap Asin", "Bumbu Kemasan", "botol", 13000, 55, 13, "Tersedia"],
-        ["PRD040", "Garam", "Bumbu Kemasan", "bungkus", 4000, 120, 25, "Tersedia"],
-
-        ["PRD041", "Margarin", "Bahan Kue", "kemasan", 7000, 17, 18, "Stok Rendah"],
-        ["PRD042", "Pasta Gigi", "Kebutuhan Rumah Tangga", "tube", 12000, 27, 16, "Tersedia"],
-        ["PRD043", "Sikat Gigi", "Kebutuhan Rumah Tangga", "buah", 8000, 31, 15, "Tersedia"],
-        ["PRD044", "Sabun Mandi", "Kebutuhan Rumah Tangga", "batang", 5000, 68, 27, "Tersedia"],
-        ["PRD045", "Sampo Sachet", "Kebutuhan Rumah Tangga", "sachet", 1000, 39, 20, "Tersedia"],
-        ["PRD046", "Deterjen", "Kebutuhan Rumah Tangga", "bungkus", 18000, 40, 18, "Tersedia"],
-        ["PRD047", "Pelembut Pakaian", "Kebutuhan Rumah Tangga", "bungkus", 12000, 21, 9, "Tersedia"],
-        ["PRD048", "Sabun Cuci Piring", "Kebutuhan Rumah Tangga", "botol", 10000, 50, 7, "Tersedia"],
-        ["PRD049", "Pembersih Lantai", "Kebutuhan Rumah Tangga", "botol", 15000, 43, 13, "Tersedia"],
-        ["PRD050", "Tisu", "Kebutuhan Rumah Tangga", "pak", 10000, 44, 20, "Tersedia"],
-
-        ["PRD051", "Pembalut", "Kebutuhan Rumah Tangga", "pak", 12000, 39, 10, "Tersedia"],
-        ["PRD052", "Popok Bayi", "Kebutuhan Rumah Tangga", "pak", 35000, 57, 9, "Tersedia"],
-        ["PRD053", "Kantong Sampah", "Kebutuhan Rumah Tangga", "pak", 10000, 14, 11, "Tersedia"],
-        ["PRD054", "Baterai AA", "Perlengkapan", "pak", 12000, 39, 12, "Tersedia"],
-        ["PRD055", "Lilin", "Perlengkapan", "batang", 3000, 34, 6, "Tersedia"],
-        ["PRD056", "Korek Api", "Perlengkapan", "buah", 2000, 65, 16, "Tersedia"],
-        ["PRD057", "Plastik Kemasan", "Perlengkapan Toko", "pak", 8000, 39, 7, "Tersedia"],
-        ["PRD058", "Aluminium Foil", "Perlengkapan Dapur", "roll", 15000, 20, 15, "Tersedia"],
-        ["PRD059", "Kertas Minyak", "Perlengkapan Dapur", "pak", 5000, 16, 11, "Tersedia"],
-        ["PRD060", "Tepung Panir", "Bahan Kue", "bungkus", 9000, 30, 13, "Tersedia"]
-
-    ];
-
-    // Mengubah data array menjadi objek produk
-
-    const products = productData.map(function (item) {
-
-        return {
-            id: item[0],
-            name: item[1],
-            category: item[2],
-            unit: item[3],
-            price: item[4],
-            stock: item[5],
-            minimumStock: item[6],
-            stockStatus: item[7]
-        };
-
-    });
-
-    // Memastikan dataset berisi tepat 60 produk
-
-    if (products.length !== 60) {
-        console.error("Jumlah produk tidak sesuai:", products.length);
-        return;
-    }
-
-
-    // 2. MENGAMBIL ELEMEN HTML
-
+    // Mengambil elemen halaman POS.
     const searchInput = document.getElementById("productSearch");
     const productTableBody = document.getElementById("productTableBody");
 
@@ -116,47 +19,226 @@ document.addEventListener("DOMContentLoaded", function () {
         !cartTotal ||
         !emptyCart
     ) {
-        console.error("Elemen transaksi POS tidak ditemukan.");
+        console.error(
+            "[ARTHA] Elemen transaksi POS tidak ditemukan."
+        );
         return;
     }
 
+    // Menyimpan data produk dari database.
+    let products = [];
 
-    // 3. FORMAT RUPIAH
+    // Menandai proses pemuatan produk.
+    let isLoadingProducts = false;
 
+    // Menandai apakah terjadi kegagalan pemuatan produk.
+    let productLoadFailed = false;
+
+    // Mengatur API yang digunakan.
+    const PRODUCT_ENDPOINT = "kasir/products";
+
+    // Format mata uang Rupiah.
     function formatPOSRupiah(amount) {
-
-        return "Rp " + Number(amount).toLocaleString("id-ID");
-
+        return "Rp " + Number(amount || 0).toLocaleString("id-ID");
     }
 
+    // Menampilkan notifikasi melalui popup ARTHA.
+    async function showPOSPopup(type, message, options = {}) {
+        if (
+            window.arthaPopup &&
+            typeof window.arthaPopup[type] === "function"
+        ) {
+            return window.arthaPopup[type](
+                message,
+                options
+            );
+        }
 
-    // 4. MENAMPILKAN 60 PRODUK KE TABEL
+        window.alert(message);
+        return false;
+    }
 
-    function renderProducts(data) {
+    // Mengambil data respons API.
+    function getResponseData(response) {
+        if (
+            !response ||
+            typeof response !== "object"
+        ) {
+            throw new Error(
+                "Respons server tidak valid."
+            );
+        }
+
+        const data = response.data ?? response.payload;
+
+        if (!Array.isArray(data)) {
+            throw new Error(
+                "Format katalog produk dari server tidak sesuai."
+            );
+        }
+
+        return data;
+    }
+
+    // Mengubah data database menjadi format produk POS.
+    function normalizeProducts(data) {
+        return data.map(function (item) {
+            const id = Number(item.id_produk);
+            const price = Number(item.harga);
+            const stock = Number(item.stok);
+            const minimumStock = Number(item.stok_minimum);
+
+            if (
+                !Number.isInteger(id) ||
+                id <= 0 ||
+                !Number.isFinite(price) ||
+                price < 0 ||
+                !Number.isFinite(stock) ||
+                stock < 0
+            ) {
+                return null;
+            }
+
+            return {
+                id: String(id),
+                id_produk: id,
+                code: String(item.kode_produk ?? ""),
+                name: String(item.nama_produk ?? ""),
+                category: String(
+                    item.kategori ??
+                    item.kategori_produk ??
+                    "Umum"
+                ),
+                unit: String(item.satuan ?? "pcs"),
+                price: price,
+                stock: stock,
+                minimumStock: Number.isFinite(minimumStock)
+                    ? minimumStock
+                    : 0,
+                stockStatus:
+                    stock <= 0
+                        ? "Stok Habis"
+                        : stock <= minimumStock
+                            ? "Stok Rendah"
+                            : "Tersedia"
+            };
+        }).filter(Boolean);
+    }
+
+    // Memuat katalog produk dari database MySQL.
+    async function loadProducts() {
+        if (isLoadingProducts) return;
+
+        isLoadingProducts = true;
+        productLoadFailed = false;
 
         productTableBody.replaceChildren();
 
-        if (data.length === 0) {
+        const loadingRow = document.createElement("tr");
+        const loadingCell = document.createElement("td");
+
+        loadingCell.colSpan = 5;
+        loadingCell.textContent = "Memuat produk dari database...";
+        loadingCell.style.textAlign = "center";
+
+        loadingRow.appendChild(loadingCell);
+        productTableBody.appendChild(loadingRow);
+
+        try {
+            if (
+                !window.ARTHA_API ||
+                typeof window.ARTHA_API.get !== "function"
+            ) {
+                throw new Error(
+                    "ARTHA API belum tersedia. Periksa pemuatan api.js."
+                );
+            }
+
+            const response = await window.ARTHA_API.get(
+                PRODUCT_ENDPOINT
+            );
+
+            const data = getResponseData(response);
+
+            products = normalizeProducts(data);
+
+            productLoadFailed = false;
+
+            renderProducts(products);
+
+            console.info(
+                `[ARTHA] ${products.length} produk berhasil dimuat dari MySQL.`,
+                products
+            );
+
+            if (products.length === 0) {
+                console.warn(
+                    "[ARTHA] Belum terdapat produk aktif dalam database."
+                );
+            }
+
+        } catch (error) {
+            productLoadFailed = true;
+            products = [];
+
+            console.error(
+                "[ARTHA] Gagal memuat katalog produk:",
+                error
+            );
+
+            productTableBody.replaceChildren();
 
             const row = document.createElement("tr");
             const cell = document.createElement("td");
 
             cell.colSpan = 5;
-            cell.textContent = "Produk tidak ditemukan.";
+            cell.textContent = "Gagal memuat produk. Silakan coba kembali.";
+            cell.style.textAlign = "center";
+
+            row.appendChild(cell);
+            productTableBody.appendChild(row);
+
+            await showPOSPopup(
+                "error",
+                error.message,
+                {
+                    title: "Gagal Memuat Produk",
+                    confirmText: "Mengerti"
+                }
+            );
+
+        } finally {
+            isLoadingProducts = false;
+        }
+    }
+
+    // Menampilkan katalog produk pada tabel POS.
+    function renderProducts(data) {
+        productTableBody.replaceChildren();
+
+        if (data.length === 0) {
+            const row = document.createElement("tr");
+            const cell = document.createElement("td");
+
+            cell.colSpan = 5;
+            cell.textContent = productLoadFailed
+                ? "Produk gagal dimuat."
+                : "Produk tidak ditemukan.";
+
+            cell.style.textAlign = "center";
 
             row.appendChild(cell);
             productTableBody.appendChild(row);
 
             return;
-
         }
 
         data.forEach(function (product) {
-
             const row = document.createElement("tr");
 
             row.dataset.productId = product.id;
             row.dataset.productName = product.name;
+            row.dataset.productCode = product.code;
             row.dataset.category = product.category;
             row.dataset.unit = product.unit;
             row.dataset.price = product.price;
@@ -167,14 +249,15 @@ document.addEventListener("DOMContentLoaded", function () {
             const idCell = document.createElement("td");
 
             const idText = document.createElement("strong");
-            idText.textContent = product.id;
+            idText.textContent = product.code || product.id;
 
             idCell.appendChild(idText);
 
             const nameCell = document.createElement("td");
 
             nameCell.className = "product-name";
-            nameCell.textContent = product.name + " (" + product.unit + ")";
+            nameCell.textContent =
+                product.name + " (" + product.unit + ")";
 
             const priceCell = document.createElement("td");
 
@@ -184,7 +267,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const stockCell = document.createElement("td");
 
             stockCell.textContent = product.stock;
-
             stockCell.title =
                 "Status: " + product.stockStatus +
                 " | Stok minimum: " + product.minimumStock;
@@ -195,10 +277,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
             addButton.type = "button";
             addButton.className = "add-item";
+
             addButton.setAttribute(
                 "aria-label",
                 "Tambah " + product.name
             );
+
+            addButton.disabled = product.stock <= 0;
+
+            if (product.stock <= 0) {
+                addButton.title = "Stok produk habis";
+            }
 
             const addIcon = document.createElement("img");
 
@@ -217,48 +306,33 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             productTableBody.appendChild(row);
-
         });
-
     }
 
-    // Memuat seluruh produk saat halaman dibuka
-
-    renderProducts(products);
-
-
-    // 5. PENCARIAN PRODUK
-
+    // Melakukan pencarian produk berdasarkan kode, nama, kategori, atau satuan.
     searchInput.addEventListener("input", function () {
-
         const keyword = this.value.trim().toLowerCase();
 
         const filteredProducts = products.filter(function (product) {
-
             return (
                 product.id.toLowerCase().includes(keyword) ||
+                product.code.toLowerCase().includes(keyword) ||
                 product.name.toLowerCase().includes(keyword) ||
                 product.category.toLowerCase().includes(keyword) ||
                 product.unit.toLowerCase().includes(keyword)
             );
-
         });
 
         renderProducts(filteredProducts);
-
     });
 
-
-    // 6. MENGHITUNG TOTAL KERANJANG
-
+    // Menghitung subtotal dan total seluruh produk dalam keranjang.
     function updateCartTotal() {
-
         let total = 0;
 
         const cartRows = cartItems.querySelectorAll(".cart-row");
 
         cartRows.forEach(function (row) {
-
             const quantity = Number(
                 row.querySelector(".qty-value").textContent
             );
@@ -271,7 +345,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 formatPOSRupiah(subtotal);
 
             total += subtotal;
-
         });
 
         cartTotal.textContent = formatPOSRupiah(total);
@@ -279,13 +352,16 @@ document.addEventListener("DOMContentLoaded", function () {
         emptyCart.style.display =
             cartRows.length === 0 ? "block" : "none";
 
+        if (checkoutButton) {
+            checkoutButton.classList.toggle(
+                "cart-empty",
+                cartRows.length === 0
+            );
+        }
     }
 
-
-    // 7. MEMBUAT BARIS KERANJANG
-
+    // Membuat tampilan satu baris produk dalam keranjang.
     function createCartRow(product) {
-
         const row = document.createElement("div");
 
         row.className = "cart-row";
@@ -312,6 +388,11 @@ document.addEventListener("DOMContentLoaded", function () {
         minusButton.className = "qty-btn minus";
         minusButton.textContent = "−";
 
+        minusButton.setAttribute(
+            "aria-label",
+            "Kurangi jumlah " + product.name
+        );
+
         const quantity = document.createElement("span");
 
         quantity.className = "qty-value";
@@ -323,6 +404,11 @@ document.addEventListener("DOMContentLoaded", function () {
         plusButton.className = "qty-btn plus";
         plusButton.textContent = "+";
 
+        plusButton.setAttribute(
+            "aria-label",
+            "Tambah jumlah " + product.name
+        );
+
         qtyControl.append(
             minusButton,
             quantity,
@@ -332,9 +418,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const subtotal = document.createElement("b");
 
         subtotal.className = "cart-subtotal";
-
-        subtotal.textContent =
-            formatPOSRupiah(product.price);
+        subtotal.textContent = formatPOSRupiah(product.price);
 
         const removeButton = document.createElement("button");
 
@@ -361,17 +445,25 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
         return row;
-
     }
 
-
-    // 8. MENAMBAHKAN PRODUK KE KERANJANG
-
-    productTableBody.addEventListener("click", function (event) {
-
+    // Menambahkan produk yang dipilih ke keranjang.
+    productTableBody.addEventListener("click", async function (event) {
         const addButton = event.target.closest(".add-item");
 
         if (!addButton) return;
+
+        if (productLoadFailed || isLoadingProducts) {
+            await showPOSPopup(
+                "warning",
+                "Katalog produk belum berhasil dimuat.",
+                {
+                    title: "Produk Belum Tersedia"
+                }
+            );
+
+            return;
+        }
 
         const productRow = addButton.closest("tr");
 
@@ -384,29 +476,36 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         if (!product) {
+            await showPOSPopup(
+                "error",
+                "Produk tidak ditemukan. Silakan muat ulang katalog.",
+                {
+                    title: "Produk Tidak Ditemukan"
+                }
+            );
 
-            alert("Produk tidak ditemukan.");
             return;
-
         }
 
         if (product.stock <= 0) {
+            await showPOSPopup(
+                "warning",
+                "Stok produk habis.",
+                {
+                    title: "Stok Habis"
+                }
+            );
 
-            alert("Stok produk habis.");
             return;
-
         }
 
         const existingRow = Array.from(
             cartItems.querySelectorAll(".cart-row")
         ).find(function (row) {
-
             return row.dataset.productId === product.id;
-
         });
 
         if (existingRow) {
-
             const quantityElement =
                 existingRow.querySelector(".qty-value");
 
@@ -414,8 +513,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 Number(quantityElement.textContent);
 
             if (currentQuantity >= product.stock) {
-
-                window.arthaPopup.warning(
+                await showPOSPopup(
+                    "warning",
                     "Jumlah " + product.name +
                     " sudah mencapai batas stok yang tersedia (" +
                     product.stock + " " + product.unit + ").",
@@ -425,26 +524,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
 
                 return;
-
             }
 
             quantityElement.textContent = currentQuantity + 1;
 
         } else {
-
-            cartItems.appendChild(createCartRow(product));
-
+            cartItems.appendChild(
+                createCartRow(product)
+            );
         }
 
         updateCartTotal();
-
     });
 
-
-    // 9. MENGUBAH KUANTITAS DAN MENGHAPUS PRODUK
-
-    cartItems.addEventListener("click", function (event) {
-
+    // Mengubah kuantitas atau menghapus produk dari keranjang.
+    cartItems.addEventListener("click", async function (event) {
         const row = event.target.closest(".cart-row");
 
         if (!row) return;
@@ -461,10 +555,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const removeButton = event.target.closest(".remove-item");
 
         if (plusButton) {
-
             if (quantity >= stock) {
-
-                window.arthaPopup.warning(
+                await showPOSPopup(
+                    "warning",
                     "Jumlah produk sudah mencapai batas stok yang tersedia (" +
                     stock + " " + row.dataset.unit + ").",
                     {
@@ -473,43 +566,32 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
 
                 return;
-
             }
 
             quantity++;
-
             quantityElement.textContent = quantity;
 
         } else if (minusButton) {
-
             if (quantity > 1) {
-
                 quantity--;
-
                 quantityElement.textContent = quantity;
-
             }
 
         } else if (removeButton) {
-
             row.remove();
-
         }
 
         updateCartTotal();
-
     });
 
-    // 10. MENGHAPUS SELURUH KERANJANG
+    // Menghapus seluruh produk dari keranjang.
     if (clearCartButton) {
-
         clearCartButton.addEventListener("click", async function () {
-
             const rows = cartItems.querySelectorAll(".cart-row");
 
             if (rows.length === 0) {
-
-                window.ArthaPopup.info(
+                await showPOSPopup(
+                    "info",
                     "Keranjang belanja masih kosong.",
                     {
                         title: "Informasi"
@@ -519,67 +601,85 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            const confirmation = await window.arthaPopup.confirm(
-                "Apakah Anda yakin ingin menghapus seluruh produk dari keranjang belanja?",
-                {
-                    title: "Kosongkan Keranjang",
-                    confirmText: "Ya, Hapus Semua",
-                    cancelText: "Batal",
-                    type: "warning"
-                }
-            );
+            let confirmation = false;
+
+            if (
+                window.arthaPopup &&
+                typeof window.arthaPopup.confirm === "function"
+            ) {
+                confirmation = await window.arthaPopup.confirm(
+                    "Apakah Anda yakin ingin menghapus seluruh produk dari keranjang belanja?",
+                    {
+                        title: "Kosongkan Keranjang",
+                        confirmText: "Ya, Hapus Semua",
+                        cancelText: "Batal",
+                        type: "warning"
+                    }
+                );
+            } else {
+                confirmation = window.confirm(
+                    "Apakah Anda yakin ingin menghapus seluruh produk dari keranjang belanja?"
+                );
+            }
 
             if (!confirmation) return;
 
-            // Menghapus seluruh produk
             cartItems.replaceChildren();
 
-            // Memperbarui total dan kondisi keranjang
             updateCartTotal();
         });
-
     }
 
-    // 11. PROSES CHECKOUT
-
+    // Memvalidasi keranjang dan mengirim data ke halaman pembayaran.
     if (checkoutButton) {
-
-        checkoutButton.addEventListener("click", function (event) {
-
+        checkoutButton.addEventListener("click", async function (event) {
             const rows = cartItems.querySelectorAll(".cart-row");
 
             if (rows.length === 0) {
-
                 event.preventDefault();
 
-                alert(
-                    "Keranjang masih kosong. Tambahkan produk terlebih dahulu."
+                await showPOSPopup(
+                    "warning",
+                    "Keranjang masih kosong. Tambahkan produk terlebih dahulu.",
+                    {
+                        title: "Keranjang Kosong"
+                    }
                 );
 
                 return;
+            }
 
+            if (productLoadFailed || isLoadingProducts) {
+                event.preventDefault();
+
+                await showPOSPopup(
+                    "error",
+                    "Katalog produk belum berhasil dimuat. Silakan muat ulang halaman.",
+                    {
+                        title: "Katalog Tidak Tersedia"
+                    }
+                );
+
+                return;
             }
 
             const items = [];
 
             let total = 0;
-
             let invalidData = false;
 
             rows.forEach(function (row) {
+                const productId = Number(row.dataset.productId);
 
                 const quantity = Number(
                     row.querySelector(".qty-value").textContent
                 );
 
                 const price = Number(row.dataset.unitPrice);
-
                 const stock = Number(row.dataset.stock);
 
                 const product = products.find(function (item) {
-
-                    return item.id === row.dataset.productId;
-
+                    return item.id_produk === productId;
                 });
 
                 if (
@@ -588,92 +688,94 @@ document.addEventListener("DOMContentLoaded", function () {
                     quantity <= 0 ||
                     quantity > stock ||
                     !Number.isFinite(price) ||
-                    price < 0
+                    price < 0 ||
+                    product.price !== price ||
+                    product.stock !== stock
                 ) {
-
                     invalidData = true;
                     return;
-
                 }
 
-                const subtotal = quantity * price;
+                const subtotal = price * quantity;
 
                 items.push({
-
                     id: product.id,
-
+                    id_produk: product.id_produk,
+                    code: product.code,
                     name: product.name,
-
                     category: product.category,
-
                     unit: product.unit,
-
-                    price: price,
-
+                    price: product.price,
                     quantity: quantity,
-
                     subtotal: subtotal
-
                 });
 
                 total += subtotal;
-
             });
 
-            if (invalidData || items.length !== rows.length) {
-
+            if (
+                invalidData ||
+                items.length !== rows.length ||
+                items.length === 0
+            ) {
                 event.preventDefault();
 
-                alert(
-                    "Data keranjang tidak valid. Periksa kembali produk."
+                await showPOSPopup(
+                    "warning",
+                    "Data keranjang tidak valid. Periksa kembali produk dan stok.",
+                    {
+                        title: "Data Transaksi Tidak Valid"
+                    }
                 );
 
                 return;
-
             }
 
             const transactionData = {
-
                 items: items,
-
                 total: total,
-
                 createdAt: new Date().toISOString()
-
             };
 
             try {
-
                 sessionStorage.setItem(
                     "artha_pos_cart",
                     JSON.stringify(transactionData)
                 );
 
-            } catch (error) {
+                console.info(
+                    "[ARTHA] Data keranjang berhasil diteruskan ke halaman pembayaran.",
+                    transactionData
+                );
 
+            } catch (error) {
                 event.preventDefault();
 
-                alert("Data transaksi gagal disimpan.");
+                console.error(
+                    "[ARTHA] Gagal menyimpan keranjang:",
+                    error
+                );
 
-                console.error(error);
-
-                return;
-
+                await showPOSPopup(
+                    "error",
+                    "Data transaksi gagal disimpan di browser.",
+                    {
+                        title: "Gagal Menyimpan Keranjang"
+                    }
+                );
             }
-
         });
-
     }
 
-
-    // 12. KONDISI AWAL
-
+    // Menginisialisasi tampilan keranjang.
     cartItems.replaceChildren();
 
     updateCartTotal();
 
-    console.log("Transaksi POS ARTHA berhasil dimuat.");
-    console.log("Jumlah produk:", products.length);
-    console.log("Keranjang awal: kosong");
+    // Memuat produk dari database setelah seluruh event siap.
+    loadProducts();
 
+    console.info(
+        "[ARTHA] Modul Transaksi POS berhasil diinisialisasi."
+    );
 });

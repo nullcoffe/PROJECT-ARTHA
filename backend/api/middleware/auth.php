@@ -69,12 +69,28 @@ function artha_require_auth()
     return $user;
 }
 
-// Memeriksa apakah role pengguna memiliki izin akses
+// Memeriksa apakah role pengguna memiliki izin akses.
 function artha_require_role(array $allowedRoles)
 {
     $user = artha_require_auth();
 
-    if (!in_array($user['peran'], $allowedRoles, true)) {
+    // Normalisasi role pengguna.
+    $userRole = strtolower(
+        trim((string) ($user['peran'] ?? ''))
+    );
+
+    // Normalisasi seluruh role yang diizinkan.
+    $allowedRoles = array_map(
+        function ($role) {
+            return strtolower(trim((string) $role));
+        },
+        $allowedRoles
+    );
+
+    if (
+        $userRole === '' ||
+        !in_array($userRole, $allowedRoles, true)
+    ) {
         throw new RuntimeException(
             'Anda tidak memiliki hak akses.',
             403

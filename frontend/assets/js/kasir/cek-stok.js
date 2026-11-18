@@ -1,464 +1,317 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
+    "use strict";
 
-    // 1. DATA PRODUK ARTHA (60 PRODUK)
+    // Mengambil elemen halaman cek stok.
+    const searchForm = document.querySelector(".stock-search");
+    const searchInput = document.getElementById("stockSearch");
+    const statusFilter = document.getElementById("stockStatusFilter");
+    const tableBody = document.getElementById("stockTableBody");
 
-    const productData = [
+    if (!searchInput || !statusFilter || !tableBody) {
+        console.error("[ARTHA] Elemen halaman cek stok tidak ditemukan.");
+        return;
+    }
 
-        ["PRD001", "Beras", 15000, 0],
-        ["PRD002", "Minyak Goreng", 18000, 172],
-        ["PRD003", "Gula Pasir", 17000, 99],
-        ["PRD004", "Telur", 29000, 173],
-        ["PRD005", "Mi Instan", 3500, 88],
-        ["PRD006", "Kopi Sachet", 1500, 110],
-        ["PRD007", "Teh Celup", 8000, 72],
-        ["PRD008", "Susu UHT", 7000, 31],
-        ["PRD009", "Susu Bubuk", 28000, 66],
-        ["PRD010", "Biskuit", 10000, 106],
+    let products = [];
+    let isLoading = false;
 
-        ["PRD011", "Wafer", 8000, 28],
-        ["PRD012", "Keripik Singkong", 10000, 57],
-        ["PRD013", "Kacang Tanah", 12000, 18],
-        ["PRD014", "Air Mineral", 4000, 54],
-        ["PRD015", "Sirup", 22000, 33],
-        ["PRD016", "Minuman Serbuk", 1500, 18],
-        ["PRD017", "Sereal", 18000, 41],
-        ["PRD018", "Oatmeal", 22000, 50],
-        ["PRD019", "Roti Tawar", 16000, 37],
-        ["PRD020", "Selai Cokelat", 18000, 36],
+    // Format mata uang Rupiah.
+    function formatRupiah(value) {
+        return "Rp " + Number(value || 0).toLocaleString("id-ID");
+    }
 
-        ["PRD021", "Selai Stroberi", 16000, 39],
-        ["PRD022", "Cokelat Batang", 6000, 22],
-        ["PRD023", "Permen", 5000, 21],
-        ["PRD024", "Madu", 30000, 11],
-        ["PRD025", "Sarden Kaleng", 16000, 20],
-        ["PRD026", "Kornet Sapi", 18000, 64],
-        ["PRD027", "Tepung Terigu", 12000, 59],
-        ["PRD028", "Tepung Maizena", 8000, 60],
-        ["PRD029", "Baking Powder", 3000, 24],
-        ["PRD030", "Vanili", 1500, 35],
-
-        ["PRD031", "Cokelat Bubuk", 7000, 59],
-        ["PRD032", "Santan Instan", 5000, 41],
-        ["PRD033", "Kaldu Bubuk", 1000, 19],
-        ["PRD034", "Merica Bubuk", 2000, 57],
-        ["PRD035", "Ketumbar Bubuk", 2000, 37],
-        ["PRD036", "Kunyit Bubuk", 2000, 30],
-        ["PRD037", "Kecap Manis", 14000, 52],
-        ["PRD038", "Saus Sambal", 9000, 26],
-        ["PRD039", "Kecap Asin", 13000, 55],
-        ["PRD040", "Garam", 4000, 120],
-
-        ["PRD041", "Margarin", 7000, 17],
-        ["PRD042", "Pasta Gigi", 12000, 27],
-        ["PRD043", "Sikat Gigi", 8000, 31],
-        ["PRD044", "Sabun Mandi", 5000, 68],
-        ["PRD045", "Sampo Sachet", 1000, 39],
-        ["PRD046", "Deterjen", 18000, 40],
-        ["PRD047", "Pelembut Pakaian", 12000, 21],
-        ["PRD048", "Sabun Cuci Piring", 10000, 50],
-        ["PRD049", "Pembersih Lantai", 15000, 43],
-        ["PRD050", "Tisu", 10000, 44],
-
-        ["PRD051", "Pembalut", 12000, 39],
-        ["PRD052", "Popok Bayi", 35000, 57],
-        ["PRD053", "Kantong Sampah", 10000, 14],
-        ["PRD054", "Baterai AA", 12000, 39],
-        ["PRD055", "Lilin", 3000, 34],
-        ["PRD056", "Korek Api", 2000, 65],
-        ["PRD057", "Plastik Kemasan", 8000, 39],
-        ["PRD058", "Aluminium Foil", 15000, 20],
-        ["PRD059", "Kertas Minyak", 5000, 16],
-        ["PRD060", "Tepung Panir", 9000, 30]
-
-    ];
-
-
-    // 2. MENENTUKAN STATUS STOK
-
-    function getStockStatus(stock) {
-
-        if (stock === 0) {
-
+    // Menghitung status stok berdasarkan batas minimum database.
+    function getStockStatus(product) {
+        if (product.stock <= 0) {
             return "empty";
-
         }
 
-        if (stock <= 40) {
-
+        if (product.stock <= product.minimumStock) {
             return "low";
-
         }
 
         return "safe";
-
     }
 
-
-    // 3. MEMBENTUK OBJEK PRODUK
-
-    const products = productData.map(function (item) {
-
-        return {
-
-            id: item[0],
-
-            name: item[1],
-
-            price: item[2],
-
-            stock: item[3],
-
-            status: getStockStatus(item[3])
-
-        };
-
-    });
-
-
-    // 4. VALIDASI DATA PRODUK
-
-    if (products.length !== 60) {
-
-        console.error(
-            "Jumlah produk tidak sesuai:",
-            products.length
-        );
-
-        return;
-
-    }
-
-
-    // 5. MENGAMBIL ELEMEN HTML
-
-    const searchForm = document.querySelector(".stock-search");
-
-    const searchInput = document.getElementById("stockSearch");
-
-    const statusFilter = document.getElementById("stockStatusFilter");
-
-    const tableBody = document.getElementById("stockTableBody");
-
-
-    // 6. VALIDASI ELEMEN HTML
-
-    if (!searchInput || !statusFilter || !tableBody) {
-
-        console.error(
-            "Elemen halaman Cek Stok tidak ditemukan."
-        );
-
-        return;
-
-    }
-
-
-    // 7. FORMAT RUPIAH
-
-    function formatRupiah(value) {
-
-        return "Rp " + Number(value).toLocaleString("id-ID");
-
-    }
-
-
-    // 8. MENENTUKAN LABEL STATUS
-
+    // Menentukan label status stok.
     function getStatusLabel(status) {
-
         const labels = {
-
             safe: "Aman",
-
             low: "Stok rendah",
-
             empty: "Habis"
-
         };
 
-        return labels[status];
-
+        return labels[status] || "-";
     }
 
-
-    // 9. MENENTUKAN CLASS STATUS
-
+    // Menentukan class tampilan status.
     function getStatusClass(status) {
-
         const classes = {
-
             safe: "stock-safe",
-
             low: "stock-low",
-
             empty: "stock-empty"
-
         };
 
-        return classes[status];
-
+        return classes[status] || "";
     }
 
-
-    // 10. MEMBUAT BARIS PRODUK
-
-    function createProductRow(product) {
+    // Menampilkan pesan pada tabel.
+    function showTableMessage(message) {
+        tableBody.replaceChildren();
 
         const row = document.createElement("tr");
+        const cell = document.createElement("td");
 
+        cell.colSpan = 5;
+        cell.textContent = message;
+        cell.style.textAlign = "center";
+        cell.style.padding = "24px";
 
-        // ID PRODUK
+        row.appendChild(cell);
+        tableBody.appendChild(row);
+    }
+
+    // Menampilkan popup ARTHA.
+    async function showPopup(type, message, options = {}) {
+        if (
+            window.arthaPopup &&
+            typeof window.arthaPopup[type] === "function"
+        ) {
+            return window.arthaPopup[type](message, options);
+        }
+
+        window.alert(message);
+    }
+
+    // Mengambil data produk dari respons API.
+    function normalizeProducts(data) {
+        return data.map(function (item) {
+            const productId = Number(item.id_produk);
+            const price = Number(item.harga);
+            const stock = Number(item.stok);
+            const minimumStock = Number(item.stok_minimum);
+
+            if (
+                !Number.isInteger(productId) ||
+                productId <= 0 ||
+                !Number.isFinite(price) ||
+                !Number.isFinite(stock) ||
+                !Number.isFinite(minimumStock)
+            ) {
+                return null;
+            }
+
+            const product = {
+                id: productId,
+                code: String(item.kode_produk || ""),
+                name: String(item.nama_produk || ""),
+                unit: String(item.satuan || "pcs"),
+                price: price,
+                stock: stock,
+                minimumStock: minimumStock
+            };
+
+            product.status = getStockStatus(product);
+
+            return product;
+        }).filter(Boolean);
+    }
+
+    // Membuat baris produk.
+    function createProductRow(product) {
+        const row = document.createElement("tr");
 
         const idCell = document.createElement("td");
-
-        idCell.textContent = product.id;
-
-
-        // NAMA PRODUK
+        idCell.textContent = product.code;
 
         const nameCell = document.createElement("td");
-
-        nameCell.textContent = product.name;
-
-
-        // HARGA PRODUK
+        nameCell.textContent =
+            product.name + " (" + product.unit + ")";
 
         const priceCell = document.createElement("td");
-
         priceCell.textContent = formatRupiah(product.price);
-
-
-        // JUMLAH STOK
 
         const stockCell = document.createElement("td");
 
         const stockValue = document.createElement("strong");
-
-        stockValue.textContent = product.stock;
+        stockValue.textContent =
+            product.stock + " " + product.unit;
 
         stockCell.appendChild(stockValue);
-
-
-        // STATUS PRODUK
 
         const statusCell = document.createElement("td");
 
         const statusLabel = document.createElement("span");
-
         statusLabel.className = getStatusClass(product.status);
-
         statusLabel.textContent = getStatusLabel(product.status);
 
         statusCell.appendChild(statusLabel);
 
-
         row.append(
-
             idCell,
-
             nameCell,
-
             priceCell,
-
             stockCell,
-
             statusCell
-
         );
 
         return row;
-
     }
 
-
-    // 11. MENAMPILKAN DATA PRODUK
-
+    // Menampilkan data produk ke tabel.
     function renderProducts(data) {
-
         tableBody.replaceChildren();
 
-
-        // KONDISI JIKA PRODUK TIDAK DITEMUKAN
-
         if (data.length === 0) {
-
-            const emptyRow = document.createElement("tr");
-
-            const emptyCell = document.createElement("td");
-
-            emptyCell.colSpan = 5;
-
-            emptyCell.textContent = "Produk tidak ditemukan.";
-
-            emptyCell.style.textAlign = "center";
-
-            emptyCell.style.padding = "24px";
-
-            emptyRow.appendChild(emptyCell);
-
-            tableBody.appendChild(emptyRow);
-
+            showTableMessage("Produk tidak ditemukan.");
             return;
-
         }
-
-
-        // MEMBUAT FRAGMENT TABEL
 
         const fragment = document.createDocumentFragment();
 
         data.forEach(function (product) {
-
             fragment.appendChild(
                 createProductRow(product)
             );
-
         });
 
         tableBody.appendChild(fragment);
-
     }
 
-
-    // 12. FUNGSI PENCARIAN DAN FILTER
-
+    // Memfilter produk berdasarkan pencarian dan status.
     function filterProducts() {
-
         const keyword = searchInput.value
-
             .trim()
-
             .toLowerCase();
-
-
-        const selectedStatus = statusFilter.value;
-
-
-        // NORMALISASI PENCARIAN ANGKA
 
         const numericKeyword = keyword.replace(/\D/g, "");
 
-
-        // MENYARING DATA PRODUK
+        const selectedStatus = statusFilter.value;
 
         const filteredProducts = products.filter(function (product) {
-
-
-            // DATA YANG DAPAT DICARI
-
             const searchableText = [
-
-                product.id,
-
+                product.code,
                 product.name,
-
+                product.unit,
+                product.price,
                 formatRupiah(product.price),
-
-                String(product.price),
-
-                String(product.stock)
-
+                product.stock,
+                product.minimumStock
             ].join(" ").toLowerCase();
 
-
-            // PENCARIAN TEKS
-
             const matchesText =
-
                 searchableText.includes(keyword);
 
-
-            // PENCARIAN ANGKA
-
-            const matchesNumber = numericKeyword !== "" && [
-
-                String(product.price),
-
-                String(product.stock)
-
-            ].some(function (value) {
-
-                return value.includes(numericKeyword);
-
-            });
-
-
-            // FILTER STATUS
+            const matchesNumber =
+                numericKeyword !== "" &&
+                [
+                    String(product.price),
+                    String(product.stock),
+                    String(product.minimumStock)
+                ].some(function (value) {
+                    return value.includes(numericKeyword);
+                });
 
             const matchesStatus =
-
                 selectedStatus === "all" ||
-
                 product.status === selectedStatus;
 
-
             return (
-
                 (matchesText || matchesNumber) &&
-
                 matchesStatus
-
             );
-
         });
 
-
-        // MENAMPILKAN HASIL FILTER
-
         renderProducts(filteredProducts);
-
-
-        // INFORMASI CONSOLE
-
-        console.log("Pencarian diperbarui.");
-
-        console.log("Kata kunci:", keyword || "-");
-
-        console.log("Filter status:", selectedStatus);
-
-        console.log(
-            "Produk ditemukan:",
-            filteredProducts.length
-        );
-
     }
 
+    // Memuat produk aktif dari database.
+    async function loadProducts() {
+        if (isLoading) return;
 
-    // 13. EVENT PENCARIAN
+        isLoading = true;
 
-    searchInput.addEventListener("input", function () {
+        showTableMessage("Memuat data stok dari database...");
 
-        filterProducts();
+        try {
+            if (
+                !window.ARTHA_API ||
+                typeof window.ARTHA_API.get !== "function"
+            ) {
+                throw new Error(
+                    "ARTHA API belum tersedia. Periksa pemuatan api.js."
+                );
+            }
 
-    });
+            const response = await window.ARTHA_API.get(
+                "kasir/products"
+            );
 
+            if (!Array.isArray(response.data)) {
+                throw new Error(
+                    "Format data produk tidak sesuai."
+                );
+            }
 
-    // 14. EVENT FILTER STATUS
-
-    statusFilter.addEventListener("change", function () {
-
-        filterProducts();
-
-    });
-
-
-    // 15. MENCEGAH RELOAD FORM
-
-    if (searchForm) {
-
-        searchForm.addEventListener("submit", function (event) {
-
-            event.preventDefault();
+            products = normalizeProducts(response.data);
 
             filterProducts();
 
-        });
+            console.info(
+                "[ARTHA] Data cek stok berhasil dimuat.",
+                {
+                    totalProduk: products.length,
+                    stokAman: products.filter(
+                        item => item.status === "safe"
+                    ).length,
+                    stokRendah: products.filter(
+                        item => item.status === "low"
+                    ).length,
+                    stokHabis: products.filter(
+                        item => item.status === "empty"
+                    ).length
+                }
+            );
 
+        } catch (error) {
+            console.error(
+                "[ARTHA] Gagal memuat data stok:",
+                error
+            );
+
+            showTableMessage(
+                "Gagal memuat data stok. Silakan muat ulang halaman."
+            );
+
+            await showPopup(
+                "error",
+                error.message,
+                {
+                    title: "Gagal Memuat Stok",
+                    confirmText: "Mengerti"
+                }
+            );
+
+        } finally {
+            isLoading = false;
+        }
     }
 
+    // Mengatur pencarian.
+    searchInput.addEventListener("input", filterProducts);
 
-    // 16. MEMBACA QUERY URL
+    // Mengatur filter status.
+    statusFilter.addEventListener("change", filterProducts);
 
+    // Mencegah form pencarian melakukan reload.
+    if (searchForm) {
+        searchForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            filterProducts();
+        });
+    }
+
+    // Membaca kata kunci dari URL.
     const urlParams = new URLSearchParams(
         window.location.search
     );
@@ -466,51 +319,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const initialKeyword = urlParams.get("q");
 
     if (initialKeyword) {
-
         searchInput.value = initialKeyword;
-
     }
 
+    // Menginisialisasi halaman.
+    await loadProducts();
 
-    // 17. INISIALISASI HALAMAN
-
-    filterProducts();
-
-
-    // 18. INFORMASI DATA PADA CONSOLE
-
-    console.log("Cek Stok ARTHA berhasil dimuat.");
-
-    console.log("Total produk:", products.length);
-
-    console.log(
-
-        "Produk Aman:",
-
-        products.filter(function (product) {
-
-            return product.status === "safe";
-
-        }).length
-
-    );
-
-    console.log(
-
-        "Produk Stok Rendah:",
-
-        products.filter(function (product) {
-
-            return product.status === "low";
-
-        }).length
-
-    );
-
-    console.log(
-        "Produk Habis:",
-        products.filter(function (product) {
-            return product.status === "empty";
-        }).length
+    console.info(
+        "[ARTHA] Modul Cek Stok berhasil diinisialisasi."
     );
 });
