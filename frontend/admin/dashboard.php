@@ -1,7 +1,15 @@
-
 <?php
 
-//* Halaman dashboard Admin ARTHA
+// Memuat sistem session dan pemeriksaan role
+require_once '../../backend/api/middleware/auth.php';
+
+// Hanya pengguna dengan role Admin yang boleh mengakses halaman ini
+artha_require_page_role(['admin']);
+
+// Mencegah halaman tetap tampil dari cache setelah logout
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Pragma: no-cache');
+header('Expires: 0');
 
 ?>
 

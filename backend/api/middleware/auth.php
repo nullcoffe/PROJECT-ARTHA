@@ -110,3 +110,27 @@ function artha_logout_session()
 
     session_destroy();
 }
+
+/**
+ * Memastikan pengguna sudah login dan memiliki role yang sesuai
+ * sebelum membuka halaman frontend.
+ */
+function artha_require_page_role(array $allowedRoles)
+{
+    try {
+
+        return artha_require_role($allowedRoles);
+
+    } catch (RuntimeException $error) {
+
+        if (
+            $error->getCode() === 401 ||
+            $error->getCode() === 403
+        ) {
+            header('Location: /artha/frontend/index.php');
+            exit;
+        }
+
+        throw $error;
+    }
+}
