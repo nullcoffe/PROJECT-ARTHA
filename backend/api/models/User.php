@@ -228,6 +228,31 @@ class User
     }
 
     /**
+     * Mengupdate password pengguna.
+     */
+    public function updatePassword(int $idPengguna, string $passwordHash): bool
+    {
+        $sql = "UPDATE pengguna
+                SET kata_sandi = ?
+                WHERE id_pengguna = ?";
+
+        $stmt = $this->conn->prepare($sql);
+
+        if (!$stmt) {
+            throw new RuntimeException('Gagal menyiapkan pembaruan password.');
+        }
+
+        $stmt->bind_param('si', $passwordHash, $idPengguna);
+        $stmt->execute();
+
+        $updated = $stmt->affected_rows > 0;
+
+        $stmt->close();
+
+        return $updated;
+    }
+
+    /**
      * Menghapus pengguna.
      */
     public function delete(int $idPengguna): bool

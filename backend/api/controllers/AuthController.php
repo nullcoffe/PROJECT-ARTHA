@@ -61,8 +61,18 @@ class AuthController
             $user['kata_sandi'],
             PASSWORD_DEFAULT
         )) {
-            // Untuk saat ini tidak perlu melakukan update.
-            // Hash baru dapat diterapkan pada proses berikutnya.
+            
+            $newHash = password_hash(
+                $password,
+                PASSWORD_DEFAULT
+            );
+
+            if ($newHash !== false) {
+                $this->userModel->updatePassword(
+                    (int) $user['id_pengguna'],
+                    $newHash
+                );
+            }
         }
 
         // Menyimpan identitas pengguna ke session
