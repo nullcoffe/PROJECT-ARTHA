@@ -111,26 +111,57 @@ function artha_logout_session()
     session_destroy();
 }
 
-/**
- * Memastikan pengguna sudah login dan memiliki role yang sesuai
- * sebelum membuka halaman frontend.
- */
 function artha_require_page_role(array $allowedRoles)
 {
-    try {
+    artha_start_session();
 
-        return artha_require_role($allowedRoles);
-
-    } catch (RuntimeException $error) {
-
-        if (
-            $error->getCode() === 401 ||
-            $error->getCode() === 403
-        ) {
-            header('Location: /artha/frontend/index.php');
-            exit;
-        }
-
-        throw $error;
+    /*
+     * Jika tidak ada session user,
+     * berarti belum login.
+     */
+    if (
+        !isset($_SESSION['user']) ||
+        !is_array($_SESSION['user'])
+    ) {
+        header('Location: /artha/frontend/index.php');
+        exit;
     }
+
+    /*
+     * Ambil role dari session.
+     */
+    $userRole = strtolower(
+        trim(
+            (string) (
+                $_SESSION['user']['peran'] ?? ''
+            )
+        )
+    );
+
+    /*
+     * Normalisasi role yang diizinkan.
+     */
+    $allowedRoles = array_map(
+        function ($role) {
+            return strtolower(trim((string) $role));
+        },
+        $allowedRoles
+    );
+
+    /*
+     * Jika role tidak sesuai,
+     * jangan izinkan halaman dibuka.
+     */
+    if (
+        $userRole === '' ||
+        !in_array($userRole, $allowedRoles, true)
+    ) {
+        header('Location: /artha/frontend/index.php');
+        exit;
+    }
+
+    /*
+     * Role valid → halaman boleh dibuka.
+     */
+    return $_SESSION['user'];
 }

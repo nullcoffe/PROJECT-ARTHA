@@ -1,560 +1,1057 @@
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
-document.addEventListener("DOMContentLoaded", function () {
+        "use strict";
 
-    // MENGAMBIL ELEMEN HTML
-    const userForm = document.getElementById("userForm");
-    const userTable = document.querySelector(".users-table tbody");
-    const nameInput = document.getElementById("newName");
-    const usernameInput = document.getElementById("newUsername");
-    const roleInput = document.getElementById("newRole");
-    const passwordInput = document.getElementById("newPassword");
-    const addButton = document.querySelector(".add-user-button");
+        /*
+        |--------------------------------------------------------------------------
+        | ELEMEN HALAMAN
+        |--------------------------------------------------------------------------
+        */
 
-    // KONFIGURASI PENYIMPANAN
-    const USER_STORAGE_KEY =
-        (window.ARTHA_CONFIG?.storagePrefix || "artha:") + "users";
-
-    // MEMERIKSA ELEMEN UTAMA
-    if (!userForm || !userTable || !nameInput ||
-        !usernameInput || !roleInput || !passwordInput) {
-        console.error("Elemen manajemen pengguna tidak ditemukan.");
-        return;
-    }
-
-    // MEMERIKSA KETERSEDIAAN CUSTOM POPUP
-    function getPopup() {
-        if (!window.arthaPopup) {
-            console.error("Custom Popup ARTHA belum tersedia.");
-            return null;
-        }
-
-        return window.arthaPopup;
-    }
-
-    // STATUS FORM
-    let editingRow = null;
-
-    // FORMAT ROLE
-    function formatRole(role) {
-        const roles = {
-            pemilik: "Pemilik",
-            kasir: "Kasir"
-        };
-
-        return roles[role] || role;
-    }
-
-    // NORMALISASI ROLE
-    function normalizeRole(role) {
-        const normalized = String(role || "").trim().toLowerCase();
-
-        if (normalized === "pemilik") return "pemilik";
-        if (normalized === "kasir") return "kasir";
-
-        return "";
-    }
-
-    // MEMERIKSA USERNAME DUPLIKAT
-    function isUsernameDuplicate(username, excludedRow = null) {
-        const normalizedUsername = username.trim().toLowerCase();
-        const rows = userTable.querySelectorAll("tr");
-
-        return Array.from(rows).some(function (row) {
-            if (row === excludedRow) return false;
-
-            const existingUsername =
-                row.cells[1]?.textContent.trim().toLowerCase();
-
-            return existingUsername === normalizedUsername;
-        });
-    }
-
-    // MEMERIKSA KETERSEDIAAN AKUN PEMILIK
-    function isOwnerAlreadyExists(excludedRow = null) {
-        const rows = userTable.querySelectorAll("tr");
-
-        return Array.from(rows).some(function (row) {
-            if (row === excludedRow) return false;
-
-            const roleBadge = row.querySelector(".role-badge");
-
-            const existingRole = normalizeRole(
-                roleBadge?.textContent || ""
+        const userForm =
+            document.getElementById(
+                "userForm"
             );
 
-            return existingRole === "pemilik";
-        });
-    }
-
-    // MEMPERBARUI BARIS PENGGUNA
-    function updateUserRow(row, name, username, role) {
-        row.cells[0].textContent = name;
-        row.cells[1].textContent = username;
-
-        const roleBadge = row.querySelector(".role-badge");
-
-        if (roleBadge) {
-            roleBadge.textContent = formatRole(role);
-            roleBadge.classList.remove("role-owner", "role-cashier");
-            roleBadge.classList.add(
-                role === "pemilik" ? "role-owner" : "role-cashier"
-            );
-        }
-
-        const editButton = row.querySelector(".edit-button");
-        const deleteButton = row.querySelector(".delete-button");
-
-        editButton?.setAttribute("aria-label", `Ubah akun ${name}`);
-        deleteButton?.setAttribute("aria-label", `Hapus akun ${name}`);
-    }
-
-    // MEMBUAT TOMBOL AKSI
-    function createActionButton(type, label, href) {
-        const link = document.createElement("a");
-
-        link.href = href;
-        link.className = `action-button ${type}-button`;
-        link.setAttribute("aria-label", label);
-
-        const image = document.createElement("img");
-
-        image.src = type === "edit"
-            ? "../assets/icons/actions/edit.svg"
-            : "../assets/icons/actions/delete.svg";
-
-        image.alt = "";
-        link.appendChild(image);
-
-        return link;
-    }
-
-    // MEMBUAT BARIS PENGGUNA
-    function createUserRow(name, username, role) {
-        const row = document.createElement("tr");
-
-        const nameCell = document.createElement("td");
-        nameCell.textContent = name;
-
-        const usernameCell = document.createElement("td");
-        usernameCell.textContent = username;
-
-        const roleCell = document.createElement("td");
-        const roleBadge = document.createElement("span");
-
-        roleBadge.className = role === "pemilik"
-            ? "role-badge role-owner"
-            : "role-badge role-cashier";
-
-        roleBadge.textContent = formatRole(role);
-        roleCell.appendChild(roleBadge);
-
-        const passwordCell = document.createElement("td");
-        const passwordHidden = document.createElement("span");
-
-        passwordHidden.className = "password-hidden";
-        passwordHidden.textContent = "••••••••";
-        passwordHidden.setAttribute(
-            "aria-label",
-            "Kata sandi disembunyikan"
-        );
-
-        passwordCell.appendChild(passwordHidden);
-
-        const actionCell = document.createElement("td");
-        const actions = document.createElement("div");
-
-        actions.className = "users-actions";
-
-        const editButton = createActionButton(
-            "edit",
-            `Ubah akun ${name}`,
-            "#userFormSection"
-        );
-
-        const deleteButton = createActionButton(
-            "delete",
-            `Hapus akun ${name}`,
-            "#"
-        );
-
-        actions.append(editButton, deleteButton);
-        actionCell.appendChild(actions);
-
-        row.append(
-            nameCell,
-            usernameCell,
-            roleCell,
-            passwordCell,
-            actionCell
-        );
-
-        return row;
-    }
-
-    // MENGAMBIL DATA PENGGUNA DARI TABEL
-    function getUsersFromTable() {
-        return Array.from(userTable.querySelectorAll("tr"))
-            .map(function (row) {
-                const roleBadge = row.querySelector(".role-badge");
-
-                const role = normalizeRole(
-                    roleBadge?.textContent || ""
-                );
-
-                return {
-                    name: row.cells[0]?.textContent.trim() || "",
-                    username: row.cells[1]?.textContent.trim() || "",
-                    role: role
-                };
-            })
-            .filter(function (user) {
-                return user.username && user.name && user.role;
-            });
-    }
-
-    // MENYIMPAN DATA PENGGUNA
-    function saveUsers() {
-        try {
-            localStorage.setItem(
-                USER_STORAGE_KEY,
-                JSON.stringify(getUsersFromTable())
+        const userTable =
+            document.querySelector(
+                ".users-table tbody"
             );
 
-            return true;
+        const nameInput =
+            document.getElementById(
+                "newName"
+            );
 
-        } catch (error) {
-            console.error("Gagal menyimpan data pengguna:", error);
-            return false;
-        }
-    }
+        const usernameInput =
+            document.getElementById(
+                "newUsername"
+            );
 
-    // MEMUAT DATA PENGGUNA
-    function loadUsers() {
-        const savedUsers = localStorage.getItem(USER_STORAGE_KEY);
+        const roleInput =
+            document.getElementById(
+                "newRole"
+            );
 
-        if (!savedUsers) {
-            saveUsers();
+        const passwordInput =
+            document.getElementById(
+                "newPassword"
+            );
+
+        const addButton =
+            document.querySelector(
+                ".add-user-button"
+            );
+
+        /*
+        |--------------------------------------------------------------------------
+        | VALIDASI ELEMEN
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            !userForm ||
+            !userTable ||
+            !nameInput ||
+            !usernameInput ||
+            !roleInput ||
+            !passwordInput
+        ) {
+
+            console.error(
+                "Elemen manajemen pengguna tidak ditemukan."
+            );
+
             return;
         }
 
-        try {
-            const users = JSON.parse(savedUsers);
+        /*
+        |--------------------------------------------------------------------------
+        | POPUP
+        |--------------------------------------------------------------------------
+        */
 
-            if (!Array.isArray(users)) {
-                throw new Error("Format data pengguna tidak valid.");
-            }
+        function getPopup() {
 
-            users.forEach(function (user) {
-                const role = normalizeRole(user.role);
+            if (
+                !window.arthaPopup
+            ) {
 
-                if (!user.name || !user.username || !role) return;
-
-                const existingRow = Array.from(
-                    userTable.querySelectorAll("tr")
-                ).find(function (row) {
-                    return row.cells[1]?.textContent.trim().toLowerCase() ===
-                        user.username.trim().toLowerCase();
-                });
-
-                if (existingRow) {
-                    updateUserRow(
-                        existingRow,
-                        user.name,
-                        user.username,
-                        role
-                    );
-                } else {
-                    userTable.appendChild(
-                        createUserRow(
-                            user.name,
-                            user.username,
-                            role
-                        )
-                    );
-                }
-            });
-
-        } catch (error) {
-            console.error("Gagal memuat data pengguna:", error);
-        }
-    }
-
-    // API DATA PENGGUNA UNTUK AUTENTIKASI
-    window.ArthaUsers = Object.freeze({
-        getAll: function () {
-            try {
-                const users = JSON.parse(
-                    localStorage.getItem(USER_STORAGE_KEY) || "[]"
+                console.error(
+                    "Custom Popup ARTHA belum tersedia."
                 );
 
-                return Array.isArray(users) ? users : [];
+                return null;
+            }
+
+            return window.arthaPopup;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | STATUS EDIT
+        |--------------------------------------------------------------------------
+        */
+
+        let editingId = null;
+
+        /*
+        |--------------------------------------------------------------------------
+        | FORMAT ROLE
+        |--------------------------------------------------------------------------
+        */
+
+        function formatRole(role) {
+
+            const roles = {
+                pemilik: "Pemilik",
+                kasir: "Kasir"
+            };
+
+            return (
+                roles[role] ||
+                role
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | NORMALISASI ROLE
+        |--------------------------------------------------------------------------
+        */
+
+        function normalizeRole(role) {
+
+            const normalized =
+                String(
+                    role || ""
+                )
+                    .trim()
+                    .toLowerCase();
+
+            if (
+                normalized === "pemilik"
+            ) {
+
+                return "pemilik";
+            }
+
+            if (
+                normalized === "kasir"
+            ) {
+
+                return "kasir";
+            }
+
+            return "";
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | MEMBUAT TOMBOL AKSI
+        |--------------------------------------------------------------------------
+        */
+
+        function createActionButton(
+            type,
+            label,
+            href
+        ) {
+
+            const link =
+                document.createElement(
+                    "a"
+                );
+
+            link.href =
+                href;
+
+            link.className =
+                `action-button ${type}-button`;
+
+            link.setAttribute(
+                "aria-label",
+                label
+            );
+
+            const image =
+                document.createElement(
+                    "img"
+                );
+
+            image.src =
+                type === "edit"
+                    ? "../assets/icons/actions/edit.svg"
+                    : "../assets/icons/actions/delete.svg";
+
+            image.alt = "";
+
+            link.appendChild(
+                image
+            );
+
+            return link;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | MEMBUAT BARIS PENGGUNA
+        |--------------------------------------------------------------------------
+        */
+
+        function createUserRow(
+            user
+        ) {
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+            row.dataset.id =
+                user.id_pengguna;
+
+            /*
+            | Nama
+            */
+
+            const nameCell =
+                document.createElement(
+                    "td"
+                );
+
+            nameCell.textContent =
+                user.nama_lengkap;
+
+            /*
+            | Username
+            */
+
+            const usernameCell =
+                document.createElement(
+                    "td"
+                );
+
+            usernameCell.textContent =
+                user.nama_pengguna;
+
+            /*
+            | Role
+            */
+
+            const roleCell =
+                document.createElement(
+                    "td"
+                );
+
+            const roleBadge =
+                document.createElement(
+                    "span"
+                );
+
+            roleBadge.className =
+                user.peran === "pemilik"
+                    ? "role-badge role-owner"
+                    : "role-badge role-cashier";
+
+            roleBadge.textContent =
+                formatRole(
+                    user.peran
+                );
+
+            roleCell.appendChild(
+                roleBadge
+            );
+
+            /*
+            | Password
+            */
+
+            const passwordCell =
+                document.createElement(
+                    "td"
+                );
+
+            const passwordHidden =
+                document.createElement(
+                    "span"
+                );
+
+            passwordHidden.className =
+                "password-hidden";
+
+            passwordHidden.textContent =
+                "••••••••";
+
+            passwordHidden.setAttribute(
+                "aria-label",
+                "Kata sandi disembunyikan"
+            );
+
+            passwordCell.appendChild(
+                passwordHidden
+            );
+
+            /*
+            | Aksi
+            */
+
+            const actionCell =
+                document.createElement(
+                    "td"
+                );
+
+            const actions =
+                document.createElement(
+                    "div"
+                );
+
+            actions.className =
+                "users-actions";
+
+            const editButton =
+                createActionButton(
+                    "edit",
+                    `Ubah akun ${user.nama_lengkap}`,
+                    "#userFormSection"
+                );
+
+            const deleteButton =
+                createActionButton(
+                    "delete",
+                    `Hapus akun ${user.nama_lengkap}`,
+                    "#"
+                );
+
+            actions.append(
+                editButton,
+                deleteButton
+            );
+
+            actionCell.appendChild(
+                actions
+            );
+
+            row.append(
+                nameCell,
+                usernameCell,
+                roleCell,
+                passwordCell,
+                actionCell
+            );
+
+            return row;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | MEMUAT DATA DARI DATABASE
+        |--------------------------------------------------------------------------
+        */
+
+        async function loadUsers() {
+
+            try {
+
+                const response =
+                    await window.ARTHA_API.get(
+                        "admin/users"
+                    );
+
+                const users =
+                    Array.isArray(
+                        response.data
+                    )
+                        ? response.data
+                        : [];
+
+                userTable.replaceChildren();
+
+                if (
+                    users.length === 0
+                ) {
+
+                    const row =
+                        document.createElement(
+                            "tr"
+                        );
+
+                    const cell =
+                        document.createElement(
+                            "td"
+                        );
+
+                    cell.colSpan = 5;
+
+                    cell.textContent =
+                        "Belum ada data pengguna.";
+
+                    cell.style.textAlign =
+                        "center";
+
+                    row.appendChild(
+                        cell
+                    );
+
+                    userTable.appendChild(
+                        row
+                    );
+
+                    return;
+                }
+
+                users.forEach(
+                    function (user) {
+
+                        userTable.appendChild(
+                            createUserRow(
+                                user
+                            )
+                        );
+                    }
+                );
 
             } catch (error) {
-                console.error("Gagal membaca data pengguna:", error);
-                return [];
-            }
-        },
 
-        findByUsername: function (username) {
-            if (typeof username !== "string") return null;
-
-            const normalizedUsername = username.trim().toLowerCase();
-
-            return this.getAll().find(function (user) {
-                return user.username.toLowerCase() === normalizedUsername;
-            }) || null;
-        }
-    });
-
-    // MENGOSONGKAN FORM KETIKA TAMBAH PENGGUNA
-    addButton?.addEventListener("click", function () {
-        editingRow = null;
-        userForm.reset();
-        passwordInput.required = true;
-
-        userForm.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-    });
-
-    // MENANGANI EVENT EDIT DAN HAPUS
-    userTable.addEventListener("click", async function (event) {
-        const editButton = event.target.closest(".edit-button");
-        const deleteButton = event.target.closest(".delete-button");
-
-        // EDIT PENGGUNA
-        if (editButton) {
-            event.preventDefault();
-
-            const row = editButton.closest("tr");
-            if (!row) return;
-
-            editingRow = row;
-
-            nameInput.value = row.cells[0].textContent.trim();
-            usernameInput.value = row.cells[1].textContent.trim();
-
-            const roleBadge = row.querySelector(".role-badge");
-
-            roleInput.value = normalizeRole(
-                roleBadge?.textContent || ""
-            );
-
-            passwordInput.value = "";
-            passwordInput.required = false;
-
-            userForm.scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
-
-            nameInput.focus();
-
-            return;
-        }
-
-        // HAPUS PENGGUNA
-        if (deleteButton) {
-            event.preventDefault();
-
-            const row = deleteButton.closest("tr");
-            if (!row) return;
-
-            const popup = getPopup();
-            if (!popup) return;
-
-            const name = row.cells[0].textContent.trim();
-
-            const confirmed = await popup.confirm(
-                `Apakah Anda yakin ingin menghapus pengguna ${name}? Tindakan ini tidak dapat dibatalkan.`,
-                {
-                    title: "Hapus Pengguna?",
-                    confirmText: "Ya, Hapus",
-                    cancelText: "Batal"
-                }
-            );
-
-            if (!confirmed) return;
-
-            const nextRow = row.nextElementSibling;
-
-            row.remove();
-
-            if (!saveUsers()) {
-                if (nextRow && nextRow.parentNode === userTable) {
-                    userTable.insertBefore(row, nextRow);
-                } else {
-                    userTable.appendChild(row);
-                }
-
-                await popup.error("Pengguna gagal dihapus.");
-                return;
-            }
-
-            await popup.success(
-                "Pengguna berhasil dihapus.",
-                {
-                    title: "Penghapusan Berhasil"
-                }
-            );
-        }
-    });
-
-    // VALIDASI DAN PROSES FORM PENGGUNA
-    userForm.noValidate = true;
-
-    userForm.addEventListener("submit", async function (event) {
-        event.preventDefault();
-
-        const popup = getPopup();
-        if (!popup) return;
-
-        const name = nameInput.value.trim();
-        const username = usernameInput.value.trim();
-        const role = normalizeRole(roleInput.value);
-        const password = passwordInput.value;
-
-        const isEditing = Boolean(editingRow);
-
-        // VALIDASI NAMA
-        if (!name) {
-            await popup.warning("Nama pengguna wajib diisi.");
-            nameInput.focus();
-            return;
-        }
-
-        // VALIDASI USERNAME
-        if (!username) {
-            await popup.warning("Username wajib diisi.");
-            usernameInput.focus();
-            return;
-        }
-
-        // VALIDASI USERNAME DUPLIKAT
-        if (isUsernameDuplicate(username, editingRow)) {
-            await popup.warning(
-                "Username sudah digunakan. Silakan gunakan username lain."
-            );
-
-            usernameInput.focus();
-            return;
-        }
-
-        // VALIDASI ROLE
-        if (!role) {
-            await popup.warning(
-                "Silakan pilih jenis pengguna yang valid."
-            );
-
-            roleInput.focus();
-            return;
-        }
-
-        // MEMBATASI JUMLAH AKUN PEMILIK HANYA SATU
-        if (role === "pemilik" && isOwnerAlreadyExists(editingRow)) {
-            await popup.warning(
-                "Sistem ARTHA hanya mengizinkan satu akun Pemilik.",
-                {
-                    title: "Akun Pemilik Sudah Ada"
-                }
-            );
-
-            roleInput.focus();
-            return;
-        }
-
-        // VALIDASI PASSWORD PENGGUNA BARU
-        if (!isEditing && password.length < 8) {
-            await popup.warning(
-                "Kata sandi minimal 8 karakter."
-            );
-
-            passwordInput.focus();
-            return;
-        }
-
-        // VALIDASI PASSWORD SAAT EDIT
-        if (isEditing && password && password.length < 8) {
-            await popup.warning(
-                "Kata sandi baru minimal 8 karakter."
-            );
-
-            passwordInput.focus();
-            return;
-        }
-
-        // MENYIMPAN DATA LAMA UNTUK PEMULIHAN
-        const oldData = isEditing ? {
-            name: editingRow.cells[0].textContent.trim(),
-            username: editingRow.cells[1].textContent.trim(),
-            role: normalizeRole(
-                editingRow.querySelector(".role-badge")?.textContent || ""
-            )
-        } : null;
-
-        let targetRow = editingRow;
-
-        // MEMPERBARUI ATAU MENAMBAHKAN PENGGUNA
-        if (isEditing) {
-            updateUserRow(editingRow, name, username, role);
-        } else {
-            targetRow = createUserRow(name, username, role);
-            userTable.appendChild(targetRow);
-        }
-
-        // MENYIMPAN PERUBAHAN
-        if (!saveUsers()) {
-            if (isEditing && oldData) {
-                updateUserRow(
-                    targetRow,
-                    oldData.name,
-                    oldData.username,
-                    oldData.role
+                console.error(
+                    "Gagal mengambil data pengguna:",
+                    error
                 );
-            } else if (targetRow) {
-                targetRow.remove();
+
+                const popup =
+                    getPopup();
+
+                if (
+                    popup &&
+                    typeof popup.error ===
+                    "function"
+                ) {
+
+                    await popup.error(
+                        error.message ||
+                        "Data pengguna gagal dimuat."
+                    );
+                }
             }
-
-            await popup.error("Data pengguna gagal disimpan.");
-            return;
         }
 
-        // RESET FORM
-        editingRow = null;
-        userForm.reset();
-        passwordInput.required = true;
+        /*
+        |--------------------------------------------------------------------------
+        | CEK USERNAME DUPLIKAT
+        |--------------------------------------------------------------------------
+        */
 
-        // NOTIFIKASI TAMBAH ATAU EDIT
-        if (isEditing) {
-            await popup.success(
-                "Data pengguna berhasil diperbarui.",
-                {
-                    title: "Perubahan Berhasil"
-                }
-            );
-        } else {
-            await popup.success(
-                "Data pengguna berhasil disimpan.",
-                {
-                    title: "Pengguna Berhasil Ditambahkan"
+        function isUsernameDuplicate(
+            username,
+            excludedId = null
+        ) {
+
+            const normalized =
+                username
+                    .trim()
+                    .toLowerCase();
+
+            const rows =
+                userTable.querySelectorAll(
+                    "tr[data-id]"
+                );
+
+            return Array.from(
+                rows
+            ).some(
+                function (row) {
+
+                    if (
+                        Number(
+                            row.dataset.id
+                        ) ===
+                        Number(
+                            excludedId
+                        )
+                    ) {
+
+                        return false;
+                    }
+
+                    const existing =
+                        row.cells[1]
+                            ?.textContent
+                            .trim()
+                            .toLowerCase();
+
+                    return (
+                        existing ===
+                        normalized
+                    );
                 }
             );
         }
-    });
 
-    // MENGATUR ULANG STATUS FORM
-    userForm.addEventListener("reset", function () {
-        editingRow = null;
-        passwordInput.required = true;
-    });
+        /*
+        |--------------------------------------------------------------------------
+        | CEK AKUN PEMILIK
+        |--------------------------------------------------------------------------
+        */
 
-    // MEMUAT DATA PENGGUNA SAAT HALAMAN DIBUKA
-    loadUsers();
+        function isOwnerAlreadyExists(
+            excludedId = null
+        ) {
 
-    // MENYIMPAN DATA AWAL
-    saveUsers();
+            const rows =
+                userTable.querySelectorAll(
+                    "tr[data-id]"
+                );
 
-    console.log("Manajemen Pengguna berhasil diinisialisasi.");
+            return Array.from(
+                rows
+            ).some(
+                function (row) {
 
-});
+                    if (
+                        Number(
+                            row.dataset.id
+                        ) ===
+                        Number(
+                            excludedId
+                        )
+                    ) {
+
+                        return false;
+                    }
+
+                    const badge =
+                        row.querySelector(
+                            ".role-badge"
+                        );
+
+                    const role =
+                        normalizeRole(
+                            badge?.textContent ||
+                            ""
+                        );
+
+                    return (
+                        role ===
+                        "pemilik"
+                    );
+                }
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | TOMBOL TAMBAH
+        |--------------------------------------------------------------------------
+        */
+
+        addButton?.addEventListener(
+            "click",
+            function () {
+
+                editingId = null;
+
+                userForm.reset();
+
+                passwordInput.required =
+                    true;
+
+                passwordInput.placeholder =
+                    "Masukan kata sandi baru";
+
+                userForm.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+            }
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | EDIT DAN DELETE
+        |--------------------------------------------------------------------------
+        */
+
+        userTable.addEventListener(
+            "click",
+            async function (event) {
+
+                const editButton =
+                    event.target.closest(
+                        ".edit-button"
+                    );
+
+                const deleteButton =
+                    event.target.closest(
+                        ".delete-button"
+                    );
+
+                /*
+                |--------------------------------------------------------------------------
+                | EDIT
+                |--------------------------------------------------------------------------
+                */
+
+                if (
+                    editButton
+                ) {
+
+                    event.preventDefault();
+
+                    const row =
+                        editButton.closest(
+                            "tr"
+                        );
+
+                    if (!row) {
+                        return;
+                    }
+
+                    editingId =
+                        Number(
+                            row.dataset.id
+                        );
+
+                    nameInput.value =
+                        row.cells[0]
+                            .textContent
+                            .trim();
+
+                    usernameInput.value =
+                        row.cells[1]
+                            .textContent
+                            .trim();
+
+                    const roleBadge =
+                        row.querySelector(
+                            ".role-badge"
+                        );
+
+                    roleInput.value =
+                        normalizeRole(
+                            roleBadge?.textContent ||
+                            ""
+                        );
+
+                    passwordInput.value =
+                        "";
+
+                    passwordInput.required =
+                        false;
+
+                    passwordInput.placeholder =
+                        "Kosongkan jika tidak ingin mengganti";
+
+                    userForm.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
+
+                    nameInput.focus();
+
+                    return;
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | DELETE
+                |--------------------------------------------------------------------------
+                */
+
+                if (
+                    deleteButton
+                ) {
+
+                    event.preventDefault();
+
+                    const row =
+                        deleteButton.closest(
+                            "tr"
+                        );
+
+                    if (!row) {
+                        return;
+                    }
+
+                    const id =
+                        Number(
+                            row.dataset.id
+                        );
+
+                    const name =
+                        row.cells[0]
+                            .textContent
+                            .trim();
+
+                    const popup =
+                        getPopup();
+
+                    if (!popup) {
+                        return;
+                    }
+
+                    const confirmed =
+                        await popup.confirm(
+                            `Apakah Anda yakin ingin menghapus pengguna ${name}? Tindakan ini tidak dapat dibatalkan.`,
+                            {
+                                title:
+                                    "Hapus Pengguna?",
+                                confirmText:
+                                    "Ya, Hapus",
+                                cancelText:
+                                    "Batal"
+                            }
+                        );
+
+                    if (!confirmed) {
+                        return;
+                    }
+
+                    try {
+
+                        await window.ARTHA_API.request(
+                            `admin/users/${id}`,
+                            {
+                                method:
+                                    "DELETE"
+                            }
+                        );
+
+                        await popup.success(
+                            "Pengguna berhasil dihapus.",
+                            {
+                                title:
+                                    "Penghapusan Berhasil"
+                            }
+                        );
+
+                        await loadUsers();
+
+                    } catch (error) {
+
+                        console.error(
+                            "Gagal menghapus pengguna:",
+                            error
+                        );
+
+                        await popup.error(
+                            error.message ||
+                            "Pengguna gagal dihapus."
+                        );
+                    }
+                }
+            }
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | SUBMIT FORM
+        |--------------------------------------------------------------------------
+        */
+
+        userForm.noValidate =
+            true;
+
+        userForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+                const popup =
+                    getPopup();
+
+                if (!popup) {
+                    return;
+                }
+
+                const name =
+                    nameInput.value.trim();
+
+                const username =
+                    usernameInput.value.trim();
+
+                const role =
+                    normalizeRole(
+                        roleInput.value
+                    );
+
+                const password =
+                    passwordInput.value;
+
+                const isEditing =
+                    editingId !== null;
+
+                /*
+                |--------------------------------------------------------------------------
+                | VALIDASI NAMA
+                |--------------------------------------------------------------------------
+                */
+
+                if (!name) {
+
+                    await popup.warning(
+                        "Nama pengguna wajib diisi."
+                    );
+
+                    nameInput.focus();
+
+                    return;
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | VALIDASI USERNAME
+                |--------------------------------------------------------------------------
+                */
+
+                if (!username) {
+
+                    await popup.warning(
+                        "Username wajib diisi."
+                    );
+
+                    usernameInput.focus();
+
+                    return;
+                }
+
+                if (
+                    isUsernameDuplicate(
+                        username,
+                        editingId
+                    )
+                ) {
+
+                    await popup.warning(
+                        "Username sudah digunakan. Silakan gunakan username lain."
+                    );
+
+                    usernameInput.focus();
+
+                    return;
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | VALIDASI ROLE
+                |--------------------------------------------------------------------------
+                */
+
+                if (!role) {
+
+                    await popup.warning(
+                        "Silakan pilih jenis pengguna."
+                    );
+
+                    roleInput.focus();
+
+                    return;
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | SATU PEMILIK
+                |--------------------------------------------------------------------------
+                */
+
+                if (
+                    role === "pemilik" &&
+                    isOwnerAlreadyExists(
+                        editingId
+                    )
+                ) {
+
+                    await popup.warning(
+                        "Sistem ARTHA hanya mengizinkan satu akun Pemilik.",
+                        {
+                            title:
+                                "Akun Pemilik Sudah Ada"
+                        }
+                    );
+
+                    roleInput.focus();
+
+                    return;
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | VALIDASI PASSWORD
+                |--------------------------------------------------------------------------
+                */
+
+                if (
+                    !isEditing &&
+                    password.length < 8
+                ) {
+
+                    await popup.warning(
+                        "Kata sandi minimal 8 karakter."
+                    );
+
+                    passwordInput.focus();
+
+                    return;
+                }
+
+                if (
+                    isEditing &&
+                    password !== "" &&
+                    password.length < 8
+                ) {
+
+                    await popup.warning(
+                        "Kata sandi baru minimal 8 karakter."
+                    );
+
+                    passwordInput.focus();
+
+                    return;
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | DATA KE SERVER
+                |--------------------------------------------------------------------------
+                */
+
+                try {
+
+                    if (
+                        isEditing
+                    ) {
+
+                        await window.ARTHA_API.request(
+                            `admin/users/${editingId}`,
+                            {
+                                method:
+                                    "PUT",
+
+                                body: {
+                                    nama_lengkap:
+                                        name,
+
+                                    nama_pengguna:
+                                        username,
+
+                                    peran:
+                                        role,
+
+                                    password:
+                                        password
+                                }
+                            }
+                        );
+
+                        await popup.success(
+                            "Data pengguna berhasil diperbarui.",
+                            {
+                                title:
+                                    "Perubahan Berhasil"
+                            }
+                        );
+
+                    } else {
+
+                        await window.ARTHA_API.post(
+                            "admin/users",
+                            {
+                                nama_lengkap:
+                                    name,
+
+                                nama_pengguna:
+                                    username,
+
+                                peran:
+                                    role,
+
+                                password:
+                                    password
+                            }
+                        );
+
+                        await popup.success(
+                            "Data pengguna berhasil disimpan.",
+                            {
+                                title:
+                                    "Pengguna Berhasil Ditambahkan"
+                            }
+                        );
+                    }
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | RESET
+                    |--------------------------------------------------------------------------
+                    */
+
+                    editingId =
+                        null;
+
+                    userForm.reset();
+
+                    passwordInput.required =
+                        true;
+
+                    passwordInput.placeholder =
+                        "Masukan kata sandi baru";
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | LOAD ULANG DATABASE
+                    |--------------------------------------------------------------------------
+                    */
+
+                    await loadUsers();
+
+                } catch (error) {
+
+                    console.error(
+                        "Gagal menyimpan pengguna:",
+                        error
+                    );
+
+                    await popup.error(
+                        error.message ||
+                        "Data pengguna gagal disimpan."
+                    );
+                }
+            }
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | RESET FORM
+        |--------------------------------------------------------------------------
+        */
+
+        userForm.addEventListener(
+            "reset",
+            function () {
+
+                editingId =
+                    null;
+
+                passwordInput.required =
+                    true;
+
+                passwordInput.placeholder =
+                    "Masukan kata sandi baru";
+            }
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | LOAD AWAL
+        |--------------------------------------------------------------------------
+        */
+
+        loadUsers();
+
+        console.log(
+            "Manajemen Pengguna ARTHA berhasil diinisialisasi."
+        );
+    }
+);

@@ -242,181 +242,6 @@
                             </thead>
 
                             <tbody>
-
-                                <!-- Data pengguna Laudya -->
-                                <tr>
-
-                                    <td>Laudya</td>
-
-                                    <td>Laudya.Pemilik</td>
-
-                                    <td>
-                                        <span class="role-badge role-owner">
-                                            Pemilik
-                                        </span>
-                                    </td>
-
-                                    <td>
-                                        <span
-                                            class="password-hidden"
-                                            aria-label="Kata sandi disembunyikan"
-                                        >
-                                            ••••••••
-                                        </span>
-                                    </td>
-
-                                    <td>
-
-                                        <div class="users-actions">
-
-                                            <a
-                                                href="#userFormSection"
-                                                class="action-button edit-button"
-                                                aria-label="Ubah akun Laudya"
-                                            >
-
-                                                <img
-                                                    src="../assets/icons/actions/edit.svg"
-                                                    alt=""
-                                                >
-
-                                            </a>
-
-                                            <a
-                                                href="#"
-                                                class="action-button delete-button"
-                                                aria-label="Hapus akun Laudya"
-                                            >
-
-                                                <img
-                                                    src="../assets/icons/actions/delete.svg"
-                                                    alt=""
-                                                >
-
-                                            </a>
-
-                                        </div>
-
-                                    </td>
-
-                                </tr>
-
-                                <!-- Data pengguna Abin -->
-                                <tr>
-
-                                    <td>Abin</td>
-
-                                    <td>Abin.Kasir</td>
-
-                                    <td>
-                                        <span class="role-badge role-cashier">
-                                            Kasir
-                                        </span>
-                                    </td>
-
-                                    <td>
-                                        <span
-                                            class="password-hidden"
-                                            aria-label="Kata sandi disembunyikan"
-                                        >
-                                            ••••••••
-                                        </span>
-                                    </td>
-
-                                    <td>
-
-                                        <div class="users-actions">
-
-                                            <a
-                                                href="#userFormSection"
-                                                class="action-button edit-button"
-                                                aria-label="Ubah akun Abin"
-                                            >
-
-                                                <img
-                                                    src="../assets/icons/actions/edit.svg"
-                                                    alt=""
-                                                >
-
-                                            </a>
-
-                                            <a
-                                                href="#"
-                                                class="action-button delete-button"
-                                                aria-label="Hapus akun Abin"
-                                            >
-
-                                                <img
-                                                    src="../assets/icons/actions/delete.svg"
-                                                    alt=""
-                                                >
-
-                                            </a>
-
-                                        </div>
-
-                                    </td>
-
-                                </tr>
-
-                                <!-- Data pengguna Alra -->
-                                <tr>
-
-                                    <td>Alra</td>
-
-                                    <td>Alra.Kasir</td>
-
-                                    <td>
-                                        <span class="role-badge role-cashier">
-                                            Kasir
-                                        </span>
-                                    </td>
-
-                                    <td>
-                                        <span
-                                            class="password-hidden"
-                                            aria-label="Kata sandi disembunyikan"
-                                        >
-                                            ••••••••
-                                        </span>
-                                    </td>
-
-                                    <td>
-
-                                        <div class="users-actions">
-
-                                            <a
-                                                href="#userFormSection"
-                                                class="action-button edit-button"
-                                                aria-label="Ubah akun Alra"
-                                            >
-
-                                                <img
-                                                    src="../assets/icons/actions/edit.svg"
-                                                    alt=""
-                                                >
-
-                                            </a>
-
-                                            <a
-                                                href="#"
-                                                class="action-button delete-button"
-                                                aria-label="Hapus akun Alra"
-                                            >
-
-                                                <img
-                                                    src="../assets/icons/actions/delete.svg"
-                                                    alt=""
-                                                >
-
-                                            </a>
-
-                                        </div>
-
-                                    </td>
-
-                                </tr>
-
                             </tbody>
 
                         </table>
@@ -559,6 +384,7 @@
 
     </div>
 
+    <script src="../assets/js/api.js"></script>
     <!-- JavaScript popup -->
     <script src="../assets/js/shared/popup.js"></script>
 
@@ -567,6 +393,7 @@
 
     <!-- JavaScript navigasi -->
     <script src="../assets/js/navigation.js"></script>
+    
 
 </body>
 

@@ -542,8 +542,7 @@ document.addEventListener(
                     if (
                         !response ||
                         response.success !== true ||
-                        !response.data ||
-                        !response.data.user
+                        !response.data
                     ) {
 
                         throw new Error(
@@ -553,7 +552,7 @@ document.addEventListener(
                     }
 
                     const user =
-                        response.data.user;
+                        response.data.user || response.data;
 
                     const actualRole =
                         String(

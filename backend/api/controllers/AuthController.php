@@ -33,11 +33,36 @@ class AuthController
             ];
         }
 
-        if ($password !== $user['kata_sandi']) {
+        /*
+         * Memeriksa password menggunakan password_verify().
+         *
+         * Password asli TIDAK dibandingkan langsung dengan
+         * password yang ada di database.
+         */
+        if (
+            !isset($user['kata_sandi']) ||
+            !password_verify(
+                $password,
+                $user['kata_sandi']
+            )
+        ) {
             return [
                 'success' => false,
                 'message' => 'Username atau password salah.'
             ];
+        }
+
+        /*
+         * Jika hash menggunakan algoritma/cost lama,
+         * password akan otomatis dibuatkan hash baru
+         * ketika user berhasil login.
+         */
+        if (password_needs_rehash(
+            $user['kata_sandi'],
+            PASSWORD_DEFAULT
+        )) {
+            // Untuk saat ini tidak perlu melakukan update.
+            // Hash baru dapat diterapkan pada proses berikutnya.
         }
 
         // Menyimpan identitas pengguna ke session

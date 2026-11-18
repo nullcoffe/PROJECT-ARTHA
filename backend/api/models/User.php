@@ -47,6 +47,7 @@ class User
                     id_pengguna,
                     nama_lengkap,
                     nama_pengguna,
+                    kata_sandi,
                     peran
                 FROM pengguna
                 WHERE id_pengguna = ?
