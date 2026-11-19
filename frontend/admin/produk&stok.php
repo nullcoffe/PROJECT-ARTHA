@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../assets/cache-busting.php'; ?>
 
 <?php
 // Halaman manajemen produk dan stok Admin
@@ -11,17 +12,17 @@
 <meta name="theme-color" content="#FFFDF0">
 <title>Produk &amp; Stok | ARTHA</title>
 
-<link rel="stylesheet" href="../assets/css/shared/variables.css">
-<link rel="stylesheet" href="../assets/css/shared/reset.css">
-<link rel="stylesheet" href="../assets/css/web/layout.css">
-<link rel="stylesheet" href="../assets/css/web/sidebar.css">
-<link rel="stylesheet" href="../assets/css/web/header.css">
-<link rel="stylesheet" href="../assets/css/web/admin/produk&stok.css">
-<link rel="stylesheet" href="../assets/css/mobile/layout.css">
-<link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
-<link rel="stylesheet" href="../assets/css/mobile/header.css">
-<link rel="stylesheet" href="../assets/css/mobile/admin/produk&stok.css">
-<link rel="stylesheet" href="../assets/css/shared/notificationPopup.css">
+<link rel="stylesheet" href="<?= artha_asset('../assets/css/shared/variables.css') ?>">
+<link rel="stylesheet" href="<?= artha_asset('../assets/css/shared/reset.css') ?>">
+<link rel="stylesheet" href="<?= artha_asset('../assets/css/web/layout.css') ?>">
+<link rel="stylesheet" href="<?= artha_asset('../assets/css/web/sidebar.css') ?>">
+<link rel="stylesheet" href="<?= artha_asset('../assets/css/web/header.css') ?>">
+<link rel="stylesheet" href="<?= artha_asset('../assets/css/web/admin/produk&stok.css') ?>">
+<link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/layout.css') ?>">
+<link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/sidebar.css') ?>">
+<link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/header.css') ?>">
+<link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/admin/produk&stok.css') ?>">
+<link rel="stylesheet" href="<?= artha_asset('../assets/css/shared/notificationPopup.css') ?>">
 </head>
 
 <body>
@@ -32,38 +33,38 @@
 <aside class="sidebar">
     <div class="sidebar-brand">
         <div class="brand-left">
-            <img src="../assets/images/Logo.svg" alt="Logo ARTHA" class="brand-logo">
+            <img src="<?= artha_asset('../assets/images/Logo.svg') ?>" alt="Logo ARTHA" class="brand-logo">
             <span class="brand-title">ARTHA</span>
         </div>
         <label for="sidebar-toggle" class="close-sidebar-btn">
-            <img src="../assets/icons/actions/cancel.svg" alt="">
+            <img src="<?= artha_asset('../assets/icons/actions/cancel.svg') ?>" alt="">
         </label>
     </div>
 
     <!-- Menu navigasi Admin -->
     <nav class="sidebar-nav">
         <a href="dashboard.php" class="nav-item">
-            <img src="../assets/icons/sidebar/dashboard.svg" class="nav-icon" alt="">
+            <img src="<?= artha_asset('../assets/icons/sidebar/dashboard.svg') ?>" class="nav-icon" alt="">
             <span>Dashboard</span>
         </a>
 
         <a href="pengguna.php" class="nav-item">
-            <img src="../assets/icons/sidebar/pengguna.svg" class="nav-icon" alt="">
+            <img src="<?= artha_asset('../assets/icons/sidebar/pengguna.svg') ?>" class="nav-icon" alt="">
             <span>Pengguna</span>
         </a>
 
         <a href="produk&amp;stok.php" class="nav-item active" aria-current="page">
-            <img src="../assets/icons/sidebar/produk&amp;stok.svg" class="nav-icon" alt="">
+            <img src="<?= artha_asset('../assets/icons/sidebar/produk&stok.svg') ?>" class="nav-icon" alt="">
             <span>Produk &amp; Stok</span>
         </a>
 
         <a href="transaksi.php" class="nav-item">
-            <img src="../assets/icons/sidebar/transaksi.svg" class="nav-icon" alt="">
+            <img src="<?= artha_asset('../assets/icons/sidebar/transaksi.svg') ?>" class="nav-icon" alt="">
             <span>Transaksi</span>
         </a>
 
         <a href="../logout.php" class="nav-item logout">
-            <img src="../assets/icons/actions/logout.svg" class="nav-icon" alt="">
+            <img src="<?= artha_asset('../assets/icons/actions/logout.svg') ?>" class="nav-icon" alt="">
             <span>Keluar</span>
         </a>
     </nav>
@@ -74,7 +75,7 @@
 <header class="dashboard-header">
     <div class="header-left">
         <label for="sidebar-toggle" class="hamburger-btn">
-            <img src="../assets/icons/actions/hamburger.svg" alt="">
+            <img src="<?= artha_asset('../assets/icons/actions/hamburger.svg') ?>" alt="">
         </label>
         <h1 class="desktop-page-title">Produk &amp; Stok</h1>
     </div>
@@ -82,7 +83,7 @@
     <div class="header-right">
         <div class="admin-profile">
             <div class="profile-circle">
-                <img src="../assets/icons/header/profile.svg" alt="">
+                <img src="<?= artha_asset('../assets/icons/header/profile.svg') ?>" alt="">
             </div>
             <span>Admin</span>
         </div>
@@ -99,18 +100,18 @@
 <!-- Pencarian dan tombol produk -->
 <section class="product-toolbar">
     <label class="product-search">
-        <img src="../assets/icons/actions/search.svg" alt="">
+        <img src="<?= artha_asset('../assets/icons/actions/search.svg') ?>" alt="">
         <input type="search" id="productSearch" placeholder="Cari nama atau kode produk">
     </label>
 
     <div class="product-toolbar-actions">
         <label for="mode-stock" class="stock-adjust-trigger">
-            <img src="../assets/icons/cards/stoktipis.svg" alt="">
+            <img src="<?= artha_asset('../assets/icons/cards/stoktipis.svg') ?>" alt="">
             <span>Sesuaikan stok</span>
         </label>
 
         <label for="mode-product" class="add-product-trigger">
-            <img src="../assets/icons/actions/tambah.svg" alt="">
+            <img src="<?= artha_asset('../assets/icons/actions/tambah.svg') ?>" alt="">
             <span>Tambah produk</span>
         </label>
     </div>
@@ -360,9 +361,9 @@
 </div>
 
 <!-- JavaScript produk dan stok -->
-<script src="../assets/js/admin/produk-stok.js"></script>
-<script src="../assets/js/navigation.js" defer></script>
-<script src="../assets/js/shared/popup.js"></script>
+<script src="<?= artha_asset('../assets/js/admin/produk-stok.js') ?>"></script>
+<script src="<?= artha_asset('../assets/js/navigation.js') ?>" defer></script>
+<script src="<?= artha_asset('../assets/js/shared/popup.js') ?>"></script>
 
 </body>
 </html>

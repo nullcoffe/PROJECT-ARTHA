@@ -1,15 +1,8 @@
-
-/* =========================================================
-   ARTHA | DESIGN TOKENS & TYPOGRAPHY
-   Sumber warna: Figma ARTHA
-   Digunakan bersama oleh Admin, Pemilik, dan Kasir.
-========================================================= */
-
 /* ================= FONT ================= */
 
 @font-face {
   font-family: "Poppins";
-  src: url("../../fonts/poppins-latin-400-normal.ttf") format("truetype");
+  src: url("../../fonts/poppins-latin-400-normal.ttf?v=1794994180") format("truetype");
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -17,7 +10,7 @@
 
 @font-face {
   font-family: "Poppins";
-  src: url("../../fonts/poppins-latin-500-normal.ttf") format("truetype");
+  src: url("../../fonts/poppins-latin-500-normal.ttf?v=1794994180") format("truetype");
   font-style: normal;
   font-weight: 500;
   font-display: swap;
@@ -25,7 +18,7 @@
 
 @font-face {
   font-family: "Poppins";
-  src: url("../../fonts/poppins-latin-600-normal.ttf") format("truetype");
+  src: url("../../fonts/poppins-latin-600-normal.ttf?v=1794994180") format("truetype");
   font-style: normal;
   font-weight: 600;
   font-display: swap;
@@ -33,7 +26,7 @@
 
 @font-face {
   font-family: "Poppins";
-  src: url("../../fonts/poppins-latin-700-normal.ttf") format("truetype");
+  src: url("../../fonts/poppins-latin-700-normal.ttf?v=1794994180") format("truetype");
   font-style: normal;
   font-weight: 700;
   font-display: swap;

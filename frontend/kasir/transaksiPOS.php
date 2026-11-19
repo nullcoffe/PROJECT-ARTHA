@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../assets/cache-busting.php'; ?>
 <?php
 // Halaman transaksi penjualan oleh Kasir
 ?>
@@ -13,23 +14,23 @@
     <title>Kasir / Input Penjualan | ARTHA</title>
 
     <!-- CSS utama -->
-    <link rel="stylesheet" href="../assets/css/shared/variables.css">
-    <link rel="stylesheet" href="../assets/css/shared/reset.css">
-    <link rel="stylesheet" href="../assets/css/shared/notificationPopup.css">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/shared/variables.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/shared/reset.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/shared/notificationPopup.css') ?>">
 
     <!-- CSS desktop -->
-    <link rel="stylesheet" href="../assets/css/web/layout.css">
-    <link rel="stylesheet" href="../assets/css/web/sidebar.css">
-    <link rel="stylesheet" href="../assets/css/web/header.css">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/web/layout.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/web/sidebar.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/web/header.css') ?>">
 
     <!-- CSS mobile -->
-    <link rel="stylesheet" href="../assets/css/mobile/layout.css">
-    <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
-    <link rel="stylesheet" href="../assets/css/mobile/header.css">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/layout.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/sidebar.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/header.css') ?>">
 
     <!-- CSS transaksi POS -->
-    <link rel="stylesheet" href="../assets/css/web/kasir/transaksiPOS.css">
-    <link rel="stylesheet" href="../assets/css/mobile/kasir/transaksiPOS.css">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/web/kasir/transaksiPOS.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/kasir/transaksiPOS.css') ?>">
 
 </head>
 
@@ -46,7 +47,7 @@
 
                 <a href="dashboard.php" class="brand-left">
 
-                    <img src="../assets/images/Logo.svg" class="brand-logo" alt="Logo ARTHA">
+                    <img src="<?= artha_asset('../assets/images/Logo.svg') ?>" class="brand-logo" alt="Logo ARTHA">
 
                     <span class="brand-title">ARTHA</span>
 
@@ -62,33 +63,33 @@
             <nav class="sidebar-nav" aria-label="Navigasi kasir">
 
                 <a class="nav-item" href="dashboard.php">
-                    <img class="nav-icon" src="../assets/icons/sidebar/dashboard.svg" alt="">
+                    <img class="nav-icon" src="<?= artha_asset('../assets/icons/sidebar/dashboard.svg') ?>" alt="">
                     <span>Dashboard</span>
                 </a>
 
                 <a class="nav-item active" href="transaksiPOS.php">
-                    <img class="nav-icon" src="../assets/icons/sidebar/transaksiPos.svg" alt="">
+                    <img class="nav-icon" src="<?= artha_asset('../assets/icons/sidebar/transaksiPos.svg') ?>" alt="">
                     <span>Transaksi POS</span>
                 </a>
 
                 <a class="nav-item" href="pembayaran.php">
-                    <img class="nav-icon" src="../assets/icons/sidebar/pembayaran.svg" alt="">
+                    <img class="nav-icon" src="<?= artha_asset('../assets/icons/sidebar/pembayaran.svg') ?>" alt="">
                     <span>Pembayaran</span>
                 </a>
 
                 <a class="nav-item" href="cetakStruk.php">
-                    <img class="nav-icon" src="../assets/icons/sidebar/cetakStruk.svg" alt="">
+                    <img class="nav-icon" src="<?= artha_asset('../assets/icons/sidebar/cetakStruk.svg') ?>" alt="">
                     <span>Cetak Struk</span>
                 </a>
 
                 <a class="nav-item" href="cekStok.php">
-                    <img class="nav-icon" src="../assets/icons/sidebar/cekStok.svg" alt="">
+                    <img class="nav-icon" src="<?= artha_asset('../assets/icons/sidebar/cekStok.svg') ?>" alt="">
                     <span>Cek Stok</span>
                 </a>
 
                 <!-- Keluar dari halaman Kasir -->
                 <a class="nav-item logout" href="../logout.php">
-                    <img class="nav-icon" src="../assets/icons/actions/logout.svg" alt="">
+                    <img class="nav-icon" src="<?= artha_asset('../assets/icons/actions/logout.svg') ?>" alt="">
                     <span>Keluar</span>
                 </a>
 
@@ -106,13 +107,13 @@
                 <div class="header-left">
 
                     <label class="hamburger-btn" for="sidebar-toggle" aria-label="Buka menu">
-                        <img src="../assets/icons/actions/hamburger.svg" alt="">
+                        <img src="<?= artha_asset('../assets/icons/actions/hamburger.svg') ?>" alt="">
                     </label>
 
                     <h1>Kasir / Input Penjualan</h1>
 
                     <a href="dashboard.php" class="mobile-brand">
-                        <img src="../assets/images/Logo.svg" alt="">
+                        <img src="<?= artha_asset('../assets/images/Logo.svg') ?>" alt="">
                         <span>ARTHA</span>
                     </a>
 
@@ -123,7 +124,7 @@
                     <div class="user-profile">
 
                         <div class="profile-circle">
-                            <img src="../assets/icons/header/profile.svg" alt="">
+                            <img src="<?= artha_asset('../assets/icons/header/profile.svg') ?>" alt="">
                         </div>
 
                         <span>Kasir</span>
@@ -141,7 +142,7 @@
             <!-- Pencarian produk -->
             <div class="product-search">
 
-                <img src="../assets/icons/actions/search.svg" alt="">
+                <img src="<?= artha_asset('../assets/icons/actions/search.svg') ?>" alt="">
 
                 <input
                     type="search"
@@ -194,7 +195,7 @@
 
                         <button class="clear-cart" type="button" id="clearCart">
 
-                            <img src="../assets/icons/actions/delete.svg" alt="">
+                            <img src="<?= artha_asset('../assets/icons/actions/delete.svg') ?>" alt="">
 
                             <span>Hapus semua</span>
 
@@ -229,7 +230,7 @@
                         <span>Lanjut Pembayaran</span>
 
                         <img
-                            src="../assets/icons/actions/chevron-right.svg"
+                            src="<?= artha_asset('../assets/icons/actions/chevron-right.svg') ?>"
                             alt=""
                             aria-hidden="true"
                             class="checkout-icon"
@@ -247,19 +248,19 @@
 
 
     <!-- JavaScript konfigurasi -->
-    <script src="../assets/js/config.js" defer></script>
+    <script src="<?= artha_asset('../assets/js/config.js') ?>" defer></script>
 
     <!-- JavaScript API -->
-    <script src="../assets/js/api.js" defer></script>
+    <script src="<?= artha_asset('../assets/js/api.js') ?>" defer></script>
 
     <!-- JavaScript popup -->
-    <script src="../assets/js/shared/popup.js" defer></script>
+    <script src="<?= artha_asset('../assets/js/shared/popup.js') ?>" defer></script>
 
     <!-- JavaScript navigasi -->
-    <script src="../assets/js/navigation.js" defer></script>
+    <script src="<?= artha_asset('../assets/js/navigation.js') ?>" defer></script>
 
     <!-- JavaScript transaksi POS -->
-    <script src="../assets/js/kasir/transaksiPOS.js" defer></script>
+    <script src="<?= artha_asset('../assets/js/kasir/transaksiPOS.js') ?>" defer></script>
 
 </body>
 </html>

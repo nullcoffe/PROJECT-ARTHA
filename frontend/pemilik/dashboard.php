@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../assets/cache-busting.php'; ?>
 <?php
 
 // Memuat sistem session dan pemeriksaan role
@@ -22,24 +23,24 @@ header('Expires: 0');
     <title>Dashboard Pemilik | ARTHA</title>
 
     <!-- SHARED CSS -->
-    <link rel="stylesheet" href="../assets/css/shared/variables.css">
-    <link rel="stylesheet" href="../assets/css/shared/reset.css">
-    <link rel="stylesheet" href="../assets/css/shared/popup.css">
-    <link rel="stylesheet" href="../assets/css/shared/notificationPopup.css">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/shared/variables.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/shared/reset.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/shared/popup.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/shared/notificationPopup.css') ?>">
 
     <!-- WEB CSS -->
-    <link rel="stylesheet" href="../assets/css/web/layout.css">
-    <link rel="stylesheet" href="../assets/css/web/sidebar.css">
-    <link rel="stylesheet" href="../assets/css/web/header.css">
-    <link rel="stylesheet" href="../assets/css/web/pemilik/dashboard.css">
-    <link rel="stylesheet" href="../assets/css/web/popupProfil.css">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/web/layout.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/web/sidebar.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/web/header.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/web/pemilik/dashboard.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/web/popupProfil.css') ?>">
 
     <!-- MOBILE CSS -->
-    <link rel="stylesheet" href="../assets/css/mobile/layout.css">
-    <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
-    <link rel="stylesheet" href="../assets/css/mobile/header.css">
-    <link rel="stylesheet" href="../assets/css/mobile/pemilik/dashboard.css">
-    <link rel="stylesheet" href="../assets/css/mobile/popupProfil.css">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/layout.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/sidebar.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/header.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/pemilik/dashboard.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/popupProfil.css') ?>">
 
 </head>
 
@@ -83,7 +84,7 @@ header('Expires: 0');
 
                 <div class="profile-avatar">
 
-                    <img src="../assets/icons/header/profile.svg"
+                    <img src="<?= artha_asset('../assets/icons/header/profile.svg') ?>"
                          alt="Ikon pengguna">
 
                 </div>
@@ -195,7 +196,7 @@ header('Expires: 0');
 
                 <div class="brand-left">
 
-                    <img src="../assets/images/Logo.svg"
+                    <img src="<?= artha_asset('../assets/images/Logo.svg') ?>"
                          alt="Logo ARTHA"
                          class="brand-logo">
 
@@ -209,7 +210,7 @@ header('Expires: 0');
                        class="close-sidebar-btn"
                        aria-label="Tutup sidebar">
 
-                    <img src="../assets/icons/actions/cancel.svg"
+                    <img src="<?= artha_asset('../assets/icons/actions/cancel.svg') ?>"
                          alt="">
 
                 </label>
@@ -223,7 +224,7 @@ header('Expires: 0');
                    class="nav-item active"
                    aria-current="page">
 
-                    <img src="../assets/icons/sidebar/dashboard.svg"
+                    <img src="<?= artha_asset('../assets/icons/sidebar/dashboard.svg') ?>"
                          alt=""
                          class="nav-icon">
 
@@ -234,7 +235,7 @@ header('Expires: 0');
                 <a href="laporan.php"
                    class="nav-item">
 
-                    <img src="../assets/icons/sidebar/laporan.svg"
+                    <img src="<?= artha_asset('../assets/icons/sidebar/laporan.svg') ?>"
                          alt=""
                          class="nav-icon">
 
@@ -245,7 +246,7 @@ header('Expires: 0');
                 <a href="analisisApriori.php"
                    class="nav-item">
 
-                    <img src="../assets/icons/sidebar/analisisApriori.svg"
+                    <img src="<?= artha_asset('../assets/icons/sidebar/analisisApriori.svg') ?>"
                          alt=""
                          class="nav-icon">
 
@@ -256,7 +257,7 @@ header('Expires: 0');
                 <a href="paketPromosi.php"
                    class="nav-item">
 
-                    <img src="../assets/icons/sidebar/paketPromosi.svg"
+                    <img src="<?= artha_asset('../assets/icons/sidebar/paketPromosi.svg') ?>"
                          alt=""
                          class="nav-icon">
 
@@ -267,7 +268,7 @@ header('Expires: 0');
                 <a href="prioritasStok.php"
                    class="nav-item">
 
-                    <img src="../assets/icons/sidebar/prioritasStok.svg"
+                    <img src="<?= artha_asset('../assets/icons/sidebar/prioritasStok.svg') ?>"
                          alt=""
                          class="nav-icon">
 
@@ -277,7 +278,7 @@ header('Expires: 0');
 
                 <a href="../logout.php" class="nav-item logout">
 
-                    <img src="../assets/icons/actions/logout.svg"
+                    <img src="<?= artha_asset('../assets/icons/actions/logout.svg') ?>"
                          class="nav-icon"
                          alt="">
 
@@ -294,7 +295,7 @@ header('Expires: 0');
                class="hamburger-btn"
                aria-label="Buka sidebar">
 
-            <img src="../assets/icons/actions/hamburger.svg"
+            <img src="<?= artha_asset('../assets/icons/actions/hamburger.svg') ?>"
                  alt="">
 
         </label>
@@ -322,7 +323,7 @@ header('Expires: 0');
 
                         <div class="profile-circle">
 
-                            <img src="../assets/icons/header/profile.svg"
+                            <img src="<?= artha_asset('../assets/icons/header/profile.svg') ?>"
                                  alt="">
 
                         </div>
@@ -346,7 +347,7 @@ header('Expires: 0');
 
                         <div class="owner-stat-icon">
 
-                            <img src="../assets/icons/cards/omzetPenjualan.svg"
+                            <img src="<?= artha_asset('../assets/icons/cards/omzetPenjualan.svg') ?>"
                                  alt="">
 
                         </div>
@@ -366,7 +367,7 @@ header('Expires: 0');
 
                         <div class="owner-stat-icon">
 
-                            <img src="../assets/icons/cards/totaljumlahtransaksi.svg"
+                            <img src="<?= artha_asset('../assets/icons/cards/totaljumlahtransaksi.svg') ?>"
                                  alt="">
 
                         </div>
@@ -386,7 +387,7 @@ header('Expires: 0');
 
                         <div class="owner-stat-icon">
 
-                            <img src="../assets/icons/cards/rekomendasipaket.svg"
+                            <img src="<?= artha_asset('../assets/icons/cards/rekomendasipaket.svg') ?>"
                                  alt="">
 
                         </div>
@@ -634,11 +635,11 @@ header('Expires: 0');
         });
     </script>
 
-    <script src="../assets/js/shared/popup.js" defer></script>
-    <script src="../assets/js/pemilik/dashboard.js" defer></script>
-    <script src="../assets/js/navigation.js" defer></script>
-    <script src="../assets/js/api.js" defer></script>
-    <script src="../assets/js/config.js" defer></script>
+    <script src="<?= artha_asset('../assets/js/shared/popup.js') ?>" defer></script>
+    <script src="<?= artha_asset('../assets/js/pemilik/dashboard.js') ?>" defer></script>
+    <script src="<?= artha_asset('../assets/js/navigation.js') ?>" defer></script>
+    <script src="<?= artha_asset('../assets/js/api.js') ?>" defer></script>
+    <script src="<?= artha_asset('../assets/js/config.js') ?>" defer></script>
 
 </body>
 </html>

@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/assets/cache-busting.php'; ?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -9,19 +10,19 @@
     <title>Login | ARTHA</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="assets/images/Logo.svg">
+    <link rel="icon" type="image/svg+xml" href="<?= artha_asset('assets/images/Logo.svg') ?>">
 
     <!-- CSS utama -->
-    <link rel="stylesheet" href="assets/css/shared/variables.css">
-    <link rel="stylesheet" href="assets/css/shared/reset.css">
+    <link rel="stylesheet" href="<?= artha_asset('assets/css/shared/variables.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('assets/css/shared/reset.css') ?>">
 
     <!-- CSS halaman login -->
-    <link rel="stylesheet" href="assets/css/web/auth.css">
-    <link rel="stylesheet" href="assets/css/mobile/auth.css">
-    <link rel="stylesheet" href="assets/css/web/loginValidation.css">
+    <link rel="stylesheet" href="<?= artha_asset('assets/css/web/auth.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('assets/css/mobile/auth.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('assets/css/web/loginValidation.css') ?>">
 
     <!-- CSS popup -->
-    <link rel="stylesheet" href="assets/css/shared/notificationPopup.css">
+    <link rel="stylesheet" href="<?= artha_asset('assets/css/shared/notificationPopup.css') ?>">
 
 </head>
 
@@ -34,7 +35,7 @@
 
             <a href="index.php" class="auth-brand" aria-label="ARTHA">
 
-                <img src="assets/images/Logo.svg" alt="Logo ARTHA" class="auth-logo">
+                <img src="<?= artha_asset('assets/images/Logo.svg') ?>" alt="Logo ARTHA" class="auth-logo">
 
                 <span>ARTHA</span>
 
@@ -64,7 +65,7 @@
 
                 <a href="index.php" class="auth-mobile-brand" aria-label="ARTHA">
 
-                    <img src="assets/images/Logo.svg" alt="Logo ARTHA">
+                    <img src="<?= artha_asset('assets/images/Logo.svg') ?>" alt="Logo ARTHA">
 
                     <span>ARTHA</span>
 
@@ -114,7 +115,7 @@
 
                         <div class="login-input-wrap">
 
-                            <img src="assets/icons/login/user.svg" alt="" class="login-field-icon">
+                            <img src="<?= artha_asset('assets/icons/login/user.svg') ?>" alt="" class="login-field-icon">
 
                             <input
                                 type="text"
@@ -146,7 +147,7 @@
 
                         <div class="login-input-wrap login-password-wrap">
 
-                            <img src="assets/icons/login/lock.svg" alt="" class="login-field-icon">
+                            <img src="<?= artha_asset('assets/icons/login/lock.svg') ?>" alt="" class="login-field-icon">
 
                             <input
                                 type="password"
@@ -191,7 +192,7 @@
                             <summary class="role-picker-trigger role-control" id="role-control">
 
                                 <img
-                                    src="assets/icons/login/manyuser.svg"
+                                    src="<?= artha_asset('assets/icons/login/manyuser.svg') ?>"
                                     alt=""
                                     class="role-trigger-icon"
                                 >
@@ -229,7 +230,7 @@
                                         required
                                     >
 
-                                    <img src="assets/icons/login/manyuser.svg" alt="">
+                                    <img src="<?= artha_asset('assets/icons/login/manyuser.svg') ?>" alt="">
 
                                     <span>Admin</span>
 
@@ -244,7 +245,7 @@
                                         value="pemilik"
                                     >
 
-                                    <img src="assets/icons/login/manyuser.svg" alt="">
+                                    <img src="<?= artha_asset('assets/icons/login/manyuser.svg') ?>" alt="">
 
                                     <span>Pemilik</span>
 
@@ -259,7 +260,7 @@
                                         value="kasir"
                                     >
 
-                                    <img src="assets/icons/login/manyuser.svg" alt="">
+                                    <img src="<?= artha_asset('assets/icons/login/manyuser.svg') ?>" alt="">
 
                                     <span>Kasir</span>
 
@@ -291,16 +292,16 @@
     </main>
 
     <!-- JavaScript konfigurasi -->
-    <script src="assets/js/config.js" defer></script>
+    <script src="<?= artha_asset('assets/js/config.js') ?>" defer></script>
 
     <!-- JavaScript API -->
-    <script src="assets/js/api.js" defer></script>
+    <script src="<?= artha_asset('assets/js/api.js') ?>" defer></script>
 
     <!-- JavaScript popup -->
-    <script src="assets/js/shared/popup.js" defer></script>
+    <script src="<?= artha_asset('assets/js/shared/popup.js') ?>" defer></script>
 
     <!-- JavaScript login -->
-    <script src="assets/js/auth.js" defer></script>
+    <script src="<?= artha_asset('assets/js/auth.js') ?>" defer></script>
 
 </body>
 </html>

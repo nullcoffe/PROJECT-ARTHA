@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../assets/cache-busting.php'; ?>
 
 <!DOCTYPE html>
 <html lang="id">
@@ -10,23 +11,23 @@
     <title>Laporan Penjualan | ARTHA</title>
 
     <!-- CSS bersama -->
-    <link rel="stylesheet" href="../assets/css/shared/variables.css">
-    <link rel="stylesheet" href="../assets/css/shared/reset.css">
-    <link rel="stylesheet" href="../assets/css/shared/notificationPopup.css">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/shared/variables.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/shared/reset.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/shared/notificationPopup.css') ?>">
 
     <!-- CSS web -->
-    <link rel="stylesheet" href="../assets/css/web/layout.css">
-    <link rel="stylesheet" href="../assets/css/web/sidebar.css">
-    <link rel="stylesheet" href="../assets/css/web/header.css">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/web/layout.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/web/sidebar.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/web/header.css') ?>">
 
     <!-- CSS mobile -->
-    <link rel="stylesheet" href="../assets/css/mobile/layout.css">
-    <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
-    <link rel="stylesheet" href="../assets/css/mobile/header.css">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/layout.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/sidebar.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/header.css') ?>">
 
     <!-- CSS khusus laporan -->
-    <link rel="stylesheet" href="../assets/css/web/pemilik/laporan.css">
-    <link rel="stylesheet" href="../assets/css/mobile/pemilik/laporan.css">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/web/pemilik/laporan.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/pemilik/laporan.css') ?>">
 </head>
 
 <body>
@@ -44,7 +45,7 @@
 
             <div class="sidebar-brand">
                 <div class="brand-left">
-                    <img src="../assets/images/Logo.svg"
+                    <img src="<?= artha_asset('../assets/images/Logo.svg') ?>"
                          alt="Logo ARTHA"
                          class="brand-logo">
 
@@ -54,7 +55,7 @@
                 <label for="sidebar-toggle"
                        class="close-sidebar-btn"
                        aria-label="Tutup sidebar">
-                    <img src="../assets/icons/actions/cancel.svg" alt="">
+                    <img src="<?= artha_asset('../assets/icons/actions/cancel.svg') ?>" alt="">
                 </label>
             </div>
 
@@ -62,7 +63,7 @@
             <nav class="sidebar-nav">
 
                 <a href="dashboard.php" class="nav-item">
-                    <img src="../assets/icons/sidebar/dashboard.svg"
+                    <img src="<?= artha_asset('../assets/icons/sidebar/dashboard.svg') ?>"
                          class="nav-icon" alt="">
                     <span>Dashboard</span>
                 </a>
@@ -70,31 +71,31 @@
                 <a href="laporan.php"
                    class="nav-item active"
                    aria-current="page">
-                    <img src="../assets/icons/sidebar/laporan.svg"
+                    <img src="<?= artha_asset('../assets/icons/sidebar/laporan.svg') ?>"
                          class="nav-icon" alt="">
                     <span>Laporan</span>
                 </a>
 
                 <a href="analisisApriori.php" class="nav-item">
-                    <img src="../assets/icons/sidebar/analisisApriori.svg"
+                    <img src="<?= artha_asset('../assets/icons/sidebar/analisisApriori.svg') ?>"
                          class="nav-icon" alt="">
                     <span>Analisis Apriori</span>
                 </a>
 
                 <a href="paketPromosi.php" class="nav-item">
-                    <img src="../assets/icons/sidebar/paketPromosi.svg"
+                    <img src="<?= artha_asset('../assets/icons/sidebar/paketPromosi.svg') ?>"
                          class="nav-icon" alt="">
                     <span>Paket Promosi</span>
                 </a>
 
                 <a href="prioritasStok.php" class="nav-item">
-                    <img src="../assets/icons/sidebar/prioritasStok.svg"
+                    <img src="<?= artha_asset('../assets/icons/sidebar/prioritasStok.svg') ?>"
                          class="nav-icon" alt="">
                     <span>Prioritas Stok</span>
                 </a>
 
                 <a href="../logout.php" class="nav-item logout">
-                    <img src="../assets/icons/actions/logout.svg"
+                    <img src="<?= artha_asset('../assets/icons/actions/logout.svg') ?>"
                          class="nav-icon" alt="">
                     <span>Keluar</span>
                 </a>
@@ -113,14 +114,14 @@
                     <label for="sidebar-toggle"
                            class="hamburger-btn"
                            aria-label="Buka sidebar">
-                        <img src="../assets/icons/actions/hamburger.svg"
+                        <img src="<?= artha_asset('../assets/icons/actions/hamburger.svg') ?>"
                              alt="">
                     </label>
 
                     <a href="dashboard.php"
                        class="mobile-brand"
                        aria-label="ARTHA">
-                        <img src="../assets/images/Logo.svg" alt="">
+                        <img src="<?= artha_asset('../assets/images/Logo.svg') ?>" alt="">
                         <span>ARTHA</span>
                     </a>
 
@@ -133,7 +134,7 @@
                 <div class="header-right">
                     <div class="user-profile">
                         <div class="profile-circle">
-                            <img src="../assets/icons/header/profile.svg"
+                            <img src="<?= artha_asset('../assets/icons/header/profile.svg') ?>"
                                  alt="">
                         </div>
                         <span>Pemilik</span>
@@ -372,10 +373,10 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="../assets/js/api.js" defer></script>
-    <script src="../assets/js/shared/popup.js" defer></script>
-    <script src="../assets/js/pemilik/laporan.js" defer></script>
-    <script src="../assets/js/navigation.js" defer></script>
+    <script src="<?= artha_asset('../assets/js/api.js') ?>" defer></script>
+    <script src="<?= artha_asset('../assets/js/shared/popup.js') ?>" defer></script>
+    <script src="<?= artha_asset('../assets/js/pemilik/laporan.js') ?>" defer></script>
+    <script src="<?= artha_asset('../assets/js/navigation.js') ?>" defer></script>
 
 </body>
 </html>

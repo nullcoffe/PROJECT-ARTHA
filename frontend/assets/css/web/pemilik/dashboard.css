@@ -1,14 +1,4 @@
-
-/* =====================================================
-   ARTHA | PEMILIK DASHBOARD — WEB
-   Hanya komponen unik halaman Dashboard Pemilik.
-   Layout global tetap menggunakan shared CSS.
-===================================================== */
-
-
-/* =====================================================
-   1. KARTU STATISTIK
-===================================================== */
+/* 1. KARTU STATISTIK */
 
 .owner-statistics {
     display: grid;
@@ -170,7 +160,7 @@
     background-color: var(--color-white);
 
     /* Ikon panah diberi jarak dari tepi kanan */
-    background-image: url("../../../icons/actions/chevron-down.svg");
+    background-image: url("../../../icons/actions/chevron-down.svg?v=1794994180");
     background-repeat: no-repeat;
     background-position: right 10px center;
     background-size: 11px;

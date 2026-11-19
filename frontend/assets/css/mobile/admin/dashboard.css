@@ -1,9 +1,3 @@
-
-/* ===========================================
-   ARTHA - DASHBOARD ADMIN MOBILE
-   Header hamburger sejajar profil
-=========================================== */
-
 @media (max-width: 768px) {
 
     /* =======================================
@@ -438,7 +432,7 @@
         background-color: var(--color-white);
 
         /* MODIF icon lokal */
-        background-image: url("../../../icons/actions/chevron-down.svg");
+        background-image: url("../../../icons/actions/chevron-down.svg?v=1794994180");
 
         background-repeat: no-repeat;
         background-position: right 6px center;

@@ -1,21 +1,10 @@
-
-/* =====================================================
-   ARTHA | PEMILIK - LAPORAN PENJUALAN
-   WEB CONTENT ONLY
-   Sidebar, header, dan layout memakai shared CSS.
-===================================================== */
-
-
-/* =====================================================
-   1. REPORT CONTENT
-===================================================== */
+/* 1. REPORT CONTENT */
 
 .report-content {
     width: 100%;
     max-width: 100%;
     min-width: 0;
 }
-
 
 /* =====================================================
    2. KARTU STATISTIK
@@ -71,10 +60,7 @@
     white-space: nowrap;
 }
 
-
-/* =====================================================
-   3. GRAFIK PENJUALAN
-===================================================== */
+/* 3. GRAFIK PENJUALAN */
 
 .report-chart-card {
     width: calc(100% - 32px);
@@ -90,10 +76,7 @@
     box-shadow: var(--shadow-soft);
 }
 
-
-/* =====================================================
-   4. HEADER GRAFIK
-===================================================== */
+/* 4. HEADER GRAFIK */
 
 .report-chart-header {
     display: flex;
@@ -117,10 +100,7 @@
     white-space: nowrap;
 }
 
-
-/* =====================================================
-   5. DROPDOWN TAHUN
-===================================================== */
+/* 5. DROPDOWN TAHUN */
 
 .report-year-select {
     display: block;
@@ -140,7 +120,7 @@
     background-color: var(--color-white);
 
     /* Ikon panah dengan jarak dari sisi kanan */
-    background-image: url("../../../icons/actions/chevron-down.svg");
+    background-image: url("../../../icons/actions/chevron-down.svg?v=1794994180");
     background-repeat: no-repeat;
     background-position: right 11px center;
     background-size: 12px;
@@ -181,10 +161,7 @@
     background-color: var(--chart-yellow);
 }
 
-
-/* =====================================================
-   6. AREA GRAFIK
-===================================================== */
+/* 6. AREA GRAFIK */
 
 .report-chart-content {
     display: grid;
@@ -431,4 +408,3 @@
         padding: 14px 16px;
     }
 }
-

@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../assets/cache-busting.php'; ?>
 
 <!DOCTYPE html>
 <html lang="id">
@@ -10,21 +11,21 @@
     <title>Rekomendasi Paket Promosi | ARTHA</title>
 
     <!-- Shared CSS -->
-    <link rel="stylesheet" href="../assets/css/shared/variables.css">
-    <link rel="stylesheet" href="../assets/css/shared/reset.css">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/shared/variables.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/shared/reset.css') ?>">
 
     <!-- Web CSS -->
-    <link rel="stylesheet" href="../assets/css/web/layout.css">
-    <link rel="stylesheet" href="../assets/css/web/sidebar.css">
-    <link rel="stylesheet" href="../assets/css/web/header.css">
-    <link rel="stylesheet" href="../assets/css/web/pemilik/paketPromosi.css">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/web/layout.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/web/sidebar.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/web/header.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/web/pemilik/paketPromosi.css') ?>">
 
     <!-- Mobile CSS -->
-    <link rel="stylesheet" href="../assets/css/mobile/layout.css">
-    <link rel="stylesheet" href="../assets/css/mobile/sidebar.css">
-    <link rel="stylesheet" href="../assets/css/mobile/header.css">
-    <link rel="stylesheet" href="../assets/css/mobile/pemilik/paketPromosi.css">
-    <link rel="stylesheet" href="../assets/css/shared/notificationPopup.css">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/layout.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/sidebar.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/header.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/pemilik/paketPromosi.css') ?>">
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/shared/notificationPopup.css') ?>">
 
 </head>
 
@@ -44,7 +45,7 @@
             <div class="sidebar-brand">
 
                 <div class="brand-left">
-                    <img src="../assets/images/Logo.svg"
+                    <img src="<?= artha_asset('../assets/images/Logo.svg') ?>"
                          alt="Logo ARTHA"
                          class="brand-logo">
 
@@ -55,7 +56,7 @@
                        class="close-sidebar-btn"
                        aria-label="Tutup sidebar">
 
-                    <img src="../assets/icons/actions/cancel.svg"
+                    <img src="<?= artha_asset('../assets/icons/actions/cancel.svg') ?>"
                          alt="">
 
                 </label>
@@ -67,7 +68,7 @@
 
                 <!-- Dashboard -->
                 <a href="dashboard.php" class="nav-item">
-                    <img src="../assets/icons/sidebar/dashboard.svg"
+                    <img src="<?= artha_asset('../assets/icons/sidebar/dashboard.svg') ?>"
                          alt=""
                          class="nav-icon">
 
@@ -76,7 +77,7 @@
 
                 <!-- Laporan -->
                 <a href="laporan.php" class="nav-item">
-                    <img src="../assets/icons/sidebar/laporan.svg"
+                    <img src="<?= artha_asset('../assets/icons/sidebar/laporan.svg') ?>"
                          alt=""
                          class="nav-icon">
 
@@ -85,7 +86,7 @@
 
                 <!-- Analisis Apriori -->
                 <a href="analisisApriori.php" class="nav-item">
-                    <img src="../assets/icons/sidebar/analisisApriori.svg"
+                    <img src="<?= artha_asset('../assets/icons/sidebar/analisisApriori.svg') ?>"
                          alt=""
                          class="nav-icon">
 
@@ -97,7 +98,7 @@
                    class="nav-item active"
                    aria-current="page">
 
-                    <img src="../assets/icons/sidebar/paketPromosi.svg"
+                    <img src="<?= artha_asset('../assets/icons/sidebar/paketPromosi.svg') ?>"
                          alt=""
                          class="nav-icon">
 
@@ -107,7 +108,7 @@
 
                 <!-- Prioritas Stok -->
                 <a href="prioritasStok.php" class="nav-item">
-                    <img src="../assets/icons/sidebar/prioritasStok.svg"
+                    <img src="<?= artha_asset('../assets/icons/sidebar/prioritasStok.svg') ?>"
                          alt=""
                          class="nav-icon">
 
@@ -116,7 +117,7 @@
 
                 <!-- Keluar -->
                 <a href="../logout.php" class="nav-item logout">
-                    <img src="../assets/icons/actions/logout.svg"
+                    <img src="<?= artha_asset('../assets/icons/actions/logout.svg') ?>"
                          alt=""
                          class="nav-icon">
 
@@ -132,7 +133,7 @@
                class="hamburger-btn"
                aria-label="Buka sidebar">
 
-            <img src="../assets/icons/actions/hamburger.svg"
+            <img src="<?= artha_asset('../assets/icons/actions/hamburger.svg') ?>"
                  alt="">
 
         </label>
@@ -156,7 +157,7 @@
                     <div class="user-profile">
 
                         <div class="profile-circle">
-                            <img src="../assets/icons/header/profile.svg"
+                            <img src="<?= artha_asset('../assets/icons/header/profile.svg') ?>"
                                  alt="">
                         </div>
 
@@ -222,9 +223,9 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="../assets/js/shared/popup.js" defer></script>
-    <script src="../assets/js/pemilik/paket-promosi.js" defer></script>
-    <script src="../assets/js/navigation.js" defer></script>
+    <script src="<?= artha_asset('../assets/js/shared/popup.js') ?>" defer></script>
+    <script src="<?= artha_asset('../assets/js/pemilik/paket-promosi.js') ?>" defer></script>
+    <script src="<?= artha_asset('../assets/js/navigation.js') ?>" defer></script>
 
 </body>
 </html>
