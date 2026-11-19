@@ -531,38 +531,35 @@
 }
 
 /* Pengaturan Cetak Browser */
-
 @page {
-    margin: 0;
+    margin: 10mm;
+    size: auto;
 }
 
 @media print {
 
+    /* Reset tampilan cetak */
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box !important;
+        writing-mode: horizontal-tb !important;
+    }
+
     html,
     body {
+        width: auto !important;
+        min-width: 0 !important;
         margin: 0 !important;
         padding: 0 !important;
-
         background: #FFFFFF !important;
     }
 
-    .cashier-page,
-    .main-content {
-        min-height: 0 !important;
-
-        margin: 0 !important;
-        padding: 0 !important;
-
-        background: #FFFFFF !important;
-    }
-
-    .dashboard-layout {
+    body.cashier-page {
         display: block !important;
-
-        margin: 0 !important;
-        padding: 0 !important;
     }
 
+    /* Hilangkan komponen navigasi */
     .sidebar,
     .sidebar-overlay,
     .sidebar-checkbox,
@@ -572,22 +569,42 @@
         display: none !important;
     }
 
-    .receipt-area {
+    /* Reset layout dashboard */
+    .dashboard-layout {
         display: block !important;
-
-        width: 80mm !important;
-        max-width: none !important;
-
+        width: 100% !important;
         margin: 0 !important;
         padding: 0 !important;
     }
 
+    .main-content {
+        display: block !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #FFFFFF !important;
+    }
+
+    /* Area struk */
+    .receipt-area {
+        display: block !important;
+        width: 80mm !important;
+        min-width: 80mm !important;
+        max-width: 80mm !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+    }
+
+    /* Kertas struk */
     .receipt-paper {
         display: block !important;
 
         width: 80mm !important;
-        min-width: 0 !important;
-        max-width: none !important;
+        min-width: 80mm !important;
+        max-width: 80mm !important;
 
         height: auto !important;
         min-height: 0 !important;
@@ -599,25 +616,124 @@
         box-sizing: border-box !important;
 
         background: #FFFFFF !important;
-
         border: none !important;
         border-radius: 0 !important;
-
         box-shadow: none !important;
 
         overflow: visible !important;
+
+        font-family: Arial, sans-serif !important;
     }
 
+    /* Header struk */
+    .receipt-paper h2 {
+        display: block !important;
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    .receipt-subtitle {
+        display: block !important;
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    /* PENTING:
+       Memastikan setiap baris tersusun horizontal */
+    .receipt-paper .receipt-line {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+
+        align-items: flex-start !important;
+        justify-content: space-between !important;
+
+        width: 100% !important;
+        min-width: 0 !important;
+
+        gap: 3mm !important;
+        margin: 10px 0 !important;
+
+        text-align: left !important;
+    }
+
+    /* Label dan nama produk */
+    .receipt-paper .receipt-line > :first-child {
+        display: block !important;
+
+        flex: 1 1 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+
+        white-space: normal !important;
+        overflow-wrap: break-word !important;
+        word-break: normal !important;
+
+        text-align: left !important;
+    }
+
+    /* Harga dan nilai transaksi */
+    .receipt-paper .receipt-line > :last-child {
+        display: block !important;
+
+        flex: 0 0 auto !important;
+        width: auto !important;
+
+        white-space: nowrap !important;
+        word-break: normal !important;
+
+        text-align: right !important;
+    }
+
+    /* Daftar produk */
     #receipt-items {
+        display: block !important;
+        width: 100% !important;
+
         height: auto !important;
+        min-height: 0 !important;
         max-height: none !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
 
         overflow: visible !important;
     }
 
-    .receipt-line {
-        break-inside: avoid;
-        page-break-inside: avoid;
+    /* Garis pemisah */
+    .receipt-dash {
+        display: block !important;
+        width: 100% !important;
     }
 
+    /* Mencegah satu baris transaksi terpotong */
+    .receipt-line {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    /* Footer */
+    .receipt-thanks {
+        display: block !important;
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    .receipt-paper .receipt-transaction {
+    flex-wrap: nowrap !important;
+    align-items: flex-start !important;
+    }
+
+    .receipt-paper .receipt-transaction > :first-child {
+        flex: 0 0 auto !important;
+        white-space: nowrap !important;
+    }
+
+    .receipt-paper .receipt-transaction > :last-child {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        white-space: normal !important;
+        overflow-wrap: anywhere !important;
+        text-align: right !important;
+    }
 }

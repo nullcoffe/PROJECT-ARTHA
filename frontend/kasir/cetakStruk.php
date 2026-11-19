@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/sidebar.css') ?>">
     <link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/header.css') ?>">
 
-    <!-- CSS halaman struk -->
-    <link rel="stylesheet" href="<?= artha_asset('../assets/css/web/kasir/cetakStruk.css') ?>">
+    <!-- CSS halaman struk mobile -->
     <link rel="stylesheet" href="<?= artha_asset('../assets/css/mobile/kasir/cetakStruk.css') ?>">
+
+    <!-- CSS halaman struk desktop dan pengaturan cetak -->
+    <link rel="stylesheet" href="<?= artha_asset('../assets/css/web/kasir/cetakStruk.css') ?>">
 
     <!-- CSS notifikasi -->
     <link rel="stylesheet" href="<?= artha_asset('../assets/css/shared/notificationPopup.css') ?>">
@@ -178,12 +180,9 @@
 
                     <div class="receipt-dash"></div>
 
-                    <div class="receipt-line">
-
+                    <div class="receipt-line receipt-transaction">
                         <span>No Transaksi</span>
-
                         <span id="receipt-transaction-id">-</span>
-
                     </div>
 
                     <div class="receipt-line">
