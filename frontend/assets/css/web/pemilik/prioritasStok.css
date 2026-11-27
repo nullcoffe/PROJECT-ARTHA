@@ -4,7 +4,10 @@
    WEB CONTENT
 ===================================================== */
 
-/* AREA KONTEN */
+/* =====================================================
+   1. AREA KONTEN
+===================================================== */
+
 .owner-stock-content {
     width: 100%;
     max-width: 100%;
@@ -12,7 +15,7 @@
 }
 
 /* =====================================================
-   1. KARTU STATISTIK
+   2. KARTU STATISTIK
 ===================================================== */
 
 .stock-statistics {
@@ -42,7 +45,7 @@
     box-shadow: var(--shadow-soft);
 }
 
-/* LABEL STATISTIK */
+/* Label statistik */
 .stock-stat-card p {
     margin: 0 0 3px;
 
@@ -53,7 +56,7 @@
     line-height: 1.4;
 }
 
-/* ANGKA STATISTIK */
+/* Angka statistik */
 .stock-stat-card h2 {
     margin: 0;
 
@@ -65,7 +68,7 @@
 }
 
 /* =====================================================
-   2. TABEL PRIORITAS STOK
+   3. KARTU TABEL PRIORITAS
 ===================================================== */
 
 .stock-table-card {
@@ -79,13 +82,22 @@
     border-radius: var(--radius-md);
 }
 
+/* =====================================================
+   4. PEMBUNGKUS TABEL
+===================================================== */
+
 .stock-table-wrapper {
     width: 100%;
     overflow-x: auto;
 }
 
+/* =====================================================
+   5. TABEL
+===================================================== */
+
 .stock-table {
     width: 100%;
+
     border-collapse: collapse;
     border-spacing: 0;
 
@@ -95,7 +107,7 @@
     text-align: left;
 }
 
-/* HEADER TABEL */
+/* Header tabel */
 .stock-table thead {
     color: var(--color-white);
     background: var(--color-primary);
@@ -118,7 +130,7 @@
     border-radius: 0 6px 0 0;
 }
 
-/* ISI TABEL */
+/* Isi tabel */
 .stock-table td {
     height: 43px;
     padding: 10px 17px;
@@ -128,4 +140,48 @@
     font-weight: 400;
 
     border-bottom: 1px solid #E5EAF1;
+}
+
+/* Hover baris */
+.stock-table tbody tr:hover:not(.no-apriori-result) {
+    background: #FAFBFD;
+}
+
+/* =====================================================
+   6. KONDISI KOSONG
+===================================================== */
+
+.stock-table .empty-state-cell {
+    height: 70px;
+    padding: 20px 25px;
+
+    color: #293957;
+    text-align: center;
+    font-family: var(--font-primary);
+    font-size: .85rem;
+    font-weight: 400;
+
+    border-bottom: 1px solid #E5EAF1;
+}
+
+/* =====================================================
+   7. LABEL PRIORITAS
+===================================================== */
+
+.stock-priority.highest {
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+/* =====================================================
+   8. RESPONSIVE DESKTOP
+===================================================== */
+
+@media (min-width: 1200px) {
+
+    .stock-statistics,
+    .stock-table-card {
+        width: 92%;
+    }
+
 }

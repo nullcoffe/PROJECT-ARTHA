@@ -84,18 +84,24 @@ header('Expires: 0');
 
                 <div class="profile-avatar">
 
-                    <img src="<?= artha_asset('../assets/icons/header/profile.svg') ?>"
-                         alt="Ikon pengguna">
+                    <img
+                        src="<?= artha_asset('../assets/icons/header/profile.svg') ?>"
+                        alt="Ikon pengguna"
+                    >
 
                 </div>
 
                 <div class="profile-user-detail">
 
-                    <strong>Nama Pengguna</strong>
+                    <strong id="profile-full-name">
+                        Memuat nama pengguna...
+                    </strong>
 
-                    <span>username</span>
+                    <span id="profile-username">
+                        Memuat username...
+                    </span>
 
-                    <small class="profile-role">
+                    <small class="profile-role" id="profile-role">
                         Pemilik
                     </small>
 
@@ -640,6 +646,7 @@ header('Expires: 0');
     <script src="<?= artha_asset('../assets/js/navigation.js') ?>" defer></script>
     <script src="<?= artha_asset('../assets/js/api.js') ?>" defer></script>
     <script src="<?= artha_asset('../assets/js/config.js') ?>" defer></script>
+    <script src="<?= artha_asset('../assets/js/profile.js') ?>" defer></script>
 
 </body>
 </html>

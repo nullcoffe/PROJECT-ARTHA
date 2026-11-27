@@ -6,7 +6,19 @@
 
 @media (max-width: 768px) {
 
-    /* KARTU STATISTIK */
+    /* =================================================
+       1. AREA KONTEN
+    ================================================= */
+
+    .owner-stock-content {
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* =================================================
+       2. KARTU STATISTIK
+    ================================================= */
+
     .stock-statistics {
         display: grid;
         grid-template-columns: 1fr;
@@ -23,6 +35,7 @@
         align-items: flex-start;
 
         width: 100%;
+        min-width: 0;
         min-height: 85px;
 
         padding: 12px 18px;
@@ -35,6 +48,7 @@
 
     .stock-stat-card p {
         margin: 0 0 2px;
+
         font-size: .7rem;
         line-height: 1.4;
     }
@@ -44,37 +58,79 @@
         line-height: 1.1;
     }
 
-    /* TABEL */
+    /* =================================================
+       3. KARTU TABEL
+    ================================================= */
+
     .stock-table-card {
         width: 100%;
         min-width: 0;
 
+        margin: 0;
         padding: 13px 10px;
+
         background: var(--color-white);
         border-radius: 10px;
     }
 
+    /* =================================================
+       4. PEMBUNGKUS TABEL
+    ================================================= */
+
     .stock-table-wrapper {
         width: 100%;
+
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
     }
 
+    /* =================================================
+       5. TABEL
+    ================================================= */
+
     .stock-table {
         width: 100%;
         min-width: 480px;
+
         font-size: .68rem;
     }
 
     .stock-table th {
         height: 36px;
         padding: 9px 12px;
+
         font-size: .65rem;
     }
 
     .stock-table td {
         height: 39px;
         padding: 9px 12px;
+
         font-size: .65rem;
     }
+
+    /* =================================================
+       6. KONDISI KOSONG
+    ================================================= */
+
+    .stock-table .empty-state-cell {
+        height: 65px;
+        padding: 18px 12px;
+
+        white-space: normal;
+        text-align: center;
+
+        font-size: .7rem;
+        line-height: 1.5;
+    }
+
+    /* =================================================
+       7. LABEL PRIORITAS
+    ================================================= */
+
+    .stock-priority.highest {
+        font-size: .65rem;
+        font-weight: 700;
+    }
+
 }

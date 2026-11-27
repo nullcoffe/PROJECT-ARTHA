@@ -85,16 +85,23 @@ header('Expires: 0');
             <div class="profile-user-info">
 
                 <div class="profile-avatar">
-                    <img src="<?= artha_asset('../assets/icons/header/profile.svg') ?>" alt="Ikon pengguna">
+                    <img
+                        src="<?= artha_asset('../assets/icons/header/profile.svg') ?>"
+                        alt="Ikon pengguna"
+                    >
                 </div>
 
                 <div class="profile-user-detail">
 
-                    <strong>Nama Pengguna</strong>
+                    <strong id="profile-full-name">
+                        Memuat nama pengguna...
+                    </strong>
 
-                    <span>username</span>
+                    <span id="profile-username">
+                        Memuat username...
+                    </span>
 
-                    <small class="profile-role">
+                    <small class="profile-role" id="profile-role">
                         Kasir
                     </small>
 

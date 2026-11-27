@@ -1,23 +1,97 @@
+
 document.addEventListener("DOMContentLoaded", function () {
+    "use strict";
+
+    // ==========================================
+    // ELEMEN POPUP PROFIL
+    // ==========================================
+
+    const popupToggle = document.getElementById("profile-popup-toggle");
+
+    const fullNameElement = document.getElementById("profile-full-name");
+    const usernameElement = document.getElementById("profile-username");
+    const roleElement = document.getElementById("profile-role");
+
+    // ==========================================
+    // ELEMEN UBAH PASSWORD
+    // ==========================================
 
     const passwordInput = document.getElementById("new-password");
     const toggleButton = document.getElementById("toggle-password");
     const eyeIcon = document.getElementById("password-eye-icon");
-
-    const popupToggle = document.getElementById("profile-popup-toggle");
     const passwordExpand = document.getElementById("password-expand");
-
     const passwordForm = document.querySelector(".profile-password-form");
     const passwordFeedback = document.getElementById("password-feedback");
 
+    // ==========================================
+    // MENGAMBIL DATA PROFIL PENGGUNA
+    // ==========================================
+
+    async function loadProfile() {
+        if (!fullNameElement || !usernameElement || !roleElement) {
+            return;
+        }
+
+        if (
+            !window.ARTHA_API ||
+            typeof window.ARTHA_API.get !== "function"
+        ) {
+            fullNameElement.textContent = "Data pengguna tidak tersedia";
+            usernameElement.textContent = "-";
+            roleElement.textContent = "-";
+            return;
+        }
+
+        try {
+            const response = await window.ARTHA_API.get("me");
+
+            const user = response.data || {};
+
+            // Menampilkan nama lengkap
+            fullNameElement.textContent =
+                user.nama_lengkap || "Nama tidak tersedia";
+
+            // Menampilkan username
+            usernameElement.textContent =
+                user.nama_pengguna || "Username tidak tersedia";
+
+            // Menyesuaikan tampilan role
+            const roleLabels = {
+                admin: "Admin",
+                kasir: "Kasir",
+                pemilik: "Pemilik"
+            };
+
+            const normalizedRole = String(user.peran || "").toLowerCase();
+
+            roleElement.textContent =
+                roleLabels[normalizedRole] || user.peran || "-";
+
+        } catch (error) {
+            console.error("Gagal mengambil profil pengguna:", error);
+
+            fullNameElement.textContent = "Gagal memuat nama pengguna";
+            usernameElement.textContent = "-";
+            roleElement.textContent = "-";
+        }
+    }
+
+    // Memuat profil ketika halaman dibuka
+    loadProfile();
+
+    // ==========================================
+    // JIKA FORM PASSWORD TIDAK TERSEDIA
+    // ==========================================
+
     if (!passwordInput || !passwordForm) {
-        console.error("Form password tidak ditemukan.");
         return;
     }
 
-    // Mengatur tampilan pesan
-    function showFeedback(message, type) {
+    // ==========================================
+    // PESAN UMPAN BALIK
+    // ==========================================
 
+    function showFeedback(message, type) {
         if (!passwordFeedback) {
             alert(message);
             return;
@@ -27,13 +101,15 @@ document.addEventListener("DOMContentLoaded", function () {
         passwordFeedback.className = "password-feedback " + type;
     }
 
-    // Ikon password terlihat
+    // ==========================================
+    // IKON LIHAT PASSWORD
+    // ==========================================
+
     const eyeVisible = `
         <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/>
         <circle cx="12" cy="12" r="3"/>
     `;
 
-    // Ikon password tersembunyi
     const eyeHidden = `
         <path d="M3 3l18 18"/>
         <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/>
@@ -41,13 +117,10 @@ document.addEventListener("DOMContentLoaded", function () {
         <path d="M6.2 6.2C3.5 8 2 12 2 12s3.6 7 10 7c1.2 0 2.3-.2 3.3-.6"/>
     `;
 
-    // Mengatur visibilitas password
     function updatePasswordVisibility(visible) {
-
         passwordInput.type = visible ? "text" : "password";
 
         if (toggleButton) {
-
             toggleButton.setAttribute(
                 "aria-pressed",
                 String(visible)
@@ -64,30 +137,28 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Event klik tombol tampilkan password
+    // ==========================================
+    // EVENT TOMBOL LIHAT PASSWORD
+    // ==========================================
+
     if (toggleButton && eyeIcon) {
-
         toggleButton.addEventListener("click", function () {
-
-            const isVisible = passwordInput.type === "text";
-
-            updatePasswordVisibility(!isVisible);
-
+            updatePasswordVisibility(
+                passwordInput.type !== "text"
+            );
         });
     }
 
-    // Validasi form password
+    // ==========================================
+    // VALIDASI FORM PASSWORD
+    // ==========================================
+
     passwordForm.noValidate = true;
 
     passwordForm.addEventListener("submit", function (event) {
-
         event.preventDefault();
 
-        const newPassword = passwordInput.value;
-
-        // Validasi password kosong
-        if (newPassword.trim() === "") {
-
+        if (passwordInput.value.trim() === "") {
             showFeedback(
                 "Password baru wajib diisi.",
                 "error"
@@ -97,33 +168,30 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // Validasi input berhasil, tetapi belum disimpan
         showFeedback(
-            "Password berhasil diubah!.",
+            "Validasi password berhasil. Fitur penyimpanan password belum diaktifkan.",
             "info"
         );
-
-        console.log("Validasi form ubah password berhasil.");
-
     });
 
-    // Menghapus pesan ketika pengguna mengetik
-    passwordInput.addEventListener("input", function () {
+    // ==========================================
+    // MEMBERSIHKAN PESAN VALIDASI
+    // ==========================================
 
+    passwordInput.addEventListener("input", function () {
         if (passwordFeedback) {
             passwordFeedback.textContent = "";
             passwordFeedback.className = "password-feedback";
         }
-
     });
 
-    // Reset ketika popup profil ditutup
+    // ==========================================
+    // RESET FORM SAAT POPUP DITUTUP
+    // ==========================================
+
     if (popupToggle) {
-
         popupToggle.addEventListener("change", function () {
-
             if (!this.checked) {
-
                 passwordInput.value = "";
 
                 updatePasswordVisibility(false);
@@ -136,15 +204,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     passwordFeedback.textContent = "";
                     passwordFeedback.className = "password-feedback";
                 }
-
             }
-
         });
     }
 
-    // Kondisi awal
     updatePasswordVisibility(false);
 
     console.log("Profile.js berhasil dimuat.");
-
 });
