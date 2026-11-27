@@ -2,6 +2,12 @@
 
 <?php
 // Halaman manajemen pengguna Admin
+
+// Memuat sistem session dan pemeriksaan role
+require_once '../../backend/api/middleware/auth.php';
+
+// Hanya pengguna dengan role Admin yang boleh mengakses halaman ini
+artha_require_page_role(['admin']);
 ?>
 
 <!DOCTYPE html>

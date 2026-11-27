@@ -15,7 +15,7 @@ function artha_start_session()
     ini_set('session.use_strict_mode', '1');
 
     session_set_cookie_params([
-        'lifetime' => 300,
+        'lifetime' => 600,
         'path' => '/',
         'secure' => $isHttps,
         'httponly' => true,
@@ -127,14 +127,19 @@ function artha_logout_session()
     session_destroy();
 }
 
+
 function artha_require_page_role(array $allowedRoles)
 {
     artha_start_session();
 
-    /*
-     * Jika tidak ada session user,
-     * berarti belum login.
-     */
+    // Mencegah halaman terlindungi tersimpan di cache browser.
+    if (!headers_sent()) {
+        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+        header('Pragma: no-cache');
+        header('Expires: 0');
+    }
+
+    // 1. Periksa apakah pengguna sudah login.
     if (
         !isset($_SESSION['user']) ||
         !is_array($_SESSION['user'])
@@ -143,20 +148,14 @@ function artha_require_page_role(array $allowedRoles)
         exit;
     }
 
-    /*
-     * Ambil role dari session.
-     */
+    // 2. Ambil role pengguna dari session.
+    $user = $_SESSION['user'];
+
     $userRole = strtolower(
-        trim(
-            (string) (
-                $_SESSION['user']['peran'] ?? ''
-            )
-        )
+        trim((string) ($user['peran'] ?? ''))
     );
 
-    /*
-     * Normalisasi role yang diizinkan.
-     */
+    // 3. Normalisasi role yang diperbolehkan.
     $allowedRoles = array_map(
         function ($role) {
             return strtolower(trim((string) $role));
@@ -164,20 +163,106 @@ function artha_require_page_role(array $allowedRoles)
         $allowedRoles
     );
 
-    /*
-     * Jika role tidak sesuai,
-     * jangan izinkan halaman dibuka.
-     */
+    // 4. Periksa kesesuaian role.
     if (
         $userRole === '' ||
         !in_array($userRole, $allowedRoles, true)
     ) {
-        header('Location: /artha/frontend/index.php');
+        http_response_code(403);
+
+        // Nama role untuk ditampilkan pada popup.
+        $roleLabels = [
+            'admin' => 'Admin',
+            'pemilik' => 'Pemilik',
+            'kasir' => 'Kasir'
+        ];
+
+        $currentRole = $roleLabels[$userRole] ?? 'Pengguna';
+
+        $requiredRoles = array_map(
+            function ($role) use ($roleLabels) {
+                return $roleLabels[$role] ?? ucfirst($role);
+            },
+            $allowedRoles
+        );
+
+        $requiredRoleText = implode(' atau ', $requiredRoles);
+
+        // Menentukan dashboard berdasarkan role pengguna.
+        $dashboardRoutes = [
+            'admin' => '/artha/frontend/admin/dashboard.php',
+            'pemilik' => '/artha/frontend/pemilik/dashboard.php',
+            'kasir' => '/artha/frontend/kasir/dashboard.php'
+        ];
+
+        $redirectUrl = $dashboardRoutes[$userRole]
+            ?? '/artha/frontend/index.php';
+
+        // Memastikan data session tersimpan sebelum halaman popup dikirim.
+        session_write_close();
+        ?>
+
+        <!DOCTYPE html>
+        <html lang="id">
+
+        <head>
+            <meta charset="UTF-8">
+
+            <meta name="viewport"
+                  content="width=device-width, initial-scale=1.0">
+
+            <meta name="theme-color" content="#FFFDF0">
+
+            <title>Akses Ditolak | ARTHA</title>
+
+            <!-- CSS popup ARTHA -->
+            <link rel="stylesheet"
+                  href="/artha/frontend/assets/css/shared/variables.css">
+
+            <link rel="stylesheet"
+                  href="/artha/frontend/assets/css/shared/reset.css">
+
+            <link rel="stylesheet"
+                  href="/artha/frontend/assets/css/shared/notificationPopup.css">
+
+        </head>
+
+        <body>
+
+            <!-- JavaScript popup ARTHA -->
+            <script src="/artha/frontend/assets/js/shared/popup.js"></script>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+
+                    // Tampilkan popup apabila role tidak sesuai.
+                    window.arthaPopup.error(
+                        "Anda login sebagai <?= htmlspecialchars($currentRole, ENT_QUOTES, 'UTF-8') ?>. Halaman ini hanya dapat diakses oleh <?= htmlspecialchars($requiredRoleText, ENT_QUOTES, 'UTF-8') ?>.",
+                        {
+                            title: "Gagal Memuat Halaman",
+                            confirmText: "Mengerti"
+                        }
+                    ).then(function () {
+
+                        // Kembali ke dashboard sesuai role pengguna.
+                        window.location.replace(
+                            <?= json_encode($redirectUrl) ?>
+                        );
+
+                    });
+
+                });
+            </script>
+
+        </body>
+
+        </html>
+
+        <?php
+
         exit;
     }
 
-    /*
-     * Role valid → halaman boleh dibuka.
-     */
-    return $_SESSION['user'];
+    // 5. Role sesuai, halaman boleh diakses.
+    return $user;
 }

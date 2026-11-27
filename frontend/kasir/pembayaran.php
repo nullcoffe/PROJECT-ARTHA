@@ -2,6 +2,12 @@
 
 <?php
 // Halaman pembayaran transaksi oleh Kasir
+
+// Memuat sistem session dan pemeriksaan role
+require_once '../../backend/api/middleware/auth.php';
+
+// Hanya pengguna dengan role Kasir yang boleh mengakses halaman ini
+artha_require_page_role(['kasir']);
 ?>
 
 <!DOCTYPE html>

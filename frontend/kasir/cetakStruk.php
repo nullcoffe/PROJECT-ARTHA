@@ -1,6 +1,12 @@
 <?php require_once __DIR__ . '/../assets/cache-busting.php'; ?>
 <?php
 // Halaman cetak struk transaksi Kasir
+
+// Memuat sistem session dan pemeriksaan role
+require_once '../../backend/api/middleware/auth.php';
+
+// Hanya pengguna dengan role Kasir yang boleh mengakses halaman ini
+artha_require_page_role(['kasir']);
 ?>
 
 <!DOCTYPE html>

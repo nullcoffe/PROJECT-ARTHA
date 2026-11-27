@@ -1,4 +1,12 @@
-<?php require_once __DIR__ . '/../assets/cache-busting.php'; ?>
+<?php require_once __DIR__ . '/../assets/cache-busting.php'; 
+
+// Memuat sistem session dan pemeriksaan role
+require_once '../../backend/api/middleware/auth.php';
+
+// Hanya pengguna dengan role Pemilik yang boleh mengakses halaman ini
+artha_require_page_role(['pemilik']);
+
+?>
 
 <!DOCTYPE html>
 <html lang="id">
