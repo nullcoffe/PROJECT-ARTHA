@@ -1,91 +1,98 @@
 
 /* =========================================================
-   ARTHA | UNIVERSAL MOBILE HEADER
-   Digunakan bersama oleh Admin, Pemilik, dan Kasir.
-   Khusus tampilan Smartphone.
+   ARTHA - UNIVERSAL MOBILE HEADER
+   Header Admin, Pemilik, dan Kasir
+   Responsive Smartphone
 ========================================================= */
 
 
 /* =========================================================
-   1. HEADER CONTAINER
+   1. HEADER UTAMA
 ========================================================= */
 
 @media (max-width: 768px) {
 
     .dashboard-header {
+        position: static !important;
         display: flex;
         align-items: center;
         justify-content: space-between;
 
         width: 100%;
-        min-height: 68px;
+        min-height: 52px;
         height: auto;
 
-        gap: 8px;
-        margin: 0 0 22px;
-        padding: 14px 0 12px;
+        margin: 0 0 18px;
+        padding: 8px 0;
+
+        gap: 12px;
 
         background: transparent;
+        border: none;
+        box-shadow: none;
 
-        /* Menghilangkan garis tipis bawah header */
-        border-bottom: none;
+        transform: none !important;
     }
 
 
     /* =====================================================
-       2. HEADER LEFT
+       2. BAGIAN KIRI HEADER
     ===================================================== */
 
     .header-left {
         display: flex;
         align-items: center;
 
+        flex: 1 1 auto;
         min-width: 0;
-        gap: 10px;
+
+        gap: 12px;
     }
 
 
     /* =====================================================
-       3. PAGE TITLE
+       3. JUDUL HALAMAN
     ===================================================== */
 
     .dashboard-header h1 {
         min-width: 0;
         margin: 0;
-        overflow: hidden;
 
         color: var(--color-primary);
 
         font-family: var(--font-primary);
-        font-size: clamp(1.1rem, 4.8vw, 1.45rem);
+        font-size: clamp(1.1rem, 4.8vw, 1.4rem);
         font-weight: 700;
 
-        line-height: 1.25;
+        line-height: 1.3;
         letter-spacing: -0.02em;
 
         white-space: nowrap;
+        overflow: hidden;
         text-overflow: ellipsis;
     }
 
 
     /* =====================================================
-       4. HEADER RIGHT
+       4. BAGIAN KANAN HEADER
     ===================================================== */
 
     .header-right {
+        position: static !important;
+
         display: flex;
         align-items: center;
         justify-content: flex-end;
 
         flex: 0 0 auto;
 
-        gap: 6px;
+        gap: 8px;
         margin-left: auto;
     }
 
 
     /* =====================================================
-       5. USER PROFILE
+       5. PROFIL PENGGUNA
     ===================================================== */
 
     .user-profile,
@@ -93,13 +100,16 @@
         display: flex;
         align-items: center;
 
-        gap: 6px;
+        gap: 8px;
         flex-shrink: 0;
+
+        text-decoration: none;
+        cursor: pointer;
     }
 
 
     /* =====================================================
-       6. PROFILE CIRCLE
+       6. LINGKARAN IKON PROFIL
     ===================================================== */
 
     .profile-circle {
@@ -107,33 +117,39 @@
         align-items: center;
         justify-content: center;
 
-        width: 36px !important;
-        height: 36px !important;
+        width: 38px !important;
+        height: 38px !important;
 
-        min-width: 36px;
-        min-height: 36px;
+        min-width: 38px;
+        min-height: 38px;
 
-        max-width: 36px;
-        max-height: 36px;
+        max-width: 38px;
+        max-height: 38px;
 
-        flex: 0 0 36px !important;
+        flex: 0 0 38px !important;
 
         padding: 0;
+        overflow: hidden;
 
         background: #192D78;
         border-radius: 50% !important;
     }
 
     .profile-circle img {
-        width: 54%;
-        height: 54%;
+        display: block;
+
+        width: 20px;
+        height: 20px;
+
+        max-width: 20px;
+        max-height: 20px;
 
         object-fit: contain;
     }
 
 
     /* =====================================================
-       7. PROFILE NAME
+       7. NAMA ROLE PENGGUNA
     ===================================================== */
 
     .user-profile span,
@@ -141,38 +157,63 @@
         color: var(--color-primary);
 
         font-family: var(--font-primary);
-        font-size: 12px;
+        font-size: 13px;
         font-weight: 600;
 
+        line-height: 1.2;
         white-space: nowrap;
     }
 
 
     /* =====================================================
-       8. HAMBURGER BUTTON
+       8. TOMBOL HAMBURGER
+       Posisi normal, bukan fixed atau sticky.
+       Akan ikut tergeser ketika halaman di-scroll.
     ===================================================== */
 
     .hamburger-btn {
-        display: flex;
+        position: static !important;
+
+        display: flex !important;
         align-items: center;
         justify-content: center;
 
-        width: 30px;
-        height: 30px;
+        width: 36px;
+        height: 36px;
 
-        flex: 0 0 30px;
+        min-width: 36px;
+
+        flex: 0 0 36px;
+
+        margin: 0;
+        padding: 0;
+
+        color: #192D78;
+        background: transparent;
+
+        border: none;
+        box-shadow: none;
+
+        cursor: pointer;
     }
 
     .hamburger-btn img {
-        width: 22px;
-        height: 22px;
+        display: block;
+
+        width: 23px;
+        height: 23px;
 
         object-fit: contain;
+
+        filter: brightness(0) saturate(100%)
+            invert(17%) sepia(38%) saturate(2410%)
+            hue-rotate(207deg) brightness(91%);
     }
 
 
     /* =====================================================
-       9. MOBILE BRAND
+       9. LOGO MOBILE
+       Tetap tersedia untuk halaman yang membutuhkannya.
     ===================================================== */
 
     .mobile-brand {
@@ -187,10 +228,13 @@
         font-size: 17px;
         font-weight: 700;
 
+        text-decoration: none;
         white-space: nowrap;
     }
 
     .mobile-brand img {
+        display: block;
+
         width: 27px;
         height: 27px;
 
@@ -199,7 +243,45 @@
 
 
     /* =====================================================
-       10. PAGE TITLE VISIBILITY
+       10. IKON TUTUP SIDEBAR
+    ===================================================== */
+
+    .sidebar-close,
+    .close-sidebar-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 34px;
+        height: 34px;
+
+        margin-left: auto;
+        padding: 0;
+
+        color: #FFFFFF;
+        background: transparent;
+
+        border: none;
+
+        cursor: pointer;
+    }
+
+    .sidebar-close img,
+    .close-sidebar-btn img,
+    .sidebar-close-icon {
+        display: block;
+
+        width: 20px;
+        height: 20px;
+
+        object-fit: contain;
+
+        filter: brightness(0) invert(1);
+    }
+
+
+    /* =====================================================
+       11. JUDUL MOBILE
     ===================================================== */
 
     .mobile-page-title {
@@ -210,22 +292,98 @@
         display: none;
     }
 
+
+    /* =====================================================
+       12. KHUSUS DASHBOARD KASIR
+    ===================================================== */
+
+    .cashier-page .dashboard-header {
+        position: static !important;
+
+        display: flex;
+        flex-direction: row;
+
+        align-items: center;
+        justify-content: space-between;
+
+        min-height: 46px;
+
+        margin: 0 0 14px;
+        padding: 0;
+
+        gap: 8px;
+    }
+
+    /* Hilangkan logo ARTHA tambahan di header Kasir */
+    .cashier-page .dashboard-header .mobile-brand {
+        display: none !important;
+    }
+
+    /* Judul menggunakan mobile-page-title di bawah header */
+    .cashier-page .dashboard-header h1 {
+        display: none !important;
+    }
+
+    .cashier-page .mobile-page-title {
+        display: block;
+    }
+
+    /* Hamburger tetap berada dalam alur halaman */
+    .cashier-page .hamburger-btn {
+        position: static !important;
+
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+
+        z-index: auto;
+
+        visibility: visible;
+    }
+
+    /* Profil berada di sisi kanan hamburger */
+    .cashier-page .dashboard-header .header-right {
+        position: static !important;
+
+        display: flex;
+        align-items: center;
+
+        min-height: 38px;
+
+        margin: 0;
+        padding: 0;
+    }
+
 }
 
 
 /* =========================================================
-   11. SMALL MOBILE
-   Layar maksimal 380px.
+   13. SMARTPHONE KECIL
 ========================================================= */
 
 @media (max-width: 380px) {
 
     .dashboard-header {
-        gap: 5px;
+        gap: 6px;
     }
 
     .header-left {
-        gap: 6px;
+        gap: 7px;
+    }
+
+    .profile-circle {
+        width: 36px !important;
+        height: 36px !important;
+
+        min-width: 36px;
+        min-height: 36px;
+
+        flex-basis: 36px !important;
+    }
+
+    .profile-circle img {
+        width: 19px;
+        height: 19px;
     }
 
     .user-profile span,
@@ -233,149 +391,36 @@
         font-size: 11px;
     }
 
+    .cashier-page .dashboard-header {
+        margin-bottom: 12px;
+    }
+
 }
 
 
-/* ==========================================
-   ARTHA | MOBILE HEADER & SIDEBAR FIX
-   Berlaku untuk seluruh role
-========================================== */
-
+/* ARTHA MOBILE - FINAL ICON COLORS */
 @media (max-width: 768px) {
-
-    /* HAMBURGER MENU */
-    .hamburger-btn {
-        position: fixed;
-        top: 13px;
-        left: 15px;
-        z-index: 1100;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        width: 32px;
-        height: 32px;
-
-        background: transparent;
-        border: none;
-        color: #8A8F98;
-        cursor: pointer;
+    body .hamburger-btn {
+        color: #192D78 !important;
+        background: transparent !important;
+        border: 0 !important;
     }
 
-    .hamburger-btn img {
-        width: 23px;
-        height: 23px;
+    body .hamburger-btn img {
         filter: brightness(0) saturate(100%)
-                invert(58%);
+            invert(13%) sepia(44%) saturate(2600%)
+            hue-rotate(207deg) brightness(91%) contrast(102%) !important;
     }
 
-    /* IKON X SIDEBAR */
-    .close-sidebar-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        color: #8A8F98 !important;
+    body .sidebar .close-sidebar-btn,
+    body .sidebar .sidebar-close {
+        color: #FFFFFF !important;
         background: transparent !important;
     }
 
-    .close-sidebar-btn img {
-        width: 19px;
-        height: 19px;
-        filter: brightness(0) saturate(100%)
-                invert(58%);
+    body .sidebar .close-sidebar-btn img,
+    body .sidebar .sidebar-close img,
+    body .sidebar .sidebar-close-icon {
+        filter: brightness(0) invert(1) !important;
     }
-
-    /* HEADER UTAMA */
-    .main-content > .dashboard-header {
-        position: relative;
-
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: flex-start;
-
-        width: 100%;
-        min-height: 0;
-
-        margin: 0 0 22px !important;
-        padding: 53px 0 0 !important;
-        gap: 0;
-    }
-
-    /* PROFIL SEJAJAR DENGAN HAMBURGER */
-    .dashboard-header .header-right {
-        position: absolute;
-        top: 0;
-        right: 0;
-
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-
-        min-height: 36px;
-        margin: 0;
-        padding: 0;
-    }
-
-    .dashboard-header .user-profile,
-    .dashboard-header .admin-profile {
-        display: flex;
-        align-items: center;
-        gap: 7px;
-    }
-
-    /* IKON PROFIL */
-    .dashboard-header .profile-circle {
-        width: 34px;
-        height: 34px;
-        flex: 0 0 34px;
-    }
-
-    .dashboard-header .profile-circle img {
-        width: 17px;
-        height: 17px;
-        object-fit: contain;
-    }
-
-    /* NAMA ROLE */
-    .dashboard-header .user-profile span,
-    .dashboard-header .admin-profile span {
-        font-size: .75rem;
-        white-space: nowrap;
-    }
-
-        /* JUDUL HALAMAN TURUN KE BAWAH */
-        .dashboard-header h1 {
-            display: block;
-            order: 2;
-
-            width: 100%;
-            margin: 0 !important;
-            padding: 0 !important;
-
-            font-size: clamp(1.2rem, 5vw, 1.55rem);
-            line-height: 1.3;
-            text-align: left;
-        }
-    }
-
-    @media (max-width: 768px) {
-
-        /* Posisi profil sejajar dengan hamburger */
-        .dashboard-header .header-right {
-            top: 13px !important;
-            right: 0;
-            min-height: 32px;
-        }
-
-        .hamburger-btn {
-            top: 13px !important;
-        }
-
-        /* Judul halaman tetap di bawah baris profil */
-        .main-content > .dashboard-header {
-            padding-top: 55px !important;
-        }
-    }
+}

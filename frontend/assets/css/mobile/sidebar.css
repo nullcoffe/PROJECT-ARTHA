@@ -55,3 +55,95 @@
     .sidebar-checkbox:checked ~ .dashboard-layout .hamburger-btn,
     .sidebar-toggle:checked ~ .dashboard-layout .hamburger-btn { visibility:hidden; }
 }
+
+/* =====================================================
+   ARTHA - SIDEBAR MOBILE COLOR & SIZE FIX
+   Berlaku untuk Admin, Kasir, dan Pemilik
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .sidebar-nav .nav-item {
+        display: flex !important;
+        align-items: center !important;
+
+        width: 100% !important;
+        min-height: 46px !important;
+
+        padding: 0 12px !important;
+        gap: 12px !important;
+
+        color: #FFFFFF !important;
+        font-family: var(--font-primary) !important;
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        line-height: 1.2 !important;
+
+        text-decoration: none !important;
+        white-space: nowrap !important;
+
+        background: transparent;
+        border: 1px solid transparent;
+        border-radius: 8px;
+    }
+
+    .sidebar-nav .nav-item span {
+        display: block !important;
+        flex: 1 1 auto !important;
+
+        min-width: 0 !important;
+
+        color: inherit !important;
+        font-size: 14px !important;
+        font-weight: inherit !important;
+        line-height: 1.2 !important;
+    }
+
+    .sidebar-nav .nav-item .nav-icon {
+        display: block !important;
+
+        width: 20px !important;
+        height: 20px !important;
+
+        min-width: 20px !important;
+        max-width: 20px !important;
+
+        flex: 0 0 20px !important;
+
+        object-fit: contain !important;
+
+        filter: brightness(0) invert(1) !important;
+    }
+
+    /* MENU AKTIF */
+    .sidebar-nav .nav-item.active {
+        color: #F2C532 !important;
+
+        background: rgba(242, 197, 50, 0.13) !important;
+        border: 1px solid #F2C532 !important;
+    }
+
+    .sidebar-nav .nav-item.active span {
+        color: #F2C532 !important;
+    }
+
+    .sidebar-nav .nav-item.active .nav-icon {
+        filter: brightness(0) saturate(100%)
+            invert(77%) sepia(95%) saturate(1000%)
+            hue-rotate(2deg) brightness(105%) !important;
+    }
+
+    /* MENU TIDAK AKTIF */
+    .sidebar-nav .nav-item:not(.active) {
+        color: #FFFFFF !important;
+    }
+
+    .sidebar-nav .nav-item:not(.active) span {
+        color: #FFFFFF !important;
+    }
+
+    .sidebar-nav .nav-item:not(.active) .nav-icon {
+        filter: brightness(0) invert(1) !important;
+    }
+
+}

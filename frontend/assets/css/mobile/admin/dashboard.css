@@ -617,3 +617,16 @@
         font-size: 13px;
     }
 }
+
+/* ARTHA ADMIN - FINAL MOBILE ICON COLORS */
+@media (max-width: 768px) {
+    body .dashboard-header .hamburger-btn img {
+        filter: brightness(0) saturate(100%)
+            invert(13%) sepia(44%) saturate(2600%)
+            hue-rotate(207deg) brightness(91%) contrast(102%) !important;
+    }
+
+    body .sidebar .close-sidebar-btn img {
+        filter: brightness(0) invert(1) !important;
+    }
+}

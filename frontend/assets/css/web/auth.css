@@ -701,3 +701,111 @@
     outline-offset: 3px;
     border-radius: 5px;
 }
+
+/* ==================================================
+   ARTHA - PASSWORD EYE TOGGLE FINAL
+   WEB DAN MOBILE
+================================================== */
+
+.login-password-wrap {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.login-password-wrap input {
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    padding-right: 58px !important;
+}
+
+.login-password-wrap .login-password-toggle {
+    position: absolute !important;
+    top: 50% !important;
+    right: 10px !important;
+    transform: translateY(-50%) !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    flex: 0 0 36px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    color: #142F7D !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 6px !important;
+
+    cursor: pointer !important;
+    z-index: 5 !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+}
+
+.login-password-toggle .login-eye-icon {
+    display: block !important;
+    width: 21px !important;
+    height: 21px !important;
+    flex: 0 0 21px !important;
+    overflow: visible !important;
+}
+
+.login-password-toggle .login-eye-slash {
+    display: block;
+}
+
+.login-password-toggle[aria-pressed="true"] .login-eye-slash {
+    display: none !important;
+}
+
+.login-password-toggle[aria-pressed="false"] .login-eye-slash {
+    display: block !important;
+}
+
+.login-password-toggle:hover {
+    opacity: .75 !important;
+}
+
+.login-password-toggle:focus {
+    outline: none !important;
+}
+
+.login-password-toggle:focus-visible {
+    outline: 2px solid #142F7D !important;
+    outline-offset: 2px !important;
+}
+
+@media (max-width: 768px) {
+
+    .login-password-wrap {
+        position: relative !important;
+    }
+
+    .login-password-wrap input {
+        padding-right: 54px !important;
+    }
+
+    .login-password-wrap .login-password-toggle {
+        top: 50% !important;
+        right: 8px !important;
+        width: 34px !important;
+        height: 34px !important;
+        min-width: 34px !important;
+        flex-basis: 34px !important;
+        transform: translateY(-50%) !important;
+    }
+
+    .login-password-toggle .login-eye-icon {
+        width: 19px !important;
+        height: 19px !important;
+    }
+}

@@ -17,3 +17,77 @@
 @media (max-width:380px) {
     .main-content { padding-left:4%; padding-right:4%; }
 }
+
+
+/* =========================================================
+   ARTHA - PERBAIKAN SCROLL VERTIKAL MOBILE
+   Berlaku untuk seluruh halaman Admin, Kasir, dan Pemilik.
+   Tujuan: halaman mengikuti tinggi konten dan dapat digulir
+   dari bawah ke atas maupun dari atas ke bawah.
+========================================================= */
+@media (max-width: 768px) {
+    html {
+        height: auto !important;
+        min-height: 100% !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        scroll-behavior: auto;
+        overscroll-behavior-y: auto;
+    }
+
+    body {
+        position: static !important;
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 100dvh !important;
+        max-height: none !important;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+        overscroll-behavior-y: auto !important;
+        touch-action: pan-y pinch-zoom;
+    }
+
+    .dashboard-layout {
+        position: relative !important;
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 100dvh !important;
+        max-height: none !important;
+        overflow: visible !important;
+        overscroll-behavior: auto !important;
+    }
+
+    .main-content {
+        position: relative !important;
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 100dvh !important;
+        max-height: none !important;
+        overflow: visible !important;
+        overscroll-behavior: auto !important;
+        touch-action: pan-y pinch-zoom;
+    }
+
+    .page-container,
+    .content-section,
+    .history-section,
+    .summary-cards,
+    .payment-layout,
+    .pos-layout {
+        max-height: none !important;
+    }
+
+    /* Area tabel boleh digulir mendatar tanpa mengunci scroll halaman. */
+    .table-container,
+    .shared-table-wrap,
+    .table-wrap,
+    .users-table-wrapper,
+    .payment-summary-table-wrap {
+        overscroll-behavior-x: contain;
+        overscroll-behavior-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}

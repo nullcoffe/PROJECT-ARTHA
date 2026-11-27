@@ -460,3 +460,18 @@
 }
 
 }
+
+
+/* ARTHA - HIDE MOBILE BRAND PEMILIK */
+@media (max-width: 768px) {
+    .dashboard-header .mobile-brand {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    .dashboard-header .header-left {
+        display: flex !important;
+        align-items: center !important;
+        gap: 0 !important;
+    }
+}
